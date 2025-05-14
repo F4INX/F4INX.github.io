@@ -47,5 +47,5 @@
 
   <p class="last-not-print">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}. See <a href="{{ "/LICENCE.html" | relative_url }}">licence</a>. </p>
 
-  <a class="print-only" href="{{ site.author.url  | append: page.url }}">{{ site.author.url  | append: page.url }}</a>
+  <a class="print-only" href="{{ page.url | absolute_url }}">{{ page.url | absolute_url }}</a>
 </div>
