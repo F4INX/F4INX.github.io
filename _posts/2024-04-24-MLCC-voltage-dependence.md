@@ -2,7 +2,7 @@
 layout: post
 title: MLCC voltage dependence.
 permalink: /posts/mlcc-voltage-dependence.html
-last_modified_at: 2024-04-24 12:06
+last_modified_at: 2025-05-14
 ---
 
 <p class="begin-note">This content was originally published on Microwaves 101 (<a href="https://www.microwaves101.com/encyclopedias/capacitor-voltage-effects">https://www.microwaves101.com/encyclopedias/capacitor-voltage-effects</a>). Many thanks to Steve for improvements on the original version. Have a look on his website for more interesting content.</p>
@@ -24,7 +24,7 @@ https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouche/8467296/ (4.7
 
 Seems rather nice, and smaller than the original. Wrong! Let’s check the detailed characteristics:
 
-<a href="https://psearch.en.murata.com/capacitor/product/GRM188R61A475KE15%23.html">https://psearch.en.murata.com/capacitor/product/GRM188R61A475KE15%23.html</a>
+<a href="https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM188R61A475KE15%23">https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM188R61A475KE15%23</a>
 
 <div id="plot-1"></div>
 <script>
@@ -111,9 +111,9 @@ An other interesting point is what happens when we combine both biasing and temp
 
 The temperature dependence is better when biased. This leads to the conclusion that temperature coefficient is most often less troublesome than voltage coefficient for MLCC capacitors.
 
-[^3]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouche/8851960/](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouche/8851960/)
-[^4]: [https://psearch.en.murata.com/capacitor/product/GRM32ER61A107ME20%23.html](https://psearch.en.murata.com/capacitor/product/GRM32ER61A107ME20%23.html)
-[^5]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouche/1084055/](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouche/1084055/)
+[^3]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8851960/](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8851960/)
+[^4]: [https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM32ER61A107ME20%23](https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM32ER61A107ME20%23)
+[^5]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/1084055](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/1084055)
 [^6]: [https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X5R1A107M160AC](https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X5R1A107M160AC)
-[^7]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouche/8410809/](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouche/8410809/)
+[^7]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8410809/](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8410809/)
 [^8]: [http://ksim.kemet.com/Plots/SpicePlots.aspx](http://ksim.kemet.com/Plots/SpicePlots.aspx)

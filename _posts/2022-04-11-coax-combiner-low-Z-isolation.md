@@ -461,7 +461,7 @@ The authors would like to thank Sylvie Lepilliet of the IEMN for her precious he
 
 [^footnote1]: In this article, we use the term "combiner" loosely for both the complete system, including the impedance prematching, and the mere combining part, without prematching.
 
-[^microwaves101wilkinson]: <cite>The Unknown Editor, <span class="article-title">"Wilkinson power splitters"</span>, <time>Oct. 2010</time>, P-N Designs. Available: <a href="http://www.microwaves101.com/encyclopedia/Wilkinson_splitters.cfm">http://www.microwaves101.com/encyclopedia/Wilkinson_splitters.cfm</a>.</cite>
+[^microwaves101wilkinson]: <cite>The Unknown Editor, <span class="article-title">"Wilkinson power splitters"</span>, <time>Jul. 2023</time>, P-N Designs. Available: <a href="https://www.microwaves101.com/encyclopedias/wilkinson-power-splitters">https://www.microwaves101.com/encyclopedias/wilkinson-power-splitters</a>.</cite>
 
 [^cohn1968broadband]: <cite>S. B. Cohn, <span class="article-title">"A class of broadband three-port tem-mode hybrids,"</span> <span class="article-journal">IEEE Transactions on Microwave Theory and Techniques</span>, vol. 16, no. 2, pp. 110–116, <time>Feb. 1968</time>. DOI: <a href="http://dx.doi.org/10.1109/TMTT.1968.1126617">10.1109/TMTT.1968.1126617</a>.</cite>
 

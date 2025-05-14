@@ -2,7 +2,7 @@
 layout: post
 title: Microstrip formulas comparison.
 permalink: /posts/microstrip-formulas-comparison.html
-last_modified_at: 2024-07-07 19:55:48
+last_modified_at: 2025-05-14
 ---
 
 ## Introduction
@@ -238,7 +238,6 @@ The following table sums up some microstrip calculators and the formulas which t
 | referencedesigner.com[^34]    | IPC-2121        | Yes       | _Formulas not told in document, but seen in JavaScript source code._          |
 | technick.net[^35]             | IPC-2141        | Yes       |                                                                               |
 | a8blog.com[^36]               | IPC-2141        | No        | _No warnings, but at least does not print the calculated negative impedance._ |
-| www.ee.ucl.ac.uk[^37]         | IPC-2141        | No        | _No warnings, but at least does not print the calculated negative impedance._ |
 | www.everythingrf.com[^38]     | IPC-2141        | No        |                                                                               |
 | chemandy.com[^39]             | IPC-2141        | No        |                                                                               |
 | ncalculators.com[^40]         | IPC-2121        | No        |                                                                               |
@@ -253,7 +252,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^1a]: E. Hammerstad and O. Jensen, "Accurate Models for Microstrip Computer-Aided Design," in _Microwave symposium Digest, 1980 IEEE MTT-S International_, 1980.
 
-[^2]: S. J. Orfanidis, "Electromagnetic waves and antennas," 2016. \[Online\]. Available: <https://www.ece.rutgers.edu/~orfanidi/ewa/>. \[Accessed 17 April 2020\].
+[^2]: S. J. Orfanidis, "Electromagnetic waves and antennas," 2016. \[Online\]. Available (archive): <https://web.archive.org/web/20240528230718/www.ece.rutgers.edu/~orfanidi/ewa/>. \[Accessed 14 May 2025\].
 
 [^3]: S. Jahn, M. Margraf, V. Habchiand and R. Jacob, "Qucs technical papers," 2007.
 
@@ -264,7 +263,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^7]: S. Huettner, "Low frequency dispersion in TEM lines," June 2011. \[Online\]. Available: <https://www.microwaves101.com/encyclopedias/low-frequency-dispersion-in-tem-lines>.
 
-[^8]: S. Ellingson, "Dispersion in coaxial cables," 01 June 2008. \[Online\]. Available: <https://www.faculty.ece.vt.edu/swe/lwa/memo/lwa0136.pdf>.
+[^8]: S. Ellingson, "Dispersion in coaxial cables," 01 June 2008. \[Online\]. Available (archive): <https://leo.phys.unm.edu/~lwa/memos/memo/lwa0136.pdf>. \[Accessed 14 May 2025\].
 
 [^9]: Agilent Technologies, "Advanced Design System 2011.01 - Distributed components".                                                                                                                                                                        
 [^10]: D. Campbell and S. Huettner, "Microstrip calculator," Microwaves101, \[Online\]. Available: <https://www.microwaves101.com/calculators/1201-microstrip-calculator>. \[Accessed 13 April 2020\].
@@ -295,7 +294,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^23]: P. T.-L. Wu, "Microwave Filter Design," 11 February 2011. \[Online\]. Available: <http://ntuemc.tw/upload/file/2011021716275842131.pdf>. \[Accessed 12 April 2020\].
 
-[^24]: P. G. Kumar, "Microwave theory and technology," 03 Septembre 2018. \[Online\]. Available: <https://nptel.ac.in/content/storage2/nptel_data3/html/mhrd/ict/text/108101112/lec9.pdf>. \[Accessed 12 April 2020\].
+[^24]: P. G. Kumar, "Microwave theory and technology", lecture 9, 03 Septembre 2018. \[Online\]. Available: <https://archive.nptel.ac.in/courses/108/101/108101112/>. \[Accessed 14 May 2025\].
 
 [^25]: E. O. Hammerstad, "Equations for microstrip circuit design," in _Proc. European Microwave Conf._, 1975.
 
@@ -320,8 +319,6 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 [^35]: N. Asuni, "PCB Impedance and Capacitance of Microstrip," 01 March 1998. \[Online\]. Available: <https://technick.net/tools/impedance-calculator/microstrip/>. \[Accessed 12 April 2020\].
 
 [^36]: A8 blog, "Online microstrip impedance calculator with multiple units," \[Online\]. Available: <https://www.a8blog.com/en_microstrip.htm>. \[Accessed 13 April 2020\].
-
-[^37]: University college London, "Microstrip characteristic impedance and capacitance calculator," \[Online\]. Available: <https://www.ee.ucl.ac.uk/~amoss/java/microstrip.htm>. \[Accessed 13 April 2020\].
 
 [^38]: R. Kapur, "Microstrip impedance calculator," everything RF, \[Online\]. Available: <https://www.everythingrf.com/rf-calculators/microstrip-impedance-calculator>. \[Accessed 06 April 2020\].
 
