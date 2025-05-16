@@ -13,6 +13,7 @@ However, a common trap with such circuits is that operational amplifiers tend to
 
 Recently, a designer in LinkedIn shared his experience on the topic on this page [^1], leading to a very interesting discussion on the topic.
 
+{% comment %}
 ## Not a simulation issue
 
 Operational amplifier unstability when capacitively loaded is a phenomenon well described by theory and which simulates rather well. However, it is easy to miss in the simulations for three reasons.
@@ -22,6 +23,7 @@ First, the simulated test cases are often not hard enough to check for such issu
 Second, a mistake in the simulated values may transform an oscillatory circuit into a barely stable circuit which poorly works but still works. For instance, in some cases, the load capacitance might be underestimated.
 
 Third, the worst case parameters which should be simulated might not be evident, particularly for the opamp GBW (gain bandwidth product). Often the worst case for proper operation is the minimum value. For stability issues the worst cases is most likely to be the maximum value. For instance, the datasheet of the LM741[^2] specifies a min GBW of 437&nbsp;kHz, a typical GBW of 1500&nbsp;kHz, and no maximum GBW.
+{% endcomment %}
 
 ## Beware of the "high capacitive load drive capability" op-amps
 
@@ -141,17 +143,40 @@ The common LT1010 has xxx drawbacks.
 
 # Case studies
 
-## Sariel Horisan
+## Sariel Hodisan
 
-Lorem ipsum.
+From this LinkedIn post[^1] from Sariel Hodisan:
+
+<blockquote>
+<p>Lately, I designed a simple biasing circuit for bipolar voltage rails (±13.5V) to bias a very precise low-noise analog circuit. To minimize offset in the analog section, it’s mandatory for the ±13.5V rails to be as closely matched as possible. The load is just a few mA, and it’s mostly a DC circuit. No fast current draws.</p>
+
+<p>[...]</p>
+
+<p>I did need decoupling for the biased circuit and figured 1nF would be enough. According to the OPA192 datasheet, there’s around 40&nbsp;% overshoot when loaded with a {% raw %}[2nF, see below]{% endraw %} cap.</p>
+
+<p>[...]</p>
+
+<p>The ±13.5V rails oscillated terribly.</p>
+
+<p>Luckily, I had provisions to add an isolation resistor (30 ohm), and that solved the problem, though at the cost of a slight voltage drop.</p>
+
+</blockquote>
+
+I edited the message to make the total capacitive load more clear: 2 nF total, including 1&nbsp;nF straight at the opamp output and 1&nbsp;nF at the load.
+
+Although some details are specific to his project, like his need of low noise, generating DC voltages to supply something is a very common need.
+
+This circuit should not have oscillated so hard, according to the datasheet, which predicts less than 45&nbsp;% overshoot for a 2&nbsp;nF load.
+
+<img src="{{ '/posts/op-amp-capacitor-stability/opa994-ds-Hodisan.png' | relative_url }}" />
+
+He solved the problem using a simple isolation resistor, at the cost of a small voltage drop, and I suggested him to add a double feedback to eliminate the drop. Since it is a DC need, the simple double feedback is sufficient.
 
 ## Microwaves101 gate pulser
 
 Lorem ipsum.
 
 [^1]: [https://www.linkedin.com/posts/sariel-hodisan_...](https://www.linkedin.com/posts/sariel-hodisan_%F0%9D%97%A7%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%B4%F0%9D%97%AE%F0%9D%97%BD-%F0%9D%97%AF%F0%9D%97%B2%F0%9D%98%81%F0%9D%98%84%F0%9D%97%B2%F0%9D%97%B2%F0%9D%97%BB-%F0%9D%98%80%F0%9D%97%B6%F0%9D%97%BA%F0%9D%98%82%F0%9D%97%B9%F0%9D%97%AE-activity-7316060130964340736-RCjM/)
-
-[^2]: [https://www.ti.com/lit/ds/symlink/lm741.pdf](https://www.ti.com/lit/ds/symlink/lm741.pdf)
 
 [^3]: [https://www.ti.com/lit/ds/symlink/opa192.pdf](https://www.ti.com/lit/ds/symlink/opa192.pdf)
 
