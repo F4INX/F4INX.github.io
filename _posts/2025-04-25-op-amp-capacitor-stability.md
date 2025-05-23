@@ -174,7 +174,29 @@ He solved the problem using a simple isolation resistor, at the cost of a small 
 
 ## Microwaves101 gate pulser
 
-Lorem ipsum.
+In the excellent microwaves101 website[^10], a page is written on the subject of pulsed RF sources. Although it advises drain pulsing (this page was written long before before GaN was mainstream), it also gives some advice about gate pulsing (bold from myself):
+
+<blockquote>
+<p>For a good gate pulsing circuit, we recommend the Analog Device's AD8036 "clamping amp", shown below. It lets you set up on and off gate bias voltages independently; for example, if you are using a PHEMT power amp you can set VG(on) to -0.9 volts, and VG(off) to -1.5 volts. You still need charge storage on the drain bias lines, and stability caps on gate and drain biases, as near as possible to the amp. Like all op-amps, the AD8036 can be configured as an inverting or non-inverting amplifier. <b>Yes, we need to add some resistive feedback to the figure!</b></p>
+</blockquote>
+
+<img src="{{ '/posts/op-amp-capacitor-stability/microwaves101-gate-driver.jpg' | relative_url }}" />
+
+The feedback was forgotten in the figure, but not in the text.
+
+However, a point which might need to be added is the stabilisation for capacitive loads. The AD8036 datasheet does not mention performance curves when capacitively loaded, but instead a recommended isolation resistor value:
+
+<img src="{{ '/posts/op-amp-capacitor-stability/ad8036-ds-fig5.png' | relative_url }}" width="50%" />
+
+Given this curve and the typical gate bias network capacitance values, I would recommend a 20&nbsp;&Omega; isolation resistor. The RC bandwidth is already 31.8&nbsp;MHz. If not sufficient, a R<sub>ISO</sub> + DFB + RFx can be used to both remove the R<sub>ISO</sub> offset and to have speed up.
+
+## Microwaves101 gate pulser, alternative solution
+
+That being said, we would propose here an alternative solution.
+
+A problem with the AD8036 is that it is an input clamping amplifier, with clamping only available on its +V<sub>IN</sub>, making it "works only for noninverting or follower applications". This needs a 0 to -5V input signal to have the requested V<sub>H</sub> and V</sub>L</sub> voltages. Not very convenient since most digital circuits operate on positive voltages.
+
+
 
 [^1]: [https://www.linkedin.com/posts/sariel-hodisan_...](https://www.linkedin.com/posts/sariel-hodisan_%F0%9D%97%A7%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%B4%F0%9D%97%AE%F0%9D%97%BD-%F0%9D%97%AF%F0%9D%97%B2%F0%9D%98%81%F0%9D%98%84%F0%9D%97%B2%F0%9D%97%B2%F0%9D%97%BB-%F0%9D%98%80%F0%9D%97%B6%F0%9D%97%BA%F0%9D%98%82%F0%9D%97%B9%F0%9D%97%AE-activity-7316060130964340736-RCjM/)
 
@@ -191,3 +213,7 @@ Lorem ipsum.
 [^8]: [https://e2e.ti.com/cfs-file/__key/.../Solving_5F00_Op_2D00_Amp_5F00_Stability_5F00_Wells_5F00_6_2D00_5_2D00_12-_2800_2_2900_.pdf](https://e2e.ti.com/cfs-file/__key/telligent-evolution-components-attachments/01-864-00-00-00-66-32-73/Solving_5F00_Op_2D00_Amp_5F00_Stability_5F00_Wells_5F00_6_2D00_5_2D00_12-_2800_2_2900_.pdf)
 
 [^9]: [https://ww1.microchip.com/downloads/en/Appnotes/00884b.pdf](https://ww1.microchip.com/downloads/en/Appnotes/00884b.pdf)
+
+[^10]: https://www.microwaves101.com/encyclopedias/pulsed-rf-sources
+
+[^11]: https://www.analog.com/media/en/technical-documentation/data-sheets/ad8036_8037.pdf
