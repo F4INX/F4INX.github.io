@@ -194,9 +194,80 @@ Given this curve and the typical gate bias network capacitance values, I would r
 
 That being said, we would propose here an alternative solution.
 
-A problem with the AD8036 is that it is an input clamping amplifier, with clamping only available on its +V<sub>IN</sub>, making it "works only for noninverting or follower applications". This needs a 0 to -5V input signal to have the requested V<sub>H</sub> and V</sub>L</sub> voltages. Not very convenient since most digital circuits operate on positive voltages.
+A problem with the AD8036 is that it is an input clamping amplifier, with clamping only available on its +V<sub>IN</sub>, making it "works only for noninverting or follower applications". This needs a 0 to -5V input signal to have the requested V<sub>H</sub> and V<sub>L</sub> voltages. Not very convenient since most digital circuits operate on positive voltages.
 
+Switching between two voltages levels would be conveniently done by a switch integrated circuit. Most common switches are slow, either because they are plain slow or because they include some "break before make" circuitry which take some transition times. The switches in the "buffered analog multiplexers" section of Analog Devices[^12] provide faster time, probably because the techniques to deal with switching transitions are easier to implement in unidirectional multiplexed buffer than in unidirectional buffer, like current steering:
 
+<blockquote>
+<p markdown="1">The &#91;ADV3129[^13]&#93; multiplexer is organized as two input transconductance stages tied in parallel with a single output transimpedance stage followed by a unity-gain buffer. Internal voltage feedback sets the gain.</p>
+</blockquote>
+
+The following chips are interesting, with only single channel devices mentionned:
+
+<figure>
+<img src="{{ '/posts/op-amp-capacitor-stability/ad8170-ds-block-diagram.png' | relative_url }}" width="50%" />
+<figcaption markdown="1">
+AD8170[^14]
+</figcaption>
+</figure>
+
+<figure>
+<img src="{{ '/posts/op-amp-capacitor-stability/ad8180-ds-block-diagram.png' | relative_url }}" width="50%" />
+<figcaption markdown="1">
+AD8180[^15]
+</figcaption>
+</figure>
+
+<figure>
+<img src="{{ '/posts/op-amp-capacitor-stability/adv3219-ds-block-diagram.png' | relative_url }}" width="50%" />
+<figcaption markdown="1">
+ADV3219[^16]
+</figcaption>
+</figure>
+
+The AD8170 is a **current feedback** amplifier with a switchable input. These category of operational amplifiers are sensitive to the impedance seen at the feedback pin, to DFB schemes cannot be used directly with them. The datasheet recommands isolation resistor values and feedback resistance. Simple RC calculations shows that the performance is mainly determined by the RC constant of the isolation resistor and the capacitive load.
+
+The AD8180 is an open loop buffer and can drive capacitive loads without isolation resistors. **However, an input resistor is recommended.** This is often the case for buffer amplifiers, and often forgotten. Performance is again determined by the open loop impedance of approximately 25&nbsp;&Omega;.
+
+The ADV3219 is a feedback amplifier with an internal feedback. Performance curves are given for low capacitive loads without isolation resistor. For higher capacitive loads, the datasheets recommands an isolation resistor of "a few tens of ohms", but does not give more performance details. Nevertheless it can be assumes that it will be dominated by the RC constant of the output.
+
+<figure>
+<table>
+<tr>
+<td>
+<img src="{{ '/posts/op-amp-capacitor-stability/ad8180-ds-fig-22.png' | relative_url }}" />
+</td>
+<td>
+<img src="{{ '/posts/op-amp-capacitor-stability/adv3219-ds-fig-56.png' | relative_url }}" />
+</td>
+</tr>
+</table>
+</figure>
+
+<figure>
+<table>
+<tr>
+<td>
+<img src="{{ '/posts/op-amp-capacitor-stability/ad8170-ds-fig-19.png' | relative_url }}" />
+<p style="text-align: center;">AD8170</p>
+</td>
+<td>
+<img src="{{ '/posts/op-amp-capacitor-stability/ad8180-ds-fig-19.png' | relative_url }}" />
+<p style="text-align: center;">AD8180</p>
+</td>
+</tr>
+<tr>
+<td>
+<img src="{{ '/posts/op-amp-capacitor-stability/ad8180-ds-fig-20.png' | relative_url }}" />
+<p style="text-align: center;">AD8180</p>
+</td>
+<td>
+<img src="{{ '/posts/op-amp-capacitor-stability/adv3219-ds-fig-4.png' | relative_url }}" />
+<p style="text-align: center;">ADV3219</p>
+</td>
+</tr>
+</table>
+</figure>
 
 [^1]: [https://www.linkedin.com/posts/sariel-hodisan_...](https://www.linkedin.com/posts/sariel-hodisan_%F0%9D%97%A7%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%B4%F0%9D%97%AE%F0%9D%97%BD-%F0%9D%97%AF%F0%9D%97%B2%F0%9D%98%81%F0%9D%98%84%F0%9D%97%B2%F0%9D%97%B2%F0%9D%97%BB-%F0%9D%98%80%F0%9D%97%B6%F0%9D%97%BA%F0%9D%98%82%F0%9D%97%B9%F0%9D%97%AE-activity-7316060130964340736-RCjM/)
 
@@ -217,3 +288,13 @@ A problem with the AD8036 is that it is an input clamping amplifier, with clampi
 [^10]: https://www.microwaves101.com/encyclopedias/pulsed-rf-sources
 
 [^11]: https://www.analog.com/media/en/technical-documentation/data-sheets/ad8036_8037.pdf
+
+[^12]: [https://www.analog.com/en/parametricsearch/11267#/sort=s3,asc](https://www.analog.com/en/parametricsearch/11267#/sort=s3,asc)
+
+[^13]: [https://www.analog.com/media/en/technical-documentation/data-sheets/ADV3219_3220.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/ADV3219_3220.pdf)
+
+[^14]: [https://www.analog.com/media/en/technical-documentation/data-sheets/ad8170_8174.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/ad8170_8174.pdf)
+
+[^15]: [https://www.analog.com/media/en/technical-documentation/data-sheets/AD8180_8182.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/AD8180_8182.pdf)
+
+[^16]: [https://www.analog.com/media/en/technical-documentation/data-sheets/ADV3219_3220.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/ADV3219_3220.pdf)
