@@ -50,7 +50,7 @@ In the discussion, the OPA994[^4] was suggested. Indeed, it is advertised as hav
 
 And once the isolation resistor is added, same comment than before.
 
-# The root cause
+## The root cause
 
 A feedback system must have less than 180° phase shift from its output to its - input at the unity gain frequency in order to the negative feedback to stay negative and to avoid it going positive and causing unstability. There are more complicated ways to tell this principle but the core concepts are here.
 
@@ -58,7 +58,7 @@ An ideal operational amplifier has already a -90° phase shift due to its integr
 
 Note what matter for stability is the open loop operational amplifier output impedance. The closed loop output impedance is much lower due to feedback, at least when the feedback operates properly.
 
-# Some details on the topic
+## Some details on the topic
 
 The details of the topic won't be explained here, because the most important is to be aware of the problem and of its solutions. Once the problem is known, details are easy to find on Google. Reference [^5] is a great starter, even if I would suggest an other solution on the "RC filter directly at the input", [^6] gives more informations on threee useful solutions: R<sub>ISO</sub>, R<sub>ISO</sub> + DFB, R<sub>ISO</sub> + DFB + RFx, [^7] give more solutions and details, and [^8] is a rather long presentation on the general subject of operational amplifier stability which beats the topic to death, [^8] gives additional details and equations on the topic. This application note from Microchip[^9], although not complete on compensation networks, give useful equation, useful tips for ADC interfacing and give useful information on large signal effects.
 
@@ -66,9 +66,9 @@ The careful reader will probably notice a mistake in the "in-loop compensation c
 
 <!-- TODO: Fix sup references. -->
 
-# Some comments of the common solutions
+## Some comments of the common solutions
 
-## Input filtering
+### Input filtering
 
 Not directly related to output driving load, this is nevertheless an interesting case to mention. Often it is derisable, particularly to reduce sensitivity to RFI and EMI, to filter the input. A capacitor straight at the op-amp inputs, like in figure below, is likely to make it unstable, for the reasons described above.
 
@@ -78,7 +78,7 @@ However, I would suggest an other solution than the one proposed by Analog Devic
 
 <!-- TODO: Add figure. -->
 
-## Output snubbing network
+### Output snubbing network
 
 A perceived drawback of solutions using an isolation resistor is the voltage drop in the isolation resistor and the inability of using the full output voltage range of the operational amplifier, particularly for RRO (rail-to-rail-output) amplifiers.
 
@@ -92,11 +92,11 @@ This solution stabilizes the circuit, but makes the load harder to drive, making
 
 A tricky point of this calculation is that the needed components values depends on the unity gain frequency, but it depends itself on the values of the snubber network which tend to reduce it.
 
-## Isolation resistor
+### Isolation resistor
 
 An isolation resistor ensures the opamp sees at the unity gain a convenient load, either a low enough capacitance when the capacitive load is low enough compared to the isolation resistor, or the isolation resistor when the capacitive load is high enough. This ensures stability, but at a price: the opamp produced the wanted voltage with the feedback before the resistor, and the actual voltage at the load is RC filtered.
 
-## Isolation resistor + double feedback
+### Isolation resistor + double feedback
 
 This technique exists in two common variants shown in the 2 figures below from the excellent article[^6] from Texas Instruments. 
 
@@ -124,7 +124,7 @@ Since I had not yet the time to do the mathematics, in waiting, please fine a pi
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
 
-# Some words on buffers
+## Some words on buffers
 
 Unity gain buffer ICs can help to solve this problem, either as a standalone solution, when their offsets are tolerable, or as an addition to the opamp, kind of replacing the isolation resistors.
 
@@ -141,9 +141,9 @@ Simple buffers:
 The common LT1010 has xxx drawbacks.
 {% endcomment %}
 
-# Case studies
+## Case studies
 
-## Sariel Hodisan
+### Sariel Hodisan
 
 From this LinkedIn post[^1] from Sariel Hodisan:
 
@@ -172,7 +172,7 @@ This circuit should not have oscillated so hard, according to the datasheet, whi
 
 He solved the problem using a simple isolation resistor, at the cost of a small voltage drop, and I suggested him to add a double feedback to eliminate the drop. Since it is a DC need, the simple double feedback is sufficient.
 
-## Microwaves101 gate pulser
+### Microwaves101 gate pulser
 
 In the excellent microwaves101 website[^10], a page is written on the subject of pulsed RF sources. Although it advises drain pulsing (this page was written long before before GaN was mainstream), it also gives some advice about gate pulsing (bold from myself):
 
@@ -190,7 +190,7 @@ However, a point which might need to be added is the stabilisation for capacitiv
 
 Given this curve and the typical gate bias network capacitance values, I would recommend a 20&nbsp;&Omega; isolation resistor. The RC bandwidth is already 31.8&nbsp;MHz. If not sufficient, a R<sub>ISO</sub> + DFB + RFx can be used to both remove the R<sub>ISO</sub> offset and to have speed up.
 
-## Microwaves101 gate pulser, alternative solution
+### Microwaves101 gate pulser, alternative solution
 
 That being said, we would propose here an alternative solution.
 
