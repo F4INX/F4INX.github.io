@@ -285,9 +285,9 @@ The ADV3219 is a feedback amplifier with an internal feedback. Performance curve
 
 [^9]: [https://ww1.microchip.com/downloads/en/Appnotes/00884b.pdf](https://ww1.microchip.com/downloads/en/Appnotes/00884b.pdf)
 
-[^10]: https://www.microwaves101.com/encyclopedias/pulsed-rf-sources
+[^10]: [https://www.microwaves101.com/encyclopedias/pulsed-rf-sources](https://www.microwaves101.com/encyclopedias/pulsed-rf-sources)
 
-[^11]: https://www.analog.com/media/en/technical-documentation/data-sheets/ad8036_8037.pdf
+[^11]: [https://www.analog.com/media/en/technical-documentation/data-sheets/ad8036_8037.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/ad8036_8037.pdf)
 
 [^12]: [https://www.analog.com/en/parametricsearch/11267#/sort=s3,asc](https://www.analog.com/en/parametricsearch/11267#/sort=s3,asc)
 
