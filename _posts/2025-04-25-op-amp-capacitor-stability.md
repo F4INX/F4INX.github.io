@@ -60,7 +60,7 @@ Note what matter for stability is the open loop operational amplifier output imp
 
 # Some details on the topic
 
-The details of the topic won't be explained here, because the most important is to be aware of the problem and of its solutions. Once the problem is known, details are easy to find on Google. Reference [^5] is a great starter, even if I would suggest an other solution on the "RC filter directly at the input", [^6] gives more informations on threee useful solutions: R<sub>ISO</sub>, R<sub>ISO</sub> + DFB, R<sub>ISO</sub> + DFB + RFx, [^7] give more solutions and details, and [^8] is a rather long presentation on the general subject of operational amplifier stability which beats the topic to death, [^8] gives additional details and equations on the topic.
+The details of the topic won't be explained here, because the most important is to be aware of the problem and of its solutions. Once the problem is known, details are easy to find on Google. Reference [^5] is a great starter, even if I would suggest an other solution on the "RC filter directly at the input", [^6] gives more informations on threee useful solutions: R<sub>ISO</sub>, R<sub>ISO</sub> + DFB, R<sub>ISO</sub> + DFB + RFx, [^7] give more solutions and details, and [^8] is a rather long presentation on the general subject of operational amplifier stability which beats the topic to death, [^8] gives additional details and equations on the topic. This application note from Microchip[^9], although not complete on compensation networks, give useful equation, useful tips for ADC interfacing and give useful information on large signal effects.
 
 The careful reader will probably notice a mistake in the "in-loop compensation circuit" of [^7]: Vin and GND are inverted, as well as the - and + inputs of the operational amplifiers. Despite this mistake, the remaining of the contents is highly valuable.
 
@@ -194,7 +194,7 @@ Given this curve and the typical gate bias network capacitance values, I would r
 
 That being said, we would propose here an alternative solution.
 
-A problem with the AD8036 is that it is an input clamping amplifier, with clamping only available on its +V<sub>IN</sub>, making it "works only for noninverting or follower applications". This needs a 0 to -5V input signal to have the requested V<sub>H</sub> and V<sub>L</sub> voltages. Not very convenient since most digital circuits operate on positive voltages.
+A problem with the AD8036[^11] is that it is an input clamping amplifier, with clamping only available on its +V<sub>IN</sub>, making it "works only for noninverting or follower applications". This needs a 0 to -5V input signal to have the requested V<sub>H</sub> and V<sub>L</sub> voltages. Not very convenient since most digital circuits operate on positive voltages.
 
 Switching between two voltages levels would be conveniently done by a switch integrated circuit. Most common switches are slow, either because they are plain slow or because they include some "break before make" circuitry which take some transition times. The switches in the "buffered analog multiplexers" section of Analog Devices[^12] provide faster time, probably because the techniques to deal with switching transitions are easier to implement in unidirectional multiplexed buffer than in unidirectional buffer, like current steering:
 
