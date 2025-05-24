@@ -104,13 +104,13 @@ This technique exists in two common variants shown in the 2 figures below from t
 <table>
 <tr>
 <td>
-<img src="{{ '/posts/op-amp-capacitor-stability/texas-article-fig2.png' | relative_url }}" />
+<img src="{{ '/posts/op-amp-capacitor-stability/texas-article-fig-2.png' | relative_url }}" />
 </td>
 <td width="10%">
 <!-- FIXME: Quick and dirty fix. -->
 </td>
 <td>
-<img src="{{ '/posts/op-amp-capacitor-stability/texas-article-fig3.png' | relative_url }}" />
+<img src="{{ '/posts/op-amp-capacitor-stability/texas-article-fig-3.png' | relative_url }}" />
 </td>
 </tr>
 </table>
@@ -186,7 +186,7 @@ The feedback was forgotten in the figure, but not in the text.
 
 However, a point which might need to be added is the stabilisation for capacitive loads. The AD8036 datasheet does not mention performance curves when capacitively loaded, but instead a recommended isolation resistor value:
 
-<img src="{{ '/posts/op-amp-capacitor-stability/ad8036-ds-fig5.png' | relative_url }}" width="50%" />
+<img src="{{ '/posts/op-amp-capacitor-stability/ad8036-ds-fig-5.png' | relative_url }}" width="50%" />
 
 Given this curve and the typical gate bias network capacitance values, I would recommend a 20&nbsp;&Omega; isolation resistor. The RC bandwidth is already 31.8&nbsp;MHz. If not sufficient, a R<sub>ISO</sub> + DFB + RFx can be used to both remove the R<sub>ISO</sub> offset and to have speed up.
 
