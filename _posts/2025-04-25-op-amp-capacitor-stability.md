@@ -269,6 +269,12 @@ The ADV3219 is a feedback amplifier with an internal feedback. Performance curve
 </table>
 </figure>
 
+## Conclusion
+
+Sine life is too short to write conclusions, please find this beautiful picture of a cat, courtesy of Microwaves101 ([https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023](https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023)):
+
+<img src="https://www.microwaves101.com/uploads/CatBed.png" />
+
 [^1]: [https://www.linkedin.com/posts/sariel-hodisan_...](https://www.linkedin.com/posts/sariel-hodisan_%F0%9D%97%A7%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%B4%F0%9D%97%AE%F0%9D%97%BD-%F0%9D%97%AF%F0%9D%97%B2%F0%9D%98%81%F0%9D%98%84%F0%9D%97%B2%F0%9D%97%B2%F0%9D%97%BB-%F0%9D%98%80%F0%9D%97%B6%F0%9D%97%BA%F0%9D%98%82%F0%9D%97%B9%F0%9D%97%AE-activity-7316060130964340736-RCjM/)
 
 [^3]: [https://www.ti.com/lit/ds/symlink/opa192.pdf](https://www.ti.com/lit/ds/symlink/opa192.pdf)
