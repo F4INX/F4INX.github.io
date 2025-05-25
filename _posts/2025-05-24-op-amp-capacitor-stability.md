@@ -52,6 +52,20 @@ The careful reader will probably notice a mistake in the "in-loop compensation c
 
 <!-- TODO: Fix sup references. -->
 
+## Important note on coaxial cables
+
+A important case of "capacitive" loads are coaxial cables. Their distributed nature and associated characteristic impedance and propagation time makes it differ from purely capacitive loads in ways that should not ignored. Coaxial cables loaded by their characteristic impedance, most often 50&nbsp;&Omega;, behave like like a pure resistance. Conversely, coaxial cables driven by with a source impedance equal to their characteristic impedance behave like a pure resistive source impedance.
+
+When it is sure a coaxial cable would be loaded by its characteristic impedance, from a stability point of view, it is just a resistor. Nothing more is needed, provided the operational amplifier can feed the requested current.
+
+When a coaxial cable is loaded by something looking like an open circuit, typically an high impedance digital input, it is best to source terminate it, by putting a resistor between the output of the operational amplifier, wired in the usual way, and the input of the coaxial cable. The coaxial cable will be merged with the source resistor, and all will behave like the source resistor loaded by the open circuit.
+
+Such a scheme can also be used in cases where the load is most often an high impedance but not always, because the source resistor will ensure a minimum resistance seen by the operational amplifier and avoid stability problems.
+
+In some cases, it can be useful to terminate the coaxial cable on both sides. This has the drawback to make the final voltage half the voltage at the output of the operational amplifier, but is a robust solution.
+
+However, when the coaxial cable is loaded by some capacitor, they must together be handled like a capacitor. Nevertheless, due to the cable propagation time, some ringing can be expected if the rise and fall times are too small compared to it. This can be avoided by ensuring long enough rise and fall times or by adding some damping resistors.
+
 ## Some comments of the common solutions
 
 ### Input filtering
