@@ -11,20 +11,6 @@ Operational amplifiers are often, and for good reason, the go-to building block 
 
 However, a common trap with such circuits is that operational amplifiers tend to be unstable when they are capacitively loaded, even for relatively low values.
 
-Recently, a designer in LinkedIn shared his experience on the topic on this page [^1], leading to a very interesting discussion on the topic.
-
-{% comment %}
-## Not a simulation issue
-
-Operational amplifier unstability when capacitively loaded is a phenomenon well described by theory and which simulates rather well. However, it is easy to miss in the simulations for three reasons.
-
-First, the simulated test cases are often not hard enough to check for such issues. When simulating something which produces DC rails, my standard test is not to simulate just a resistor but an abrupt transition from 0 to full load. Such an hard test allows to detect lots of problems before they happen in the lab.
-
-Second, a mistake in the simulated values may transform an oscillatory circuit into a barely stable circuit which poorly works but still works. For instance, in some cases, the load capacitance might be underestimated.
-
-Third, the worst case parameters which should be simulated might not be evident, particularly for the opamp GBW (gain bandwidth product). Often the worst case for proper operation is the minimum value. For stability issues the worst cases is most likely to be the maximum value. For instance, the datasheet of the LM741[^2] specifies a min GBW of 437&nbsp;kHz, a typical GBW of 1500&nbsp;kHz, and no maximum GBW.
-{% endcomment %}
-
 ## Beware of the "high capacitive load drive capability" op-amps
 
 Some op-amps models like the OPA192[^3] advertise an "high capacitive load drive capability", but the stated value is only 1 nF. Even if this is only a typical value, its conditions are rather fair: only 40% overshoot. The main problem is that it is only 1 nF.
