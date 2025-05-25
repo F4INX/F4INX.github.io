@@ -118,11 +118,118 @@ This technique exists in two common variants shown in the 2 figures below from t
 
 The operating principle is the same in the two cases: provide an high frequency and a low frequency feedback paths. The high frequency path, right at the operational amplifier output, undelayed, provides stability, while the low frequency path, at the load, provided an exact low frequency response.
 
-With some mathematics, it is possible to determine the optimum values which ensure both stability and performance.
+With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations.
 
-Since I had not yet the time to do the mathematics, in waiting, please find a picture of these beautiful cats from Wikipedia:
+<!-- TODO: Add the link for Chris Basso. -->
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+Transfert function can be written as such:
+
+<!-- <asciimath>
+V_"out" = V_"AOP" \cdot (1/(C_L \cdot s))/(R_"iso"+1/(C_L \cdot s)) = V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s)
+</asciimath>
+
+<asciimath>
+V_"out" = (V_"in" - V_x) \cdot "GBW"/s \cdot 1/(1+R_"iso" \cdot C_L \cdot s)
+</asciimath> -->
+
+#### Operational amplifier output to feedback
+
+<asciimath>
+V_x = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"out" / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F) = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
+</asciimath>
+
+<asciimath>
+V_x = V_"AOP" \cdot (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
+</asciimath>
+
+<asciimath>
+V_x = V_"AOP" \cdot (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1/(1+R_"iso" \cdot C_L \cdot s)) / (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1)
+</asciimath>
+
+<asciimath>
+V_x = V_"AOP" \cdot ((R_F \cdot (1+R_"iso" \cdot C_L \cdot s)) / (R_(Fx) + 1 / (C_F \cdot s)) + 1) / ((R_F \cdot (1+R_"iso" \cdot C_L \cdot s)) / (R_(Fx) + 1 / (C_F \cdot s)) + 1+R_"iso" \cdot C_L \cdot s)
+</asciimath>
+
+<asciimath>
+V_x = V_"AOP" \cdot ([R_F \cdot (1+R_"iso" \cdot C_L \cdot s)] + (R_(Fx) + 1 / (C_F \cdot s))) / ([R_F \cdot (1+R_"iso" \cdot C_L \cdot s)] + (1+R_"iso" \cdot C_L \cdot s) \cdot (R_(Fx) + 1 / (C_F \cdot s)))
+</asciimath>
+
+<asciimath>
+V_x = V_"AOP" \cdot ((R_F \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2) + (1 + R_(Fx) \cdot C_F \cdot s)) / ((R_F \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2) + (1+R_"iso" \cdot C_L \cdot s) \cdot (1 + R_(Fx) \cdot C_F \cdot s))
+</asciimath>
+
+<asciimath>
+V_x = V_"AOP" \cdot 
+  ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
+  ((R_F \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2) + [1 + (R_"iso" \cdot C_L + R_(Fx) \cdot C_F) \cdot s + (R_"iso" \cdot R_(Fx) \cdot C_L \cdot C_F) \cdot s^2 ])
+</asciimath>
+
+<asciimath>
+V_x = V_"AOP" \cdot 
+  ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
+  (1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath>
+
+#### Closed loop AOP gain
+
+<asciimath>
+V_"AOP" = (V_"in" - V_x) \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot "GBW"/s - V_x \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot "GBW"/s - V_"AOP" \cdot 
+  ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
+  (1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot [ 1 + ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
+  (1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) \cdot "GBW"/s ]
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot [ 1 + ( "GBW" + "GBW" \cdot (R_F + R_(Fx)) \cdot C_F \cdot s + "GBW" \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
+  (s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 ) ]
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot
+( "GBW" + [1 + "GBW" \cdot (R_F + R_(Fx)) \cdot C_F] \cdot s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F + "GBW" \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 ) /
+( s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 )
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot "GBW" / s \cdot
+( s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 ) /
+( "GBW" + [1 + "GBW" \cdot (R_F + R_(Fx)) \cdot C_F] \cdot s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F + "GBW" \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 )
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot
+( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
+( 1 + [1 / "GBW" + (R_F + R_(Fx)) \cdot C_F] \cdot s + ((R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) / "GBW" + R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + (R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F) / "GBW" \cdot s^3 )
+</asciimath>
 
 ## Some words on buffers
 
@@ -280,6 +387,10 @@ Previous version of the page included various cat pictures as placeholders for c
 Courtesy of Microwaves101 ([https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023](https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023)):
 
 <img src="https://www.microwaves101.com/uploads/CatBed.png" />
+
+From Wikipedia:
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
 
 [^1]: [https://www.linkedin.com/posts/sariel-hodisan_...](https://www.linkedin.com/posts/sariel-hodisan_%F0%9D%97%A7%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%B4%F0%9D%97%AE%F0%9D%97%BD-%F0%9D%97%AF%F0%9D%97%B2%F0%9D%98%81%F0%9D%98%84%F0%9D%97%B2%F0%9D%97%B2%F0%9D%97%BB-%F0%9D%98%80%F0%9D%97%B6%F0%9D%97%BA%F0%9D%98%82%F0%9D%97%B9%F0%9D%97%AE-activity-7316060130964340736-RCjM/)
 
