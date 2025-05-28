@@ -11,20 +11,6 @@ Operational amplifiers are often, and for good reason, the go-to building block 
 
 However, a common trap with such circuits is that operational amplifiers tend to be unstable when they are capacitively loaded, even for relatively low values.
 
-Recently, a designer in LinkedIn shared his experience on the topic on this page [^1], leading to a very interesting discussion on the topic.
-
-{% comment %}
-## Not a simulation issue
-
-Operational amplifier unstability when capacitively loaded is a phenomenon well described by theory and which simulates rather well. However, it is easy to miss in the simulations for three reasons.
-
-First, the simulated test cases are often not hard enough to check for such issues. When simulating something which produces DC rails, my standard test is not to simulate just a resistor but an abrupt transition from 0 to full load. Such an hard test allows to detect lots of problems before they happen in the lab.
-
-Second, a mistake in the simulated values may transform an oscillatory circuit into a barely stable circuit which poorly works but still works. For instance, in some cases, the load capacitance might be underestimated.
-
-Third, the worst case parameters which should be simulated might not be evident, particularly for the opamp GBW (gain bandwidth product). Often the worst case for proper operation is the minimum value. For stability issues the worst cases is most likely to be the maximum value. For instance, the datasheet of the LM741[^2] specifies a min GBW of 437&nbsp;kHz, a typical GBW of 1500&nbsp;kHz, and no maximum GBW.
-{% endcomment %}
-
 ## Beware of the "high capacitive load drive capability" op-amps
 
 Some op-amps models like the OPA192[^3] advertise an "high capacitive load drive capability", but the stated value is only 1 nF. Even if this is only a typical value, its conditions are rather fair: only 40% overshoot. The main problem is that it is only 1 nF.
@@ -65,6 +51,20 @@ The details of the topic won't be explained here, because the most important is 
 The careful reader will probably notice a mistake in the "in-loop compensation circuit" of [^7]: Vin and GND are inverted, as well as the - and + inputs of the operational amplifiers. Despite this mistake, the remaining of the contents is highly valuable.
 
 <!-- TODO: Fix sup references. -->
+
+## Important note on coaxial cables
+
+A important case of "capacitive" loads are coaxial cables. Their distributed nature and associated characteristic impedance and propagation time makes it differ from purely capacitive loads in ways that should not ignored. Coaxial cables loaded by their characteristic impedance, most often 50&nbsp;&Omega;, behave like like a pure resistance. Conversely, coaxial cables driven by with a source impedance equal to their characteristic impedance behave like a pure resistive source impedance.
+
+When it is sure a coaxial cable would be loaded by its characteristic impedance, from a stability point of view, it is just a resistor. Nothing more is needed, provided the operational amplifier can feed the requested current.
+
+When a coaxial cable is loaded by something looking like an open circuit, typically an high impedance digital input, it is best to source terminate it, by putting a resistor between the output of the operational amplifier, wired in the usual way, and the input of the coaxial cable. The coaxial cable will be merged with the source resistor, and all will behave like the source resistor loaded by the open circuit.
+
+Such a scheme can also be used in cases where the load is most often an high impedance but not always, because the source resistor will ensure a minimum resistance seen by the operational amplifier and avoid stability problems.
+
+In some cases, it can be useful to terminate the coaxial cable on both sides. This has the drawback to make the final voltage half the voltage at the output of the operational amplifier, but is a robust solution.
+
+However, when the coaxial cable is loaded by some capacitor, they must together be handled like a capacitor. Nevertheless, due to the cable propagation time, some ringing can be expected if the rise and fall times are too small compared to it. This can be avoided by ensuring long enough rise and fall times or by adding some damping resistors.
 
 ## Some comments of the common solutions
 
@@ -271,7 +271,13 @@ The ADV3219 is a feedback amplifier with an internal feedback. Performance curve
 
 ## Conclusion
 
-Sine life is too short to write conclusions, please find this beautiful picture of a cat, courtesy of Microwaves101 ([https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023](https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023)):
+Capacitor unstability when capacitively loaded is a classical trap, catching even rather experienced designers, particularly RF designers who are not always proficient in low frequency analog design. Although it may seem hard, this problem is well known, well documented and has readily available efficient solutions.
+
+## Appendix
+
+Previous version of the page included various cat pictures as placeholders for contents to be written. They are left here for posterity:
+
+Courtesy of Microwaves101 ([https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023](https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023)):
 
 <img src="https://www.microwaves101.com/uploads/CatBed.png" />
 
