@@ -2,7 +2,7 @@
 layout: post
 title: On stability of capacitive loaded op-amps.
 permalink: /posts/op-amp-capacitor-stability.html
-last_modified_at: 2025-05-24
+last_modified_at: 2025-05-29
 ---
 
 ## Introduction
