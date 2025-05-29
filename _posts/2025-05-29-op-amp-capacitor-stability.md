@@ -124,10 +124,7 @@ With some mathematics, it is possible to determine the optimum values which ensu
 
 Transfert function can be written as such:
 
-<!-- <asciimath>
-V_"out" = V_"AOP" \cdot (1/(C_L \cdot s))/(R_"iso"+1/(C_L \cdot s)) = V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s)
-</asciimath>
-
+<!--
 <asciimath>
 V_"out" = (V_"in" - V_x) \cdot "GBW"/s \cdot 1/(1+R_"iso" \cdot C_L \cdot s)
 </asciimath> -->
@@ -229,6 +226,55 @@ V_"AOP" = V_"in" \cdot "GBW" / s \cdot
 V_"AOP" = V_"in" \cdot
 ( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
 ( 1 + [1 / "GBW" + (R_F + R_(Fx)) \cdot C_F] \cdot s + ((R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) / "GBW" + R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + (R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F) / "GBW" \cdot s^3 )
+</asciimath>
+
+<!--
+#### Simpification for GBW high enough
+
+Assuming GBW is high enough, and letting aside the question of what is high enough, the previous monster can be simplified as follows:
+
+<asciimath>
+V_"AOP" = V_"in" \cdot
+( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
+( 1 + [(R_F + R_(Fx)) \cdot C_F] \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath>
+
+Note only the denominator is impacted by this simplification.
+-->
+
+#### Output at the capacitive load
+
+<asciimath>
+V_"out" = V_"AOP" \cdot (1/(C_L \cdot s))/(R_"iso"+1/(C_L \cdot s)) = V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"out" = V_"in" \cdot
+( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
+( 1 + [1 / "GBW" + (R_F + R_(Fx)) \cdot C_F] \cdot s + ((R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) / "GBW" + R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + (R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F) / "GBW" \cdot s^3 )
+\cdot 1/(1+R_"iso" \cdot C_L \cdot s)
+</asciimath>
+
+<!--
+Expression with simplification
+<asciimath>
+V_"AOP" = V_"in" \cdot
+( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
+( 1 + [(R_F + R_(Fx)) \cdot C_F] \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+\cdot 1/(1+R_"iso" \cdot C_L \cdot s)
+</asciimath>
+-->
+
+The denominator is a monster, however the numerator does not depends on GBW and can be factored in the usual way.
+
+<asciimath>
+Delta = [R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F]^2 - 4 \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F
+</asciimath>
+
+<asciimath>
+Delta = R_"iso"^2 \cdot C_L^2 + 2 \cdot R_"iso" \cdot C_L \cdot (R_F + R_(Fx)) \cdot C_F + (R_F + R_(Fx))^2 \cdot C_F^2 - 4 \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F
 </asciimath>
 
 ## Some words on buffers
