@@ -120,7 +120,7 @@ The operating principle is the same in the two cases: provide an high frequency 
 
 With some mathematics, it is possible to determine the optimum values which ensure both stability and performance.
 
-Since I had not yet the time to do the mathematics, in waiting, please fine a picture of these beautiful cats from Wikipedia:
+Since I had not yet the time to do the mathematics, in waiting, please find a picture of these beautiful cats from Wikipedia:
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
 
