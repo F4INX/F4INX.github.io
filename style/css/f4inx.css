@@ -501,6 +501,12 @@ td mjx-container {
   margin-right: 1em;
 }
 
+/* Border */
+asciimath.framed mjx-math,
+latexmath.framed mjx-math {
+    border: solid;
+}
+
 /*************/
 /* Footnotes */
 /*************/
