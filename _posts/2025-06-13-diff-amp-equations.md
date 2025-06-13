@@ -212,6 +212,10 @@ leading to the final expression of &&R_T&&:
 \frac{1}{R_T} = \frac{1}{\frac{1}{Z_\text{IN}}-\left(1 + \frac{G}{2 \cdot K}\right)\cdot\frac{1}{R_F + R_G}}
 </latexmath>
 
+## LTSpice simulation
+
+<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-plot.png' | relative_url }}"/>
+
 [^1]: [https://www.analog.com/en/resources/app-notes/an-0990.html](https://www.analog.com/en/resources/app-notes/an-0990.html)
 
 [^2]: [https://en.wikipedia.org/wiki/Millman%27s_theorem](https://en.wikipedia.org/wiki/Millman%27s_theorem)
