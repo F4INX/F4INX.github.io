@@ -11,6 +11,12 @@ A few years ago, I had to terminate a differential amplifier in single-ended inp
 
 However, in this use case, the last equation is **uncorrect**. It would have been correct if the -D<sub>IN</sub> input were connected directly to ground. However, this is not the case, and instead this input is connected to ground through a resistor of value <asciimath>R_S////R_T</asciimath> to ensure symmetry.
 
+## Schematic
+
+The schematic is shown below. Note the strange alignment of R<sub>sp</sub> and R<sub>sn</sub>. R<sub>sp</sub> is part of the source while R<sub>sn</sub> is part of the board. Note that in an actual implementation, R<sub>sn</sub> and R<sub>tn</sub> are likely to be merged. Details of the LTSpice simulation will be described at the end.
+
+<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-schematic.svg' | relative_url }}"/>
+
 ## Calculation philosophy: solving vs. enforcing
 
 There are two methods to calculate the values of the components in an electrical circuit:
