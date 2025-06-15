@@ -214,6 +214,10 @@ leading to the final expression of &&R_T&&:
 
 ## LTSpice simulation
 
+LTSpice simulation filed are provided here: [diff-amp-SE-plot.asc]({{ '/posts/diff-amp-equations/diff-amp-SE-plot.asc' | absolute_url }}) and [diff-amp-SE-plot.plt]({{ '/posts/diff-amp-equations/diff-amp-SE-plot.plt' | absolute_url }}). Gain was set to 2 to allow easier check of proper operation by superimposing the curves.
+
+<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-schematic.svg' | relative_url }}"/>
+
 <img src="{{ '/posts/diff-amp-equations/diff-amp-SE-plot.png' | relative_url }}"/>
 
 [^1]: [https://www.analog.com/en/resources/app-notes/an-0990.html](https://www.analog.com/en/resources/app-notes/an-0990.html)
