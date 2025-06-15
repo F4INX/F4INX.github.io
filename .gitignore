@@ -46,3 +46,7 @@ node_modules
 
 # Ignore Gemfile.lock
 Gemfile.lock
+
+# Ignore temp files produced by LTSpice in diff-amp-equations
+posts/diff-amp-equations/diff-amp-SE-plot.op.raw
+posts/diff-amp-equations/diff-amp-SE-plot.raw
