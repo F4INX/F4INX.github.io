@@ -15,7 +15,7 @@ However, in this use case, the last equation is **uncorrect**. It would have bee
 
 The schematic is shown below. Note the strange alignment of R<sub>sp</sub> and R<sub>sn</sub>. R<sub>sp</sub> is part of the source while R<sub>sn</sub> is part of the board. Note that in an actual implementation, R<sub>sn</sub> and R<sub>tn</sub> are likely to be merged. Details of the LTSpice simulation will be described at the end.
 
-<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-schematic.svg' | relative_url }}"/>
+<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-LTSpice.svg' | relative_url }}"/>
 
 ## Calculation philosophy: solving vs. enforcing
 
@@ -214,11 +214,11 @@ leading to the final expression of &&R_T&&:
 
 ## LTSpice simulation
 
-LTSpice simulation filed are provided here: [diff-amp-SE-plot.asc]({{ '/posts/diff-amp-equations/diff-amp-SE-plot.asc' | absolute_url }}) and [diff-amp-SE-plot.plt]({{ '/posts/diff-amp-equations/diff-amp-SE-plot.plt' | absolute_url }}). Gain was set to 2 to allow easier check of proper operation by superimposing the curves.
+LTSpice simulation filed are provided here: [diff-amp-SE-plot.asc]({{ '/posts/diff-amp-equations/diff-amp-SE-LTSpice.asc' | absolute_url }}) and [diff-amp-SE-plot.plt]({{ '/posts/diff-amp-equations/diff-amp-SE-LTSpice.plt' | absolute_url }}). Gain was set to 2 to allow easier check of proper operation by superimposing the curves.
 
-<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-schematic.svg' | relative_url }}"/>
+<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-LTSpice.svg' | relative_url }}"/>
 
-<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-plot.png' | relative_url }}"/>
+<img src="{{ '/posts/diff-amp-equations/diff-amp-SE-LTSpice.plt.png' | relative_url }}"/>
 
 [^1]: [https://www.analog.com/en/resources/app-notes/an-0990.html](https://www.analog.com/en/resources/app-notes/an-0990.html)
 
