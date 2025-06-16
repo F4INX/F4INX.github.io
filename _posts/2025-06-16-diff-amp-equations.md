@@ -229,3 +229,7 @@ LTSpice simulation filed are provided here: [diff-amp-SE-plot.asc]({{ '/posts/di
 [^4]: [{{ '/posts/miller-effect-1.html' | absolute_url }}]({{ '/posts/miller-effect-1.html' | absolute_url }}) [https://en.wikipedia.org/wiki/Miller_effect](https://en.wikipedia.org/wiki/Miller_effect)
 
 [^5]: [https://en.wikipedia.org/wiki/Series_and_parallel_circuits#Resistance_units_2](https://en.wikipedia.org/wiki/Series_and_parallel_circuits#Resistance_units_2)
+
+## Excel file
+
+The Excel calculation file, self explanatory, can be downloaded here: [diff-amp-SE-Excel.xlsx]({{ '/posts/diff-amp-equations/diff-amp-SE-Excel.xlsx' | absolute_url }}).
