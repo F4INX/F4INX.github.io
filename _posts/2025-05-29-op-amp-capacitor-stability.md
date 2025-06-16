@@ -167,6 +167,19 @@ V_x = V_"AOP" \cdot
   (1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath>
 
+
+#### Poles and zeros of the feedback
+
+Zeros can be obtained by solving the quadratic equations:
+
+<asciimath>
+Delta_"zeros" = [ (R_F + R_(Fx)) \cdot C_F ]^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F
+</asciimath>
+
+<asciimath>
+Delta_"zeros" = (R_F^2 + 2 \cdot R_F \cdot R_(Fx) + R_(Fx)^2) \cdot C_F^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F
+</asciimath>
+
 #### Closed loop AOP gain
 
 <asciimath>
