@@ -2,7 +2,7 @@
 layout: post
 title: Equations for terminating a differential amplifier in single-ended input
 permalink: /posts/diff-amp-equations.html
-last_modified_at: 2025-06-13
+last_modified_at: 2025-06-16
 ---
 
 ## Introduction
