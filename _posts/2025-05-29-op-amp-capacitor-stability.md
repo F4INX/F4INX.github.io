@@ -172,44 +172,9 @@ V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot 
 V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 + R_(Fx) \cdot C_F \cdot s + 1 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
 </asciimath>
 
-#### [OLD] Operational amplifier output to feedback
-
 <asciimath>
-V_x = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"out" / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F) = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
+V^- = V_"AOP" \cdot ( 1 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
 </asciimath>
-
-<asciimath>
-V_x = V_"AOP" \cdot (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
-</asciimath>
-
-<asciimath>
-V_x = V_"AOP" \cdot (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1/(1+R_"iso" \cdot C_L \cdot s)) / (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1)
-</asciimath>
-
-<asciimath>
-V_x = V_"AOP" \cdot ((R_F \cdot (1+R_"iso" \cdot C_L \cdot s)) / (R_(Fx) + 1 / (C_F \cdot s)) + 1) / ((R_F \cdot (1+R_"iso" \cdot C_L \cdot s)) / (R_(Fx) + 1 / (C_F \cdot s)) + 1+R_"iso" \cdot C_L \cdot s)
-</asciimath>
-
-<asciimath>
-V_x = V_"AOP" \cdot ([R_F \cdot (1+R_"iso" \cdot C_L \cdot s)] + (R_(Fx) + 1 / (C_F \cdot s))) / ([R_F \cdot (1+R_"iso" \cdot C_L \cdot s)] + (1+R_"iso" \cdot C_L \cdot s) \cdot (R_(Fx) + 1 / (C_F \cdot s)))
-</asciimath>
-
-<asciimath>
-V_x = V_"AOP" \cdot ((R_F \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2) + (1 + R_(Fx) \cdot C_F \cdot s)) / ((R_F \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2) + (1+R_"iso" \cdot C_L \cdot s) \cdot (1 + R_(Fx) \cdot C_F \cdot s))
-</asciimath>
-
-<asciimath>
-V_x = V_"AOP" \cdot 
-  ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
-  ((R_F \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2) + [1 + (R_"iso" \cdot C_L + R_(Fx) \cdot C_F) \cdot s + (R_"iso" \cdot R_(Fx) \cdot C_L \cdot C_F) \cdot s^2 ])
-</asciimath>
-
-<asciimath>
-V_x = V_"AOP" \cdot 
-  ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
-  (1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 )
-</asciimath>
-
 
 #### Poles and zeros of the feedback
 
@@ -219,8 +184,22 @@ Zeros can be obtained by solving the quadratic equations:
 Delta_"zeros" = [ (R_F + R_(Fx)) \cdot C_F ]^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F
 </asciimath>
 
+<p></p>
+
 <asciimath>
 Delta_"zeros" = (R_F^2 + 2 \cdot R_F \cdot R_(Fx) + R_(Fx)^2) \cdot C_F^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F
+</asciimath>
+
+<p></p>
+
+<asciimath>
+Delta_"zeros" = R_F^2 \cdot C_F^2 + 2 \cdot R_F \cdot R_(Fx) \cdot C_F^2 + R_(Fx)^2 \cdot C_F^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F
+</asciimath>
+
+<p></p>
+
+<asciimath>
+s_z = (- ( R_F +  R_(Fx) ) \cdot C_F +- sqrt( R_F^2 \cdot C_F^2 + 2 \cdot R_F \cdot R_(Fx) \cdot C_F^2 + R_(Fx)^2 \cdot C_F^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F ) ) / (2 \cdot R_"iso" \cdot C_L \cdot R_F \cdot C_F )
 </asciimath>
 
 #### Closed loop AOP gain
