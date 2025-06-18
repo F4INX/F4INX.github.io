@@ -118,18 +118,61 @@ This technique exists in two common variants shown in the 2 figures below from t
 
 The operating principle is the same in the two cases: provide an high frequency and a low frequency feedback paths. The high frequency path, right at the operational amplifier output, undelayed, provides stability, while the low frequency path, at the load, provided an exact low frequency response.
 
-With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations.
+With some mathematics, it is possible to determine the optimum values which ensure both stability and performance.
+
+<!-- Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations. -->
 
 <!-- TODO: Add the link for Chris Basso. -->
 
-Transfert function can be written as such:
-
-<!--
-<asciimath>
-V_"out" = (V_"in" - V_x) \cdot "GBW"/s \cdot 1/(1+R_"iso" \cdot C_L \cdot s)
-</asciimath> -->
+<!-- Transfert function can be written as such: -->
 
 #### Operational amplifier output to feedback
+
+<p></p>
+
+<asciimath>
+V^- = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"out" / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F) = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1/(1+R_"iso" \cdot C_L \cdot s)) / (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( R_F / (R_(Fx) + 1 / (C_F \cdot s)) \cdot (1+R_"iso" \cdot C_L \cdot s) + 1 ) / ( (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1) \cdot (1+R_"iso" \cdot C_L \cdot s) )
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = ( V_"AOP" \cdot R_F \cdot (1+R_"iso" \cdot C_L \cdot s) + R_(Fx) + 1 / (C_F \cdot s) ) / ( (R_F + R_(Fx) + 1 / (C_F \cdot s)) \cdot (1+R_"iso" \cdot C_L \cdot s) )
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( R_F \cdot (1+R_"iso" \cdot C_L \cdot s) \cdot C_F \cdot s + R_(Fx) \cdot C_F \cdot s + 1 ) / ( [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] \cdot (1+R_"iso" \cdot C_L \cdot s) )
+</asciimath>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 + R_(Fx) \cdot C_F \cdot s + 1 ) / ( [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] \cdot (1+R_"iso" \cdot C_L \cdot s) )
+</asciimath>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 + R_(Fx) \cdot C_F \cdot s + 1 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
+</asciimath>
+
+#### [OLD] Operational amplifier output to feedback
 
 <asciimath>
 V_x = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"out" / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F) = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
