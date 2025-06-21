@@ -202,6 +202,12 @@ Delta_"zeros" = R_F^2 \cdot C_F^2 + 2 \cdot R_F \cdot R_(Fx) \cdot C_F^2 + R_(Fx
 s_z = (- ( R_F +  R_(Fx) ) \cdot C_F +- sqrt( R_F^2 \cdot C_F^2 + 2 \cdot R_F \cdot R_(Fx) \cdot C_F^2 + R_(Fx)^2 \cdot C_F^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F ) ) / (2 \cdot R_"iso" \cdot C_L \cdot R_F \cdot C_F )
 </asciimath>
 
+<p></p>
+
+<asciimath>
+s_z = - ( R_F +  R_(Fx) ) / (2 \cdot R_"iso" \cdot R_F \cdot C_L ) +- sqrt( R_F^2 \cdot C_F^2 + 2 \cdot R_F \cdot R_(Fx) \cdot C_F^2 + R_(Fx)^2 \cdot C_F^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F ) / (2 \cdot R_"iso" \cdot C_L \cdot R_F \cdot C_F )
+</asciimath>
+
 #### Closed loop AOP gain
 
 <asciimath>
