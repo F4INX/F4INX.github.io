@@ -176,6 +176,20 @@ V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot 
 V^- = V_"AOP" \cdot ( 1 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
 </asciimath>
 
+This expression contains a pole corresponding to the RC constant of the isolation resistor and to the load, which is useful because the feedback should compensate it. However, the second pole is not desirable, and should be compensated by one of the zeros of the numeraros.
+
+#### Removal of one pole
+
+It would be tempting to solve the numerator to find the zeros, and then placing the zeros where we want. However, since we know the position we want, it is better to directly enforce it, in the following way.
+
+<asciimath>
+1 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 = 0 " when " s = - 1 / ((R_F + R_(Fx)) \cdot C_F)
+</asciimath>
+
+<asciimath>
+1 - ( ( R_F +  R_(Fx) ) \cdot C_F ) / ((R_F + R_(Fx)) \cdot C_F) + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / [(R_F + R_(Fx)) \cdot C_F]^2 = 0
+</asciimath>
+
 #### Poles and zeros of the feedback
 
 Zeros can be obtained by solving the quadratic equations:
