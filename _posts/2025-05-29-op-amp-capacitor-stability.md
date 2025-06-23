@@ -176,7 +176,48 @@ V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot 
 V^- = V_"AOP" \cdot ( 1 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
 </asciimath>
 
-This expression contains a pole corresponding to the RC constant of the isolation resistor and to the load, which is useful because the feedback should compensate it. However, the second pole is not desirable, and should be compensated by one of the zeros of the numeraros.
+<!-- This expression contains a pole corresponding to the RC constant of the isolation resistor and to the load, which is useful because the feedback should compensate it. However, the second pole is not desirable, and should be compensated by one of the zeros of the numeraros. -->
+
+#### Merging of the zeros
+
+The numerator has two zeros. In a first approach, it could be attempted to make these two zeros coincide, at least to see what happens. Since the numerator is a quadratic equation, the zeros have the same frequency if:
+
+<asciimath>
+Delta_"zeros" = 0
+</asciimath>
+
+<p></p>
+
+<asciimath>
+[ (R_F + R_(Fx)) \cdot C_F ]^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F = 0
+</asciimath>
+
+<!-- <p></p>
+
+<asciimath>
+(R_F^2 + 2 \cdot R_F \cdot R_(Fx) + R_(Fx)^2) \cdot C_F^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F = 0
+</asciimath>
+
+<p></p>
+
+<asciimath>
+R_F^2 \cdot C_F^2 + 2 \cdot R_F \cdot R_(Fx) \cdot C_F^2 + R_(Fx)^2 \cdot C_F^2 - 4 \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F = 0
+</asciimath> -->
+
+Before solving this equation, it is interesting to perform the following change of variables:
+
+<latexmath>
+\begin{split}
+R_{FT} &= R_{F} + R_{Fx} \\
+k_F &= \frac{R_{F}}{R_{Fx}}
+\end{split}
+</latexmath>
+
+Giving the following equation:
+
+<asciimath>
+[ R_(FT) \cdot C_F ]^2 - 4 \cdot R_"iso" \cdot k \cdot R_(FT) \cdot C_L \cdot C_F = 0
+</asciimath>
 
 #### Removal of one pole
 
