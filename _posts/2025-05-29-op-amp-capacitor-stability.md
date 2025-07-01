@@ -176,6 +176,44 @@ V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot 
 V^- = V_"AOP" \cdot ( 1 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
 </asciimath>
 
+This expression has the following poles and zeros:
+
+* a pole corresponding to the &&R_\"iso\"\cdot C_L&& time constant of the isolation resistor and the load, which is quite normal to be in the feedback, because the feedback should compensate it to some extent,
+
+* a zero, which should be placed just before the unity gain cross-over, to ensure stability,
+
+* another zero, which will be analyzed later,
+
+* another pole, which will be also analyzed later.
+
+#### Values of the zeros
+
+Instead of solving the numerator to get the roots, we will instead work it to choose the roots. The first root will be chosen as &&s_\"z1\" = -1/\tau_1&&, where the detailed value of &&\tau_1&& will be calculated later. By Euclidean division, the numerator can be rewriten as such:
+
+<asciimath>
+"num" = R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + 1
+</asciimath>
+
+<!-- TODO: Fix sign error. -->
+
+<p></p>
+
+<asciimath>
+"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = ( R_F +  R_(Fx) ) \cdot C_F \cdot s - ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 \cdot s + 1
+</asciimath>
+
+<p></p>
+
+<asciimath>
+"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = [ ( 1 + R_(Fx) / R_F ) - ( R_"iso" \cdot C_L ) / \tau_1 ] \cdot R_F \cdot C_F \cdot s + 1
+</asciimath>
+
+<p></p>
+
+<asciimath>
+"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s + [ ( 1 + R_(Fx) / R_F ) - ( R_"iso" \cdot C_L ) / \tau_1 ] \cdot R_F \cdot C_F ) = [ ( 1 + R_(Fx) / R_F ) - ( R_"iso" \cdot C_L ) / \tau_1 ] \cdot R_F \cdot C_F \cdot 1 / \tau_1 + 1
+</asciimath>
+
 #### Merging of the zeros
 
 The numerator has two zeros. In a first approach, it could be attempted to make these two zeros coincide, at least to see what happens. Since the numerator is a quadratic equation, the zeros have the same frequency if:
