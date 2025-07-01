@@ -194,24 +194,24 @@ Instead of solving the numerator to get the roots, we will instead work it to ch
 "num" = R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + 1
 </asciimath>
 
+<p></p>
+
+<asciimath>
+"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = ( R_F +  R_(Fx) ) \cdot C_F \cdot s + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 \cdot s + 1
+</asciimath>
+
+<p></p>
+
 <!-- TODO: Fix sign error. -->
 
-<p></p>
-
 <asciimath>
-"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = ( R_F +  R_(Fx) ) \cdot C_F \cdot s - ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 \cdot s + 1
+"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = [ ( R_F +  R_(Fx) ) \cdot C_F + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] \cdot s + 1
 </asciimath>
 
 <p></p>
 
 <asciimath>
-"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = [ ( 1 + R_(Fx) / R_F ) - ( R_"iso" \cdot C_L ) / \tau_1 ] \cdot R_F \cdot C_F \cdot s + 1
-</asciimath>
-
-<p></p>
-
-<asciimath>
-"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s + [ ( 1 + R_(Fx) / R_F ) - ( R_"iso" \cdot C_L ) / \tau_1 ] \cdot R_F \cdot C_F ) = [ ( 1 + R_(Fx) / R_F ) - ( R_"iso" \cdot C_L ) / \tau_1 ] \cdot R_F \cdot C_F \cdot 1 / \tau_1 + 1
+"num" - (s - 1/\tau_1)[R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s + [ ( R_F +  R_(Fx) ) \cdot C_F + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] ] = [ ( R_F +  R_(Fx) ) \cdot C_F + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] \cdot 1 / \tau_1 + 1
 </asciimath>
 
 #### Merging of the zeros
