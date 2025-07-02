@@ -197,22 +197,29 @@ Instead of solving the numerator to get the roots, we will instead work it to ch
 <p></p>
 
 <asciimath>
-"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = ( R_F +  R_(Fx) ) \cdot C_F \cdot s + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 \cdot s + 1
-</asciimath>
-
-<p></p>
-
-<!-- TODO: Fix sign error. -->
-
-<asciimath>
-"num" - (s - 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = [ ( R_F +  R_(Fx) ) \cdot C_F + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] \cdot s + 1
+"num" - (s + 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = ( R_F +  R_(Fx) ) \cdot C_F \cdot s - ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 \cdot s + 1
 </asciimath>
 
 <p></p>
 
 <asciimath>
-"num" - (s - 1/\tau_1)[R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s + [ ( R_F +  R_(Fx) ) \cdot C_F + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] ] = [ ( R_F +  R_(Fx) ) \cdot C_F + ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] \cdot 1 / \tau_1 + 1
+"num" - (s + 1/\tau_1)(R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s) = [ ( R_F +  R_(Fx) ) \cdot C_F - ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] \cdot s + 1
 </asciimath>
+
+<p></p>
+
+<asciimath>
+"num" - (s + 1/\tau_1)[R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s + [ ( R_F +  R_(Fx) ) \cdot C_F - ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] ] = - [ ( R_F +  R_(Fx) ) \cdot C_F - ( R_"iso" \cdot C_L \cdot R_F \cdot C_F ) / \tau_1 ] \cdot 1 / \tau_1 + 1
+</asciimath>
+
+The right hand side, which should be equal to 0 for &&-1/(\tau_1)&& to be a root, is equal to &&\"num\"(-1/(\tau_1))&&, which is logical. When this condition is fullfilled, the factorization of the numerator and a little simplification give the following equations:
+
+<latexmath>
+\begin{split}
+\text{num} &= R_\text{iso} \cdot C_L \cdot R_F \cdot C_F \cdot \left(s + \frac{1}{\tau_1}\right) \cdot \left(s + \frac{1}{\tau_2}\right) \\
+\tau_2 &= \frac{ R_\text{iso} \cdot C_L \cdot R_F \cdot C_F  } {\tau_1}
+\end{split}
+</latexmath>
 
 #### Merging of the zeros
 
