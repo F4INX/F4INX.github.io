@@ -217,7 +217,8 @@ The right hand side, which should be equal to 0 for &&-1/(\tau_1)&& to be a root
 <latexmath>
 \begin{split}
 \text{num} &= R_\text{iso} \cdot C_L \cdot R_F \cdot C_F \cdot \left(s + \frac{1}{\tau_1}\right) \cdot \left(s + \frac{1}{\tau_2}\right) \\
-\tau_2 &= \frac{ R_\text{iso} \cdot C_L \cdot R_F \cdot C_F  } {\tau_1}
+\tau_2 &= \frac{ R_\text{iso} \cdot C_L \cdot R_F \cdot C_F  } {\tau_1} \\
+& - \left[ ( R_F +  R_{Fx} ) \cdot C_F - \frac{ R_\text{iso} \cdot C_L \cdot R_F \cdot C_F }{ \tau_1 } \right] \cdot \frac{1}{\tau_1} + 1 = 0
 \end{split}
 </latexmath>
 
