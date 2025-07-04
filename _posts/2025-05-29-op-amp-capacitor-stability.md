@@ -222,6 +222,32 @@ The right hand side, which should be equal to 0 for &&-1/(\tau_1)&& to be a root
 \end{split}
 </latexmath>
 
+<p></p>
+
+Solving the equation for &&\tau_1&&:
+
+<latexmath>
+( R_F +  R_{Fx} ) \cdot C_F - \frac{ R_\text{iso} \cdot C_L \cdot R_F \cdot C_F }{ \tau_1 } = \tau_1
+</latexmath>
+
+<p></p>
+
+<latexmath>
+( R_F +  R_{Fx} ) \cdot C_F - \frac{ R_\text{iso} \cdot C_L \cdot C_F }{ \tau_1 } \cdot \frac{R_F}{R_F +  R_{Fx}} \cdot ( R_F +  R_{Fx} ) \cdot C_F = \tau_1
+</latexmath>
+
+<p></p>
+
+<latexmath>
+\left[ 1 - \frac{ R_\text{iso} \cdot C_L }{ \tau_1 } \cdot \frac{R_F}{R_F +  R_{Fx}} \right] \cdot \left[ ( R_F +  R_{Fx} ) \cdot C_F \right] = \tau_1
+</latexmath>
+
+<p></p>
+
+<latexmath>
+( R_F +  R_{Fx} ) \cdot C_F = \frac{\tau_1}{\left[ 1 - \frac{ R_\text{iso} \cdot C_L }{ \tau_1 } \cdot \frac{R_F}{R_F +  R_{Fx}} \right]}
+</latexmath>
+
 #### Merging of the zeros
 
 The numerator has two zeros. In a first approach, it could be attempted to make these two zeros coincide, at least to see what happens. Since the numerator is a quadratic equation, the zeros have the same frequency if:
