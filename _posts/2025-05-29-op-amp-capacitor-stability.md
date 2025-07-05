@@ -245,7 +245,17 @@ Solving the equation for &&\tau_1&&:
 <p></p>
 
 <latexmath>
-( R_F +  R_{Fx} ) \cdot C_F = \frac{\tau_1}{\left[ 1 - \frac{ R_\text{iso} \cdot C_L }{ \tau_1 } \cdot \frac{R_F}{R_F +  R_{Fx}} \right]}
+( R_F +  R_{Fx} ) \cdot C_F = \frac{\tau_1}{\left[ 1 - \frac{ R_\text{iso} \cdot C_L }{ \tau_1 } \cdot \frac{R_F}{R_F + R_{Fx}} \right]}
+</latexmath>
+
+Solve equation for &&\tau_2&&:
+
+<latexmath>
+\begin{split}
+\tau_2 &= \frac{ R_\text{iso} \cdot C_L \cdot R_F \cdot C_F  } {\tau_1} = R_\text{iso} \cdot C_L \cdot \frac{R_F}{R_F +  R_{Fx}} \cdot \frac{ (R_F +  R_{Fx}) \cdot C_F  } {\tau_1} \\
+&= R_\text{iso} \cdot C_L \cdot \frac{R_F}{R_F +  R_{Fx}} \cdot \frac{1}{\left[ 1 - \frac{ R_\text{iso} \cdot C_L }{ \tau_1 } \cdot \frac{R_F}{R_F + R_{Fx}} \right]} \\
+&= \frac{ R_\text{iso} \cdot C_L }{\left[ \frac{R_F + R_{Fx}}{R_F} - \frac{ R_\text{iso} \cdot C_L }{ \tau_1 } \right]}
+\end{split}
 </latexmath>
 
 #### Merging of the zeros
