@@ -178,13 +178,13 @@ V^- = V_"AOP" \cdot ( 1 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + R_"iso" \cdot C_
 
 This expression has the following poles and zeros:
 
-* a pole corresponding to the &&R_\"iso\"\cdot C_L&& time constant of the isolation resistor and the load, which is quite normal to be in the feedback, because the feedback should compensate it to some extent,
+* a pole of time constant &&\tau_{p1} = R_\"iso\"\cdot C_L&& corresponding to the isolation resistor and the load, which is quite normal to be in the feedback, because the feedback should compensate it to some extent,
 
-* a zero, which should be placed just before the unity gain cross-over, to ensure stability,
+* a zero of time constant &&\tau_{z1}&&, which should be placed before the unity gain cross-over, to ensure stability,
 
-* another zero, which will be analyzed later,
+* another zero of time constant &&\tau_{z2}&&, which will be analyzed later,
 
-* another pole, which will be also analyzed later.
+* another pole of time constant &&\tau_{p2}&&, which will be also analyzed later.
 
 #### Values of the zeros
 
