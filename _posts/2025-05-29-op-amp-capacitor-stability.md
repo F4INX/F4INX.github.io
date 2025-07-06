@@ -258,6 +258,15 @@ Solve equation for &&\tau_2&&:
 \end{split}
 </latexmath>
 
+Relative position of second zero &&\tau_2&& and pole &&\tau_{p2}&&:
+
+<latexmath>
+\begin{split}
+\frac{\tau_2}{\tau_{p2}} &= R_\text{iso} \cdot C_L \cdot \frac{R_F}{R_F +  R_{Fx}} \cdot \frac{ (R_F +  R_{Fx}) \cdot C_F  } {\tau_1} \cdot \frac{1}{ (R_F +  R_{Fx}) \cdot C_F } \\
+&= \frac{ R_\text{iso} \cdot C_L  } {\tau_1} \cdot \frac{R_F}{R_F +  R_{Fx}}
+\end{split}
+</latexmath>
+
 #### Merging of the zeros
 
 The numerator has two zeros. In a first approach, it could be attempted to make these two zeros coincide, at least to see what happens. Since the numerator is a quadratic equation, the zeros have the same frequency if:
