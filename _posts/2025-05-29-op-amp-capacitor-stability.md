@@ -184,9 +184,47 @@ This expression has the following poles and zeros:
 
 * another zero of time constant &&\tau_{z2}&&, which will be analyzed later,
 
-* another pole of time constant &&\tau_{p2}&&, which will be also analyzed later.
+* another pole of time constant &&\tau_{p2} = (R_F + R_(Fx)) \cdot C_F&&, which will be also analyzed later.
 
 #### Values of the zeros
+
+Instead of solving the numerator to get the roots, we will instead choose them. The numerator can be directly written as a product with its roots:
+
+<latexmath>
+\begin{split}
+\text{num} &= 1 + ( R_F +  R_{Fx} ) \cdot C_F \cdot s + R_\text{iso} \cdot C_L \cdot R_F \cdot C_F \cdot s^2 \\
+\text{num} &= (1 + \tau_{z1} \cdot s) \cdot (1 + \tau_{z2} \cdot s)
+\end{split}
+</latexmath>
+
+Developping and identifying:
+
+<latexmath>
+\begin{split}
+( R_F +  R_{Fx} ) \cdot C_F &= \tau_{z1} + \tau_{z2} \\
+R_\text{iso} \cdot C_L \cdot R_F \cdot C_F &= \tau_{z1} \cdot \tau_{z2}
+\end{split}
+</latexmath>
+
+Note we have also, from the denominator:
+
+<latexmath>
+\begin{split}
+( R_F +  R_{Fx} ) \cdot C_F &= \tau_{p2}
+\end{split}
+</latexmath>
+
+Giving the following equations linking the values of the components and the pole &&\tau_{p2}&& to the zeros:
+
+<latexmath>
+\begin{split}
+( R_F +  R_{Fx} ) \cdot C_F &= \tau_{z1} + \tau_{z2} \\
+R_\text{iso} \cdot C_L \cdot R_F \cdot C_F &= \tau_{z1} \cdot \tau_{z2} \\
+\tau_{p2} &= \tau_{z1} + \tau_{z2}
+\end{split}
+</latexmath>
+
+#### Values of the zeros (old)
 
 Instead of solving the numerator to get the roots, we will instead work it to choose the roots. The first root will be chosen as &&s_\"z1\" = -1/\tau_1&&, where the detailed value of &&\tau_1&& will be calculated later. By Euclidean division, the numerator can be rewriten as such:
 
