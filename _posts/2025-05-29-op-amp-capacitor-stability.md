@@ -492,7 +492,7 @@ V_"AOP" = V_"in" \cdot
 </asciimath>
 -->
 
-The denominator is a monster, however the numerator does not depends on GBW and can be factored in the usual way.
+<!-- The denominator is a monster, however the numerator does not depends on GBW and can be factored in the usual way.
 
 <asciimath>
 Delta = [R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F]^2 - 4 \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F
@@ -500,6 +500,28 @@ Delta = [R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F]^2 - 4 \cdot (R_F + R_(Fx)
 
 <asciimath>
 Delta = R_"iso"^2 \cdot C_L^2 + 2 \cdot R_"iso" \cdot C_L \cdot (R_F + R_(Fx)) \cdot C_F + (R_F + R_(Fx))^2 \cdot C_F^2 - 4 \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F
+</asciimath> -->
+
+The numerator can be factored as such:
+
+<asciimath>
+N(s) = [1 + R_"iso" \cdot C_L \cdot s] \cdot [1 + (R_F + R_(Fx)) \cdot C_F \cdot s]
+</asciimath>
+
+Leading to a simpler expression:
+
+<asciimath>
+V_"out" = V_"in" \cdot
+[1 + (R_F + R_(Fx)) \cdot C_F \cdot s] /
+( 1 + [1 / "GBW" + (R_F + R_(Fx)) \cdot C_F] \cdot s + ((R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) / "GBW" + R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + (R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F) / "GBW" \cdot s^3 )
+</asciimath>
+
+The only practical way to handle this is to assume a big enough GBW:
+
+<asciimath>
+V_"out" = V_"in" \cdot
+[1 + (R_F + R_(Fx)) \cdot C_F \cdot s] /
+( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath>
 
 ## Some words on buffers
