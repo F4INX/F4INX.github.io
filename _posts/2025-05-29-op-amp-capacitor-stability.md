@@ -524,6 +524,14 @@ V_"out" = V_"in" \cdot
 ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath>
 
+The error can be expressed as such:
+
+<asciimath>
+V_"out" - V_"in" = V_"in" \cdot
+[R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2] /
+( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath>
+
 ## Some words on buffers
 
 Unity gain buffer ICs can help to solve this problem, either as a standalone solution, when their offsets are tolerable, or as an addition to the opamp, kind of replacing the isolation resistors.
