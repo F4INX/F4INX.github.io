@@ -524,12 +524,52 @@ V_"out" = V_"in" \cdot
 ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath>
 
-The error can be expressed as such:
+<!-- The error can be expressed as such:
 
 <asciimath>
 V_"out" - V_"in" = V_"in" \cdot
 [R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2] /
 ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath> -->
+
+### Step answer
+
+<asciimath>
+V_"out" = \frac{1}{s} \cdot
+[1 + (R_F + R_(Fx)) \cdot C_F \cdot s] /
+( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath>
+
+<asciimath>
+V_"out" = \frac{A}{s} + (B \cdot s + C) / ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath>
+
+Multiply by s and eval at s=0: <asciimath>1 = A</asciimath>.
+
+Substract A/s and continue:
+
+<!-- FIXME: add some steps before publishing. -->
+
+<asciimath>
+[-R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s] /
+( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+ = (B \cdot s + C) / ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath>
+
+Leading to:
+
+<asciimath>
+B = -R_"iso" \cdot R_F \cdot C_L \cdot C_F
+</asciimath>
+
+<asciimath>
+C = 0
+</asciimath>
+
+Final expression:
+
+<asciimath>
+V_"out" = \frac{1}{s} - (R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s) / ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath>
 
 ## Some words on buffers
