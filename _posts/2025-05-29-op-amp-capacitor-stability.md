@@ -603,11 +603,12 @@ V_"out" = 1 / s \cdot ( A + [C \cdot \omega + (2 \cdot A + B) \cdot \alpha] / (\
 </asciimath>
 
 <!-- FIXME: better formatting of equation system -->
-Solving the frequencies:
+<!-- Solving the frequencies: -->
 <!-- <asciimath>
 (2 \cdot \alpha) / (\omega^2 + \alpha^2) = (R_F + R_(Fx)) \cdot C_F
 1 / (\omega^2 + \alpha^2) = R_"iso" \cdot R_F \cdot C_L \cdot C_F
 </asciimath> -->
+<!--
 <latexmath>
 \begin{align}
 \frac{2 \cdot \alpha}{\omega^2 + \alpha^2} &= (R_F + R_{Fx}) \cdot C_F \\
@@ -630,6 +631,31 @@ Solving the frequencies:
 \omega^2 &= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2} - \frac{(R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2}  \\
 \omega^2 &= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2}
 \end{align}
+</latexmath>
+-->
+
+Equating the coefficients:
+
+<latexmath>
+\begin{align*}
+A &= 1   \\
+\frac{C \cdot \omega + (2 \cdot A + B) \cdot \alpha}{\omega^2 + \alpha^2} &= (R_F + R_(Fx)) \cdot C_F  \\
+\frac{A + B}{\omega^2 + \alpha^2} &= 0  \\
+\frac{2 \cdot \alpha}{\omega^2 + \alpha^2} &= (R_F + R_{Fx}) \cdot C_F  \\
+\frac{1}{\omega^2 + \alpha^2} &= R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F
+\end{align*}
+</latexmath>
+
+Solving:
+
+<latexmath>
+\begin{align*}
+A &= 1   \\
+C \cdot \omega + \alpha &= \frac{(R_F + R_(Fx)) \cdot C_F}{R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}  \\
+B &= -1  \\
+\frac{2 \cdot \alpha}{\omega^2 + \alpha^2} &= (R_F + R_{Fx}) \cdot C_F  \\
+\frac{1}{\omega^2 + \alpha^2} &= R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F
+\end{align*}
 </latexmath>
 
 ## Some words on buffers
