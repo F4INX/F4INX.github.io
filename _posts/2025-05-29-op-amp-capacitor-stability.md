@@ -336,7 +336,7 @@ Before solving this equation, it is interesting to perform the following change 
 <latexmath>
 \begin{split}
 R_{FT} &= R_{F} + R_{Fx} \\
-k_F &= \frac{R_{F}}{R_{Fx}}
+k_F &= \frac{R_{F}}{R_{FT}}
 \end{split}
 </latexmath>
 
@@ -531,6 +531,41 @@ V_"out" - V_"in" = V_"in" \cdot
 [R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2] /
 ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath> -->
+
+### Aperiodic answer
+
+For most applications, an aperiodic answer is seeked. A too high damping would cause a slow response, and a too low damping would cause undesirable overshoots.
+
+The critically damped condition can be written as:
+
+<latexmath>
+\begin{align*}
+& 1 + (R_F + R_{Fx}) \cdot C_F \cdot s + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot s^2 = 1 + \frac{2 \zeta}{\omega} \cdot s + \frac{1}{\omega^2} \cdot s^2  \\
+& \zeta = \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot \sqrt{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}}  \\
+& (R_F + R_{Fx}) \cdot C_F = 2 \cdot \zeta \cdot \sqrt{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}
+\end{align*}
+</latexmath>
+
+Introducing the following change of variables:
+
+<latexmath>
+\begin{split}
+R_{FT} &= R_{F} + R_{Fx} \\
+k_F &= \frac{R_{F}}{R_{FT}}
+\end{split}
+</latexmath>
+
+It gives:
+
+<latexmath>
+\begin{align*}
+& R_{FT} \cdot C_F = 2 \cdot \zeta \cdot \sqrt{R_\text{iso} \cdot R_{FT} \cdot k_F \cdot C_L \cdot C_F}  \\
+\\
+& R_{FT}^2 \cdot C_F^2 = 4 \cdot \zeta^2 \cdot R_\text{iso} \cdot R_{FT} \cdot k_F \cdot C_L \cdot C_F   \\
+\\
+& k_F = \frac{R_{FT} \cdot C_F}{4 \cdot \zeta^2 \cdot R_\text{iso} \cdot C_L}
+\end{align*}
+</latexmath>
 
 ### Step answer
 
