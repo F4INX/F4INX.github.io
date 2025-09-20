@@ -661,7 +661,7 @@ Solving for frequency <asciimath>\omega</asciimath>:
 \end{align}
 </latexmath>
 
-Integral of the error:
+### Squared integral of the error
 
 <latexmath>
 E = \int_{0}^{+\infty} \left[ e^{-\alpha\cdot t}\,\big[ B\cos(\omega t) + C\sin(\omega t) \big] \right]^2 \, dt
@@ -673,6 +673,18 @@ which can be calculated as follows: <!-- FIXME: details -->
 \begin{align*}
 E &= \int_{0}^{+\infty} e^{-2at}\big(B\cos(\omega t)+C\sin(\omega t)\big)^2\,dt  \\
   &= \frac{B^2+C^2}{4a} + \frac{a(B^2-C^2)+2\omega BC}{4\,(a^2+\omega^2)}
+\end{align*}
+</latexmath>
+
+By substituing the previously calculated coefficients values:
+
+<latexmath>
+\begin{align*}
+\frac{B^2}{\alpha} &= (-1)^2 \cdot \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F}  \\
+  &= \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F}  \\
+\frac{C^2}{\alpha} &= \left[ \frac{(R_F + R_{Fx}) \cdot C_F}{\omega \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \right]^2 \cdot \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F} \\
+  &= \frac{(R_F + R_{Fx}) \cdot C_F}{\omega^2 \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}  \\
+\frac{B^2+C^2}{\alpha} &= \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F} + \frac{(R_F + R_{Fx}) \cdot C_F}{\omega^2 \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}  \\
 \end{align*}
 </latexmath>
 
