@@ -540,37 +540,62 @@ V_"out" = \frac{1}{s} \cdot
 ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath>
 
-<asciimath>
-V_"out" = \frac{A}{s} + (B \cdot s + C) / ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
-</asciimath>
+<!-- Add a link to table -->
 
-Multiply by s and eval at s=0: <asciimath>1 = A</asciimath>.
-
-Substract A/s and continue:
-
-<!-- FIXME: add some steps before publishing. -->
+We search to express this in the form
 
 <asciimath>
-[-R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s] /
-( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
- = (B \cdot s + C) / ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+V_"out" = \frac{A}{s} + B \cdot (s + \alpha) / ( (s + \alpha)^2 + \omega^2 ) + C \cdot (\omega) / ( (s + \alpha)^2 + \omega^2 )
 </asciimath>
 
-Leading to:
+<p></p>
 
 <asciimath>
-B = -R_"iso" \cdot R_F \cdot C_L \cdot C_F
+V_"out" = \frac{A}{s} + (C \cdot \omega + B \cdot \alpha + B \cdot s) / ( \omega^2 + \alpha^2 + 2 \cdot \alpha \cdot s + s^2)
 </asciimath>
+
+<p></p>
+
+<!-- TODO: add steps before -->
+<asciimath>
+V_"out" = 1 / s \cdot ( A \cdot (\omega^2 + \alpha^2) + [C \cdot \omega + (2 \cdot A + B) \cdot \alpha] \cdot s + (A + B) \cdot s^2 ) / ( \omega^2 + \alpha^2 + 2 \cdot \alpha \cdot s + s^2)
+</asciimath>
+
+<p></p>
 
 <asciimath>
-C = 0
+V_"out" = 1 / s \cdot ( A + [C \cdot \omega + (2 \cdot A + B) \cdot \alpha] / (\omega^2 + \alpha^2) \cdot s + (A + B) / (\omega^2 + \alpha^2) \cdot s^2 ) / ( 1 + (2 \cdot \alpha) / (\omega^2 + \alpha^2) \cdot s + 1 / (\omega^2 + \alpha^2) \cdot s^2)
 </asciimath>
 
-Final expression:
+<!-- FIXME: better formatting of equation system -->
+Solving the frequencies:
+<!-- <asciimath>
+(2 \cdot \alpha) / (\omega^2 + \alpha^2) = (R_F + R_(Fx)) \cdot C_F
+1 / (\omega^2 + \alpha^2) = R_"iso" \cdot R_F \cdot C_L \cdot C_F
+</asciimath> -->
+<latexmath>
+\begin{align}
+\frac{2 \cdot \alpha}{\omega^2 + \alpha^2} &= (R_F + R_{Fx}) \cdot C_F \\
+\frac{1}{\omega^2 + \alpha^2} &= R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F
+\end{align}
+</latexmath>
 
-<asciimath>
-V_"out" = \frac{1}{s} - (R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s) / ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
-</asciimath>
+<p></p>
+<latexmath>
+\begin{align}
+\alpha &= \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \\
+\omega^2 + \alpha^2 &= \frac{1}{R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}
+\end{align}
+</latexmath>
+
+<p></p>
+<latexmath>
+\begin{align}
+\omega^2 &= \frac{1}{R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} - \left[ \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \right]^2  \\
+\omega^2 &= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2} - \frac{(R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2}  \\
+\omega^2 &= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2}
+\end{align}
+</latexmath>
 
 ## Some words on buffers
 
