@@ -636,7 +636,7 @@ C \cdot \omega &= \frac{(R_F + R_(Fx)) \cdot C_F}{R_{\text{iso}} \cdot R_F \cdot
 \end{align*}
 </latexmath>
 
-Solving for frequency <asciimath>\omega</asciimath>
+Solving for frequency <asciimath>\omega</asciimath>:
 <latexmath>
 \begin{align}
 \frac{2 \cdot \alpha}{\omega^2 + \alpha^2} &= (R_F + R_{Fx}) \cdot C_F \\
@@ -659,6 +659,21 @@ Solving for frequency <asciimath>\omega</asciimath>
 \omega^2 &= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2} - \frac{(R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2}  \\
 \omega^2 &= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2}
 \end{align}
+</latexmath>
+
+Integral of the error:
+
+<latexmath>
+E = \int_{0}^{+\infty} \left[ e^{-\alpha\cdot t}\,\big[ B\cos(\omega t) + C\sin(\omega t) \big] \right]^2 \, dt
+</latexmath>
+
+which can be calculated as follows: <!-- FIXME: details -->
+
+<latexmath>
+\begin{align*}
+E &= \int_{0}^{+\infty} e^{-2at}\big(B\cos(\omega t)+C\sin(\omega t)\big)^2\,dt  \\
+  &= \frac{B^2+C^2}{4a} + \frac{a(B^2-C^2)+2\omega BC}{4\,(a^2+\omega^2)}
+\end{align*}
 </latexmath>
 
 ## Some words on buffers
