@@ -51,3 +51,9 @@ Gemfile.lock
 posts/diff-amp-equations/diff-amp-SE-LTSpice.op.raw
 posts/diff-amp-equations/diff-amp-SE-LTSpice.raw
 posts/diff-amp-equations/diff-amp-SE-LTSpice.emf
+
+# Ignore temp of op-amp-capacitor-stability (LTSpice)
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.op.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.net
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.plt
