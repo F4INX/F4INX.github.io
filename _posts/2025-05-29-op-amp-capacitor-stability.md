@@ -684,7 +684,37 @@ By substituing the previously calculated coefficients values:
   &= \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F}  \\
 \frac{C^2}{\alpha} &= \left[ \frac{(R_F + R_{Fx}) \cdot C_F}{\omega \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \right]^2 \cdot \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F} \\
   &= \frac{(R_F + R_{Fx}) \cdot C_F}{\omega^2 \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}  \\
-\frac{B^2+C^2}{\alpha} &= \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F} + \frac{(R_F + R_{Fx}) \cdot C_F}{\omega^2 \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}  \\
+\frac{B^2+C^2}{\alpha} &= \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F} + \frac{(R_F + R_{Fx}) \cdot C_F}{\omega^2 \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}
+\end{align*}
+</latexmath>
+
+<latexmath>
+\begin{align*}
+&\omega^2 \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F  \\
+&= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2} \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F  \\
+&= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}
+\end{align*}
+</latexmath>
+
+<latexmath>
+\begin{align*}
+\frac{(R_F + R_{Fx}) \cdot C_F}{\omega^2 \cdot 2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} =  \frac{\left(2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F \right) \cdot (R_F + R_{Fx}) \cdot C_F}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}
+\end{align*}
+</latexmath>
+
+<latexmath>
+\begin{align*}
+\frac{B^2+C^2}{\alpha} &= \frac{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{(R_F + R_{Fx}) \cdot C_F} + \frac{\left(2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F \right) \cdot (R_F + R_{Fx}) \cdot C_F}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}
+\end{align*}
+</latexmath>
+
+<!-- FIXME: copy here for the final version -->
+Introducing the usual change of variables:
+
+<latexmath>
+\begin{align*}
+\frac{B^2+C^2}{\alpha} &= \frac{2 \cdot R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F}{R_{FT} \cdot C_F} + \frac{\left(2 \cdot R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F \right) \cdot R_{FT} \cdot C_F}{4 \cdot R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F - R_{FT}^2 \cdot C_F^2}  \\
+&= 2 \cdot R_{\text{iso}} \cdot k_F \cdot C_L + \frac{2 \cdot R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F}{4 \cdot R_{\text{iso}} \cdot k_F\cdot C_L - R_{FT} \cdot C_F}
 \end{align*}
 </latexmath>
 
