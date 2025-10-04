@@ -718,6 +718,72 @@ Introducing the usual change of variables:
 \end{align*}
 </latexmath>
 
+Second term:
+
+<latexmath>
+\begin{align*}
+B^2 - C^2 &= 1 - \left[ \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \right]^2 \cdot \frac{4 \cdot R_{\text{iso}}^2 \cdot R_F^2 \cdot C_L^2 \cdot C_F^2}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}  \\
+&= 1 - \frac{(R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}%  \\
+% &= \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - 2 \cdot (R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}
+\end{align*}
+</latexmath>
+
+<latexmath>
+\begin{align*}
+% \alpha \cdot (B^2 - C^2) &= \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \cdot \frac{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - 2 \cdot (R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}
+\alpha \cdot (B^2 - C^2) &= \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \cdot \left[ 1 - \frac{(R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2} \right]
+\end{align*}
+</latexmath>
+
+<p></p>
+
+<latexmath>
+\begin{align*}
+2 \cdot \omega \cdot B \cdot C &= (2) \cdot (B) \cdot (C \cdot \omega) = 2 \cdot (-1) \cdot \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}  \\
+&= -2 \cdot \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}
+\end{align*}
+</latexmath>
+
+<p></p>
+
+<latexmath>
+\begin{align*}
+\alpha \cdot (B^2 - C^2) + 2 \cdot \omega \cdot B \cdot C &= \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \cdot \left[ -1 - \frac{(R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2} \right]  \\
+&= \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F} \cdot \frac{-4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}  \\
+&= \frac{-2 \cdot (R_F + R_{Fx}) \cdot C_F}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2}
+\end{align*}
+</latexmath>
+
+<p></p>
+
+<latexmath>
+\begin{align*}
+\frac{\alpha \cdot (B^2 - C^2) + 2 \cdot \omega \cdot B \cdot C}{4 \cdot ( \alpha^2 + \omega^2 )} = \frac{-2 \cdot (R_F + R_{Fx}) \cdot C_F}{4 \cdot R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F - (R_F + R_{Fx})^2 \cdot C_F^2} \cdot \frac{R_{\text{iso}} \cdot R_F \cdot C_L \cdot C_F}{4}
+\end{align*}
+</latexmath>
+
+Introducing the usual change of variables:
+
+<latexmath>
+\begin{align*}
+\frac{\alpha \cdot (B^2 - C^2) + 2 \cdot \omega \cdot B \cdot C}{4 \cdot ( \alpha^2 + \omega^2 )} &= \frac{-2 \cdot R_{FT} \cdot C_F}{4 \cdot R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F - R_{FT}^2 \cdot C_F^2} \cdot \frac{R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F}{4}  \\
+&= \frac{- \frac{1}{2} \cdot R_{FT} \cdot C_F \cdot R_{\text{iso}} \cdot k_F \cdot C_L}{4 \cdot R_{\text{iso}} \cdot k_F \cdot C_L - R_{FT} \cdot C_F}
+\end{align*}
+</latexmath>
+
+Get the error term:
+
+<latexmath>
+\begin{align*}
+E &= \frac{B^2+C^2}{4a} + \frac{a(B^2-C^2)+2\omega BC}{4\,(a^2+\omega^2)}  \\
+&= 2 \cdot R_{\text{iso}} \cdot k_F \cdot C_L + \frac{2 \cdot R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F}{4 \cdot R_{\text{iso}} \cdot k_F \cdot C_L - R_{FT} \cdot C_F} + \frac{- \frac{1}{2} \cdot R_{FT} \cdot C_F \cdot R_{\text{iso}} \cdot k_F \cdot C_L}{4 \cdot R_{\text{iso}} \cdot k_F \cdot C_L - R_{FT} \cdot C_F}  \\
+&= 2 \cdot R_{\text{iso}} \cdot k_F \cdot C_L + \frac{\frac{3}{2} \cdot R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F}{4 \cdot R_{\text{iso}} \cdot k_F \cdot C_L - R_{FT} \cdot C_F}  \\
+&= \frac{8 \cdot R_{\text{iso}}^2 \cdot k_F^2 \cdot C_L^2 - 2 \cdot R_{FT} \cdot C_F \cdot R_{\text{iso}} \cdot k_F \cdot C_L + \frac{3}{2} \cdot R_{\text{iso}} \cdot k_F \cdot R_{FT} \cdot C_L \cdot C_F}{4 \cdot R_{\text{iso}} \cdot k_F\cdot C_L - R_{FT} \cdot C_F}  \\
+&= \frac{8 \cdot R_{\text{iso}}^2 \cdot k_F^2 \cdot C_L^2 - \frac{1}{2} \cdot R_{FT} \cdot C_F \cdot R_{\text{iso}} \cdot k_F \cdot C_L }{4 \cdot R_{\text{iso}} \cdot k_F\cdot C_L - R_{FT} \cdot C_F}  \\
+&= \frac{ R_{\text{iso}} \cdot k_F \cdot C_L \cdot \left[ 8 \cdot R_{\text{iso}} \cdot k_F \cdot C_L - \frac{1}{2} \cdot R_{FT} \cdot C_F  \right] }{4 \cdot R_{\text{iso}} \cdot k_F \cdot C_L - R_{FT} \cdot C_F}
+\end{align*}
+</latexmath>
+
 ## Some words on buffers
 
 Unity gain buffer ICs can help to solve this problem, either as a standalone solution, when their offsets are tolerable, or as an addition to the opamp, kind of replacing the isolation resistors.
