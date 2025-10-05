@@ -61,3 +61,8 @@ posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.net
 posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors.op.raw
 posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors.raw
 posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors.net
+
+# Ignore temp of op-amp-capacitor-stability-compensated-resistors-cap (LTSpice)
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors-cap.op.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors-cap.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors-cap.net
