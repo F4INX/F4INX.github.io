@@ -5,6 +5,165 @@ permalink: /posts/op-amp-capacitor-stability-equations.html
 last_modified_at: 2025-10-10
 ---
 
+## Isolation resistor + double feedback without RFx resistor
+
+Before getting to the more complex case of the double feedback with RFx resistor, it is useful to study this case.
+
+### Operational amplifier output to feedback
+
+<asciimath>
+V^- = (V_"AOP" \cdot C_F \cdot s + V_"out" / R_F) / (C_F \cdot s + 1 / R_F) = (V_"AOP" \cdot C_F \cdot s + V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (C_F \cdot s + 1 / R_F)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot (C_F \cdot s + 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (C_F \cdot s + 1 / R_F)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot (R_F \cdot C_F \cdot s + 1/(1+R_"iso" \cdot C_L \cdot s)) / (R_F \cdot C_F \cdot s + 1)
+</asciimath>
+
+Here the time constants can be introduced:
+
+<asciimath>
+V^- = V_"AOP" \cdot (\tau_F \cdot s + 1/(1 + \tau_L \cdot s)) / (\tau_F \cdot s + 1)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot (1 + (\tau_F \cdot s) \cdot (1 + \tau_L \cdot s)) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s))
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot (1 + \tau_F \cdot s + \tau_F \cdot \tau_L \cdot s^2) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s))
+</asciimath>
+
+### Closed loop AOP gain
+
+<asciimath>
+V_"AOP" = (V_"in" - V^-) \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot "GBW"/s - V^- \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot "GBW"/s - V_"AOP" \cdot 
+  (1 + \tau_F \cdot s + \tau_F \cdot \tau_L \cdot s^2) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s)) \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot [ 1 + (1 + \tau_F \cdot s + \tau_F \cdot \tau_L \cdot s^2) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s)) \cdot "GBW"/s ]
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot [ 1 + ("GBW" + "GBW" \cdot \tau_F \cdot s + "GBW" \cdot \tau_F \cdot \tau_L \cdot s^2) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s) \cdot s) ]
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot ( (s + (\tau_F + \tau_S) \cdot s^2 + \tau_F \cdot \tau_L \cdot s^3) + ("GBW" + "GBW" \cdot \tau_F \cdot s + "GBW" \cdot \tau_F \cdot \tau_L \cdot s^2) ) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s) \cdot s)
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot ( "GBW" + (1 + "GBW" \cdot \tau_F) \cdot s + (\tau_F + \tau_S + "GBW" \cdot \tau_F \cdot \tau_L) \cdot s^2 + \tau_F \cdot \tau_L \cdot s^3 ) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s) \cdot s)
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+Factorizing by <asciimath>"GBW"</asciimath> and <asciimath>1/s</asciimath>:
+
+<asciimath>
+V_"AOP" \cdot ( 1 + (\tau_F + 1 / "GBW") \cdot s + (\tau_F \cdot \tau_L + (\tau_F + \tau_L) / "GBW") \cdot s^2 + (\tau_F \cdot \tau_L) / "GBW" \cdot s^3 ) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s))
+= V_"in"
+</asciimath>
+
+Inverting:
+
+<asciimath>
+V_"AOP" 
+= ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s)) / ( 1 + (\tau_F + 1 / "GBW") \cdot s + (\tau_F \cdot \tau_L + (\tau_F + \tau_L) / "GBW") \cdot s^2 + (\tau_F \cdot \tau_L) / "GBW" \cdot s^3 ) \cdot  V_"in"
+</asciimath>
+
+<p></p>
+
+Trying to factor:
+
+<latexmath>
+\begin{align}
+& \frac{\tau_F \cdot \tau_L}{\text{GBW}} \cdot s^3 + \left( \tau_F \cdot \tau_L + \frac{\tau_F + \tau_L}{\text{GBW}} \right) \cdot s^2 + (\tau_F + \frac{1}{GBW}) \cdot s + 1  \\
+& = \frac{\tau_F \cdot \tau_L}{\text{GBW}} \cdot \left[
+        s^3 +
+        \left( \text{GBW} + \frac{\tau_F + \tau_L}{\tau_F \cdot \tau_L} \right) \cdot s^2
+        + \left( \frac{\text{GBW}}{\tau_L} + \frac{1}{\tau_F \cdot \tau_L} \right) \cdot s
+        + \frac{\text{GBW}}{\tau_F \cdot \tau_L}
+    \right]  \\
+&= \frac{\tau_F \cdot \tau_L}{\text{GBW}} \cdot \left[
+       \left( s + \frac{1}{\tau_L} \right) \cdot
+       (s^2) +
+       \left( \text{GBW} + \frac{\tau_F + \tau_L}{\tau_F \cdot \tau_L} - \frac{1}{\tau_L} \right) \cdot s^2
+       + \left( \frac{\text{GBW}}{\tau_L} + \frac{1}{\tau_F \cdot \tau_L} \right) \cdot s
+       + \frac{\text{GBW}}{\tau_F \cdot \tau_L}
+   \right]  \\
+&= \frac{\tau_F \cdot \tau_L}{\text{GBW}} \cdot \left[
+       \left( s + \frac{1}{\tau_L} \right) \cdot
+       (s^2) +
+       \left( \text{GBW} + \frac{\tau_L}{\tau_F \cdot \tau_L} \right) \cdot s^2
+       + \left( \frac{\text{GBW}}{\tau_L} + \frac{1}{\tau_F \cdot \tau_L} \right) \cdot s
+       + \frac{\text{GBW}}{\tau_F \cdot \tau_L}
+   \right]  \\
+&= \frac{\tau_F \cdot \tau_L}{\text{GBW}} \cdot \left[
+       \left( s + \frac{1}{\tau_L} \right) \cdot
+       \left( s^2 + \left( \text{GBW} + \frac{\tau_L}{\tau_F \cdot \tau_L} \right) \cdot s \right) +
+       \left( -\frac{\text{GBW}}{\tau_L} - \frac{1}{\tau_F \cdot \tau_L} + \frac{\text{GBW}}{\tau_L} + \frac{1}{\tau_F \cdot \tau_L} \right) \cdot s
+       + \frac{\text{GBW}}{\tau_F \cdot \tau_L}
+   \right]  \\
+&= \frac{\tau_F \cdot \tau_L}{\text{GBW}} \cdot \left[
+       \left( s + \frac{1}{\tau_L} \right) \cdot
+       \left( s^2 + \left( \text{GBW} + \frac{\tau_L}{\tau_F \cdot \tau_L} \right) \cdot s \right)
+       + \frac{\text{GBW}}{\tau_F \cdot \tau_L}
+   \right]  \\
+\end{align}
+</latexmath>
+
+Not successful, attempt an approximate factorization.
+
+<!-- ### Gain to load
+
+<asciimath>
+V_"out" = V_"AOP" \cdot 1/(1 + R_"iso" \cdot C_L \cdot s) = V_"AOP" \cdot 1/(1 + \tau_L \cdot s)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"out" 
+= ... * ( 1 + (\tau_F + 1 / "GBW") \cdot s + (\tau_F \cdot \tau_L + (\tau_F + \tau_L) / "GBW") \cdot s^2 + (\tau_F \cdot \tau_L) / "GBW" \cdot s^3 ) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s)^2) \cdot  V_"in"
+</asciimath> -->
+
+## Other equations to sort
+
 <!-- Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations. -->
 
 <!-- TODO: Add the link for Chris Basso. -->
