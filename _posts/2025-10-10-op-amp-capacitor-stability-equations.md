@@ -108,7 +108,7 @@ V_"AOP"
 
 <p></p>
 
-Trying to factor:
+<!-- Trying to factor:
 
 <latexmath>
 \begin{align}
@@ -147,7 +147,129 @@ Trying to factor:
 \end{align}
 </latexmath>
 
-Not successful, attempt an approximate factorization.
+Not successful, attempt an approximate factorization. -->
+
+Seek factorization on the form:
+
+<latexmath>
+\begin{align}
+& D(s)  \\
+& = (1 + 2 \cdot \zeta \cdot \tau_{p0} \cdot s + \tau_{p0}^2 \cdot s^2) \cdot (1 + \tau_{p1} \cdot s)  \\
+& = 1 + (2 \cdot \zeta \cdot \tau_{p0} + \tau_{p1}) \cdot s + (\tau_{p0}^2 + 2 \cdot \zeta \cdot \tau_{p0} \cdot \tau_{p1}) \cdot s^2 + \tau_{p0}^2 \cdot \tau_{p1} \cdot s^3
+\end{align}
+</latexmath>
+
+Leading to following equations:
+
+<latexmath>
+\begin{align}
+2 \cdot \zeta \cdot \tau_{p0} + \tau_{p1} &= \tau_F + \frac{1}{\text{GBW}}  \\
+\tau_{p0}^2 + 2 \cdot \zeta \cdot \tau_{p0} \cdot \tau_{p1} &= \tau_F \cdot \tau_L + \frac{\tau_F + \tau_L}{\text{GBW}}  \\
+\tau_{p0}^2 \cdot \tau_{p1} &= \frac{\tau_F \cdot \tau_L}{\text{GBW}}
+\end{align}
+</latexmath>
+
+Approximating using: <latexmath>\tau_{p0}^2 \gg 2 \cdot \zeta \cdot \tau_{p0} \cdot \tau_{p1}</latexmath>:
+
+<latexmath>
+\begin{align}
+\tau_{p0}^2 &\approx \tau_F \cdot \tau_L + \frac{\tau_F + \tau_L}{\text{GBW}}  \\
+\left[ \tau_F \cdot \tau_L + \frac{\tau_F + \tau_L}{\text{GBW}} \right] \cdot \tau_{p1} &\approx \frac{\tau_F \cdot \tau_L}{\text{GBW}}  \\
+2 \cdot \zeta \cdot \tau_{p0} + \tau_{p1} &= \tau_F + \frac{1}{\text{GBW}}
+\end{align}
+</latexmath>
+
+Equation of last pole:
+
+<latexmath>
+\begin{align}
+\left[ \text{GBW} + \frac{\tau_F + \tau_L}{\tau_F \cdot \tau_L} \right] \cdot \tau_{p1} \approx 1  \\
+\left[ \text{GBW} + \frac{1}{\tau_F} + \frac{1}{\tau_L} \right] \cdot \tau_{p1} \approx 1  \\
+\tau_{p1} \approx \frac{1}{\text{GBW} + \frac{1}{\tau_F} + \frac{1}{\tau_L}}
+\end{align}
+</latexmath>
+
+AOP dominant. Equation of damping:
+
+<latexmath>
+\begin{align}
+2 \cdot \zeta \cdot \tau_{p0} + \tau_{p1} &= \tau_F + \frac{1}{\text{GBW}}  \\
+\zeta &\approx \frac
+    { \tau_F + \frac{1}{\text{GBW}} - \frac{1}{\text{GBW} + \frac{1}{\tau_F} + \frac{1}{\tau_L}} }
+    { 2 \cdot \sqrt{\tau_F \cdot \tau_L + \frac{\tau_F + \tau_L}{\text{GBW}}} }
+\end{align}
+</latexmath>
+
+The upper term can be simplified as such:
+
+<latexmath>
+\begin{align}
+& \frac{1}{\text{GBW}} - \frac{1}{\text{GBW} + \frac{1}{\tau_F} + \frac{1}{\tau_L}}  \\
+& = \frac
+    {\text{GBW} + \frac{1}{\tau_F} + \frac{1}{\tau_L} - \text{GBW}}
+    {\text{GBW} \cdot \left( \text{GBW} + \frac{1}{\tau_F} + \frac{1}{\tau_L} \right)}  \\
+& = \frac
+    { \frac{1}{\tau_F} + \frac{1}{\tau_L} }
+    {\text{GBW} \cdot \left( \text{GBW} + \frac{1}{\tau_F} + \frac{1}{\tau_L} \right)}  \\
+& = \frac
+    { \tau_F + \tau_L }
+    {\text{GBW} \cdot \left( \text{GBW} \cdot \tau_F \cdot \tau_L + \tau_F + \tau_L \right)}
+\end{align}
+</latexmath>
+
+<!---- REFACTOR BEFORE -->
+
+Giving:
+
+<latexmath>
+\begin{align}
+\zeta &\approx \frac
+    {
+        \tau_F
+        + \frac
+            { \tau_F + \tau_L }
+            {\text{GBW} \cdot \left( \text{GBW} \cdot \tau_F \cdot \tau_L + \tau_F + \tau_L \right)}
+    }
+    { 2 \cdot \sqrt{\tau_F \cdot \tau_L + \frac{\tau_F + \tau_L}{\text{GBW}}} }
+\end{align}
+</latexmath>
+
+The value for <asciimath>"GBW" = \infty</asciimath> can be outlined as such:
+
+<latexmath>
+\begin{align}
+\zeta &\approx
+    \frac
+    { \tau_F }
+    {
+        2 \cdot \sqrt{\tau_F \cdot \tau_L}
+    } \cdot
+    \frac
+    {
+    1
+    + \frac
+        { \tau_F + \tau_L }
+        {\text{GBW} \cdot \tau_F \cdot \left( \text{GBW} \cdot \tau_F \cdot \tau_L + \tau_F + \tau_L \right)}
+    }
+    { \sqrt{ 1 + \frac{\tau_F + \tau_L}{\text{GBW} \cdot \tau_F \cdot \tau_L} } }  \\
+&\approx
+    \sqrt{
+        \frac
+            { \tau_F }
+            { 4 \cdot \tau_L }
+    } \cdot
+    \frac
+    {
+    1
+    + \frac
+        { \tau_F + \tau_L }
+        {\text{GBW} \cdot \tau_F \cdot \left( \text{GBW} \cdot \tau_F \cdot \tau_L + \tau_F + \tau_L \right)}
+    }
+    { \sqrt{ 1 + \frac{\tau_F + \tau_L}{\text{GBW} \cdot \tau_F \cdot \tau_L} } }
+\end{align}
+</latexmath>
+
+This last expression shows that to have an aperiodic answer, the time constant of the feedback network must be at least 4 times the time constant of the output RC. In this case, the feedback network ensures DC accuracy and stability, but for higher frequencies, this scheme is equivalent to a simple voltage followed followed by the RC network, without any improvement on its bandwidth, which lead to the desire of feedback schemes who provide actual bandwidth improvement.
 
 <!-- ### Gain to load
 
