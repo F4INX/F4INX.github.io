@@ -2,8 +2,10 @@
 layout: post
 title: LC ladder impedance matching.
 permalink: /posts/LC-ladder-impedance-matching.html
-last_modified_at: 2023-06-25 21-17
+last_modified_at: 2025-10-16
 ---
+
+<p class="begin-note">2025-10-26: Fix some errors in formulas, add some details about calculations.</p>
 
 <p class="begin-note">This blog page is an English translation and adaptation of a part of my PhD thesis. Numbers in brackets refers to the original bibliography, they will be replaced in a future revision.</p>
 
@@ -21,7 +23,7 @@ For these reasons this page describes in detail the calculation of such impedanc
 
 As usual, <asciimath>f</asciimath> is the usual frequency in <asciimath>s^-1</asciimath> and <asciimath>\omega</asciimath> the angular pulsation in <asciimath>rad \cdot s^-1</asciimath>. Calculations will use mainly <asciimath>\omega</asciimath>.
 
-In a first time, the matching network is calculated for the center frequency <asciimath>\omega_m=1</asciimath> and source impedance <asciimath>R_S=1</asciimath>. This normalization is not mandatory, but allows to compare intermediate results with those of [84] to test the good operation of the Python program which was written during the PhD thesis.
+In a first time, the matching network is calculated for the center frequency <asciimath>\omega_0=1</asciimath> and source impedance <asciimath>R_S=1</asciimath>. This normalization is not mandatory, but allows to compare intermediate results with those of [84] to test the good operation of the Python program which was written during the PhD thesis.
 
 The reflexion coefficient of a LC ladder (output) matching network of type Chebychev, seen from the source, is[^2]:
 
@@ -29,7 +31,7 @@ The reflexion coefficient of a LC ladder (output) matching network of type Cheby
 |\Gamma|^2 = (\epsilon^2\cdotT_n^2((\omega^2-\omega_0^2)/(\Delta\omega^2)))/(1+\epsilon^2\cdotT_n^2((\omega^2-\omega_0^2)/(\Delta\omega^2)))
 </asciimath>
 
-with <asciimath>\omega_0=sqrt(\omega_a+\omega_b)</asciimath>, <asciimath>\omega_a</asciimath> the beginning of the passband, and <asciimath>\omega_b</asciimath> the end of the passband.
+with[^errorsite] <asciimath>\omega_0=sqrt((\omega_a^2+\omega_b^2)/2)</asciimath>, <asciimath>\Delta\omega=sqrt((\omega_b^2-\omega_a^2)/2)</asciimath>, <asciimath>\omega_a</asciimath> the beginning of the passband, and <asciimath>\omega_b</asciimath> the end of the passband.
 
 Next figure shows the reflection coefficient seen from the source of an example of an (output) LC matching network going from 5&#8239;Ω towards 50&#8239;Ω from 1 to 2,5&#8239;GHz. These values are approximately those of the first wideband amplifier of the PhD thesis.
 
@@ -81,17 +83,17 @@ With this factorization, reflection coefficient (and not only his squared norm) 
 
 At the beginning of our work on the subject, factorization was performed numerically. This method was thereafter discarded due to numerical instability problems for high orders. This is why a semi-analytic method was taken, inspired by [47, 84]. Roots of the numerator and of the denominator are calculated analytically. Next, factorized polynomianls are calculated by taken only roots with negative real parts.
 
-The calculation, more long than complex, won't be detailed. The roots of the numerator and of the denominator are given by the following formulas:
+The calculation, more long than complex, won't be detailed. The roots of the numerator and of the denominator are given by the following formulas[^errorphd]:
 
 {% comment %}
 FIXME: Math style
 {% endcomment %}
 <asciimath>
-  {: ( +-j sqrt(Delta omega^2 \cdot cos((pi)/(2 \cdot n) \cdot (1 + 2 \cdot k))) , k in [1, n] ),
-     ( +-j sqrt(Delta omega^2 \cdot cos(1/n \cdot arccos(j/epsilon))) ,            k in [1, 2 \cdot n] ) :}
+  {: ( +- sqrt(Delta omega^2 \cdot cos[(pi)/(2 \cdot n) \cdot (1 + 2 \cdot k)] + \omega_0^2) , k in [0, 2n - 1] ),
+     ( +- sqrt(Delta omega^2 \cdot cos[1/n \cdot [arccos(j/epsilon) + k \cdot \pi ]] + \omega_0^2) ,            k in [0, 2n - 1] ) :}
 </asciimath>
 
-The first equation give directly the set of needed roots, since the numerator has double imaginary roots. However, negative real part roots need to be selected from all the roots given by second equation. This point is easily done numerically.
+The first equation give directly the set of needed roots, since the square root is real and positive. However, negative real part roots need to be selected from all the roots given by second equation. This point is easily done numerically.
 
 {% comment %}
 FIXME: Translate French titles, add alt text.
@@ -130,7 +132,7 @@ This impedance is then expanded into a continued fraction through successive div
 Z(p) = g_1 \cdot p + 1 / (g_2 \cdot p + 1/ (g_3 \cdot p + ... + 1 / (g_m \cdot p + g_(m+1))))
 </asciimath>
 
-This expression immediately leads to an LC network. The odd gm values are the normalized values of the inductances, while the even gm values are the normalized values of the capacitances. This denormalization is performed according to the following equations[^5]:
+This expression immediately leads to an LC network. The odd gm values are the normalized values of the inductances, while the even gm values are the normalized values of the capacitances. This denormalization is performed according to the following equations[^errorphd]:
 
 <asciimath>
 {: ( L = g / (2 pi f_0) \cdot Z_1 ),
@@ -138,6 +140,60 @@ This expression immediately leads to an LC network. The odd gm values are the no
 </asciimath>
 
 The last &&g_m&& is the load resistance, which is also normalized. Its value has been known for a long time, but it can be interesting to recalculate it to verify that there is no significant error due to numerical inaccuracies.
+
+## Appendix: equations of the roots
+
+### Numerator
+
+The roots of the numerator, without any attempt to remove duplicates, can be expressed as such:
+
+<latexmath>
+\begin{align*}
+& \epsilon^2 \cdot T_n^2(x) = 0  \\
+\Leftrightarrow \enspace & T_n^2(x) = 0  \\
+\Leftrightarrow \enspace & \cos \left[ n \cdot \arccos (x) \right] = 0  \\
+\Leftrightarrow \enspace & n \cdot \arccos (x) = \frac{\pi}{2} + k \cdot \pi, \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & x = \cos \left[ \frac{\frac{\pi}{2} + k \cdot \pi}{n} \right], \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & x = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right], \enspace k \in \mathbb{Z}  \\
+\end{align*}
+</latexmath>
+
+Due to the periodicity and invariance by sign change of the cosinus, different values of k can lead to the same root. Two different values of k lead to the same root on the following condition:
+
+<latexmath>
+\begin{align*}
+& \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k_1 \right) \right] = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k_2 \right) \right]  \\
+\Leftrightarrow \enspace & \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k_1 \right) = \pm \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k_2 \right) + l \cdot 2 \cdot \pi, \enspace l \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & \frac{\pi}{n} \cdot k_1 = \pm \frac{\pi}{n} \cdot k_2 + l \cdot 2 \cdot \pi, \enspace l \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & k_1 = \pm k_2 + l \cdot 2 \cdot n, \enspace l \in \mathbb{Z}  \\
+\end{align*}
+</latexmath>
+
+Which lead to the set of the roots after removing the duplicates:
+
+<latexmath>
+\begin{align*}
+x_k = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right], \enspace k \in [0; 2n-1]  \\
+\end{align*}
+</latexmath>
+
+### Denominator
+
+Same method.
+
+<latexmath>
+\begin{align*}
+& 1 + \epsilon^2 \cdot T_n^2(x) = 0  \\
+\Leftrightarrow \enspace & T_n^2 (x) = - \frac{1}{\epsilon^2}  \\
+\Leftrightarrow \enspace & T_n(x) = \pm \frac{j}{\epsilon}  \\
+\Leftrightarrow \enspace & \cos \left[ n \cdot \arccos \left( x \right) \right] = \pm \frac{j}{\epsilon}  \\
+\Leftrightarrow \enspace & n \cdot \arccos \left( x \right) = \pm \arccos \left( \pm \frac{j}{\epsilon} \right) + k \cdot 2 \cdot \pi, \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & \arccos \left( x \right) = \pm \frac{1}{n} \arccos \left( \pm \frac{j}{\epsilon} \right) + \frac{k}{n} \cdot 2 \cdot \pi, \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & x = \cos \left[ \frac{1}{n} \arccos \left( \pm \frac{j}{\epsilon} \right) + \frac{k}{n} \cdot 2 \cdot \pi \right] , \enspace k \in \mathbb{Z}
+\end{align*}
+</latexmath>
+
+And for the same reason as for the numerator, <latexmath>k</latexmath> can be restricted to the interval <latexmath>[0; 2n-1]</latexmath>.
 
 [^1]: It is not even a pure impedance. See the blog pages to come!
 
@@ -147,4 +203,6 @@ The last &&g_m&& is the load resistance, which is also normalized. Its value has
 
 [^4]: This point has been forgotten to be mentioned in the PhD thesis pdf. Sorry.
 
-[^5]: There is a typo in these formulas in the PhD thesis pdf. Sorry.
+[^errorphd]: There is a typo in these formulas in the PhD thesis pdf. Sorry.
+
+[^errorsite]: There was a typo in these formulas in a previous version of this article. Sorry.
