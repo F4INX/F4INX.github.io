@@ -149,8 +149,8 @@ The roots of the numerator, without any attempt to remove duplicates, can be exp
 
 <latexmath>
 \begin{align*}
-& \epsilon^2 \cdot T_n(x)^2 = 0  \\
-\Leftrightarrow \enspace & T_n(x) = 0  \\
+& \epsilon^2 \cdot T_n^2(x) = 0  \\
+\Leftrightarrow \enspace & T_n^2(x) = 0  \\
 \Leftrightarrow \enspace & \cos \left[ n \cdot \arccos (x) \right] = 0  \\
 \Leftrightarrow \enspace & n \cdot \arccos (x) = \frac{\pi}{2} + k \cdot \pi, \enspace k \in \mathbb{Z}  \\
 \Leftrightarrow \enspace & x = \cos \left[ \frac{\frac{\pi}{2} + k \cdot \pi}{n} \right], \enspace k \in \mathbb{Z}  \\
@@ -176,6 +176,24 @@ Which lead to the set of the roots after removing the duplicates:
 x_k = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right], \enspace k \in [0; 2n-1]  \\
 \end{align*}
 </latexmath>
+
+### Denominator
+
+Same method.
+
+<latexmath>
+\begin{align*}
+& 1 + \epsilon^2 \cdot T_n^2(x) = 0  \\
+\Leftrightarrow \enspace & T_n^2 (x) = - \frac{1}{\epsilon^2}  \\
+\Leftrightarrow \enspace & T_n(x) = \pm \frac{j}{\epsilon}  \\
+\Leftrightarrow \enspace & \cos \left[ n \cdot \arccos \left( x \right) \right] = \pm \frac{j}{\epsilon}  \\
+\Leftrightarrow \enspace & n \cdot \arccos \left( x \right) = \pm \arccos \left( \pm \frac{j}{\epsilon} \right) + k \cdot 2 \cdot \pi, \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & \arccos \left( x \right) = \pm \frac{1}{n} \arccos \left( \pm \frac{j}{\epsilon} \right) + \frac{k}{n} \cdot 2 \cdot \pi, \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & x = \cos \left[ \frac{1}{n} \arccos \left( \pm \frac{j}{\epsilon} \right) + \frac{k}{n} \cdot 2 \cdot \pi \right] , \enspace k \in \mathbb{Z}
+\end{align*}
+</latexmath>
+
+And for the same reason as for the numerator, <latexmath>k</latexmath> can be restricted to the interval <latexmath>[0; 2n-1]</latexmath>.
 
 [^1]: It is not even a pure impedance. See the blog pages to come!
 
