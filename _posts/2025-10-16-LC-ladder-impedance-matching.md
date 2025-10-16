@@ -141,6 +141,42 @@ This expression immediately leads to an LC network. The odd gm values are the no
 
 The last &&g_m&& is the load resistance, which is also normalized. Its value has been known for a long time, but it can be interesting to recalculate it to verify that there is no significant error due to numerical inaccuracies.
 
+## Appendix: equations of the roots
+
+### Numerator
+
+The roots of the numerator, without any attempt to remove duplicates, can be expressed as such:
+
+<latexmath>
+\begin{align*}
+& \epsilon^2 \cdot T_n(x)^2 = 0  \\
+\Leftrightarrow \enspace & T_n(x) = 0  \\
+\Leftrightarrow \enspace & \cos \left[ n \cdot \arccos (x) \right] = 0  \\
+\Leftrightarrow \enspace & n \cdot \arccos (x) = \frac{\pi}{2} + k \cdot \pi, \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & x = \cos \left[ \frac{\frac{\pi}{2} + k \cdot \pi}{n} \right], \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & x = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right], \enspace k \in \mathbb{Z}  \\
+\end{align*}
+</latexmath>
+
+Due to the periodicity and invariance by sign change of the cosinus, different values of k can lead to the same root. Two different values of k lead to the same root on the following condition:
+
+<latexmath>
+\begin{align*}
+& \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k_1 \right) \right] = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k_2 \right) \right]  \\
+\Leftrightarrow \enspace & \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k_1 \right) = \pm \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k_2 \right) + l \cdot 2 \cdot \pi, \enspace l \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & \frac{\pi}{n} \cdot k_1 = \pm \frac{\pi}{n} \cdot k_2 + l \cdot 2 \cdot \pi, \enspace l \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & k_1 = \pm k_2 + l \cdot 2 \cdot n, \enspace l \in \mathbb{Z}  \\
+\end{align*}
+</latexmath>
+
+Which lead to the set of the roots after removing the duplicates:
+
+<latexmath>
+\begin{align*}
+x_k = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right], \enspace k \in [0; 2n-1]  \\
+\end{align*}
+</latexmath>
+
 [^1]: It is not even a pure impedance. See the blog pages to come!
 
 [^2]: In [84], &&\Delta\omega^2&& is named A.
