@@ -15,19 +15,19 @@ last_modified_at: 2025-11-09
 
 Impedance matching is performed by LC ladder networks. This method allows to synthesize low impedances (around 5&#8239;Ω) on the same PCB than the standard 50&#8239;Ω output (no need for a second PCB with high permittivity). Moreover, this method is more compact than quarter-wave transformer.
 
-Exact value calculation was performed by numerical optimization. Manual calculation would be too difficule because the output impedance of the transistor is not a pure resistance[^1]. However, numerical optimization needs to know the number of components of the ladder, because the ADS optimizer is not able to add components when needed, but is only able to determine their value. Moreover, an initial estimate of the values of the components of the LC ladder is useful for the optimizer to converge quicker towards the solution. Calculation method is the one of [84], adapted for the needs of the PhD thesis.
+Exact value calculation was performed by numerical optimization. Manual calculation would be too difficule because the output impedance of the transistor is not a pure resistance[^1]. However, numerical optimization needs to know the number of components of the ladder, because the ADS optimizer is not able to add components when needed, but is only able to determine their value. Moreover, an initial estimate of the values of the components of the LC ladder is useful for the optimizer to converge quicker towards the solution. Calculation method is the one of [^ref84], adapted for the needs of the PhD thesis.
 
 Inductors and capacitors are assumed ideal and lossless, as well as the microstrip junctions. The effets of the polarization networks of the transistors are also ignored. Such effects are absolutely not negligeable, but will be easily corrected by the numerical optimizer in the final phase of the design.
 
-A simple empirical method is commonly used [32], but it doesn't allows a priori calculation of the order and of the mismatch of the matching network.
+A simple empirical method is commonly used [^ref32], but it doesn't allows a priori calculation of the order and of the mismatch of the matching network.
 
-In [116] and [29], tables of [84] are used to calculate a low-pass matching network of Chebychev type. Unfortunately these tables does not provide values for very broadband impedance matching network (1:6 ratio for the amplifier module of the PhD thesis).
+In [^ref116] and [^ref29], tables of [^ref84] are used to calculate a low-pass matching network of Chebychev type. Unfortunately these tables does not provide values for very broadband impedance matching network (1:6 ratio for the amplifier module of the PhD thesis).
 
-For these reasons this page describes in detail the calculation of such impedance matching networks. The calculation method is the one of [84], adapted for the needs of the PhD thesis.
+For these reasons this page describes in detail the calculation of such impedance matching networks. The calculation method is the one of [^ref84], adapted for the needs of the PhD thesis.
 
 As usual, <asciimath>f</asciimath> is the usual frequency in <asciimath>s^-1</asciimath> and <asciimath>\omega</asciimath> the angular pulsation in <asciimath>rad \cdot s^-1</asciimath>. Calculations will use mainly <asciimath>\omega</asciimath>.
 
-In a first time, the matching network is calculated for the center frequency <asciimath>\omega_0=1</asciimath> and source impedance <asciimath>R_S=1</asciimath>. This normalization is not mandatory, but allows to compare intermediate results with those of [84] to test the good operation of the Python program which was written during the PhD thesis.
+In a first time, the matching network is calculated for the center frequency <asciimath>\omega_0=1</asciimath> and source [^ref84] to test the good operation of the Python program which was written during the PhD thesis.
 
 The reflexion coefficient of a LC ladder (output) matching network of type Chebychev, seen from the source, is[^2]:
 
@@ -69,7 +69,7 @@ Needs <asciimath></asciimath> tags instead of && &&. Not sure why.
 {% endcomment %}
 The first step of the calculation is to determine the first n such as <asciimath>|\Gamma_max|^2</asciimath> is less than the requirements. This calcul is done numerically, by testing all the integers n from 1 until this requirement is met.
 
-This n is half the number of elements of the final network [84].
+This n is half the number of elements of the final network [^ref84].
 
 Next, variable change p = j · ω is performed. This variable change enables to simplify greatly the calculations to come. Then, the square of the magnitude of the reflection coefficient is factored as such:
 
@@ -221,7 +221,7 @@ Next, <asciimath>omega</asciimath> and p can be calculated in a similar way than
 
 [^1]: It is not even a pure impedance. See the blog pages to come!
 
-[^2]: In [84], &&\Delta\omega^2&& is named A.
+[^2]: In [^ref84], &&\Delta\omega^2&& is named A.
 
 [^3]: Such polynomials are called Hurwitz polynomials. The reasons why a and b must satisfy this condition go beyond the scope of this thesis. The reader is encouraged to refer to a book on network synthesis [12, 56, 73].
 
@@ -230,3 +230,11 @@ Next, <asciimath>omega</asciimath> and p can be calculated in a similar way than
 [^errorphd]: There is a typo in these formulas in the PhD thesis pdf. Sorry.
 
 [^errorsite]: There was a typo in these formulas in a previous version of this article. Sorry.
+
+[^ref32]: Chen CHI, Chen JUN et Wang LEI. «L-band high efficiency GaN HEMT power amplifier for space application ». In : Radar Conference 2013, IET International. Avr. 2013, p. 1-4. DOI : 10.1049/cp.2013.0455.
+
+[^ref84]: G.L. MATTHAEI. « Tables of Chebyshev impedance-transforming networks of low-pass filter form». In : Proceedings of the IEEE 52.8 (august 1964), p. 939-963. ISSN : 0018-9219. DOI : 10 . 1109 / PROC . 1964 . 3185.
+
+[^ref116]: D.A. SUKHANOV et A.A. KISHCHINSKIY. « High efficiency L-, S-, C- band GaN power pulse amplifiers ». In: Microwave and Telecommunication Technology (CriMiCo), 2013 23rd International Crimean Conference. Sept. 2013, p. 94-95.
+
+[^ref29]: Kenle CHEN et D. PEROULIS. « Design of Highly Efficient Broadband Class-E Power Amplifier Using Synthesized Low-Pass Matching Networks ». In: Microwave Theory and Techniques, IEEE Transactions on 59.12 (déc. 2011), p. 3162-3173. ISSN : 0018-9480. DOI : 10.1109/TMTT.2011.2169080.
