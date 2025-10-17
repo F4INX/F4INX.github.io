@@ -47,6 +47,110 @@ FIXME: Translate French titles, add alt text.
   <figcaption>Fig.&#8239;1. Example of reflection coefficient seen from the source of an LC matching network. See text for parameters.</figcaption>
 </figure>
 
+<!-- Thanks to Mistral le Chat. -->
+<div id="myDiv"></div>
+<script>
+    /* Chebyshev polynomial of the first kind, Tn, for any x */
+    function cheby(x, n) {
+        if (x < -1) {
+            return Math.pow(-1, n) * Math.cosh(n * Math.acosh(-x));
+        }
+        else if (x <= 1) {
+            return Math.cos(n * Math.acos(x));
+        }
+        else {
+            return Math.cosh(n * Math.acosh(x));
+        }
+    }
+
+    /* Reg test of cheby */
+    for (let n = 0; n <= 10; n++) {
+        let min = Infinity, max = -Infinity;
+        for (let x = -1; x <= 1; x += 0.1) {
+            const val = cheby(x, n);
+            min = Math.min(min, val);
+            max = Math.max(max, val);
+        }
+        console.log(`n=${n}: min=${min.toFixed(2)}, max=${max.toFixed(2)}`);
+    }
+
+    /* epsilon in function of order and gamma_0 */
+    function epsilon_fct(order, gamma_0, w_0_2, delta_omega_2) {
+        a = gamma_0 ** 2
+        b = a / (1.0 - a)
+        X0 = -w_0_2 / delta_omega_2
+        Y0 = cheby(X0, order)**2
+        var epsilon = Math.sqrt(b / Y0)  // Add real part if needed
+        return epsilon
+    }
+
+    function gamma_square_in_band(order, gamma_0, w_0_2, delta_omega_2) {
+        const epsilon = epsilon_fct(order, gamma_0, w_0_2, delta_omega_2);
+        return Math.pow(epsilon, 2) / (1.0 + Math.pow(epsilon, 2));
+    }
+
+    /* Chebychev order, not components order */
+    function min_order(gamma_0, w_0_2, delta_omega_2, gamma_max) {
+        return Math.min(...Array.from({length: 99}, (_, N) => N + 1).filter(N => gamma_square_in_band(N, gamma_0, w_0_2, delta_omega_2) < gamma_max**2));
+    }
+
+    // Parameters
+    z1 = 5.0
+    z2 = 50.0
+    f1 = 1.0
+    f2 = 2.5
+
+    // Normalised parameters
+    f0 = (f1 + f2) / 2.0
+    w = (f2 - f1) / f0
+    w_a = 1.0 - w/2.0;
+    w_b = 1.0 + w/2.0;
+    w_0_2 = (w_a**2 + w_b**2) / 2.0;
+    delta_omega_2 = (w_b**2 - w_a**2) / 2.0;
+    gamma_0 = Math.abs((z1-z2)/(z1+z2));
+
+    const n = min_order(gamma_0, w_0_2, delta_omega_2, 0.1);
+    console.log(n);
+    const epsilon = epsilon_fct(n, gamma_0, w_0_2, delta_omega_2);
+
+    // Generate omega values
+    const omega = [];
+    for (let i = -10; i <= 10; i += 0.01) {
+        omega.push(i);
+    }
+
+    // Calculate the function values
+    const y = omega.map(om => {
+        const Tn = cheby((om * om - w_0_2) / delta_omega_2, n);
+        return (Math.pow(epsilon, 2) * Math.pow(Tn, 2)) /
+               (1 + Math.pow(epsilon, 2) * Math.pow(Tn, 2));
+    });
+
+    // Create the plot
+    const trace = {
+        x: omega,
+        y: y,
+        mode: 'lines',
+        type: 'scatter',
+        name: 'Function',
+        line: {
+            width: 1  // Adjust this value to make the line thinner or thicker
+        }
+    };
+
+    const layout = {
+        title: 'Norm squared Γ^2 of the reflection coefficient in function of the frequency',
+        xaxis: {
+            title: 'Angular frequency ω [rad/s]'
+        },
+        yaxis: {
+            title: 'Norm squared Γ^2 of the reflection coefficient [unitless]'
+        }
+    };
+
+    Plotly.newPlot('myDiv', [trace], layout);
+</script>
+
 In previous expression, <asciimath>\epsilon</asciimath> is chosen such as:
 
 <asciimath>
