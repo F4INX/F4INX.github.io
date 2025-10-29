@@ -284,6 +284,216 @@ V_"out"
 = ... * ( 1 + (\tau_F + 1 / "GBW") \cdot s + (\tau_F \cdot \tau_L + (\tau_F + \tau_L) / "GBW") \cdot s^2 + (\tau_F \cdot \tau_L) / "GBW" \cdot s^3 ) / ((1 + \tau_F \cdot s) \cdot (1 + \tau_L \cdot s)^2) \cdot  V_"in"
 </asciimath> -->
 
+## Isolation resistor + double feedback with RFx resistor
+
+### Operational amplifier output to feedback
+
+<p></p>
+
+<asciimath>
+V^- = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"out" / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F) = (V_"AOP" / (R_(Fx) + 1 / (C_F \cdot s)) + V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1/(1+R_"iso" \cdot C_L \cdot s) \cdot 1 / R_F) / (1 / (R_(Fx) + 1 / (C_F \cdot s)) + 1 / R_F)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1/(1+R_"iso" \cdot C_L \cdot s)) / (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( R_F / (R_(Fx) + 1 / (C_F \cdot s)) \cdot (1+R_"iso" \cdot C_L \cdot s) + 1 ) / ( (R_F / (R_(Fx) + 1 / (C_F \cdot s)) + 1) \cdot (1+R_"iso" \cdot C_L \cdot s) )
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = ( V_"AOP" \cdot R_F \cdot (1+R_"iso" \cdot C_L \cdot s) + R_(Fx) + 1 / (C_F \cdot s) ) / ( (R_F + R_(Fx) + 1 / (C_F \cdot s)) \cdot (1+R_"iso" \cdot C_L \cdot s) )
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( R_F \cdot (1+R_"iso" \cdot C_L \cdot s) \cdot C_F \cdot s + R_(Fx) \cdot C_F \cdot s + 1 ) / ( [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] \cdot (1+R_"iso" \cdot C_L \cdot s) )
+</asciimath>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 + R_(Fx) \cdot C_F \cdot s + 1 ) / ( [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] \cdot (1+R_"iso" \cdot C_L \cdot s) )
+</asciimath>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 + R_(Fx) \cdot C_F \cdot s + 1 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
+</asciimath>
+
+<asciimath>
+V^- = V_"AOP" \cdot ( 1 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
+</asciimath>
+
+### Closed loop AOP gain
+
+<asciimath>
+V_"AOP" = (V_"in" - V_x) \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot "GBW"/s - V_x \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot "GBW"/s - V_"AOP" \cdot
+  ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
+  (1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) \cdot "GBW"/s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot [ 1 + ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
+  (1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) \cdot "GBW"/s ]
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot [ 1 + ( "GBW" + "GBW" \cdot (R_F + R_(Fx)) \cdot C_F \cdot s + "GBW" \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
+  (s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 ) ]
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" \cdot
+( "GBW" + [1 + "GBW" \cdot (R_F + R_(Fx)) \cdot C_F] \cdot s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F + "GBW" \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 ) /
+( s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 )
+= V_"in" \cdot "GBW" / s
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot "GBW" / s \cdot
+( s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 ) /
+( "GBW" + [1 + "GBW" \cdot (R_F + R_(Fx)) \cdot C_F] \cdot s + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F + "GBW" \cdot R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^3 )
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"AOP" = V_"in" \cdot
+( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
+( 1 + [1 / "GBW" + (R_F + R_(Fx)) \cdot C_F] \cdot s + ((R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) / "GBW" + R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + (R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F) / "GBW" \cdot s^3 )
+</asciimath>
+
+<!--
+### Simpification for GBW high enough
+
+Assuming GBW is high enough, and letting aside the question of what is high enough, the previous monster can be simplified as follows:
+
+<asciimath>
+V_"AOP" = V_"in" \cdot
+( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
+( 1 + [(R_F + R_(Fx)) \cdot C_F] \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath>
+
+Note only the denominator is impacted by this simplification.
+-->
+
+### Output at the capacitive load
+
+<asciimath>
+V_"out" = V_"AOP" \cdot (1/(C_L \cdot s))/(R_"iso"+1/(C_L \cdot s)) = V_"AOP" \cdot 1/(1+R_"iso" \cdot C_L \cdot s)
+</asciimath>
+
+<p></p>
+
+<asciimath>
+V_"out" = V_"in" \cdot
+( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
+( 1 + [1 / "GBW" + (R_F + R_(Fx)) \cdot C_F] \cdot s + ((R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) / "GBW" + R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + (R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F) / "GBW" \cdot s^3 )
+\cdot 1/(1+R_"iso" \cdot C_L \cdot s)
+</asciimath>
+
+<!--
+Expression with simplification
+<asciimath>
+V_"AOP" = V_"in" \cdot
+( 1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) /
+( 1 + [(R_F + R_(Fx)) \cdot C_F] \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+\cdot 1/(1+R_"iso" \cdot C_L \cdot s)
+</asciimath>
+-->
+
+<!-- The denominator is a monster, however the numerator does not depends on GBW and can be factored in the usual way.
+
+<asciimath>
+Delta = [R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F]^2 - 4 \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F
+</asciimath>
+
+<asciimath>
+Delta = R_"iso"^2 \cdot C_L^2 + 2 \cdot R_"iso" \cdot C_L \cdot (R_F + R_(Fx)) \cdot C_F + (R_F + R_(Fx))^2 \cdot C_F^2 - 4 \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F
+</asciimath> -->
+
+The numerator can be factored as such:
+
+<asciimath>
+N(s) = [1 + R_"iso" \cdot C_L \cdot s] \cdot [1 + (R_F + R_(Fx)) \cdot C_F \cdot s]
+</asciimath>
+
+Leading to a simpler expression:
+
+<asciimath>
+V_"out" = V_"in" \cdot
+[1 + (R_F + R_(Fx)) \cdot C_F \cdot s] /
+( 1 + [1 / "GBW" + (R_F + R_(Fx)) \cdot C_F] \cdot s + ((R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) / "GBW" + R_"iso" \cdot R_F \cdot C_L \cdot C_F) \cdot s^2 + (R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F) / "GBW" \cdot s^3 )
+</asciimath>
+
+<!-- TODO: Use the same factorization method as before. -->
+
+The only practical way to handle this is to assume a big enough GBW:
+
+<asciimath>
+V_"out" = V_"in" \cdot
+[1 + (R_F + R_(Fx)) \cdot C_F \cdot s] /
+( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath>
+
+<!-- The error can be expressed as such:
+
+<asciimath>
+V_"out" - V_"in" = V_"in" \cdot
+[R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2] /
+( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
+</asciimath> -->
+
+### Aperiodic answer
+
+For most applications, an aperiodic answer is seeked. A too high damping would cause a slow response, and a too low damping would cause undesirable overshoots.
+
+The critically damped condition can be written as:
+
+<latexmath>
+\begin{align*}
+& 1 + (R_F + R_{Fx}) \cdot C_F \cdot s + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot s^2 = 1 + \frac{2 \zeta}{\omega} \cdot s + \frac{1}{\omega^2} \cdot s^2  \\
+& \zeta = \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot \sqrt{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}}  \\
+& (R_F + R_{Fx}) \cdot C_F = 2 \cdot \zeta \cdot \sqrt{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}
+\end{align*}
+</latexmath>
+
+[... TO BE CONTINUED... ]
+
 ## Other equations to sort
 
 <!-- Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations. -->
@@ -573,7 +783,7 @@ V_"AOP" = V_"in" \cdot "GBW"/s - V_x \cdot "GBW"/s
 <p></p>
 
 <asciimath>
-V_"AOP" = V_"in" \cdot "GBW"/s - V_"AOP" \cdot 
+V_"AOP" = V_"in" \cdot "GBW"/s - V_"AOP" \cdot
   ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 ) /
   (1 + (R_"iso" \cdot C_L + (R_F + R_(Fx)) \cdot C_F) \cdot s + R_"iso" \cdot (R_F + R_(Fx)) \cdot C_L \cdot C_F \cdot s^2 ) \cdot "GBW"/s
 </asciimath>
