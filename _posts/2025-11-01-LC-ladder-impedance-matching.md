@@ -2,8 +2,10 @@
 layout: post
 title: LC ladder impedance matching.
 permalink: /posts/LC-ladder-impedance-matching.html
-last_modified_at: 2025-10-16
+last_modified_at: 2025-11-09
 ---
+
+<p class="begin-note">2025-11-09: Fix roots calculation and change of variables.</p>
 
 <p class="begin-note">2025-10-26: Fix some errors in formulas, add some details about calculations.</p>
 
@@ -31,7 +33,7 @@ The reflexion coefficient of a LC ladder (output) matching network of type Cheby
 |\Gamma|^2 = (\epsilon^2\cdotT_n^2((\omega^2-\omega_0^2)/(\Delta\omega^2)))/(1+\epsilon^2\cdotT_n^2((\omega^2-\omega_0^2)/(\Delta\omega^2)))
 </asciimath>
 
-with[^errorsite] <asciimath>\omega_0=sqrt((\omega_a^2+\omega_b^2)/2)</asciimath>, <asciimath>\Delta\omega=sqrt((\omega_b^2-\omega_a^2)/2)</asciimath>, <asciimath>\omega_a</asciimath> the beginning of the passband, and <asciimath>\omega_b</asciimath> the end of the passband.
+with[^errorsite] <asciimath>\omega_0=sqrt((\omega_a^2+\omega_b^2)/2)</asciimath>, <asciimath>\Delta\omega^2=(\omega_b^2-\omega_a^2)/2</asciimath>, <asciimath>\omega_a</asciimath> the beginning of the passband, and <asciimath>\omega_b</asciimath> the end of the passband.
 
 Next figure shows the reflection coefficient seen from the source of an example of an (output) LC matching network going from 5&#8239;Ω towards 50&#8239;Ω from 1 to 2,5&#8239;GHz. These values are approximately those of the first wideband amplifier of the PhD thesis.
 
@@ -89,11 +91,11 @@ The calculation, more long than complex, won't be detailed. The roots of the num
 FIXME: Math style
 {% endcomment %}
 <asciimath>
-  {: ( +- sqrt(Delta omega^2 \cdot cos[(pi)/(2 \cdot n) \cdot (1 + 2 \cdot k)] + \omega_0^2) , k in [0, 2n - 1] ),
-     ( +- sqrt(Delta omega^2 \cdot cos[1/n \cdot [arccos(j/epsilon) + k \cdot \pi ]] + \omega_0^2) ,            k in [0, 2n - 1] ) :}
+  {: ( +- j \cdot sqrt(\omega_0^2 + Delta omega^2 \cdot cos[(pi)/(2 \cdot n) \cdot (1 + 2 \cdot k)]) , k in [0, 2n - 1] ),
+     ( +- j \cdot sqrt( \omega_0^2 + Delta omega^2 \cdot cos[1/n \cdot [arccos(j/epsilon) + k \cdot \pi ]]) , k in [0, 2n - 1] ) :}
 </asciimath>
 
-The first equation give directly the set of needed roots, since the square root is real and positive. However, negative real part roots need to be selected from all the roots given by second equation. This point is easily done numerically.
+In the implementation of this method, the negative real part roots are sorted numerically.
 
 {% comment %}
 FIXME: Translate French titles, add alt text.
@@ -152,7 +154,7 @@ The roots of the numerator, without any attempt to remove duplicates, can be exp
 & \epsilon^2 \cdot T_n^2(x) = 0  \\
 \Leftrightarrow \enspace & T_n^2(x) = 0  \\
 \Leftrightarrow \enspace & \cos \left[ n \cdot \arccos (x) \right] = 0  \\
-\Leftrightarrow \enspace & n \cdot \arccos (x) = \frac{\pi}{2} + k \cdot \pi, \enspace k \in \mathbb{Z}  \\
+\Leftrightarrow \enspace & n \cdot \arccos x) = \frac{\pi}{2} + k \cdot \pi, \enspace k \in \mathbb{Z}  \\
 \Leftrightarrow \enspace & x = \cos \left[ \frac{\frac{\pi}{2} + k \cdot \pi}{n} \right], \enspace k \in \mathbb{Z}  \\
 \Leftrightarrow \enspace & x = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right], \enspace k \in \mathbb{Z}  \\
 \end{align*}
@@ -177,6 +179,24 @@ x_k = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \righ
 \end{align*}
 </latexmath>
 
+Next the corresponding values of <asciimath>\omega</asciimath> can be solved:
+
+<latexmath>
+\begin{align*}
+&\frac{\omega^2-\omega_0^2}{\Delta\omega^2} = \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right], \enspace k \in [0; 2n-1]  \\
+&\omega^2 = \omega_0^2 + \Delta\omega^2 \cdot \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right], \enspace k \in [0; 2n-1]  \\
+&\omega = \pm \sqrt{ \omega_0^2 + \Delta\omega^2 \cdot \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right] }, \enspace k \in [0; 2n-1]
+\end{align*}
+</latexmath>
+
+Next the corresponding value of <asciimath>p</asciimath> can be solved. This point led to a confusion in an intermediate version of this page:
+
+<latexmath>
+\begin{align*}
+p_k = \pm j \cdot \sqrt{ \omega_0^2 + \Delta\omega^2 \cdot \cos \left[ \frac{\pi}{2 \cdot n} \cdot \left( 1 + 2 \cdot k \right) \right] }, \enspace k \in [0; 2n-1]  \\
+\end{align*}
+</latexmath>
+
 ### Denominator
 
 Same method.
@@ -194,6 +214,8 @@ Same method.
 </latexmath>
 
 And for the same reason as for the numerator, <latexmath>k</latexmath> can be restricted to the interval <latexmath>[0; 2n-1]</latexmath>.
+
+Next, <asciimath>omega</asciimath> and p can be calculated in a similar way than for the numerator.
 
 [^1]: It is not even a pure impedance. See the blog pages to come!
 
