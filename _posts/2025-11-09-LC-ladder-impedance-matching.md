@@ -9,6 +9,8 @@ last_modified_at: 2025-11-09
 
 <p class="begin-note">2025-10-26: Fix some errors in formulas, add some details about calculations.</p>
 
+<p class="begin-note">2023-06-25: First version.</p>
+
 <p class="begin-note">This blog page is an English translation and adaptation of a part of my PhD thesis. Numbers in brackets refers to the original bibliography, they will be replaced in a future revision.</p>
 
 Impedance matching is performed by LC ladder networks. This method allows to synthesize low impedances (around 5&#8239;Ω) on the same PCB than the standard 50&#8239;Ω output (no need for a second PCB with high permittivity). Moreover, this method is more compact than quarter-wave transformer.
