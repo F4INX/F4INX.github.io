@@ -478,22 +478,93 @@ V_"out" - V_"in" = V_"in" \cdot
 ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath> -->
 
-### Aperiodic answer
+### Pole of the resulting answer
 
-For most applications, an aperiodic answer is seeked. A too high damping would cause a slow response, and a too low damping would cause undesirable overshoots.
+This feedback scheme allows to extend the bandwidth by compensating the output time constant <asciimath>R_{iso}\cdot C_L</asciimath> with a gain boost and to replace it by a lower time constant <asciimath>\tau_2</asciimath>. This is a key parameter for the final performance of the compensated operational amplifier, the amount of gain and bandwdith needed by the operational amplifier, and the stability issues. Forcing this parameter to be a root of the denominator give the following conditions:
 
-The critically damped condition can be written as:
+<!-- <latexmath>
+\begin{align*}
+& R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot s^2 - \left(R_F + R_{Fx}\right) \cdot C_F \cdot s + 1  \\
+& = R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \left[ s^2 - \frac{\left(R_F + R_{Fx}\right) \cdot C_F}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \cdot s + \frac{1}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \right]  \\
+& = R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \left[ \left(s + \frac{1}{\tau_2}\right) \cdot (s) - \frac{1}{\tau_2} \cdot s - \frac{\left(R_F + R_{Fx}\right) \cdot C_F}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \cdot s + \frac{1}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \right]  \\
+& = R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \left[ \left(s + \frac{1}{\tau_2}\right) \cdot ( s - \frac{1}{\tau_2} - \frac{\left(R_F + R_{Fx}\right) \cdot C_F}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} ) + 1 + \frac{\tau_2 \cdot \left(R_F + R_{Fx}\right) \cdot C_F}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} + \frac{1}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \right]  \\
+\end{align*}
+</latexmath> -->
 
 <latexmath>
 \begin{align*}
-& 1 + (R_F + R_{Fx}) \cdot C_F \cdot s + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot s^2 = 1 + \frac{2 \zeta}{\omega} \cdot s + \frac{1}{\omega^2} \cdot s^2  \\
-& \zeta = \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot \sqrt{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}}  \\
-& \zeta = \sqrt{\frac{(R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}}  \\
-& \zeta = \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \sqrt{\frac{R_F \cdot C_F}{4 \cdot R_\text{iso} \cdot C_L}}
+1 - \left(R_F + R_{Fx}\right) \cdot C_F \cdot \frac{1}{\tau_2} + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \frac{1}{\tau_2^2} = 0  \\
+\tau_2 - \left(R_F + R_{Fx}\right) \cdot C_F + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \frac{1}{\tau_2} = 0  \\
+\tau_2 - \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot R_F \cdot C_F + \frac{R_\text{iso} \cdot C_L}{\tau_2} \cdot R_F \cdot C_F = 0  \\
+\tau_2 - \left[ \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} \right] \cdot R_F \cdot C_F = 0  \\
+R_F \cdot C_F = \frac{\tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}}  \\
 \end{align*}
 </latexmath>
 
-[... TO BE CONTINUED... ]
+Once this condition is fullfilled, this time constant can be expressed as such:
+
+<latexmath>
+\tau_2 = \frac{R_F \cdot C_F}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}}
+</latexmath>
+
+the other time constant can be calculated using the Viete relations:
+
+<latexmath>
+\tau_3 = \frac{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}{\tau_2} = \left( R_\text{iso} \cdot C_L \right) \cdot \left[ \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} \right]
+</latexmath>
+
+and their ratio is:
+
+<latexmath>
+\frac{\tau_3}{\tau_2} = \frac{R_\text{iso} \cdot C_L}{R_F \cdot C_F} \cdot \left[ \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} \right]^2
+</latexmath>
+
+<!-- Which plugged into the transfer function gives:
+
+<latexmath>
+\begin{align*}
+V_\text{out} & = V_\text{in} \cdot \frac
+{ 1 + (R_F + R_{Fx}) \cdot C_F \cdot s }
+{ 1 + (R_F + R_{Fx}) \cdot C_F \cdot s + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot s^2 }  \\
+& = V_\text{in} \cdot \frac
+{ 1 + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot R_F \cdot C_F \cdot s }
+{ 1 + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot R_F  \cdot C_F \cdot s + R_\text{iso} \cdot C_L \cdot R_F \cdot C_F \cdot s^2 }  \\
+% & = V_\text{in} \cdot \frac
+% { 1 + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \frac{\tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}} \cdot s }
+% { 1 + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \frac{\tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}} \cdot s + R_\text{iso} \cdot C_L \cdot \frac{\tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}} \cdot s^2 }  \\
+% & = V_\text{in} \cdot \frac
+% { \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \tau_2 \cdot s }
+% { \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \tau_2 \cdot s + R_\text{iso} \cdot C_L \cdot \tau_2 \cdot s^2 }
+\end{align*}
+</latexmath>
+
+<p>calculating intermediate quantities:</p>
+
+<latexmath>
+\begin{align*}
+\left(1+\frac{R_{Fx}}{R_F}\right) \cdot R_F  \cdot C_F & = \frac{\left(1+\frac{R_{Fx}}{R_F}\right) \cdot \tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}}  \\
+& = \frac{\left(R_F+R_{Fx}\right) \cdot \tau_2^2}{\left(R_F+R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L}
+\end{align*}
+</latexmath>
+
+<p>and:</p>
+
+<latexmath>
+\begin{align*}
+R_\text{iso} \cdot C_L \cdot R_F \cdot C_F & = \frac{R_\text{iso} \cdot C_L \cdot \tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}}  \\
+& = \frac{R_\text{iso} \cdot C_L \cdot R_F \cdot \tau_2^2}{\left(R_F + R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L}
+\end{align*}
+</latexmath>
+
+<p>lead to:</p>
+
+<latexmath>
+\begin{align*}
+V_\text{out} & = V_\text{in} \cdot \frac
+{ 1 + \frac{\left(R_F+R_{Fx}\right) \cdot \tau_2^2}{\left(R_F+R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L} \cdot s }
+{ 1 + \frac{\left(R_F+R_{Fx}\right) \cdot \tau_2^2}{\left(R_F+R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L} \cdot s + \frac{R_\text{iso} \cdot C_L \cdot R_F \cdot \tau_2^2}{\left(R_F + R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L} \cdot s^2 }
+\end{align*}
+</latexmath> -->
 
 ## Other equations to sort
 
