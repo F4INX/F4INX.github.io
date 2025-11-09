@@ -488,7 +488,8 @@ The critically damped condition can be written as:
 \begin{align*}
 & 1 + (R_F + R_{Fx}) \cdot C_F \cdot s + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot s^2 = 1 + \frac{2 \zeta}{\omega} \cdot s + \frac{1}{\omega^2} \cdot s^2  \\
 & \zeta = \frac{(R_F + R_{Fx}) \cdot C_F}{2 \cdot \sqrt{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}}  \\
-& (R_F + R_{Fx}) \cdot C_F = 2 \cdot \zeta \cdot \sqrt{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}
+& \zeta = \sqrt{\frac{(R_F + R_{Fx})^2 \cdot C_F^2}{4 \cdot R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}}  \\
+& \zeta = \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \sqrt{\frac{R_F \cdot C_F}{4 \cdot R_\text{iso} \cdot C_L}}
 \end{align*}
 </latexmath>
 
