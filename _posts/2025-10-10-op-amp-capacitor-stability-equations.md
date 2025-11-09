@@ -497,27 +497,49 @@ This feedback scheme allows to extend the bandwidth by compensating the output t
 \tau_2 - \left(R_F + R_{Fx}\right) \cdot C_F + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \frac{1}{\tau_2} = 0  \\
 \tau_2 - \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot R_F \cdot C_F + \frac{R_\text{iso} \cdot C_L}{\tau_2} \cdot R_F \cdot C_F = 0  \\
 \tau_2 - \left[ \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} \right] \cdot R_F \cdot C_F = 0  \\
-R_F \cdot C_F = \frac{\tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}}  \\
+\left(1 + \frac{R_{Fx}}{R_F}\right) = \frac{\tau_2}{R_F \cdot C_F} - \frac{R_\text{iso} \cdot C_L}{\tau_2}  \\
 \end{align*}
 </latexmath>
 
-Once this condition is fullfilled, this time constant can be expressed as such:
+Note this condition implicitely requires:
 
 <latexmath>
-\tau_2 = \frac{R_F \cdot C_F}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}}
+\begin{align*}
+& \frac{\tau_2}{R_F \cdot C_F} - \frac{R_\text{iso} \cdot C_L}{\tau_2} \geq 1  \\
+& \frac{\tau_2}{R_F \cdot C_F} \geq 1 + \frac{R_\text{iso} \cdot C_L}{\tau_2}  \\
+& R_F \cdot C_F \leq \frac{\tau_2}{1 + \frac{R_\text{iso} \cdot C_L}{\tau_2}}  \\
+& R_F \cdot C_F \leq \frac{\tau_2^2}{\tau_2 + R_\text{iso} \cdot C_L}  \\
+\end{align*}
 </latexmath>
 
-the other time constant can be calculated using the Viete relations:
+Once this condition is fullfilled, the other time constant can be calculated using the Viete relations:
 
 <latexmath>
-\tau_3 = \frac{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}{\tau_2} = \left( R_\text{iso} \cdot C_L \right) \cdot \left[ \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} \right]
+\tau_3 = \frac{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}{\tau_2}
 </latexmath>
 
-and their ratio is:
+<!-- and their ratio is:
 
 <latexmath>
-\frac{\tau_3}{\tau_2} = \frac{R_\text{iso} \cdot C_L}{R_F \cdot C_F} \cdot \left[ \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} \right]^2
+\frac{\tau_2}{\tau_3} = \frac{\tau_2^2}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}
+</latexmath> -->
+
+To avoid a lowering in performance, we want <asciimath>\tau_2 \geq \tau_3</asciimath>, so:
+
+<latexmath>
+\begin{align*}
+\tau_2 \geq \frac{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}{\tau_2}  \\
+R_F \cdot C_F \leq \frac{\tau_2^2}{R_\text{iso} \cdot C_L}
+\end{align*}
 </latexmath>
+
+<!-- We have <asciimath>R_\text{iso} \cdot C_L >= \tau_2</asciimath> because otherwise this scheme would not be interesting and <asciimath>\tau_2 \geq \tau_3</asciimath> by convenience because both can be swapped, <asciimath>\tau_3 \geq \tau_4 = (R_F + R_(Fx)) \cdot C_F</asciimath> for stability reasons, so:
+
+<latexmath>
+\begin{align*}
+& R_\text{iso} \cdot C_L \geq \tau_2 \geq \tau_3 = \frac{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}{\tau_2} \geq \tau_4 = (R_F + R_{Fx}) \cdot C_F  \\
+\end{align*}
+</latexmath> -->
 
 <!-- Which plugged into the transfer function gives:
 
