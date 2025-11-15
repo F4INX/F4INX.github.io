@@ -336,6 +336,12 @@ V^- = V_"AOP" \cdot ( R_F \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot 
 V^- = V_"AOP" \cdot ( 1 + ( R_F +  R_(Fx) ) \cdot C_F \cdot s + R_"iso" \cdot C_L \cdot R_F \cdot C_F \cdot s^2 ) / ( (1+R_"iso" \cdot C_L \cdot s) \cdot [ 1 + (R_F + R_(Fx)) \cdot C_F \cdot s ] )
 </asciimath>
 
+To avoid overshoots in the transfer function, it is seeked that the numerator has real roots, corresponding to time constants named conveniently <asciimath>\tau_3</asciimath> and <asciimath>\tau_4</asciimath>, sorted in such a way that <asciimath>\tau_3 >= \tau_4</asciimath>. The denominator has two real roots, corresponding to the time constant <asciimath>R_"iso"\cdot C_L</asciimath> and to a time constant <asciimath>\tau_2=(R_F+R_(Fx)) \cdot C_F</asciimath>. Viete's relations show that <asciimath>\tau_3+\tau_4=1+(R_F+R_(Fx)) \cdot C_F</asciimath> and hence that <asciimath>\tau_3+\tau_4=\tau_2</asciimath>. Thus, these constants can be ordered and renamed as follows:
+
+<asciimath>\tau_2 >= \tau_3 >= \tau_4</asciimath>
+
+For stability reasons, the phase shift at the unity gain frequency must be low enough because the op-amp has already a 90° phase shift, so <asciimath>\tau_4 >= \tau_"min"</asciimath>, with <asciimath>\tau_"min"</asciimath> sufficiently lower than the time constant of the unity gain frequency.
+
 ### Closed loop AOP gain
 
 <asciimath>
@@ -478,115 +484,13 @@ V_"out" - V_"in" = V_"in" \cdot
 ( 1 + (R_F + R_(Fx)) \cdot C_F \cdot s + R_"iso" \cdot R_F \cdot C_L \cdot C_F \cdot s^2 )
 </asciimath> -->
 
-### Pole of the resulting answer
+### Poles and zeros of the closed loop transfer function
 
-This feedback scheme allows to extend the bandwidth by compensating the output time constant <asciimath>R_{iso}\cdot C_L</asciimath> with a gain boost and to replace it by a lower time constant <asciimath>\tau_2</asciimath>. This is a key parameter for the final performance of the compensated operational amplifier, the amount of gain and bandwdith needed by the operational amplifier, and the stability issues. Forcing this parameter to be a root of the denominator give the following conditions:
+This transfer function has the time constants previously found: a zero with time constant <asciimath>\tau_2=(R_F+R_(Fx)) \cdot C_F</asciimath> and two poles with times constants <asciimath>\tau_3</asciimath> and <asciimath>\tau_4</asciimath> such as <asciimath>\tau_3+\tau_4=\tau_2</asciimath>.
 
-<!-- <latexmath>
-\begin{align*}
-& R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot s^2 - \left(R_F + R_{Fx}\right) \cdot C_F \cdot s + 1  \\
-& = R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \left[ s^2 - \frac{\left(R_F + R_{Fx}\right) \cdot C_F}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \cdot s + \frac{1}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \right]  \\
-& = R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \left[ \left(s + \frac{1}{\tau_2}\right) \cdot (s) - \frac{1}{\tau_2} \cdot s - \frac{\left(R_F + R_{Fx}\right) \cdot C_F}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \cdot s + \frac{1}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \right]  \\
-& = R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \left[ \left(s + \frac{1}{\tau_2}\right) \cdot ( s - \frac{1}{\tau_2} - \frac{\left(R_F + R_{Fx}\right) \cdot C_F}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} ) + 1 + \frac{\tau_2 \cdot \left(R_F + R_{Fx}\right) \cdot C_F}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} + \frac{1}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F} \right]  \\
-\end{align*}
-</latexmath> -->
+For the transfert function to be as close as possible to an ideal single-pole function, the zero time constant <asciimath>\tau_2</asciimath> should be close enough to one of the time constants of the poles, <asciimath>\tau_3</asciimath> or <asciimath>\tau_4</asciimath>.
 
-<latexmath>
-\begin{align*}
-1 - \left(R_F + R_{Fx}\right) \cdot C_F \cdot \frac{1}{\tau_2} + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \frac{1}{\tau_2^2} = 0  \\
-\tau_2 - \left(R_F + R_{Fx}\right) \cdot C_F + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot \frac{1}{\tau_2} = 0  \\
-\tau_2 - \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot R_F \cdot C_F + \frac{R_\text{iso} \cdot C_L}{\tau_2} \cdot R_F \cdot C_F = 0  \\
-\tau_2 - \left[ \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} \right] \cdot R_F \cdot C_F = 0  \\
-\left(1 + \frac{R_{Fx}}{R_F}\right) = \frac{\tau_2}{R_F \cdot C_F} - \frac{R_\text{iso} \cdot C_L}{\tau_2}  \\
-\end{align*}
-</latexmath>
-
-Note this condition implicitely requires:
-
-<latexmath>
-\begin{align*}
-& \frac{\tau_2}{R_F \cdot C_F} - \frac{R_\text{iso} \cdot C_L}{\tau_2} \geq 1  \\
-& \frac{\tau_2}{R_F \cdot C_F} \geq 1 + \frac{R_\text{iso} \cdot C_L}{\tau_2}  \\
-& R_F \cdot C_F \leq \frac{\tau_2}{1 + \frac{R_\text{iso} \cdot C_L}{\tau_2}}  \\
-& R_F \cdot C_F \leq \frac{\tau_2^2}{\tau_2 + R_\text{iso} \cdot C_L}  \\
-\end{align*}
-</latexmath>
-
-Once this condition is fullfilled, the other time constant can be calculated using the Viete relations:
-
-<latexmath>
-\tau_3 = \frac{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}{\tau_2}
-</latexmath>
-
-<!-- and their ratio is:
-
-<latexmath>
-\frac{\tau_2}{\tau_3} = \frac{\tau_2^2}{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}
-</latexmath> -->
-
-To avoid a lowering in performance, we want <asciimath>\tau_2 \geq \tau_3</asciimath>, so:
-
-<latexmath>
-\begin{align*}
-\tau_2 \geq \frac{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}{\tau_2}  \\
-R_F \cdot C_F \leq \frac{\tau_2^2}{R_\text{iso} \cdot C_L}
-\end{align*}
-</latexmath>
-
-<!-- We have <asciimath>R_\text{iso} \cdot C_L >= \tau_2</asciimath> because otherwise this scheme would not be interesting and <asciimath>\tau_2 \geq \tau_3</asciimath> by convenience because both can be swapped, <asciimath>\tau_3 \geq \tau_4 = (R_F + R_(Fx)) \cdot C_F</asciimath> for stability reasons, so:
-
-<latexmath>
-\begin{align*}
-& R_\text{iso} \cdot C_L \geq \tau_2 \geq \tau_3 = \frac{R_\text{iso} \cdot R_F \cdot C_L \cdot C_F}{\tau_2} \geq \tau_4 = (R_F + R_{Fx}) \cdot C_F  \\
-\end{align*}
-</latexmath> -->
-
-<!-- Which plugged into the transfer function gives:
-
-<latexmath>
-\begin{align*}
-V_\text{out} & = V_\text{in} \cdot \frac
-{ 1 + (R_F + R_{Fx}) \cdot C_F \cdot s }
-{ 1 + (R_F + R_{Fx}) \cdot C_F \cdot s + R_\text{iso} \cdot R_F \cdot C_L \cdot C_F \cdot s^2 }  \\
-& = V_\text{in} \cdot \frac
-{ 1 + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot R_F \cdot C_F \cdot s }
-{ 1 + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot R_F  \cdot C_F \cdot s + R_\text{iso} \cdot C_L \cdot R_F \cdot C_F \cdot s^2 }  \\
-% & = V_\text{in} \cdot \frac
-% { 1 + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \frac{\tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}} \cdot s }
-% { 1 + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \frac{\tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}} \cdot s + R_\text{iso} \cdot C_L \cdot \frac{\tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}} \cdot s^2 }  \\
-% & = V_\text{in} \cdot \frac
-% { \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \tau_2 \cdot s }
-% { \left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2} + \left(1 + \frac{R_{Fx}}{R_F}\right) \cdot \tau_2 \cdot s + R_\text{iso} \cdot C_L \cdot \tau_2 \cdot s^2 }
-\end{align*}
-</latexmath>
-
-<p>calculating intermediate quantities:</p>
-
-<latexmath>
-\begin{align*}
-\left(1+\frac{R_{Fx}}{R_F}\right) \cdot R_F  \cdot C_F & = \frac{\left(1+\frac{R_{Fx}}{R_F}\right) \cdot \tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}}  \\
-& = \frac{\left(R_F+R_{Fx}\right) \cdot \tau_2^2}{\left(R_F+R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L}
-\end{align*}
-</latexmath>
-
-<p>and:</p>
-
-<latexmath>
-\begin{align*}
-R_\text{iso} \cdot C_L \cdot R_F \cdot C_F & = \frac{R_\text{iso} \cdot C_L \cdot \tau_2}{\left(1 + \frac{R_{Fx}}{R_F}\right) - \frac{R_\text{iso} \cdot C_L}{\tau_2}}  \\
-& = \frac{R_\text{iso} \cdot C_L \cdot R_F \cdot \tau_2^2}{\left(R_F + R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L}
-\end{align*}
-</latexmath>
-
-<p>lead to:</p>
-
-<latexmath>
-\begin{align*}
-V_\text{out} & = V_\text{in} \cdot \frac
-{ 1 + \frac{\left(R_F+R_{Fx}\right) \cdot \tau_2^2}{\left(R_F+R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L} \cdot s }
-{ 1 + \frac{\left(R_F+R_{Fx}\right) \cdot \tau_2^2}{\left(R_F+R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L} \cdot s + \frac{R_\text{iso} \cdot C_L \cdot R_F \cdot \tau_2^2}{\left(R_F + R_{Fx}\right) \cdot \tau_2 - R_F \cdot R_\text{iso} \cdot C_L} \cdot s^2 }
-\end{align*}
-</latexmath> -->
+Since <asciimath>\tau_3+\tau_4=\tau_2</asciimath> and <asciimath>\tau_3>=\tau_4</asciimath>, this lead to <latexmath>\tau_2 \approx \tau_3 \gg \tau_4</latexmath>.
 
 ## Other equations to sort
 
