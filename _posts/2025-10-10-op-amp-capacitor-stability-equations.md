@@ -492,6 +492,113 @@ For the transfert function to be as close as possible to an ideal single-pole fu
 
 Since <asciimath>\tau_3+\tau_4=\tau_2</asciimath> and <asciimath>\tau_3>=\tau_4</asciimath>, this lead to <latexmath>\tau_2 \approx \tau_3 \gg \tau_4</latexmath>.
 
+### Loop gain, stability, and omega max
+
+The loop gain is:
+
+<latexmath>
+L = \frac{\text{GBW}}{s} \cdot
+    \frac{
+        1 + \left( R_F +  R_{Fx} \right) \cdot C_F \cdot s + R_\text{iso} \cdot C_L \cdot R_F \cdot C_F \cdot s^2
+    }{
+        \left( 1 + R_\text{iso} \cdot C_L \cdot s \right) \cdot \left[ 1 + (R_F + R_{Fx}) \cdot C_F \cdot s \right]
+    }
+</latexmath>
+
+Plugging into this equation the time constants:
+
+<latexmath>
+L = \text{GBW} \cdot
+    \frac{
+        (1 + \tau_3 \cdot s) \cdot (1 + \tau_4 \cdot s)
+    }{
+        \left( 1 + \tau_L \cdot s \right) \cdot \left( 1 + \tau_2 \cdot s \right) \cdot s
+    }
+</latexmath>
+
+Using the relations between time constants:
+
+<latexmath>
+L = \text{GBW} \cdot
+    \frac{
+        (1 + \tau_3 \cdot s) \cdot (1 + \tau_4 \cdot s)
+    }{
+        \left( 1 + \tau_L \cdot s \right) \cdot \left[ 1 + \left( \tau_3 + \tau_4 \right) \cdot s \right] \cdot s
+    }
+</latexmath>
+
+At the unity gain frequency to be calculated:
+
+<latexmath>
+\begin{align*}
+\left| L(\omega_0) \right| &= \left| \text{GBW} \cdot
+    \frac{
+        (1 + j \cdot \tau_3 \cdot \omega_0) \cdot (1 + j \cdot \tau_4 \cdot \omega_0)
+    }{
+        \left( 1 + j \cdot \tau_L \cdot \omega_0 \right) \cdot \left[ 1 + j \cdot \left( \tau_3 + \tau_4 \right) \cdot \omega_0 \right] \cdot j \cdot \omega_0
+    } \right|  \\
+&= \text{GBW} \cdot
+    \frac{
+        \left| 1 + j \cdot \tau_3 \cdot \omega_0 \right| \cdot \left| 1 + j \cdot \tau_4 \cdot \omega_0 \right|
+    }{
+        \left| 1 + j \cdot \tau_L \cdot \omega_0 \right| \cdot \left| 1 + j \cdot \left( \tau_3 + \tau_4 \right) \cdot \omega_0 \right| \cdot \omega_0
+    }
+\end{align*}
+</latexmath>
+
+Since for stability reasons the unity gain frequency is much greater than the other poles and zeros, it can be simplified as such:
+
+<latexmath>
+\begin{align*}
+\left| L(\omega_0) \right| &= \text{GBW} \cdot
+    \frac{
+        \tau_3 \cdot \omega_0 \cdot \tau_4 \cdot \omega_0
+    }{
+        \tau_L \cdot \omega_0 \cdot \left( \tau_3 + \tau_4 \right) \cdot \omega_0 \cdot \omega_0
+    }  \\
+&= \text{GBW} \cdot
+    \frac{
+        \tau_3 \cdot \tau_4
+    }{
+        \tau_L \cdot \left( \tau_3 + \tau_4 \right)
+    } \cdot \frac{1}{\omega_0}  \\
+&= \text{GBW} \cdot
+    \frac{
+        1
+    }{
+        \tau_L \cdot \left( \frac{1}{\tau_3} + \frac{1}{\tau_4} \right)
+    } \cdot \frac{1}{\omega_0}  \\
+\end{align*}
+</latexmath>
+
+Since <asciimath>\tau_4</asciimath> depends on <asciimath>\omega_0</asciimath> because it must be high enough compared to <asciimath>1/\omega_0</asciimath>, it is useful to introduce a product <asciimath>k_4 = \tau_4 \cdot \omega_0</asciimath>. 5 can be used as a starting point for a convenient phase shift. With this:
+
+<latexmath>
+\begin{align*}
+\left| L(\omega_0) \right| &= \text{GBW} \cdot
+    \frac{
+        1
+    }{
+        \tau_L \cdot \left( \frac{1}{\tau_3} + \frac{\omega_0}{k_4} \right)
+    } \cdot \frac{1}{\omega_0}  \\
+\end{align*}
+</latexmath>
+
+Solving this equation:
+
+<latexmath>
+\begin{align*}
+& \left| L(\omega_0) \right| = 1  \\
+& \text{GBW} \cdot
+    \frac{
+        1
+    }{
+        \tau_L \cdot \left( \frac{1}{\tau_3} + \frac{\omega_0}{k_4} \right)
+    } \cdot \frac{1}{\omega_0} = 1  \\
+& \text{GBW} = \tau_L \cdot \left( \frac{1}{\tau_3} + \frac{\omega_0}{k_4} \right) \cdot \omega_0  \\
+\end{align*}
+</latexmath>
+
 ## Other equations to sort
 
 <!-- Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations. -->
