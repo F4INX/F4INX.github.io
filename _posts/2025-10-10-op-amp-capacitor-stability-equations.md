@@ -596,6 +596,20 @@ Solving this equation:
         \tau_L \cdot \left( \frac{1}{\tau_3} + \frac{\omega_0}{k_4} \right)
     } \cdot \frac{1}{\omega_0} = 1  \\
 & \text{GBW} = \tau_L \cdot \left( \frac{1}{\tau_3} + \frac{\omega_0}{k_4} \right) \cdot \omega_0  \\
+& \frac{\tau_L}{k_4} \cdot \omega_0^2 + \frac{\tau_L}{\tau_3} \cdot \omega_0 - \text{GBW} = 0  \\
+& \omega_0^2 + \frac{k_4}{\tau_3} \cdot \omega_0 - \frac{\text{GBW} \cdot k_4}{\tau_L} = 0  \\
+& \Delta = \frac{k_4^2}{\tau_3^2} + \frac{4 \cdot \text{GBW} \cdot k_4}{\tau_L}  \\
+& \omega_0 = - \frac{k_4}{\tau_3} \pm \sqrt{\frac{k_4^2}{\tau_3^2} + \frac{4 \cdot \text{GBW} \cdot k_4}{\tau_L}}
+\end{align*}
+</latexmath>
+
+Only one of the two roots is positive. This root can be written as follows to attempt a simplification:
+
+<latexmath>
+\begin{align*}
+& \omega_0 = \sqrt{ \frac{4 \cdot \text{GBW} \cdot k_4}{\tau_L} + \frac{k_4^2}{\tau_3^2} }- \frac{k_4}{\tau_3}  \\
+& \omega_0 = \sqrt{ \frac{4 \cdot \text{GBW} \cdot k_4}{\tau_L} \cdot \left[ 1 + \frac{\tau_L}{4 \cdot \text{GBW} \cdot k_4} \cdot \frac{k_4^2}{\tau_3^2} \right] } - \frac{k_4}{\tau_3}  \\
+& \omega_0 = \sqrt{ \frac{4 \cdot \text{GBW} \cdot k_4}{\tau_L} \cdot \left[ 1 + \frac{\tau_L}{4 \cdot \tau_3 } \cdot \frac{k_4}{\text{GBW} \cdot \tau_3} \right] } - \frac{k_4}{\tau_3} 
 \end{align*}
 </latexmath>
 
