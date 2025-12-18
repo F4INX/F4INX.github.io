@@ -610,6 +610,43 @@ Since <latexmath>\tau_3 \gg \tau_4</latexmath>, the equation can be simplified a
 \end{align*}
 </latexmath>
 
+### Components values for the unit loop gain
+
+Taking again the expression for the loop gain:
+
+<latexmath>
+\begin{align*}
+\left| L(\omega_0) \right| &= \text{GBW} \cdot
+    \frac{
+        \tau_3 \cdot \tau_4
+    }{
+        \tau_L \cdot \left( \tau_3 + \tau_4 \right)
+    } \cdot \frac{1}{\omega_0}  \\
+\end{align*}
+</latexmath>
+
+Plugging inside the relations between <latexmath>\tau_3 \cdot \tau_4</latexmath>, <latexmath>\tau_3+\tau_4</latexmath>, <latexmath>\tau_L</latexmath> and the component values:
+
+<latexmath>
+\begin{align*}
+\left| L(\omega_0) \right| &= \frac{\text{GBW}}{\omega_0} \cdot
+    \frac{
+        R_\text{iso} \cdot C_L \cdot R_F \cdot C_F
+    }{
+        R_\text{iso} \cdot C_L \cdot \left( R_F + R_{Fx} \right) \cdot C_F
+    }  \\
+&= \frac{\text{GBW}}{\omega_0} \cdot \frac{R_F}{R_F + R_{Fx}}  \\
+\end{align*}
+</latexmath>
+
+Since <latexmath>\left| L(\omega_0) \right| = 1</latexmath>:
+
+<latexmath>
+\begin{align*}
+\frac{R_F}{R_F + R_{Fx}} = \frac{\omega_0}{\text{GBW}} = \sqrt{\frac{k_4}{\text{GBW} \cdot \tau_L}}  \\
+\end{align*}
+</latexmath>
+
 ## Other equations to sort
 
 <!-- Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations. -->
