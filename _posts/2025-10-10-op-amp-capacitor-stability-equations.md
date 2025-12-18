@@ -599,6 +599,58 @@ Solving this equation:
 \end{align*}
 </latexmath>
 
+This equation will be solved in two ways: a zero order approximation to have a tendency, and a first order approximation based on this tendency.
+
+#### Zero order approximation solving
+
+Since <latexmath>\tau_3 \gg \tau_4</latexmath>, the equation can be simplified as such:
+
+<latexmath>
+\begin{align*}
+& \text{GBW} \approx \tau_L \cdot \frac{\omega_0}{k_4} \cdot \omega_0 = \frac{\tau_L \cdot \omega_0^2}{k_4} \\
+& \omega_0 = \sqrt{\frac{\text{GBW} \cdot k_4}{\tau_L}}
+\end{align*}
+</latexmath>
+
+#### First order approximation solving
+
+GBW equation can be written as a second order polynomial as such:
+
+<latexmath>
+\begin{align*}
+& \frac{\tau_L}{k_4} \cdot \omega_0^2 + \frac{\tau_L}{\tau_3} \cdot \omega_0 - \text{GBW} = 0  \\
+& \omega_0^2 + \frac{k_4}{\tau_3} \cdot \omega_0 - \frac{\text{GBW} \cdot k_4}{\tau_L} = 0  \\
+& \Delta = \frac{k_4^2}{\tau_3^2} + \frac{4 \cdot \text{GBW} \cdot k_4}{\tau_L}  \\
+& \omega_0 = \frac{1}{2} \cdot \left( - \frac{k_4}{\tau_3} \pm \sqrt{\frac{k_4^2}{\tau_3^2} + \frac{4 \cdot \text{GBW} \cdot k_4}{\tau_L}} \right)  \\
+& \omega_0 = - \frac{k_4}{2 \cdot \tau_3} \pm \sqrt{\frac{k_4^2}{4 \cdot \tau_3^2} + \frac{\text{GBW} \cdot k_4}{\tau_L}}  \\
+\end{align*}
+</latexmath>
+
+Only one of the two roots is positive. This root can be written as follows to attempt a simplification:
+
+<latexmath>
+\begin{align*}
+& \omega_0 = \sqrt{\frac{\text{GBW} \cdot k_4}{\tau_L} + \frac{k_4^2}{4 \cdot \tau_3^2}} - \frac{k_4}{2 \cdot \tau_3}  \\
+& \omega_0 = \sqrt{ \frac{\text{GBW} \cdot k_4}{\tau_L} \cdot \left[ 1 + \frac{\tau_L}{\text{GBW} \cdot k_4} \cdot \frac{k_4^2}{4 \cdot \tau_3^2} \right] } - \frac{k_4}{2 \cdot \tau_3}  \\
+& \omega_0 = \sqrt{ \frac{\text{GBW} \cdot k_4}{\tau_L} \cdot \left[ 1 + \frac{k_4 \cdot \tau_L}{4 \cdot \text{GBW} \cdot \tau_3^2} \right] } - \frac{k_4}{2 \cdot \tau_3} 
+\end{align*}
+</latexmath>
+
+Checking if approximations can be made:
+
+<latexmath>
+\frac{k_4 \cdot \tau_L}{4 \cdot \text{GBW} \cdot \tau_3^2} = \frac{1}{4} \cdot \frac{\tau_L}{\tau_3} \cdot \frac{\tau_4}{\tau_3} \cdot \frac{\omega_0}{\text{GBW}} \ll 1
+</latexmath>
+
+Which allows to simplify the square root as follows:
+
+<latexmath>
+\begin{align*}
+& \omega_0 \approx \sqrt{ \frac{\text{GBW} \cdot k_4}{\tau_L} } \cdot \left[ 1 + \frac{k_4 \cdot \tau_L}{8 \cdot \text{GBW} \cdot \tau_3^2} \right] - \frac{k_4}{2 \cdot \tau_3}  \\
+& \omega_0 \approx \sqrt{ \frac{\text{GBW} \cdot k_4}{\tau_L} } + \sqrt{ \frac{\tau_L}{\text{GBW} \cdot k_4} } \cdot \frac{1}{8\cdot \tau_3^2} - \frac{k_4}{2 \cdot \tau_3}
+\end{align*}
+</latexmath>
+
 ## Other equations to sort
 
 <!-- Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations. -->
