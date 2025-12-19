@@ -51,3 +51,23 @@ Gemfile.lock
 posts/diff-amp-equations/diff-amp-SE-LTSpice.op.raw
 posts/diff-amp-equations/diff-amp-SE-LTSpice.raw
 posts/diff-amp-equations/diff-amp-SE-LTSpice.emf
+
+# Ignore temp of op-amp-capacitor-stability (LTSpice)
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.op.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.net
+
+# Ignore temp of op-amp-capacitor-stability-compensated-resistors (LTSpice)
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors.op.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors.net
+
+# Ignore temp of op-amp-capacitor-stability-compensated-resistors-cap (LTSpice)
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors-cap.op.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors-cap.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors-cap.net
+
+# Ignore temp of op-amp-capacitor-stability-compensated-integrator (LTSpice)
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-integrator.op.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-integrator.raw
+posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-integrator.net

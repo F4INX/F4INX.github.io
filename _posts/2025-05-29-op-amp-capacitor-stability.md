@@ -2,7 +2,7 @@
 layout: post
 title: On stability of capacitive loaded op-amps.
 permalink: /posts/op-amp-capacitor-stability.html
-last_modified_at: 2025-05-29
+last_modified_at: 2025-10-10
 ---
 
 ## Introduction
@@ -118,11 +118,15 @@ This technique exists in two common variants shown in the 2 figures below from t
 
 The operating principle is the same in the two cases: provide an high frequency and a low frequency feedback paths. The high frequency path, right at the operational amplifier output, undelayed, provides stability, while the low frequency path, at the load, provided an exact low frequency response.
 
-With some mathematics, it is possible to determine the optimum values which ensure both stability and performance.
+With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. The detailed equations, rather long, are presented in this page: <a href="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-stability-equations.html' | relative_url }}">{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-stability-equations.html' | relative_url }}</a>.
 
-Since I had not yet the time to do the mathematics, in waiting, please find a picture of these beautiful cats from Wikipedia:
+Simulation results with the values calculated using the equations are shown below:
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.png' | relative_url }}" >
+
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-AC.png' | relative_url }}" >
+
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-tran.png' | relative_url }}" >
 
 ## Some words on buffers
 
@@ -280,6 +284,10 @@ Previous version of the page included various cat pictures as placeholders for c
 Courtesy of Microwaves101 ([https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023](https://www.microwaves101.com/unknown-editor-121-cat-wrangler-april-2023)):
 
 <img src="https://www.microwaves101.com/uploads/CatBed.png" />
+
+From Wikipedia:
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
 
 [^1]: [https://www.linkedin.com/posts/sariel-hodisan_...](https://www.linkedin.com/posts/sariel-hodisan_%F0%9D%97%A7%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%B4%F0%9D%97%AE%F0%9D%97%BD-%F0%9D%97%AF%F0%9D%97%B2%F0%9D%98%81%F0%9D%98%84%F0%9D%97%B2%F0%9D%97%B2%F0%9D%97%BB-%F0%9D%98%80%F0%9D%97%B6%F0%9D%97%BA%F0%9D%98%82%F0%9D%97%B9%F0%9D%97%AE-activity-7316060130964340736-RCjM/)
 
