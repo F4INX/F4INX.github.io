@@ -2,7 +2,7 @@
 layout: post
 title: On stability of capacitive loaded op-amps, detailed equations.
 permalink: /posts/op-amp-capacitor-stability-equations.html
-last_modified_at: 2025-10-10
+last_modified_at: 2025-12-19
 ---
 
 ## Isolation resistor + double feedback without RFx resistor
