@@ -647,6 +647,14 @@ Since <latexmath>\left| L(\omega_0) \right| = 1</latexmath>:
 \end{align*}
 </latexmath>
 
+### LTSpice simulation
+
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.png' | relative_url }}" >
+
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-AC.png' | relative_url }}" >
+
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-tran.png' | relative_url }}" >
+
 ## Other equations to sort
 
 <!-- Two things must be looked at. First, the transfer function, from <asciimath>V_"in"</asciimath> to <asciimath>V_"out"</asciimath>. Second, the closed loop output impedance, particularly important for outputs which should be fixed like DC voltages, and rightly underlined by Chris Basso in his presentations. -->
