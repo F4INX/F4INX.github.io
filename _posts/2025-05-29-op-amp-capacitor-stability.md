@@ -118,10 +118,15 @@ This technique exists in two common variants shown in the 2 figures below from t
 
 The operating principle is the same in the two cases: provide an high frequency and a low frequency feedback paths. The high frequency path, right at the operational amplifier output, undelayed, provides stability, while the low frequency path, at the load, provided an exact low frequency response.
 
-With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. Since the math is a bit long, the equations will be put in this page LINK. Before reading them, please have a break and have a look on this beautiful cat.
+With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. The detailed equations, rather long, are presented in this page: <a href="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-stability-equations.html' | relative_url }}">{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-stability-equations.html' | relative_url }}</a>.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symp
-honie."/>
+Simulation results with the values calculated using the equations are shown below:
+
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.png' | relative_url }}" >
+
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-AC.png' | relative_url }}" >
+
+<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-tran.png' | relative_url }}" >
 
 ## Some words on buffers
 
