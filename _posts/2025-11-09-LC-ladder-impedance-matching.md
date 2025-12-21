@@ -211,42 +211,51 @@ FIXME: Translate French titles, add alt text.
 </figure>
 
 <script>
-    // Plot roots of the denominator
-    const roots_real = [];
-    const roots_imag = [];
-    
-    // Roots calculation
-    for (let k = 0; k < 2 * n; k++) {
-        // const angle = (1 / n) * Math.acos(1 / epsilon);
-        // const x = Math.cos(angle + (k / n) * 2 * Math.PI);
-        // const imag_sq = w_0_2 + delta_omega_2 * x;
-
-        const x = Math.cos(Math.PI / (2 * n) * (1 + 2 * k));
-        const imag_sq = w_0_2 + delta_omega_2 * x;
+    {
+        // Plot roots of the denominator
+        const roots_real = [];
+        const roots_imag = [];
         
-        if (imag_sq >= 0) {
-            roots_real.push(0);
-            roots_imag.push(Math.sqrt(imag_sq));
-            roots_real.push(0);
-            roots_imag.push(-Math.sqrt(imag_sq));
+        // Roots calculation
+        for (let k = 0; k < 2 * n; k++) {
+            // const angle = (1 / n) * Math.acos(1 / epsilon);
+            // const x = Math.cos(angle + (k / n) * 2 * Math.PI);
+            // const imag_sq = w_0_2 + delta_omega_2 * x;
+
+            const x = Math.cos(Math.PI / (2 * n) * (1 + 2 * k));
+            const imag_sq = w_0_2 + delta_omega_2 * x;
+            
+            if (imag_sq >= 0) {
+                roots_real.push(0);
+                roots_imag.push(Math.sqrt(imag_sq));
+                roots_real.push(0);
+                roots_imag.push(-Math.sqrt(imag_sq));
+            }
         }
+        
+        const trace = {
+            x: roots_real,
+            y: roots_imag,
+            mode: 'markers',
+            type: 'scatter',
+            marker: {
+                size: 8,
+                symbol: 'x-thin',
+                line: {
+                    color: 'black',
+                    width: 1
+                }
+            }
+        };
+        
+        const layout = {
+            xaxis: { title: 'Real part' },
+            yaxis: { title: 'Imaginary part' },
+            showlegend: false
+        };
+        
+        Plotly.newPlot('LC-ladder-num', [trace], layout);
     }
-    
-    const trace2 = {
-        x: roots_real,
-        y: roots_imag,
-        mode: 'markers',
-        type: 'scatter',
-        marker: { size: 8, color: 'blue' }
-    };
-    
-    const layout2 = {
-        xaxis: { title: 'Real part' },
-        yaxis: { title: 'Imaginary part' },
-        showlegend: false
-    };
-    
-    Plotly.newPlot('LC-ladder-num', [trace2], layout2);
 </script>
 
 {% comment %}
