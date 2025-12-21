@@ -320,7 +320,15 @@ FIXME: Translate French titles, add alt text.
             y: roots_imag,
             mode: 'markers',
             type: 'scatter',
-            marker: { size: 10, symbol: 'x', color: 'blue' }
+            marker: {
+                size: 8,
+                symbol: 'x-thin',
+                // color: 'blue',
+                line: {
+                    color: 'blue',
+                    width: 1
+                }
+            }
         };
 
         const layout = {
