@@ -53,9 +53,12 @@ FIXME: Translate French titles, add alt text.
 <script>
     /* Light/dark mode */
     /* FIXME: Does not handle yet the red/blue lines, works here by luck... */
+    function dark_mode() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
     function update_plot_dark_mode(layout, trace) {
         /* See https://stackoverflow.com/questions/56393880/how-do-i-detect-dark-mode-using-javascript */
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if (dark_mode()) {
             /* Background */
             layout['paper_bgcolor'] = 'rgba(0,0,0,0)';
             layout['plot_bgcolor'] = 'rgba(0,0,0,0)';
@@ -69,20 +72,35 @@ FIXME: Translate French titles, add alt text.
                 layout['yaxis'] = {};
             }
             layout['yaxis']['color'] = 'white';
+            /* Foreground */
             if (!('line' in trace))
             {
                 trace['line'] = {};
             }
-            /* Foreground */
             trace['line']['color'] = 'white';
             /* Marker if needed */
-            if ('marker' in trace) {
-                if ('line' in trace['marker']) {
-                    trace['marker']['line']['color'] = 'white';
-                }
+            /* Fill missing dict keys */
+            if (!('marker' in trace)) {trace['marker'] = {};}
+            if (!('line' in trace['marker'])) {trace['marker']['line'] = {};}
+            if (!('color' in trace['marker']['line'])) {
+                /* Case 1: missing color value */
+                trace['marker']['line']['color'] = 'white';
+            }
+            else if (['blue', 'red'].includes(trace['marker']['line']['color'])) {
+                /* Case 2: color to keep constant */
+                /* Do nothing */
+            }
+            else {
+                /* Case 3: other cases */
+                trace['marker']['line']['color'] = 'white';
             }
         }
     }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        plot_gamma_2();
+        plot_num();
+        plot_denum();
+    });
 
     /* Chebyshev polynomial of the first kind, Tn, for any x */
     function cheby(x, n) {
@@ -149,30 +167,39 @@ FIXME: Translate French titles, add alt text.
                (1 + Math.pow(epsilon, 2) * Math.pow(Tn, 2));
     });
 
-    // Create the plot
-    const trace = {
-        x: omega,
-        y: y,
-        mode: 'lines',
-        type: 'scatter',
-        name: 'Function',
-        line: {
-            width: 1  // Adjust this value to make the line thinner or thicker
-        }
-    };
+    /* Create the plot */
+    function plot_gamma_2() {
+        const trace = {
+            x: omega,
+            y: y,
+            mode: 'lines',
+            type: 'scatter',
+            name: 'Function',
+            line: {
+                color: 'black',
+                width: 1  // Adjust this value to make the line thinner or thicker
+            }
+        };
 
-    const layout = {
-        // title: 'Norm squared Γ^2 of the reflection coefficient in function of the frequency',
-        xaxis: {
-            title: 'Angular frequency ω [rad/s]'
-        },
-        yaxis: {
-            title: 'Norm squared Γ^2 of the reflection coefficient [unitless]'
-        }
-    };
+        const layout = {
+            // title: 'Norm squared Γ^2 of the reflection coefficient in function of the frequency',
+            xaxis: {
+                title: 'Angular frequency ω [rad/s]'
+            },
+            yaxis: {
+                title: 'Norm squared Γ^2 of the reflection coefficient [unitless]'
+            }
+        };
 
-    update_plot_dark_mode(layout, trace)
-    Plotly.newPlot('LC-ladder-gamma-2', [trace], layout);
+        update_plot_dark_mode(layout, trace)
+        if (dark_mode) {
+            /* Difficult to set good color for axes with a white plot. */
+            /* Blue color will do the trick. */
+            trace['line']['color'] = 'blue';
+        }
+        Plotly.newPlot('LC-ladder-gamma-2', [trace], layout);
+    }
+    plot_gamma_2();
 </script>
 
 In previous expression, <asciimath>\epsilon</asciimath> is chosen such as:
@@ -236,7 +263,7 @@ FIXME: Translate French titles, add alt text.
 </figure>
 
 <script>
-    {
+    function plot_num() {
         // Roots of the numerator
         const roots_real = [];
         const roots_imag = [];
@@ -276,8 +303,14 @@ FIXME: Translate French titles, add alt text.
         };
 
         update_plot_dark_mode(layout, trace);
+        if (dark_mode()) {
+            /* Difficult to set good color for axes with a white plot. */
+            /* Blue color will do the trick. */
+            trace['marker']['line']['color'] = 'blue';
+        }
         Plotly.newPlot('LC-ladder-num', [trace], layout);
     }
+    plot_num();
 </script>
 
 {% comment %}
@@ -289,7 +322,7 @@ FIXME: Translate French titles, add alt text.
 </figure>
 
 <script>
-    {
+    function plot_denum() {
         // Roots of the denominator
         const roots_left_real = [];
         const roots_left_imag = [];
@@ -385,9 +418,12 @@ FIXME: Translate French titles, add alt text.
             showlegend: false
         };
 
-        update_plot_dark_mode(layout, trace);
+        /* FIXME: rework this */
+        update_plot_dark_mode(layout, trace_left);
+        update_plot_dark_mode(layout, trace_right);
         Plotly.newPlot('LC-ladder-denum', [trace_left, trace_right], layout);
     }
+    plot_denum();
 </script>
 
 A polynomial is defined by the set of its roots, but up to a multiplicative factor. The next step is to determine this multiplicative factor. Details of the calculation won't be given here, but only the result:
