@@ -347,9 +347,7 @@ FIXME: Translate French titles, add alt text.
         const layout = {
             xaxis: { title: 'Real part' },
             yaxis: { title: 'Imaginary part' },
-            showlegend: false,
-            width: 600,
-            height: 600
+            showlegend: false
         };
 
         Plotly.newPlot('LC-ladder-denum', [trace_left, trace_right], layout);
