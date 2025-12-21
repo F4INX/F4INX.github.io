@@ -262,12 +262,10 @@ FIXME: Translate French titles, add alt text.
 FIXME: Translate French titles, add alt text.
 {% endcomment %}
 <figure>
-  <img class="dark-mode-invert" src="{{ '/posts/LC-ladder-impedance-matching/LC-ladder-denum.svg' | relative_url }}">
-
+  <div id="LC-ladder-denum"></div>
   <figcaption>Fig.&#8239;3. Roots of the denominator in the example. The roots of interest are marked in blue, while the ones in red are ignored.</figcaption>
 </figure>
 
-<div id="LC-ladder-denum">
 <script>
     {
         // Plot roots of the denominator
