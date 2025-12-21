@@ -16,6 +16,8 @@ collections:
     output: true
   unreleased:
     output: true
+  hidden:
+    output: true
 
 # Feed
 feed:
