@@ -260,75 +260,93 @@ FIXME: Translate French titles, add alt text.
 
 <div id="LC-ladder-denum">
 <script>
-    {// Plot roots of the denominator
-    const roots_real = [];
-    const roots_imag = [];
-    
-    // Roots calculation
-    for (let k = 0; k < 2 * n; k++) {
-        /* See https://math.stackexchange.com/questions/4075851/how-to-separate-real-and-imaginary-parts-of-arccosxiy */
-        /* arccos */
-        const arccos_x = 0;
-        const arccos_y = 1 / epsilon;
-        const arccos_u = Math.acos(
-            (
-                Math.sqrt(Math.pow(arccos_x+1, 2) + Math.pow(arccos_y, 2)) -
-                Math.sqrt(Math.pow(arccos_x-1, 2) + Math.pow(arccos_y, 2))
-            ) / 2);
-        const arccos_v = Math.acosh(
-            (
-                Math.sqrt(Math.pow(arccos_x+1, 2) + Math.pow(arccos_y, 2)) +
-                Math.sqrt(Math.pow(arccos_x-1, 2) + Math.pow(arccos_y, 2))
-            ) / 2);
-        console.assert(!isNaN(arccos_u));
-        console.assert(!isNaN(arccos_v));
-        /* cos */
-        /* See https://math.stackexchange.com/questions/1743935/real-and-imaginary-parts-of-cosz */
-        const cos_x = (arccos_u + k*Math.PI) / n;
-        const cos_y =  arccos_v              / n;
-        console.assert(!isNaN(cos_x));
-        console.assert(!isNaN(cos_y));
-        const cos_u = Math.cos(cos_x)*Math.cosh(cos_y);
-        const cos_v = -Math.sin(cos_x)*Math.sinh(cos_y);
-        console.assert(!isNaN(cos_u));
-        console.assert(!isNaN(cos_v));
-        /* sqrt */
-        const sq_x = w_0_2 + delta_omega_2 * cos_u;
-        const sq_y =         delta_omega_2 * cos_v;
-        const sq_u = Math.sqrt((Math.sqrt(Math.pow(sq_x, 2) + Math.pow(sq_y, 2)) + sq_x) / 2);
-        const sq_v = Math.sign(sq_y) * Math.sqrt((Math.sqrt(Math.pow(sq_x, 2) + Math.pow(sq_y, 2)) - sq_x) / 2)
-        /* j */
-        const root_x = -sq_v;
-        const root_y = sq_u;
+    {
+        // Plot roots of the denominator
+        const roots_real = [];
+        const roots_imag = [];
 
-        roots_real.push(root_x);
-        roots_imag.push(root_y);
+        // Roots calculation
+        for (let k = 0; k < 2 * n; k++) {
+            /* See https://math.stackexchange.com/questions/4075851/how-to-separate-real-and-imaginary-parts-of-arccosxiy */
+            /* arccos */
+            const arccos_x = 0;
+            const arccos_y = 1 / epsilon;
+            const arccos_u = Math.acos(
+                (
+                    Math.sqrt(Math.pow(arccos_x+1, 2) + Math.pow(arccos_y, 2)) -
+                    Math.sqrt(Math.pow(arccos_x-1, 2) + Math.pow(arccos_y, 2))
+                ) / 2);
+            const arccos_v = Math.acosh(
+                (
+                    Math.sqrt(Math.pow(arccos_x+1, 2) + Math.pow(arccos_y, 2)) +
+                    Math.sqrt(Math.pow(arccos_x-1, 2) + Math.pow(arccos_y, 2))
+                ) / 2);
+            console.assert(!isNaN(arccos_u));
+            console.assert(!isNaN(arccos_v));
+            /* cos */
+            /* See https://math.stackexchange.com/questions/1743935/real-and-imaginary-parts-of-cosz */
+            const cos_x = (arccos_u + k*Math.PI) / n;
+            const cos_y =  arccos_v              / n;
+            console.assert(!isNaN(cos_x));
+            console.assert(!isNaN(cos_y));
+            const cos_u = Math.cos(cos_x)*Math.cosh(cos_y);
+            const cos_v = -Math.sin(cos_x)*Math.sinh(cos_y);
+            console.assert(!isNaN(cos_u));
+            console.assert(!isNaN(cos_v));
+            /* sqrt */
+            const sq_x = w_0_2 + delta_omega_2 * cos_u;
+            const sq_y =         delta_omega_2 * cos_v;
+            const sq_u = Math.sqrt((Math.sqrt(Math.pow(sq_x, 2) + Math.pow(sq_y, 2)) + sq_x) / 2);
+            const sq_v = Math.sign(sq_y) * Math.sqrt((Math.sqrt(Math.pow(sq_x, 2) + Math.pow(sq_y, 2)) - sq_x) / 2)
+            /* j */
+            const root_x = -sq_v;
+            const root_y = sq_u;
 
-        console.log(root_x);
-        console.log(root_y);
+            roots_real.push(root_x);
+            roots_imag.push(root_y);
 
-        roots_real.push(-root_x);
-        roots_imag.push(-root_y);
+            console.log(root_x);
+            console.log(root_y);
 
-        console.log(-root_x);
-        console.log(-root_y);
+            roots_real.push(-root_x);
+            roots_imag.push(-root_y);
+
+            console.log(-root_x);
+            console.log(-root_y);
+        }
+
+        const trace = {
+            x: roots_real,
+            y: roots_imag,
+            mode: 'markers',
+            type: 'scatter',
+            marker: { size: 10, symbol: 'x', color: 'blue' }
+        };
+
+        const layout = {
+            xaxis: { title: 'Real part' },
+            yaxis: { title: 'Imaginary part' },
+            showlegend: false,
+            width: 600,
+            height: 600,
+            xaxis: {
+                // scaleanchor: 'y',
+                // scaleratio: 1,
+                // showgrid: true,
+                // gridwidth: 1,
+                // gridcolor: 'lightgray'
+            },
+            yaxis: {
+                // scaleanchor: 'x',
+                // scaleratio: 1,
+                // showgrid: true,
+                // gridwidth: 1,
+                // gridcolor: 'lightgray'
+            }
+        };
+
+        Plotly.newPlot('LC-ladder-denum', [trace], layout);
     }
-    
-    const trace = {
-        x: roots_real,
-        y: roots_imag,
-        mode: 'markers',
-        type: 'scatter',
-        marker: { size: 8, color: 'blue' }
-    };
-    
-    const layout = {
-        xaxis: { title: 'Real part' },
-        yaxis: { title: 'Imaginary part' },
-        showlegend: false
-    };
-    
-    Plotly.newPlot('LC-ladder-denum', [trace], layout);}
 </script>
 
 A polynomial is defined by the set of its roots, but up to a multiplicative factor. The next step is to determine this multiplicative factor. Details of the calculation won't be given here, but only the result:
