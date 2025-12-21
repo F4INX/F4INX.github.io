@@ -62,17 +62,6 @@ FIXME: Translate French titles, add alt text.
         }
     }
 
-    /* Reg test of cheby */
-    for (let n = 0; n <= 10; n++) {
-        let min = Infinity, max = -Infinity;
-        for (let x = -1; x <= 1; x += 0.1) {
-            const val = cheby(x, n);
-            min = Math.min(min, val);
-            max = Math.max(max, val);
-        }
-        console.log(`n=${n}: min=${min.toFixed(2)}, max=${max.toFixed(2)}`);
-    }
-
     /* epsilon in function of order and gamma_0 */
     function epsilon_fct(order, gamma_0, w_0_2, delta_omega_2) {
         a = gamma_0 ** 2
@@ -212,16 +201,12 @@ FIXME: Translate French titles, add alt text.
 
 <script>
     {
-        // Plot roots of the denominator
+        // Roots of the numerator
         const roots_real = [];
         const roots_imag = [];
         
         // Roots calculation
         for (let k = 0; k < 2 * n; k++) {
-            // const angle = (1 / n) * Math.acos(1 / epsilon);
-            // const x = Math.cos(angle + (k / n) * 2 * Math.PI);
-            // const imag_sq = w_0_2 + delta_omega_2 * x;
-
             const x = Math.cos(Math.PI / (2 * n) * (1 + 2 * k));
             const imag_sq = w_0_2 + delta_omega_2 * x;
             
@@ -268,7 +253,7 @@ FIXME: Translate French titles, add alt text.
 
 <script>
     {
-        // Plot roots of the denominator
+        // Roots of the denominator
         const roots_left_real = [];
         const roots_left_imag = [];
         const roots_right_real = [];
