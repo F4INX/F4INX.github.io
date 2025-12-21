@@ -215,7 +215,7 @@ FIXME: Translate French titles, add alt text.
     const roots_real = [];
     const roots_imag = [];
     
-    // Example roots calculation
+    // Roots calculation
     for (let k = 0; k < 2 * n; k++) {
         // const angle = (1 / n) * Math.acos(1 / epsilon);
         // const x = Math.cos(angle + (k / n) * 2 * Math.PI);
