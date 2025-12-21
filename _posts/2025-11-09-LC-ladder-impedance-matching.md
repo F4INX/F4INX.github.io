@@ -43,7 +43,10 @@ Next figure shows the reflection coefficient seen from the source of an example 
 FIXME: Translate French titles, add alt text.
 {% endcomment %}
 <figure>
-  <div id="LC-ladder-gamma-2"></div>
+  <div id="LC-ladder-gamma-2">
+    <!-- Alt image in case of JS failure. -->
+    <img class="dark-mode-invert" src="{{ '/posts/LC-ladder-impedance-matching/LC-ladder-gamma-2.svg' | relative_url }}">
+  </div>
   <figcaption>Fig.&#8239;1. Example of squared reflection coefficient seen from the source of an LC matching network. See text for parameters.</figcaption>
 </figure>
 
