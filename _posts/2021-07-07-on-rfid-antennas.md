@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Why RFID antennas should be called neither RFID nor antennas ?
+title:  Why RFID antennas should not be called antennas ?
 permalink: /posts/on-rfid-antennas.html
 last_modified_at: 2021-07-21 00:22:31 +0200
 ---
