@@ -43,12 +43,11 @@ Next figure shows the reflection coefficient seen from the source of an example 
 FIXME: Translate French titles, add alt text.
 {% endcomment %}
 <figure>
-  <img class="dark-mode-invert" src="{{ '/posts/LC-ladder-impedance-matching/LC-ladder-gamma-2.svg' | relative_url }}">
-  <figcaption>Fig.&#8239;1. Example of reflection coefficient seen from the source of an LC matching network. See text for parameters.</figcaption>
+  <div id="LC-ladder-gamma-2"></div>
+  <figcaption>Fig.&#8239;1. Example of squared reflection coefficient seen from the source of an LC matching network. See text for parameters.</figcaption>
 </figure>
 
 <!-- Thanks to Mistral le Chat. -->
-<div id="myDiv"></div>
 <script>
     /* Chebyshev polynomial of the first kind, Tn, for any x */
     function cheby(x, n) {
@@ -139,7 +138,7 @@ FIXME: Translate French titles, add alt text.
     };
 
     const layout = {
-        title: 'Norm squared Γ^2 of the reflection coefficient in function of the frequency',
+        // title: 'Norm squared Γ^2 of the reflection coefficient in function of the frequency',
         xaxis: {
             title: 'Angular frequency ω [rad/s]'
         },
@@ -148,7 +147,7 @@ FIXME: Translate French titles, add alt text.
         }
     };
 
-    Plotly.newPlot('myDiv', [trace], layout);
+    Plotly.newPlot('LC-ladder-gamma-2', [trace], layout);
 </script>
 
 In previous expression, <asciimath>\epsilon</asciimath> is chosen such as:
