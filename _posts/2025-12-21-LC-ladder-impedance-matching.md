@@ -51,6 +51,39 @@ FIXME: Translate French titles, add alt text.
 
 <!-- Thanks to Mistral le Chat. -->
 <script>
+    /* Light/dark mode */
+    /* FIXME: Does not handle yet the red/blue lines, works here by luck... */
+    function update_plot_dark_mode(layout, trace) {
+        /* See https://stackoverflow.com/questions/56393880/how-do-i-detect-dark-mode-using-javascript */
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            /* Background */
+            layout['paper_bgcolor'] = 'rgba(0,0,0,0)';
+            layout['plot_bgcolor'] = 'rgba(0,0,0,0)';
+            if (!('xaxis' in layout))
+            {
+                layout['xaxis'] = {};
+            }
+            layout['xaxis']['color'] = 'white';
+            if (!('yaxis' in layout))
+            {
+                layout['yaxis'] = {};
+            }
+            layout['yaxis']['color'] = 'white';
+            if (!('line' in trace))
+            {
+                trace['line'] = {};
+            }
+            /* Foreground */
+            trace['line']['color'] = 'white';
+            /* Marker if needed */
+            if ('marker' in trace) {
+                if ('line' in trace['marker']) {
+                    trace['marker']['line']['color'] = 'white';
+                }
+            }
+        }
+    }
+
     /* Chebyshev polynomial of the first kind, Tn, for any x */
     function cheby(x, n) {
         if (x < -1) {
@@ -138,6 +171,7 @@ FIXME: Translate French titles, add alt text.
         }
     };
 
+    update_plot_dark_mode(layout, trace)
     Plotly.newPlot('LC-ladder-gamma-2', [trace], layout);
 </script>
 
@@ -240,7 +274,8 @@ FIXME: Translate French titles, add alt text.
             yaxis: { title: 'Imaginary part' },
             showlegend: false
         };
-        
+
+        update_plot_dark_mode(layout, trace);
         Plotly.newPlot('LC-ladder-num', [trace], layout);
     }
 </script>
@@ -350,6 +385,7 @@ FIXME: Translate French titles, add alt text.
             showlegend: false
         };
 
+        update_plot_dark_mode(layout, trace);
         Plotly.newPlot('LC-ladder-denum', [trace_left, trace_right], layout);
     }
 </script>
