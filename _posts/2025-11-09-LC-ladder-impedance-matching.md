@@ -271,8 +271,10 @@ FIXME: Translate French titles, add alt text.
 <script>
     {
         // Plot roots of the denominator
-        const roots_real = [];
-        const roots_imag = [];
+        const roots_left_real = [];
+        const roots_left_imag = [];
+        const roots_right_real = [];
+        const roots_right_imag = [];
 
         // Roots calculation
         for (let k = 0; k < 2 * n; k++) {
@@ -310,31 +312,48 @@ FIXME: Translate French titles, add alt text.
             /* j */
             const root_x = -sq_v;
             const root_y = sq_u;
-
-            roots_real.push(root_x);
-            roots_imag.push(root_y);
-
             console.log(root_x);
             console.log(root_y);
-
-            roots_real.push(-root_x);
-            roots_imag.push(-root_y);
-
-            console.log(-root_x);
-            console.log(-root_y);
+            /* Left/right roots sorting */
+            if (root_x < 0) {
+                roots_left_real.push(root_x);
+                roots_left_imag.push(root_y);
+                roots_right_real.push(-root_x);
+                roots_right_imag.push(-root_y);
+            }
+            else {
+                roots_right_real.push(root_x);
+                roots_right_imag.push(root_y);
+                roots_left_real.push(-root_x);
+                roots_left_imag.push(-root_y);
+            }
         }
 
-        const trace = {
-            x: roots_real,
-            y: roots_imag,
+        const trace_left = {
+            x: roots_left_real,
+            y: roots_left_imag,
             mode: 'markers',
             type: 'scatter',
             marker: {
                 size: 8,
                 symbol: 'x-thin',
-                // color: 'blue',
                 line: {
                     color: 'blue',
+                    width: 1
+                }
+            }
+        };
+
+        const trace_right = {
+            x: roots_right_real,
+            y: roots_right_imag,
+            mode: 'markers',
+            type: 'scatter',
+            marker: {
+                size: 8,
+                symbol: 'x-thin',
+                line: {
+                    color: 'red',
                     width: 1
                 }
             }
@@ -345,24 +364,10 @@ FIXME: Translate French titles, add alt text.
             yaxis: { title: 'Imaginary part' },
             showlegend: false,
             width: 600,
-            height: 600,
-            xaxis: {
-                // scaleanchor: 'y',
-                // scaleratio: 1,
-                // showgrid: true,
-                // gridwidth: 1,
-                // gridcolor: 'lightgray'
-            },
-            yaxis: {
-                // scaleanchor: 'x',
-                // scaleratio: 1,
-                // showgrid: true,
-                // gridwidth: 1,
-                // gridcolor: 'lightgray'
-            }
+            height: 600
         };
 
-        Plotly.newPlot('LC-ladder-denum', [trace], layout);
+        Plotly.newPlot('LC-ladder-denum', [trace_left, trace_right], layout);
     }
 </script>
 
