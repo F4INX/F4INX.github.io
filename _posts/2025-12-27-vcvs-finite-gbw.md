@@ -223,7 +223,7 @@ From which the transfer function can be calculated:
     \end{align*}
 </latexmath>
 
-### Test expression with GBW infinite
+### Test expression with infinite GBW
 
 When GBW infinite, the following expression reduces to:
 
@@ -300,7 +300,7 @@ Consistent with the equations for infinite GBW[^2].
 
 [^2]: https://www.changpuak.ch/electronics/downloads/sloa088.pdf
 
-### Parameters for GBW finite
+### Parameters for finite GBW
 
 Since this VCVS has another pole due to the finite GBW of the opamps, the transfer function is as follows:
 
