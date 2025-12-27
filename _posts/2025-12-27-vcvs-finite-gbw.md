@@ -13,11 +13,137 @@ last_modified_at: 2025-12-27
 
 Replace R1 and R3 by equivalent circuit: <latexinline>V_\text{TH} = V_\text{IN} \cdot \frac{...}{...}</latexinline>, <latexinline>R_\text{TH} = ...</latexinline>.
 
-The X point voltage can be calculated: ...
+The voltage at point x, <latexinline>V_x</latexinline>, can be calculated using Millman theorem:
 
-The V- voltage can be calculated: ...
+<latexmath>
+\begin{multline*}
+V_x = \frac{
+    \frac{V_\text{TH}}{R_\text{TH}}+\frac{V^-}{\frac{1}{C \cdot s}}
+    + \frac{V_\text{out}}{\frac{1}{C \cdot s}}
+  }{
+    \frac{1}{R_\text{TH}}
+    + \frac{1}{\frac{1}{C \cdot s}}+\frac{1}{\frac{1}{C \cdot s}}
+  }
+= \frac{
+    \frac{1}{R_\text{TH}} \cdot V_\text{TH}
+    + C \cdot s \cdot V^-
+    + C \cdot s \cdot V_\text{out}
+  }{
+    \frac{1}{R_\text{TH}}
+    + 2 \cdot C \cdot s
+  } 
+\end{multline*}
+</latexmath>
 
-...
+The V- voltage can be calculated in the same way:
+
+<latexmath>
+\begin{multline*}
+V^- = \frac{
+      \frac{V_x}{\frac{1}{C \cdot s}}
+      + \frac{V_\text{out}}{R_2}
+    }{
+      \frac{1}{\frac{1}{C \cdot s}}
+      + \frac{1}{R_2}
+    }
+= \frac{
+    C \cdot s \cdot V_x
+    + \frac{1}{R_2} \cdot V_\text{out}
+  }{
+    C \cdot s
+    + \frac{1}{R_2}
+  }
+= \frac{
+    R_2 \cdot C \cdot s \cdot V_x
+    + V_\text{out}
+  }{
+    1 + R_2 \cdot C \cdot s
+  } 
+\end{multline*}
+</latexmath>
+
+Combining both equations:
+
+<latexmath>
+V^- = \frac{R_2 \cdot C \cdot s}{1 + R_2 \cdot C \cdot s} \cdot \left[
+    \frac{
+        \frac{1}{R_\text{TH}} \cdot V_\text{TH}
+        + C \cdot s \cdot V^-
+        + C \cdot s \cdot V_\text{out}
+    }{
+        \frac{1}{R_\text{TH}}
+        + 2 \cdot C \cdot s
+    }
+  \right] + \frac{1}{1 + R_2 \cdot C \cdot s} \cdot V_\text{out}
+</latexmath>
+
+Multiplying both sides of the equation by <latexinline>\left[ 1 + R_2 \cdot C \cdot s \right] \cdot \left[ \frac{1}{R_\text{TH}} + 2 \cdot C \cdot s \right]</latexinline>:
+
+<latexmath>
+\left[ 1 + R_2 \cdot C \cdot s \right] \cdot \left[ \frac{1}{R_\text{TH}} + 2 \cdot C \cdot s \right] \cdot V^-
+= R_2 \cdot C \cdot s \cdot \left[
+    \frac{1}{R_\text{TH}} \cdot V_\text{TH}
+    + C \cdot s \cdot V^-
+    + C \cdot s \cdot V_\text{out}
+  \right]
+  + \left[ \frac{1}{R_\text{TH}} + 2 \cdot C \cdot s \right] \cdot V_\text{out}
+</latexmath>
+
+Multiplying by R_TH to outline the time constant units:
+
+<latexmath>
+\left[ 1 + R_2 \cdot C \cdot s \right] \cdot \left[ 1 + 2 \cdot R_\text{TH} \cdot C \cdot s \right] \cdot V^-
+= R_2 \cdot C \cdot s \cdot \left[
+    V_\text{TH}
+    + R_\text{TH} \cdot C \cdot s \cdot V^-
+    + R_\text{TH} \cdot C \cdot s \cdot V_\text{out}
+  \right]
+  + \left[ 1 + 2 \cdot R_\text{TH} \cdot C \cdot s \right] \cdot V_\text{out}
+</latexmath>
+
+Developping and regrouping terms according to their voltage:
+
+<!-- FIXME: move globally -->
+<style>
+  .math-reduced .MathJax {
+    font-size: 1.0em !important;
+  }
+</style>
+<latexmath class="math-reduced">
+    \begin{align*}
+        &\left[
+        1
+        + \left(
+            2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+            \right) \cdot s
+        + 2 \cdot R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        \right] \cdot V^-  \\
+        & \quad =
+        R_2 \cdot C \cdot s \cdot V_\text{TH}
+        + R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2 \cdot V^-  \\
+        & \qquad + \left[
+            1 + 2 \cdot R_\text{TH} \cdot C \cdot s + R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        \right] \cdot V_\text{out}
+    \end{align*}
+</latexmath>
+
+Regrouping V- on the left side (the change is put in bold for clarity):
+<latexmath class="math-reduced">
+    \begin{align*}
+        &\left[
+        1
+        + \left(
+            2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+            \right) \cdot s
+        + \pmb{1} \cdot R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        \right] \cdot V^-  \\
+        & \quad =
+        R_2 \cdot C \cdot s \cdot V_\text{TH}
+        + \left[
+            1 + 2 \cdot R_\text{TH} \cdot C \cdot s + R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        \right] \cdot V_\text{out}
+    \end{align*}
+</latexmath>
 
 Plugging op-amp gain (don’t forget the sign!):
 
