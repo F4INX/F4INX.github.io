@@ -227,9 +227,78 @@ From which the transfer function can be calculated:
 
 When GBW infinite, the following expression reduces to:
 
-![](/posts/vcvs-finite-gbw/eqn03.png)
+<latexmath class="math-reduced">
+    \begin{align*}
+        V_\text{out} = \frac{
+            - R_2 \cdot C \cdot s
+        }{
+            1
+            + 2 \cdot R_\text{TH} \cdot C \cdot s
+            + R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        } \cdot V_\text{TH}
+    \end{align*}
+</latexmath>
 
-...
+For an ideal VCVS filter with infinite GBW opamps[^1]:
+
+[^1]: https://electronics.stackexchange.com/questions/735869/cannot-find-the-derivation-for-gain-and-q-in-a-mfb-bandpass-filter-with-fixed-ga
+
+<latexmath class="math-reduced">
+    \begin{align*}
+        V_\text{out} = \frac{
+            \frac{A^{'}}{Q \cdot \omega_0} s
+        }{
+            1
+            + \frac{1}{Q \cdot \omega_0} \cdot s
+            + \frac{1}{\omega_0^2} \cdot s^2
+        } \cdot V_\text{TH}
+    \end{align*}
+</latexmath>
+
+Note the gain is called A^' and not A because it does not include the V_TH/V_IN.
+
+<latexmath class="math-reduced">
+    \begin{align*}
+        V_\text{out} = \frac{
+            \frac{A^{'}}{Q \cdot \omega_0} s
+        }{
+            1
+            + \frac{1}{Q \cdot \omega_0} \cdot s
+            + \frac{1}{\omega_0^2} \cdot s^2
+        } \cdot V_\text{TH}
+        = \frac{
+            - R_2 \cdot C \cdot s
+        }{
+            1
+            + 2 \cdot R_\text{TH} \cdot C \cdot s
+            + R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        } \cdot V_\text{TH}
+    \end{align*}
+</latexmath>
+
+<latexmath class="math-reduced">
+    \begin{align*}
+        \cases{
+            \frac{A^{'}}{Q \cdot \omega_0} = - R_2 \cdot C  \\
+            \frac{1}{Q \cdot \omega_0} = 2 \cdot R_\text{TH} \cdot C  \\
+            \frac{1}{\omega_0^2} = R_\text{TH} \cdot R_2 \cdot C^2
+        }
+    \end{align*}
+</latexmath>
+
+<latexmath class="math-reduced">
+    \begin{align*}
+        \cases{
+            A^{'} = \frac{- R_2}{2 \cdot R_\text{TH}};  \qquad A = \frac{R_3}{R_1+R_3} \cdot \frac{R_1+R_3}{R_1\cdot R_3} \cdot \frac{R_2}{2} = \frac{-R_2}{R_1}; \qquad \text{OK}  \\
+            Q = ... = \pi \cdot f_0 \cdot R_C \cdot C; \qquad \text{OK}  \\
+            \omega_0 = ...; \qquad f_0 = ...; \qquad \text{OK}
+        }
+    \end{align*}
+</latexmath>
+
+Consistent with the equations for infinite GBW[^2].
+
+[^2]: https://www.changpuak.ch/electronics/downloads/sloa088.pdf
 
 ### Parameters for GBW finite
 
