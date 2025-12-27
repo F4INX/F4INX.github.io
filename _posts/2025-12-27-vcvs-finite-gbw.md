@@ -147,17 +147,81 @@ Regrouping V- on the left side (the change is put in bold for clarity):
 
 Plugging op-amp gain (don’t forget the sign!):
 
-...
+<latexmath class="math-reduced">
+    \begin{align*}
+        & - \left[
+        1
+        + \left(
+            2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+            \right) \cdot s
+        + R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        \right] \cdot \frac{V_\text{out}}{\omega_\text{BW} \cdot s}  \\
+        & \quad =
+        R_2 \cdot C \cdot s \cdot V_\text{TH}
+        + \left[
+            1 + 2 \cdot R_\text{TH} \cdot C \cdot s + R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        \right] \cdot V_\text{out}
+    \end{align*}
+</latexmath>
 
-![](/posts/vcvs-finite-gbw/eqn01.png)
+Outlining the polynomial of s:
 
-Rational transfer function:
+<latexmath class="math-reduced">
+    \begin{align*}
+        & - \left[
+        \frac{1}{\omega_\text{BW}} \cdot s
+        + \frac{
+            2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+          }{\omega_\text{BW}} \cdot s^2
+        + \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW}} \cdot s^3
+        \right] \cdot V_\text{out}  \\
+        & \qquad =
+        R_2 \cdot C \cdot s \cdot V_\text{TH}
+        + \left[
+            1 + 2 \cdot R_\text{TH} \cdot C \cdot s + R_\text{TH} \cdot R_2 \cdot C^2 \cdot s^2
+        \right] \cdot V_\text{out}
+    \end{align*}
+</latexmath>
 
-...
+Putting all the V_out on the left:
 
-Cleanup:
+<latexmath class="math-reduced">
+    \begin{align*}
+        & - \left[
+        1
+        + \left( \frac{1}{\omega_\text{BW}} + 2 \cdot R_\text{TH} \cdot C \right) \cdot s
+        +  \left(
+                \frac{
+                    2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+                }{\omega_\text{BW}}
+                + R_\text{TH} \cdot R_2 \cdot C^2
+            \right) \cdot s^2
+        + \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW}} \cdot s^3
+        \right] \cdot V_\text{out}  \\
+        & \qquad =
+        R_2 \cdot C \cdot s \cdot V_\text{TH}
+    \end{align*}
+</latexmath>
 
-![](/posts/vcvs-finite-gbw/eqn02.png)
+From which the transfer function can be calculated:
+
+<latexmath class="math-reduced">
+    \begin{align*}
+        V_\text{out} = \frac{
+            - R_2 \cdot C \cdot s
+        }{
+            1
+            + \left( \frac{1}{\omega_\text{BW}} + 2 \cdot R_\text{TH} \cdot C \right) \cdot s
+            +  \left(
+                    \frac{
+                        2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+                    }{\omega_\text{BW}}
+                    + R_\text{TH} \cdot R_2 \cdot C^2
+                \right) \cdot s^2
+            + \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW}} \cdot s^3
+        } \cdot V_\text{TH}
+    \end{align*}
+</latexmath>
 
 ### Test expression with GBW infinite
 
