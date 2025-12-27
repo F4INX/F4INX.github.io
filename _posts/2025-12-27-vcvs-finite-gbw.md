@@ -335,11 +335,18 @@ However, the denominator needs to be factorized before the other parameters can 
 
 Coefficients of denominator:
 
-![](/posts/vcvs-finite-gbw/eqn06.png)
+<latexmath>
+D(s) = 1 + b_1 \cdot s + b_2 \cdot s^2 + b_3 \cdot s^3
+</latexmath>
 
-Seek factorisation as such:
+Seek factorisation as such, using time constants instead of angular frequencies to make calculations easier:
 
-![](/posts/vcvs-finite-gbw/eqn07.png)
+<latexmath>
+\begin{align*}
+D(s) &= \left( 1 + \frac{\tau_0}{Q} \cdot s + \tau_0^2 \cdot s^2  \right) \cdot \left( 1 + \tau_p \cdot s \right)  \\
+D(s) &= 1 + \left( \frac{\tau_0}{Q} + \tau_p \right) \cdot s + \left( \tau_0^2 + \frac{\tau_0 \cdot \tau_p}{Q} \right) \cdot s^2 + \tau_0^2 \cdot \tau_p \cdot s^3
+\end{align*}
+</latexmath>
 
 <!-- FIXME: put this in CSS. -->
 To allow solving, hypothesis <img style="display:unset;vertical-align:middle;" src="/posts/vcvs-finite-gbw/eqn08.png"/>:
