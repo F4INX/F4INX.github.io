@@ -304,11 +304,28 @@ Consistent with the equations for infinite GBW[^2].
 
 Since this VCVS has another pole due to the finite GBW of the opamps, the transfer function is as follows:
 
-![](/posts/vcvs-finite-gbw/eqn04.png)
+<latexmath class="math-reduced">
+    \begin{align*}
+        V_\text{out} = \frac{
+            \frac{A^{'}}{Q \cdot \omega_0} s
+        }{
+            \left[
+                1
+                + \frac{1}{Q \cdot \omega_0} \cdot s
+                + \frac{1}{\omega_0^2} \cdot s^2
+            \right] \cdot
+            \left[
+                1 + \frac{1}{\omega_p} \cdot s
+            \right]
+        } \cdot V_\text{TH}
+    \end{align*}
+</latexmath>
 
-Assuming the pole is far enough from the center frequency, its effect can be neglected, and the gain has still the same value.
+Assuming the pole is far enough from the center frequency, its effect can be neglected, and the gain has still the same value:
 
-![](/posts/vcvs-finite-gbw/eqn05.png)
+<latexmath>
+\frac{A^{'}}{Q \cdot \omega_0} = - R_2 \cdot C; \qquad A^{'} = \frac{- R_2}{2 \cdot R_\text{TH}}
+</latexmath>
 
 However, the denominator needs to be factorized before the other parameters can be expressed.
 
