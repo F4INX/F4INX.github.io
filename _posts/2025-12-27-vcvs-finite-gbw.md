@@ -584,4 +584,3 @@ Note that there are some values where 1/ the filter is still realisable and 2/ t
 No time to conclude, please find instead a beautiful cat.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Blackcat-Lilith.jpg" alt="Lilith black cat."/>
-
