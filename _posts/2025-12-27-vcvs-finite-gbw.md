@@ -348,10 +348,23 @@ D(s) &= 1 + \left( \frac{\tau_0}{Q} + \tau_p \right) \cdot s + \left( \tau_0^2 +
 \end{align*}
 </latexmath>
 
-<!-- FIXME: put this in CSS. -->
-To allow solving, hypothesis <img style="display:unset;vertical-align:middle;" src="/posts/vcvs-finite-gbw/eqn08.png"/>:
+To allow solving, hypothesis <latexinline>\tau_0^2 \gg \frac{\tau_0 \cdot \tau_p}{Q}</latexinline>:
 
-![](/posts/vcvs-finite-gbw/eqn09.png)
+<latexmath class="math-reduced">
+    \cases{
+        \tau_0^2 \cdot \tau_p = b_3  \\
+        \tau_0^2 = b_2  \\
+        \frac{\tau_0}{Q} + \tau_p = b_1
+    }
+</latexmath>
+
+<latexmath class="math-reduced">
+    \cases{
+        \tau_p = \frac{b_3}{b_2}  \\
+        \tau_0^2 = b_2  \\
+        \frac{\tau_0}{Q} = b_1 - \frac{b_3}{b_2}
+    }
+</latexmath>
 
 ### Applying to components values
 
