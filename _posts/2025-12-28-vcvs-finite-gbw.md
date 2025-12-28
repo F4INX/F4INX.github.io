@@ -13,6 +13,8 @@ last_modified_at: 2025-12-28
 </style>
 <div class="vcvs-finite-gbw-fixes" markdown="1">
 
+<p class="begin-note">Many thanks to Christophe Basso to have showed me the factorisation technique which is the key of this work.</p>
+
 ## Transfer function
 
 ### Full expression
