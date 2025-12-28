@@ -2,8 +2,16 @@
 layout: post
 title: VCVS with finite GBW.
 permalink: /posts/vcvs-finite-gbw.html
-last_modified_at: 2025-12-27
+last_modified_at: 2025-12-28
 ---
+
+<!-- FIXME: move globally -->
+<style>
+  .vcvs-finite-gbw-fixes .MathJax {
+    font-size: 1.0em !important;
+  }
+</style>
+<div class="vcvs-finite-gbw-fixes" markdown="1">
 
 ## Transfer function
 
@@ -11,7 +19,7 @@ last_modified_at: 2025-12-27
 
 ![](/posts/vcvs-finite-gbw/schematic.svg)
 
-Replace R1 and R3 by equivalent circuit: <latexinline>V_\text{TH} = V_\text{IN} \cdot \frac{...}{...}</latexinline>, <latexinline>R_\text{TH} = ...</latexinline>.
+Replace R1 and R3 by equivalent circuit: <latexinline>V_\text{TH} = V_\text{IN} \cdot \frac{R_3}{R_1 + R_3}</latexinline>, <latexinline>R_\text{TH} = \frac{R_1 \cdot R_3}{R_1 + R_3}</latexinline>.
 
 The voltage at point x, <latexinline>V_x</latexinline>, can be calculated using Millman theorem:
 
@@ -103,13 +111,7 @@ Multiplying by R_TH to outline the time constant units:
 
 Developping and regrouping terms according to their voltage:
 
-<!-- FIXME: move globally -->
-<style>
-  .math-reduced .MathJax {
-    font-size: 1.0em !important;
-  }
-</style>
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         &\left[
         1
@@ -128,7 +130,7 @@ Developping and regrouping terms according to their voltage:
 </latexmath>
 
 Regrouping V- on the left side (the change is put in bold for clarity):
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         &\left[
         1
@@ -147,7 +149,7 @@ Regrouping V- on the left side (the change is put in bold for clarity):
 
 Plugging op-amp gain (don’t forget the sign!):
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         & - \left[
         1
@@ -166,7 +168,7 @@ Plugging op-amp gain (don’t forget the sign!):
 
 Outlining the polynomial of s:
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         & - \left[
         \frac{1}{\omega_\text{BW}} \cdot s
@@ -185,7 +187,7 @@ Outlining the polynomial of s:
 
 Putting all the V_out on the left:
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         & - \left[
         1
@@ -205,7 +207,7 @@ Putting all the V_out on the left:
 
 From which the transfer function can be calculated:
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         V_\text{out} = \frac{
             - R_2 \cdot C \cdot s
@@ -227,7 +229,7 @@ From which the transfer function can be calculated:
 
 When GBW infinite, the following expression reduces to:
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         V_\text{out} = \frac{
             - R_2 \cdot C \cdot s
@@ -243,7 +245,7 @@ For an ideal VCVS filter with infinite GBW opamps[^1]:
 
 [^1]: https://electronics.stackexchange.com/questions/735869/cannot-find-the-derivation-for-gain-and-q-in-a-mfb-bandpass-filter-with-fixed-ga
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         V_\text{out} = \frac{
             \frac{A^{'}}{Q \cdot \omega_0} s
@@ -255,9 +257,9 @@ For an ideal VCVS filter with infinite GBW opamps[^1]:
     \end{align*}
 </latexmath>
 
-Note the gain is called A^' and not A because it does not include the V_TH/V_IN.
+Note this gain is called <latexinline>A^{'}</latexinline> and not <latexinline>A</latexinline> because it does not include the <latexinline>\frac{V_\text{TH}}{V_\text{in}}</latexinline>.
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         V_\text{out} = \frac{
             \frac{A^{'}}{Q \cdot \omega_0} s
@@ -276,7 +278,7 @@ Note the gain is called A^' and not A because it does not include the V_TH/V_IN.
     \end{align*}
 </latexmath>
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         \cases{
             \frac{A^{'}}{Q \cdot \omega_0} = - R_2 \cdot C  \\
@@ -286,14 +288,16 @@ Note the gain is called A^' and not A because it does not include the V_TH/V_IN.
     \end{align*}
 </latexmath>
 
-<latexmath class="math-reduced">
-    \begin{align*}
-        \cases{
-            A^{'} = \frac{- R_2}{2 \cdot R_\text{TH}};  \qquad A = \frac{R_3}{R_1+R_3} \cdot \frac{R_1+R_3}{R_1\cdot R_3} \cdot \frac{R_2}{2} = \frac{-R_2}{R_1}; \qquad \text{OK}  \\
-            Q = ... = \pi \cdot f_0 \cdot R_C \cdot C; \qquad \text{OK}  \\
-            \omega_0 = ...; \qquad f_0 = ...; \qquad \text{OK}
-        }
-    \end{align*}
+*The ... are equations that will be filled in a future release of this page.*
+
+<latexmath>
+    \left\{
+        \begin{align*}
+            & A^{'} = \frac{- R_2}{2 \cdot R_\text{TH}} \qquad A = \frac{R_3}{R_1+R_3} \cdot \frac{R_1+R_3}{R_1\cdot R_3} \cdot \frac{R_2}{2} = \frac{-R_2}{R_1} && \text{OK}  \\
+            & Q = \frac{1}{2 \cdot R_\text{TH} \cdot C\cdot \omega_0} = ... = \pi \cdot f_0 \cdot R_C \cdot C && \text{OK}  \\
+            & \omega_0 = ... \qquad f_0 = ... = \frac{1}{2 \cdot \pi \cdot C} \cdot \sqrt{\frac{R_1 + R_3}{R_1 \cdot R_2 \cdot R_3}} && \text{OK}
+        \end{align*}
+    \right.
 </latexmath>
 
 Consistent with the equations for infinite GBW[^2].
@@ -304,7 +308,7 @@ Consistent with the equations for infinite GBW[^2].
 
 Since this VCVS has another pole due to the finite GBW of the opamps, the transfer function is as follows:
 
-<latexmath class="math-reduced">
+<latexmath>
     \begin{align*}
         V_\text{out} = \frac{
             \frac{A^{'}}{Q \cdot \omega_0} s
@@ -350,7 +354,7 @@ D(s) &= 1 + \left( \frac{\tau_0}{Q} + \tau_p \right) \cdot s + \left( \tau_0^2 +
 
 To allow solving, hypothesis <latexinline>\tau_0^2 \gg \frac{\tau_0 \cdot \tau_p}{Q}</latexinline>:
 
-<latexmath class="math-reduced">
+<latexmath>
     \cases{
         \tau_0^2 \cdot \tau_p = b_3  \\
         \tau_0^2 = b_2  \\
@@ -358,7 +362,7 @@ To allow solving, hypothesis <latexinline>\tau_0^2 \gg \frac{\tau_0 \cdot \tau_p
     }
 </latexmath>
 
-<latexmath class="math-reduced">
+<latexmath>
     \cases{
         \tau_p = \frac{b_3}{b_2}  \\
         \tau_0^2 = b_2  \\
@@ -368,7 +372,7 @@ To allow solving, hypothesis <latexinline>\tau_0^2 \gg \frac{\tau_0 \cdot \tau_p
 
 Anticipating a simplification to come, these equations can be rewritten as follows:
 
-<latexmath class="math-reduced">
+<latexmath>
     \cases{
         \tau_p = \frac{b_3}{\tau_0^2}  \\
         \tau_0^2 = b_2  \\
@@ -380,7 +384,7 @@ Anticipating a simplification to come, these equations can be rewritten as follo
 
 Plugging components values:
 
-<latexmath class="math-reduced">
+<latexmath>
     D(s) = 1
             + \left( 2 \cdot R_\text{TH} \cdot C + \frac{1}{\omega_\text{BW}} \right) \cdot s
             +  \left(
@@ -394,7 +398,7 @@ Plugging components values:
 
 <p></p>
 
-<latexmath class="math-reduced">
+<latexmath>
     \cases{
         \tau_p = \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}  \\
         \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
@@ -407,7 +411,7 @@ Plugging components values:
 
 <p></p>
 
-<latexmath class="math-reduced">
+<latexmath>
 \frac{1}{\omega_\text{BW}} - \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2} =
 \frac{\tau_0^2 - R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2} =
 \frac{2 \cdot R_\text{TH} \cdot C + R_2 \cdot C}{\omega_\text{BW}^2 \cdot \tau_0^2}
@@ -415,7 +419,7 @@ Plugging components values:
 
 Leading to:
 
-<latexmath class="math-reduced">
+<latexmath>
     \cases{
         \tau_p = \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}  \\
         \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
@@ -584,3 +588,5 @@ Note that there are some values where 1/ the filter is still realisable and 2/ t
 No time to conclude, please find instead a beautiful cat.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Blackcat-Lilith.jpg" alt="Lilith black cat."/>
+
+</div>  <!-- End of <div class="vcvs-finite-gbw-fixes"> -->
