@@ -430,27 +430,87 @@ Leading to:
 
 First-order approximation:
 
-![](/posts/vcvs-finite-gbw/eqn15.png)
+<!-- FIXME: test this hypothesis. -->
+<latexmath>
+    \cases{
+        \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
+                    + \frac{
+                        2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+                    }{\omega_\text{BW}}  \\
+        \frac{\tau_0}{Q} \approx 2 \cdot R_\text{TH} \cdot C
+    }
+</latexmath>
 
 Next, second equation becomes:
 
-![](/posts/vcvs-finite-gbw/eqn16.png)
+<latexmath>
+     R_\text{TH} \cdot C \approx \frac{\tau_0}{2 \cdot Q}
+</latexmath>
 
 And first equation:
 
-![](/posts/vcvs-finite-gbw/eqn17.png)
+<latexmath>
+    \begin{gather*}
+        R_\text{TH} \cdot R_2 \cdot C^2
+        = \tau_0^2
+            - \frac{
+                2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+            }{\omega_\text{BW}}
+        = \tau_0^2
+            - \frac{
+                2 \cdot R_\text{TH} \cdot C
+            }{\omega_\text{BW}}
+            - \frac{
+                R_2 \cdot C
+            }{\omega_\text{BW}}  \\
+        \frac{\tau_0}{2 \cdot Q} \cdot R_2 \cdot C
+        = \tau_0^2
+            - \frac{2}{\omega_\text{BW}} \cdot \frac{\tau_0}{2 \cdot Q}
+            - \frac{
+                R_2 \cdot C
+            }{\omega_\text{BW}}  \\
+        \left[ \frac{\tau_0}{2 \cdot Q} + \frac{1}{\omega_\text{BW}} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right]
+    \end{gather*}
+</latexmath>
+
+Putting in a form more convenient for first-order approximation:
+
+<latexmath>
+    \begin{gather*}
+        \frac{\tau_0}{2 \cdot Q} \cdot \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right]  \\
+        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.
+    \end{gather*}
+</latexmath>
 
 First-order approximation:
 
-![](/posts/vcvs-finite-gbw/eqn18.png)
+<latexmath>
+    R_2 \cdot C \approx 2 \cdot Q \cdot \tau_0 \cdot  \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \cdot \left[ 1 - \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]
+</latexmath>
 
-Filtering only the first-order terms:
+Developping and keeping only the first-order terms:
 
-![](/posts/vcvs-finite-gbw/eqn19.png)
+<latexmath>
+    R_2 \cdot C \approx 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} - \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]
+</latexmath>
 
 Gathering all pieces:
 
-![](/posts/vcvs-finite-gbw/eqn20.png)
+<latexmath>
+    \cases{
+        R_2 \cdot C = 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]  \\
+        R_\text{TH} \cdot C = \frac{\tau_0}{2 \cdot Q}
+    }
+</latexmath>
+
+<p></p>
+
+<latexmath>
+    \cases{
+        R_2 = \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]  \\
+        R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C}
+    }
+</latexmath>
 
 ## Conditions for realisability
 
