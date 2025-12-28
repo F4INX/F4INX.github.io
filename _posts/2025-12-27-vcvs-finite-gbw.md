@@ -539,21 +539,45 @@ Which can be interpreted as the gain-bandwidth of the operational amplifier must
 
 Remind the hypothesis:
 
-![](/posts/vcvs-finite-gbw/eqn22.png)
+<latexmath>
+\tau_0^2 \gg \frac{\tau_0 \cdot \tau_p}{Q}
+</latexmath>
 
 Equivalent to:
 
-![](/posts/vcvs-finite-gbw/eqn23.png)
+<latexmath>
+\frac{\tau_p}{Q \cdot \tau_0} \ll 1
+</latexmath>
 
 It is difficult to have an exact expression for τ_p, but a bound allows to check the hypothesis:
 
-![](/posts/vcvs-finite-gbw/eqn24.png)
+<latexmath>
+\tau_p
+= \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\tau_0^2 \cdot \omega_\text{BW}}
+= \frac{\tau_0^2 - \frac{2 \cdot R_\text{TH} \cdot C + R_2 \cdot C}{\omega_\text{BW}}}{\tau_0^2 \cdot \omega_\text{BW}}
+< \frac{\tau_0^2}{\tau_0^2 \cdot \omega_\text{BW}}
+= \frac{1}{\omega_\text{BW}}
+</latexmath>
 
-So, a sufficient condition is:
+<p></p>
 
-![](/posts/vcvs-finite-gbw/eqn25.png)
+<latexmath>
+\frac{\tau_p}{Q \cdot \tau_0} < \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0}
+</latexmath>
 
-This equation is always satisfied when Q is high enough (the precise value calculation is left as an exercise for the reader) and realisable.
+So, a sufficient condition to satisfy the hypothesis is:
+
+<latexmath>
+\frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \ll 1
+</latexmath>
+
+A sufficient condition for this is:
+
+* the calculated resistance values are realisable
+
+* AND Q is high enough (the precise value calculation is left as an exercise for the reader).
+
+Note that there are some values where 1/ the filter is still realisable and 2/ the hypothesis made at the beginning is not accurate anymore. The determination of these values is left as an exercie for the reader.
 
 ## Conclusion
 
