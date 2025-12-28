@@ -514,9 +514,26 @@ Gathering all pieces:
 
 ## Conditions for realisability
 
-<!-- TODO: add resistor to equations. -->
+The previously done hypothesis allows to calculate the needed values of the components. However, they are not necessarily realisable, for instance when the equations give negative values. The conditions for realisability are as follows:
 
-![](/posts/vcvs-finite-gbw/eqn21.png)
+<latexmath>
+    \cases{
+        R_2 = \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]\geq 0 \\
+        R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C} \geq 0
+    }
+</latexmath>
+
+Leading to this condition:
+
+<latexmath>
+    \begin{gather*}
+        1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \geq 0  \\
+        \Leftrightarrow \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \leq 1  \\
+        \Leftrightarrow \omega_\text{BW} \geq \frac{1 + 2 \cdot Q^2}{\tau_0}
+    \end{gather*}
+</latexmath>
+
+Which can be interpreted as the gain-bandwidth of the operational amplifier must be higher than the filter frequency multiplied by a factor depending of the quality factor Q.
 
 ## Hypothesis verification
 
