@@ -366,23 +366,65 @@ To allow solving, hypothesis <latexinline>\tau_0^2 \gg \frac{\tau_0 \cdot \tau_p
     }
 </latexmath>
 
+Anticipating a simplification to come, these equations can be rewritten as follows:
+
+<latexmath class="math-reduced">
+    \cases{
+        \tau_p = \frac{b_3}{\tau_0^2}  \\
+        \tau_0^2 = b_2  \\
+        \frac{\tau_0}{Q} = b_1 - \frac{b_3}{\tau_0^2}
+    }
+</latexmath>
+
 ### Applying to components values
 
 Plugging components values:
 
-![](/posts/vcvs-finite-gbw/eqn10.png)
+<latexmath class="math-reduced">
+    D(s) = 1
+            + \left( 2 \cdot R_\text{TH} \cdot C + \frac{1}{\omega_\text{BW}} \right) \cdot s
+            +  \left(
+                    R_\text{TH} \cdot R_2 \cdot C^2
+                    + \frac{
+                        2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+                    }{\omega_\text{BW}}
+                \right) \cdot s^2
+            + \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW}} \cdot s^3
+</latexmath>
 
-![](/posts/vcvs-finite-gbw/eqn11.png)
+<p></p>
 
-![](/posts/vcvs-finite-gbw/eqn12.png)
+<latexmath class="math-reduced">
+    \cases{
+        \tau_p = \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}  \\
+        \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
+                    + \frac{
+                        2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+                    }{\omega_\text{BW}}  \\
+        \frac{\tau_0}{Q} = 2 \cdot R_\text{TH} \cdot C + \frac{1}{\omega_\text{BW}} - \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}
+    }
+</latexmath>
+
+<p></p>
+
+<latexmath class="math-reduced">
+\frac{1}{\omega_\text{BW}} - \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2} =
+\frac{\tau_0^2 - R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2} =
+\frac{2 \cdot R_\text{TH} \cdot C + R_2 \cdot C}{\omega_\text{BW}^2 \cdot \tau_0^2}
+</latexmath>
 
 Leading to:
 
-![](/posts/vcvs-finite-gbw/eqn13.png)
-
-The denominator of first and last equation can be simplified using the expression of tau_0, leading to:
-
-![](/posts/vcvs-finite-gbw/eqn14.png)
+<latexmath class="math-reduced">
+    \cases{
+        \tau_p = \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}  \\
+        \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
+                    + \frac{
+                        2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+                    }{\omega_\text{BW}}  \\
+        \frac{\tau_0}{Q} = 2 \cdot R_\text{TH} \cdot C + \frac{2 \cdot R_\text{TH} \cdot C + R_2 \cdot C}{\omega_\text{BW}^2 \cdot \tau_0^2}
+    }
+</latexmath>
 
 ## Synthesis formulas
 
