@@ -33,7 +33,7 @@ This page presents simple equations for analysis and synthesis of VCVS filters w
 
 ![](/posts/vcvs-finite-gbw/schematic.svg)
 
-Replace R1 and R3 by equivalent circuit: <latexinline>V_\text{TH} = V_\text{IN} \cdot \frac{R_3}{R_1 + R_3}</latexinline>, <latexinline>R_\text{TH} = \frac{R_1 \cdot R_3}{R_1 + R_3}</latexinline>.
+Replace <latexinline>R_1</latexinline> and <latexinline>R_3</latexinline> by equivalent circuit: <latexinline>V_\text{TH} = V_\text{IN} \cdot \frac{R_3}{R_1 + R_3}</latexinline>, <latexinline>R_\text{TH} = \frac{R_1 \cdot R_3}{R_1 + R_3}</latexinline>.
 
 The voltage at point x, <latexinline>V_x</latexinline>, can be calculated using Millman theorem:
 
@@ -57,7 +57,7 @@ V_x = \frac{
 \end{multline*}
 </latexmath>
 
-The V- voltage can be calculated in the same way:
+The <latexinline>V^-</latexinline> voltage can be calculated in the same way:
 
 <latexmath>
 \begin{multline*}
@@ -111,7 +111,7 @@ Multiplying both sides of the equation by <latexinline>\left[ 1 + R_2 \cdot C \c
   + \left[ \frac{1}{R_\text{TH}} + 2 \cdot C \cdot s \right] \cdot V_\text{out}
 </latexmath>
 
-Multiplying by R_TH to outline the time constant units:
+Multiplying by <latexinline>R_\text{TH}</latexinline> to outline the time constant units:
 
 <latexmath>
 \left[ 1 + R_2 \cdot C \cdot s \right] \cdot \left[ 1 + 2 \cdot R_\text{TH} \cdot C \cdot s \right] \cdot V^-
