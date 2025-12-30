@@ -477,7 +477,7 @@ And first equation:
             - \frac{
                 R_2 \cdot C
             }{\omega_\text{BW}}  \\
-        \left[ \frac{\tau_0}{2 \cdot Q} + \frac{1}{\omega_\text{BW}} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right]
+        \left[ \frac{\tau_0}{2 \cdot Q} + \frac{1}{\omega_\text{BW}} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right]
     \end{gather*}
 </latexmath>
 
@@ -485,8 +485,8 @@ Rewriting to highlight the infinite GBW value and the correction term:
 
 <latexmath>
     \begin{gather*}
-        \frac{\tau_0}{2 \cdot Q} \cdot \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right]  \\
-        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.
+        \frac{\tau_0}{2 \cdot Q} \cdot \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right]  \\
+        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.
     \end{gather*}
 </latexmath>
 
@@ -496,7 +496,7 @@ Gathering all pieces:
 
 <latexmath>
     \cases{
-        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
+        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
         R_\text{TH} \cdot C = \frac{\tau_0}{2 \cdot Q}
     }
 </latexmath>
@@ -505,7 +505,7 @@ Gathering all pieces:
 
 <latexmath>
     \cases{
-        R_2 = \left. \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
+        R_2 = \left. \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
         R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C}
     }
 </latexmath>
