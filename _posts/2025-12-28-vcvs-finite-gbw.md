@@ -575,6 +575,28 @@ So, a sufficient condition to satisfy the hypothesis is:
 
 This condition is similar to the realisability condition, albeit with some margin to take.
 
+## Example
+
+This article won't be complete without a design example.
+
+In the project which gave me the opportunity to write this article, I simply used a 10 MHz GBW op-amp. However, to test GBW compensation equations, a lower GBW op-amp is a much better test. Indeed, it was this test which allows me to detect and fix a mistake in the previous version.
+
+JLCPCB offers a reduced price on the PCBAs using a reduced list of components. Components from <a href="https://jlcpcb.com/parts/1st/Amplifiers_Comparators_23">this list</a> are listed below:
+
+<!-- FIXME: improve formatting. -->
+* NE5532DR &ensp;&ensp;&ensp;  output 2 V to Vcc - 2 V, not convenient for 5 V operation
+* TL072CDT &ensp;&ensp;&ensp;   6 V min Vcc
+* LM393DR2G &ensp;&ensp;        not an op-amp but a comparator
+* OP07CDR &ensp;&ensp;&ensp;    6 V min Vcc
+* LM358DR2G &ensp;&ensp;&ensp;  0 V to Vcc - 2 V, half LM324
+* LM324DT &ensp;&ensp;&ensp;    0 V to Vcc - 2 V
+
+The LM324 is selected.
+
+Different values of its GBW are present in the various datasheets, but we'll stick to the most common value of 1.2 MHz.
+
+For now, the files are available <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">on my github repository</a>. I will put the pictures in this page a bit later.
+
 ## Conclusion
 
 No time to conclude, please find instead a beautiful cat.
