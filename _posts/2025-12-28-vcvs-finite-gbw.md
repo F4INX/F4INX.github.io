@@ -481,7 +481,7 @@ And first equation:
     \end{gather*}
 </latexmath>
 
-Putting in a form more convenient for first-order approximation:
+Rewriting to highlight the infinite GBW value and the correction term:
 
 <latexmath>
     \begin{gather*}
@@ -490,23 +490,13 @@ Putting in a form more convenient for first-order approximation:
     \end{gather*}
 </latexmath>
 
-First-order approximation:
-
-<latexmath>
-    R_2 \cdot C \approx 2 \cdot Q \cdot \tau_0 \cdot  \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \cdot \left[ 1 - \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]
-</latexmath>
-
-Developping and keeping only the first-order terms:
-
-<latexmath>
-    R_2 \cdot C \approx 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} - \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]
-</latexmath>
+A previous version of this article presented a further first order approximation of this equation using the hypothesis <latexinline>\frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \ll 1</latexinline>. This hypothesis is **inaccurate** in though cases, like the example to come using an LM324, and bring no additional value. Sorry for the inconvenience.
 
 Gathering all pieces:
 
 <latexmath>
     \cases{
-        R_2 \cdot C = 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]  \\
+        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
         R_\text{TH} \cdot C = \frac{\tau_0}{2 \cdot Q}
     }
 </latexmath>
@@ -515,7 +505,7 @@ Gathering all pieces:
 
 <latexmath>
     \cases{
-        R_2 = \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]  \\
+        R_2 = \left. \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
         R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C}
     }
 </latexmath>
