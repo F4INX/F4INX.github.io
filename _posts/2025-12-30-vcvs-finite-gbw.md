@@ -17,6 +17,16 @@ last_modified_at: 2025-12-30
 
 <p class="begin-note">TODO: add some comparison with the existing stuff: lack of compensation equations for the simple case, compensation scheme from TI efficient but with additionnal components.</p>
 
+## Introduction
+
+Active operational amplifier filters, called VCVS in the jargon, are a convenient way to implement low frequency filtering, particularly when operational amplifiers are already used for amplification.
+
+Design equations are readily available but often don't take into account the needed correction for finite GBW of the operational amplifier.
+
+Texas Instruments <a href="https://www.ti.com/lit/an/sbaa236/sbaa236.pdf">SBAA236 application note</a> provides a compensation scheme using additional components, very efficient but overkill for lots of applications.
+
+This page presents simple equations for analysis and synthesis of VCVS filters with finite GBW operational amplifiers.
+
 ## Transfer function
 
 ### Full expression
