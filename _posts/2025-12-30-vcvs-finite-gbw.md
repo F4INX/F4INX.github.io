@@ -2,7 +2,7 @@
 layout: post
 title: VCVS filter calculation with finite GBW.
 permalink: /posts/vcvs-finite-gbw.html
-last_modified_at: 2025-12-28
+last_modified_at: 2025-12-30
 ---
 
 <!-- FIXME: move globally -->
