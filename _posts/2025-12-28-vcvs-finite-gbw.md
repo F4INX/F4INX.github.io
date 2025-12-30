@@ -577,8 +577,6 @@ This condition is similar to the realisability condition, albeit with some margi
 
 ## Example
 
-This article won't be complete without a design example.
-
 In the project which gave me the opportunity to write this article, I simply used a 10 MHz GBW op-amp. However, to test GBW compensation equations, a lower GBW op-amp is a much better test. Indeed, it was this test which allows me to detect and fix a mistake in the previous version.
 
 JLCPCB offers a reduced price on the PCBAs using a reduced list of components. Components from <a href="https://jlcpcb.com/parts/1st/Amplifiers_Comparators_23">this list</a> are listed below:
@@ -595,7 +593,21 @@ The LM324 is selected.
 
 Different values of its GBW are present in the various datasheets, but we'll stick to the most common value of 1.2 MHz.
 
-For now, the files are available <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">on my github repository</a>. I will put the pictures in this page a bit later.
+The following example filter was designed for a 40 kHz center frequency and a Q of 4 (10 kHz bandwidth). Schematic and simulation results are shown below:
+
+<picture>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/vcvs-finite-gbw/vcvs-example-01.png' | relative_url }}" />
+</picture>
+
+<picture>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot.png' | relative_url }}" />
+</picture>
+
+As usual, files can be downloaded <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">on my github repository</a>.
 
 ## Conclusion
 
