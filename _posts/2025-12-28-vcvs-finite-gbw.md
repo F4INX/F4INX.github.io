@@ -516,19 +516,23 @@ The previously done hypothesis allows to calculate the needed values of the comp
 
 <latexmath>
     \cases{
-        R_2 = \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]\geq 0 \\
+        R_2 = \left. \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right. \geq 0 \\
         R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C} \geq 0
     }
+</latexmath>
+
+The second equation is always true. The first reduces to the following condition:
+
+<latexmath>
+    \begin{gather*}
+        1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0}  \geq 0
+    \end{gather*}
 </latexmath>
 
 Leading to this condition:
 
 <latexmath>
-    \begin{gather*}
-        1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \geq 0  \\
-        \Leftrightarrow \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \leq 1  \\
-        \Leftrightarrow \omega_\text{BW} \geq \frac{1 + 2 \cdot Q^2}{\tau_0}
-    \end{gather*}
+    \omega_\text{BW} \geq \frac{Q}{\tau_0}
 </latexmath>
 
 Which can be interpreted as the gain-bandwidth of the operational amplifier must be higher than the filter frequency multiplied by a factor depending of the quality factor Q.
@@ -569,13 +573,7 @@ So, a sufficient condition to satisfy the hypothesis is:
 \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \ll 1
 </latexmath>
 
-A sufficient condition for this is:
-
-* the calculated resistance values are realisable
-
-* AND Q is high enough (the precise value calculation is left as an exercise for the reader).
-
-Note that there are some values where 1/ the filter is still realisable and 2/ the hypothesis made at the beginning is not accurate anymore. The determination of these values is left as an exercie for the reader.
+This condition is similar to the realisability condition, albeit with some margin to take.
 
 ## Conclusion
 
