@@ -1,6 +1,6 @@
 ---
 layout: post
-title: VCVS with finite GBW.
+title: VCVS filter calculation with finite GBW.
 permalink: /posts/vcvs-finite-gbw.html
 last_modified_at: 2025-12-28
 ---
