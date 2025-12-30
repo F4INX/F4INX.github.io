@@ -510,7 +510,7 @@ Gathering all pieces:
     }
 </latexmath>
 
-## Conditions for realisability
+### Conditions for realisability
 
 The previously done hypothesis allows to calculate the needed values of the components. However, they are not necessarily realisable, for instance when the equations give negative values. The conditions for realisability are as follows:
 
@@ -537,7 +537,7 @@ Leading to this condition:
 
 Which can be interpreted as the gain-bandwidth of the operational amplifier must be higher than the filter frequency multiplied by a factor depending of the quality factor Q.
 
-## Hypothesis verification
+### Hypothesis verification
 
 Remind the hypothesis:
 
