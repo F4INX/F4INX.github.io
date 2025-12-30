@@ -1,8 +1,8 @@
 ---
 layout: post
-title: VCVS with finite GBW.
+title: VCVS filter calculation with finite GBW.
 permalink: /posts/vcvs-finite-gbw.html
-last_modified_at: 2025-12-28
+last_modified_at: 2025-12-30
 ---
 
 <!-- FIXME: move globally -->
@@ -17,13 +17,23 @@ last_modified_at: 2025-12-28
 
 <p class="begin-note">TODO: add some comparison with the existing stuff: lack of compensation equations for the simple case, compensation scheme from TI efficient but with additionnal components.</p>
 
+## Introduction
+
+Active operational amplifier filters, called VCVS in the jargon, are a convenient way to implement low frequency filtering, particularly when operational amplifiers are already used for amplification.
+
+Design equations are readily available but often don't take into account the needed correction for finite GBW of the operational amplifier.
+
+Texas Instruments <a href="https://www.ti.com/lit/an/sbaa236/sbaa236.pdf">SBAA236 application note</a> provides a compensation scheme using additional components, very efficient but overkill for lots of applications.
+
+This page presents simple equations for analysis and synthesis of VCVS filters with finite GBW operational amplifiers.
+
 ## Transfer function
 
 ### Full expression
 
 ![](/posts/vcvs-finite-gbw/schematic.svg)
 
-Replace R1 and R3 by equivalent circuit: <latexinline>V_\text{TH} = V_\text{IN} \cdot \frac{R_3}{R_1 + R_3}</latexinline>, <latexinline>R_\text{TH} = \frac{R_1 \cdot R_3}{R_1 + R_3}</latexinline>.
+Replace <latexinline>R_1</latexinline> and <latexinline>R_3</latexinline> by equivalent circuit: <latexinline>V_\text{TH} = V_\text{IN} \cdot \frac{R_3}{R_1 + R_3}</latexinline>, <latexinline>R_\text{TH} = \frac{R_1 \cdot R_3}{R_1 + R_3}</latexinline>.
 
 The voltage at point x, <latexinline>V_x</latexinline>, can be calculated using Millman theorem:
 
@@ -47,7 +57,7 @@ V_x = \frac{
 \end{multline*}
 </latexmath>
 
-The V- voltage can be calculated in the same way:
+The <latexinline>V^-</latexinline> voltage can be calculated in the same way:
 
 <latexmath>
 \begin{multline*}
@@ -101,7 +111,7 @@ Multiplying both sides of the equation by <latexinline>\left[ 1 + R_2 \cdot C \c
   + \left[ \frac{1}{R_\text{TH}} + 2 \cdot C \cdot s \right] \cdot V_\text{out}
 </latexmath>
 
-Multiplying by R_TH to outline the time constant units:
+Multiplying by <latexinline>R_\text{TH}</latexinline> to outline the time constant units:
 
 <latexmath>
 \left[ 1 + R_2 \cdot C \cdot s \right] \cdot \left[ 1 + 2 \cdot R_\text{TH} \cdot C \cdot s \right] \cdot V^-
@@ -577,8 +587,6 @@ This condition is similar to the realisability condition, albeit with some margi
 
 ## Example
 
-This article won't be complete without a design example.
-
 In the project which gave me the opportunity to write this article, I simply used a 10 MHz GBW op-amp. However, to test GBW compensation equations, a lower GBW op-amp is a much better test. Indeed, it was this test which allows me to detect and fix a mistake in the previous version.
 
 JLCPCB offers a reduced price on the PCBAs using a reduced list of components. Components from <a href="https://jlcpcb.com/parts/1st/Amplifiers_Comparators_23">this list</a> are listed below:
@@ -595,7 +603,21 @@ The LM324 is selected.
 
 Different values of its GBW are present in the various datasheets, but we'll stick to the most common value of 1.2 MHz.
 
-For now, the files are available <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">on my github repository</a>. I will put the pictures in this page a bit later.
+The following example filter was designed for a 40 kHz center frequency and a Q of 4 (10 kHz bandwidth). Schematic and simulation results are shown below:
+
+<picture>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/vcvs-finite-gbw/vcvs-example-01.png' | relative_url }}" />
+</picture>
+
+<picture>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot.png' | relative_url }}" />
+</picture>
+
+As usual, files can be downloaded <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">on my github repository</a>.
 
 ## Conclusion
 
