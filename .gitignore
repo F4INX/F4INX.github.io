@@ -71,3 +71,8 @@ posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-resistors-cap.net
 posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-integrator.op.raw
 posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-integrator.raw
 posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-integrator.net
+
+# Ignore temp of vcvs-finite-gbw (LTSpice)
+posts/vcvs-finite-gbw/*.op.raw
+posts/vcvs-finite-gbw/*.raw
+posts/vcvs-finite-gbw/*.net

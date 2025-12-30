@@ -477,36 +477,26 @@ And first equation:
             - \frac{
                 R_2 \cdot C
             }{\omega_\text{BW}}  \\
-        \left[ \frac{\tau_0}{2 \cdot Q} + \frac{1}{\omega_\text{BW}} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right]
+        \left[ \frac{\tau_0}{2 \cdot Q} + \frac{1}{\omega_\text{BW}} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right]
     \end{gather*}
 </latexmath>
 
-Putting in a form more convenient for first-order approximation:
+Rewriting to highlight the infinite GBW value and the correction term:
 
 <latexmath>
     \begin{gather*}
-        \frac{\tau_0}{2 \cdot Q} \cdot \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right]  \\
-        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.
+        \frac{\tau_0}{2 \cdot Q} \cdot \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right] \cdot R_2 \cdot C = \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right]  \\
+        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.
     \end{gather*}
 </latexmath>
 
-First-order approximation:
-
-<latexmath>
-    R_2 \cdot C \approx 2 \cdot Q \cdot \tau_0 \cdot  \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} \right] \cdot \left[ 1 - \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]
-</latexmath>
-
-Developping and keeping only the first-order terms:
-
-<latexmath>
-    R_2 \cdot C \approx 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_0 \cdot \tau_0} - \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]
-</latexmath>
+A previous version of this article presented a further first order approximation of this equation using the hypothesis <latexinline>\frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \ll 1</latexinline>. This hypothesis is **inaccurate** in though cases, like the example to come using an LM324, and bring no additional value. Sorry for the inconvenience.
 
 Gathering all pieces:
 
 <latexmath>
     \cases{
-        R_2 \cdot C = 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]  \\
+        R_2 \cdot C = \left. 2 \cdot Q \cdot \tau_0 \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
         R_\text{TH} \cdot C = \frac{\tau_0}{2 \cdot Q}
     }
 </latexmath>
@@ -515,35 +505,39 @@ Gathering all pieces:
 
 <latexmath>
     \cases{
-        R_2 = \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]  \\
+        R_2 = \left. \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
         R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C}
     }
 </latexmath>
 
-## Conditions for realisability
+### Conditions for realisability
 
 The previously done hypothesis allows to calculate the needed values of the components. However, they are not necessarily realisable, for instance when the equations give negative values. The conditions for realisability are as follows:
 
 <latexmath>
     \cases{
-        R_2 = \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \right]\geq 0 \\
+        R_2 = \left. \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right. \geq 0 \\
         R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C} \geq 0
     }
+</latexmath>
+
+The second equation is always true. The first reduces to the following condition:
+
+<latexmath>
+    \begin{gather*}
+        1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0}  \geq 0
+    \end{gather*}
 </latexmath>
 
 Leading to this condition:
 
 <latexmath>
-    \begin{gather*}
-        1 - \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \geq 0  \\
-        \Leftrightarrow \frac{1 + 2 \cdot Q^2}{\omega_\text{BW} \cdot \tau_0} \leq 1  \\
-        \Leftrightarrow \omega_\text{BW} \geq \frac{1 + 2 \cdot Q^2}{\tau_0}
-    \end{gather*}
+    \omega_\text{BW} \geq \frac{Q}{\tau_0}
 </latexmath>
 
 Which can be interpreted as the gain-bandwidth of the operational amplifier must be higher than the filter frequency multiplied by a factor depending of the quality factor Q.
 
-## Hypothesis verification
+### Hypothesis verification
 
 Remind the hypothesis:
 
@@ -579,13 +573,29 @@ So, a sufficient condition to satisfy the hypothesis is:
 \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \ll 1
 </latexmath>
 
-A sufficient condition for this is:
+This condition is similar to the realisability condition, albeit with some margin to take.
 
-* the calculated resistance values are realisable
+## Example
 
-* AND Q is high enough (the precise value calculation is left as an exercise for the reader).
+This article won't be complete without a design example.
 
-Note that there are some values where 1/ the filter is still realisable and 2/ the hypothesis made at the beginning is not accurate anymore. The determination of these values is left as an exercie for the reader.
+In the project which gave me the opportunity to write this article, I simply used a 10 MHz GBW op-amp. However, to test GBW compensation equations, a lower GBW op-amp is a much better test. Indeed, it was this test which allows me to detect and fix a mistake in the previous version.
+
+JLCPCB offers a reduced price on the PCBAs using a reduced list of components. Components from <a href="https://jlcpcb.com/parts/1st/Amplifiers_Comparators_23">this list</a> are listed below:
+
+<!-- FIXME: improve formatting. -->
+* NE5532DR &ensp;&ensp;&ensp;  output 2 V to Vcc - 2 V, not convenient for 5 V operation
+* TL072CDT &ensp;&ensp;&ensp;   6 V min Vcc
+* LM393DR2G &ensp;&ensp;        not an op-amp but a comparator
+* OP07CDR &ensp;&ensp;&ensp;    6 V min Vcc
+* LM358DR2G &ensp;&ensp;&ensp;  0 V to Vcc - 2 V, half LM324
+* LM324DT &ensp;&ensp;&ensp;    0 V to Vcc - 2 V
+
+The LM324 is selected.
+
+Different values of its GBW are present in the various datasheets, but we'll stick to the most common value of 1.2 MHz.
+
+For now, the files are available <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">on my github repository</a>. I will put the pictures in this page a bit later.
 
 ## Conclusion
 
