@@ -1,8 +1,8 @@
 ---
 layout: post
 title: VCVS filter calculation with finite GBW.
-permalink: /posts/vcvs-finite-gbw.html
-last_modified_at: 2025-12-30
+permalink: /posts/vcvs-finite-gbw-details.html
+last_modified_at: 2025-12-31
 ---
 
 <!-- FIXME: move globally -->
@@ -618,11 +618,5 @@ The following example filter was designed for a 40 kHz center frequency and a Q 
 </picture>
 
 As usual, files can be downloaded <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">on my github repository</a>.
-
-## Conclusion
-
-No time to conclude, please find instead a beautiful cat.
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Blackcat-Lilith.jpg" alt="Lilith black cat."/>
 
 </div>  <!-- End of <div class="vcvs-finite-gbw-fixes"> -->

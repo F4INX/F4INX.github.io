@@ -18,6 +18,8 @@ collections:
     output: true
   hidden:
     output: true
+  details:
+    output: true
 
 # Feed
 feed:

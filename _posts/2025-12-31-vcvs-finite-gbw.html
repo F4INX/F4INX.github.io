@@ -1,0 +1,210 @@
+---
+layout: post
+title: Simple calculations for active bandpass filter with finite GBW operational amplifier.
+permalink: /posts/vcvs-finite-gbw.html
+last_modified_at: 2025-12-31
+---
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-3.3.0.min.js"></script>
+<style>
+    .calculator {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<h2>Introduction</h2>
+
+Active filters are a convenient way to implement low frequency bandpass filters, and design equations are commonly available. However, their accuracy is often disappointing, with centre frequency often shifted, because they don't take into account the finite GBW (gain bandwidth product) of the operational amplifier used, particularly for common and low cost amplifiers with low GBW (gain bandwidth product) like the popular LM324. We propose here simple equations which take this into account and free and open source calculation tools.
+
+<h2>Calculator</h2>
+
+<p>Simpler than the equations, you can directly jump on the following calculator which conveniently computes all the requested components values from the desired center frequency and bandwidth.</p>
+
+<p><img src="{{ '/posts/vcvs-finite-gbw/schematic.svg' | relative_url }}"/></p>
+
+<script>
+    function vcvsCalculator () {
+        return {	
+            /* Initial values, will be changed by the user. */
+            f0: 40000,
+            /* Q: 4 */
+            BW: 10000,
+            gbw: 1200000,
+            C: 1e-9,
+            R2: "—",
+            R2_ok: "—",
+            Rth: "—",
+            Rth_ok: "—",
+            h1_ok: "—",
+            h2_ok: "—",
+
+            calculate() {
+                const τ0 = 1 / (2 * Math.PI * this.f0);
+                /* const Q = this.Q; */
+                const Q = this.f0 / this.BW;
+                const ωbw = 2 * Math.PI * this.gbw;
+
+                R2 = (2 * Q * τ0 / this.C) * (1 - 1/(Q * ωbw * τ0)) / (1 + (2 * Q)/(ωbw * τ0));
+                this.R2 = R2.toFixed(2);
+                this.R2_ok = R2 >= 0? "✅" : "❌";
+                Rth = τ0 / (2 * Q * this.C);
+                τp = (Rth * R2 * this.C * this.C) / (ωbw * τ0 * τ0);
+                this.Rth = Rth.toFixed(2);
+                this.Rth_ok = R2 >= 0? "✅" : "❌";
+                this.h1_ok = τ0 >= 10 * (τp / Q) ? "✅" : "❌";
+                this.h2_ok = 1 ? "✅" : "❌";
+
+                this.plotBode();
+            },
+
+            plotBode() {
+                /* Generate frequency response data */
+                /* FIXME: duplicate */
+                const ωbw = 2 * Math.PI * this.gbw;
+                const C = parseFloat(this.C);
+                /* Note that the numbers are taken as written */
+                const R2 = parseFloat(this.R2);
+                const Rth = parseFloat(this.Rth);
+                const f = Array.from({length: 991}, (_, i) => this.f0 * (0.1 + i * 0.01));
+                const H_full = f.map(
+                    freq => {
+                        /* Full transfer function with components */
+                        /* No direct complex number support contrary to Python */
+                        const s_im = 2 * Math.PI * freq;
+                        const denum_0 = 1;
+                        const denum_1 = 2*Rth*this.C + 1/ωbw;
+                        const denum_2 = Rth*R2*this.C*this.C + (2*Rth*C+R2*this.C)/ωbw;
+                        const denum_3 = Rth*R2*this.C*this.C/ωbw;
+                        const num_im = -R2 * this.C * s_im;  // Minus sign useless but kept in case
+                        const denum_re = denum_0 - denum_2*s_im*s_im;
+                        const denum_im = denum_1*s_im - denum_3*s_im*s_im*s_im;
+                        return 20 * Math.log10(Math.abs(num_im*num_im) / (Math.abs(denum_re*denum_re) + Math.abs(denum_im*denum_im)));
+                    }
+                );
+
+                // Plot using Plotly
+                const trace_full = {
+                    /* FIXME: labels... */
+                    x: f,
+                    y: H_full,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Gain (dB)'
+                };
+                const layout = {
+                    title: 'Bode Plot: Frequency Response',
+                    xaxis: { title: 'Frequency (Hz)', type: 'log' },
+                    yaxis: { title: 'Gain (dB)' }
+                };
+                Plotly.newPlot('plot', [trace_full], layout);
+            }
+        };
+    }
+</script>
+<section x-data="vcvsCalculator()" x-init="calculate">
+    <div class="calculator">
+        <h3>Input parameters</h3>
+        <div>
+            <label for="f0">Center Frequency (f₀):</label>
+            <input type="number" id="f0" x-model="f0" placeholder="e.g., 40000" @input="calculate" required> Hz
+        </div>
+        <div>
+            <!-- <label for="Q">Quality Factor (Q):</label> -->
+            <!-- <input type="number" id="Q" x-model="Q" placeholder="e.g., 4" @input="calculate" required> -->
+            <label for="B>">Bandwidth (BW):</label>
+            <input type="number" id="BW" x-model="BW" placeholder="e.g., 10000" @input="calculate" required> Hz
+        </div>
+        <div>
+            <label for="gbw">Op-Amp GBW:</label>
+            <input type="number" id="gbw" x-model="gbw" placeholder="e.g., 1200000" @input="calculate" required> Hz
+        </div>
+        <div>
+            <label for="C">Capacitor (C):</label>
+            <input type="number" id="C" x-model="C" placeholder="e.g., 1e-9" @input="calculate" required> F
+        </div>
+
+        <div id="results" style="margin-top: 10px;">
+        <h3>Component values</h3>
+            <i>In the current release, the gain is always set as its maximum. This will be fixed in a future release.</i>
+            <div>R<sub>1</sub>: <span x-text="Rth"></span> Ω <span x-text="Rth_ok"></span></div>
+            <div>R<sub>2</sub>: <span x-text="R2"></span> Ω <span x-text="R2_ok"></span></div>
+            <div>R<sub>3</sub>: <span>∞ (Do not connect)</span> <span>✅</span></div>
+        <h3>Validity conditions</h3>
+            <i>The details will be put in a next release.</i>
+            <div>Condition 1: <span x-text="h1_ok"></span></div>
+            <div>Condition 2: <span x-text="h2_ok"></span></div>
+        </div>
+
+        <div id="plotter">
+            <h3>Transfer function plot</h3>
+            <div id="plot"></div>
+        </div>
+    </div>
+</section>
+
+<h2>Equations for Excel spreadsheets</h2>
+
+For people wanting or needing to implement these calculations in an Excel spreadsheet, here are the equations to be used.
+
+The usual equations to calculate the component values assuming an ideal operational amplifier with infinite GBW are:
+
+<p></p>
+
+<latexmath>
+    \cases{
+        R_2 = \frac{1}{\pi \cdot \text{BW} \cdot C}  \\
+        R_\text{TH} = \frac{\text{BW}}{4 \cdot \pi \cdot f_0^2 \cdot C}
+    }
+</latexmath>
+
+<p></p>
+
+New equations taking info account the finite GBW are:
+
+<p></p>
+
+<latexmath>
+    \cases{
+        R_2 = \left. \frac{1}{\pi \cdot \text{BW} \cdot C} \cdot \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right] \middle/ \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]\right.  \\
+        R_\text{TH} = \frac{\text{BW}}{4 \cdot \pi \cdot f_0^2 \cdot C}
+    }
+</latexmath>
+
+<!-- FIXME: yes, I know..... -->
+The validity conditions of these equations will be added in a future release.
+
+<h2>Example with Excel spreadsheet</h2>
+
+Some time ago, for <a href="https://github.com/F4INX/ultrasonic-measurement-system">this project</a>, I designed an active bandpass filter. To simplify its design, I used a 10 MHz GBW op-amp. However a lower GBW op-amp is a much better test for the equation taking into account the GBW.
+
+A common and low cost op-amp is the LM324, with a GBW of 1.2 MHz. When making PCBa with JLCPCB, not only the LM324 is very cheap, but there is no <q>component fee</q>.
+
+The following example filter with a 1.2 MHz GBW LM324 is designed for a 40 kHz center frequency and a 10 kHz bandwidth. Schematic and simulation results are shown below:
+
+<picture>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/vcvs-finite-gbw/vcvs-example-01.png' | relative_url }}" />
+</picture>
+
+<picture>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/vcvs-finite-gbw/vcvs-example-01-plot.png' | relative_url }}" />
+</picture>
+
+<p></p>
+
+The Excel spreadsheet can be downloaded <a href="{{ '/posts/vcvs-finite-gbw/vcvs-example-01.xlsx' | relative_url }}">here</a> and the other files <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">in github</a>
+
+<h2>Conclusion</h2>
+
+<p>The conclusion will be written in a future release. In the meantime, please find instead a beautiful cat.</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Blackcat-Lilith.jpg" alt="Lilith black cat."/></p>
+
+<h2>Appendix: details of the mathematics</h2>
+
+The detailed demonstration of theses equations is a bit long, so it is put in <a href="{{ '/posts/vcvs-finite-gbw-details.html' | relative_url }}">this separate page</a>.
