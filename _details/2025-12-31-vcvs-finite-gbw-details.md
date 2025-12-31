@@ -1,8 +1,8 @@
 ---
 layout: post
 title: VCVS filter calculation with finite GBW.
-permalink: /posts/vcvs-finite-gbw.html
-last_modified_at: 2025-12-30
+permalink: /posts/vcvs-finite-gbw-details.html
+last_modified_at: 2025-12-31
 ---
 
 <!-- FIXME: move globally -->
@@ -448,7 +448,6 @@ Leading to:
 
 First-order approximation:
 
-<!-- FIXME: test this hypothesis. -->
 <latexmath>
     \cases{
         \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
@@ -520,6 +519,39 @@ Gathering all pieces:
     }
 </latexmath>
 
+### Parasitic pole equation
+
+One the components values are calculated, the parasitic pole frequency can be calculated as follows:
+
+<!-- TODO: cleanup the equations -->
+<latexmath>
+    \begin{gather*}
+        \tau_p = \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}  \\
+        R_2
+        = \left. \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
+        \qquad = \left. \frac{1}{\pi \cdot \text{BW} \cdot C} \cdot \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right] \middle/ \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]\right.  \\
+        R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C} = \frac{\text{BW}}{4 \cdot \pi \cdot f_0^2 \cdot C}  \\
+        R_\text{TH} \cdot R_2 = \left.
+            \frac{1}{4 \cdot \pi^2 \cdot f_0^2 \cdot C^2} \cdot
+            \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right]
+            \middle/
+            \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]
+            \right.  \\
+        \tau_p = \left.
+            \frac{1}{\omega_\text{BW}} \cdot
+            \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right]
+            \middle/
+            \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]
+            \right.  \\
+        f_p = \left.
+            \text{GBW} \cdot
+            \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]
+            \middle/
+            \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right]
+            \right.
+    \end{gather*}
+</latexmath>
+
 ### Conditions for realisability
 
 The previously done hypothesis allows to calculate the needed values of the components. However, they are not necessarily realisable, for instance when the equations give negative values. The conditions for realisability are as follows:
@@ -548,6 +580,8 @@ Leading to this condition:
 Which can be interpreted as the gain-bandwidth of the operational amplifier must be higher than the filter frequency multiplied by a factor depending of the quality factor Q.
 
 ### Hypothesis verification
+
+#### Factorosation hypothesis
 
 Remind the hypothesis:
 
@@ -585,6 +619,27 @@ So, a sufficient condition to satisfy the hypothesis is:
 
 This condition is similar to the realisability condition, albeit with some margin to take.
 
+#### Circuit simplification hypothesis
+
+Remind the hypothesis:
+
+<latexmath>
+2 \cdot R_\text{TH} \cdot C \gg \frac{2 \cdot R_\text{TH} \cdot C + R_2 \cdot C}{\omega_\text{BW}^2 \cdot \tau_0^2}
+</latexmath>
+
+Equivalent to:
+
+<latexmath>
+\left( 1 + \frac{R_2}{R_\text{TH}} \right) \cdot \left(\frac{f_0}{\text{GBW}}\right)^2 \ll 1
+</latexmath>
+
+<!-- FIXME: add details because this is the section of details. -->
+Although a formal check should be done, this condition is likely be largely true in most cases due to the squarring of the small term.
+
+<latexmath>
+\left(\frac{f_0}{\text{GBW}}\right)^2 \leq Q \cdot \left(\frac{f_0}{\text{GBW}}\right)
+</latexmath>
+
 ## Example
 
 In the project which gave me the opportunity to write this article, I simply used a 10 MHz GBW op-amp. However, to test GBW compensation equations, a lower GBW op-amp is a much better test. Indeed, it was this test which allows me to detect and fix a mistake in the previous version.
@@ -618,11 +673,5 @@ The following example filter was designed for a 40 kHz center frequency and a Q 
 </picture>
 
 As usual, files can be downloaded <a href="https://github.com/F4INX/F4INX.github.io/tree/master/posts/vcvs-finite-gbw">on my github repository</a>.
-
-## Conclusion
-
-No time to conclude, please find instead a beautiful cat.
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Blackcat-Lilith.jpg" alt="Lilith black cat."/>
 
 </div>  <!-- End of <div class="vcvs-finite-gbw-fixes"> -->
