@@ -54,7 +54,6 @@ Active filters are a convenient way to implement low frequency bandpass filters,
                 this.Rth = Rth.toFixed(2);
                 this.Rth_ok = R2 >= 0? "✅" : "❌";
                 this.h1_ok = τ0 >= 10 * (τp / Q) ? "✅" : "❌";
-                this.h2_ok = 1 ? "✅" : "❌";
 
                 this.plotBode();
             },
@@ -132,9 +131,7 @@ Active filters are a convenient way to implement low frequency bandpass filters,
             <div>R<sub>2</sub>: <span x-text="R2"></span> Ω <span x-text="R2_ok"></span></div>
             <div>R<sub>3</sub>: <span>∞ (Do not connect)</span> <span>✅</span></div>
         <h3>Validity conditions</h3>
-            <i>The details will be put in a next release.</i>
-            <div>Condition 1: <span x-text="h1_ok"></span></div>
-            <div>Condition 2: <span x-text="h2_ok"></span></div>
+            <div><latexinline>\frac{f_p}{\text{BW}} \geq 10</latexinline><span x-text="h1_ok"></span></div>
         </div>
 
         <div id="plotter">
@@ -191,13 +188,11 @@ New equations taking info account the finite GBW are:
 
 <h3>Validity conditions of the formulas</h3>
 
-<p>Once the parasitic pole is calculated, the main validity conditions is the following:</p>
+<p>Once the parasitic pole is calculated, the validity conditions is the following:</p>
 
 <latexmath>
 \frac{f_p}{\text{BW}} \geq 10
 </latexmath>
-
-<p>The second validity condition, almost always true, is for a future release.</p>
 
 <h2>Example with Excel spreadsheet</h2>
 

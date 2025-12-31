@@ -448,7 +448,6 @@ Leading to:
 
 First-order approximation:
 
-<!-- FIXME: test this hypothesis. -->
 <latexmath>
     \cases{
         \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
@@ -582,6 +581,8 @@ Which can be interpreted as the gain-bandwidth of the operational amplifier must
 
 ### Hypothesis verification
 
+#### Factorosation hypothesis
+
 Remind the hypothesis:
 
 <latexmath>
@@ -617,6 +618,27 @@ So, a sufficient condition to satisfy the hypothesis is:
 </latexmath>
 
 This condition is similar to the realisability condition, albeit with some margin to take.
+
+#### Circuit simplification hypothesis
+
+Remind the hypothesis:
+
+<latexmath>
+2 \cdot R_\text{TH} \cdot C \gg \frac{2 \cdot R_\text{TH} \cdot C + R_2 \cdot C}{\omega_\text{BW}^2 \cdot \tau_0^2}
+</latexmath>
+
+Equivalent to:
+
+<latexmath>
+\left( 1 + \frac{R_2}{R_\text{TH}} \right) \cdot \left(\frac{f_0}{\text{GBW}}\right)^2 \ll 1
+</latexmath>
+
+<!-- FIXME: add details because this is the section of details. -->
+Although a formal check should be done, this condition is likely be largely true in most cases due to the squarring of the small term.
+
+<latexmath>
+\left(\frac{f_0}{\text{GBW}}\right)^2 \leq Q \cdot \left(\frac{f_0}{\text{GBW}}\right)
+</latexmath>
 
 ## Example
 
