@@ -146,6 +146,8 @@ Active filters are a convenient way to implement low frequency bandpass filters,
 
 <h2>Equations for Excel spreadsheets</h2>
 
+<h3>Synthesis equations</h3>
+
 For people wanting or needing to implement these calculations in an Excel spreadsheet, here are the equations to be used.
 
 The usual equations to calculate the component values assuming an ideal operational amplifier with infinite GBW are:
@@ -172,8 +174,30 @@ New equations taking info account the finite GBW are:
     }
 </latexmath>
 
-<!-- FIXME: yes, I know..... -->
-The validity conditions of these equations will be added in a future release.
+<h3>Parasitic low-pass filter</h3>
+
+<p></p>A consequence of the finite GBW is the apparition of a parasitic low-pass filter with a cut-off frequency fp given by:</p>
+
+<latexmath>
+    f_p = \left.
+        \text{GBW} \cdot
+        \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]
+        \middle/
+        \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right]
+        \right.
+</latexmath>
+
+<p>which is indeed slightly higher than GBW.</p>
+
+<h3>Validity conditions of the formulas</h3>
+
+<p>Once the parasitic pole is calculated, the main validity conditions is the following:</p>
+
+<latexmath>
+\frac{f_p}{\text{BW}} \geq 10
+</latexmath>
+
+<p>The second validity condition, almost always true, is for a future release.</p>
 
 <h2>Example with Excel spreadsheet</h2>
 

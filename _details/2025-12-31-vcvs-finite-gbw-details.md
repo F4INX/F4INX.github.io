@@ -520,6 +520,39 @@ Gathering all pieces:
     }
 </latexmath>
 
+### Parasitic pole equation
+
+One the components values are calculated, the parasitic pole frequency can be calculated as follows:
+
+<!-- TODO: cleanup the equations -->
+<latexmath>
+    \begin{gather*}
+        \tau_p = \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}  \\
+        R_2
+        = \left. \frac{2 \cdot Q \cdot \tau_0}{C} \cdot \left[ 1 - \frac{1}{Q \cdot \omega_\text{BW} \cdot \tau_0} \right] \middle/ \left[ 1 + \frac{2 \cdot Q}{\omega_\text{BW} \cdot \tau_0} \right]\right.  \\
+        \qquad = \left. \frac{1}{\pi \cdot \text{BW} \cdot C} \cdot \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right] \middle/ \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]\right.  \\
+        R_\text{TH} = \frac{\tau_0}{2 \cdot Q \cdot C} = \frac{\text{BW}}{4 \cdot \pi \cdot f_0^2 \cdot C}  \\
+        R_\text{TH} \cdot R_2 = \left.
+            \frac{1}{4 \cdot \pi^2 \cdot f_0^2 \cdot C^2} \cdot
+            \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right]
+            \middle/
+            \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]
+            \right.  \\
+        \tau_p = \left.
+            \frac{1}{\omega_\text{BW}} \cdot
+            \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right]
+            \middle/
+            \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]
+            \right.  \\
+        f_p = \left.
+            \text{GBW} \cdot
+            \left[ 1 + \frac{2 f_0^2}{\text{BW} \cdot \text{GBW}} \right]
+            \middle/
+            \left[ 1 - \frac{\text{BW}}{\text{GBW}} \right]
+            \right.
+    \end{gather*}
+</latexmath>
+
 ### Conditions for realisability
 
 The previously done hypothesis allows to calculate the needed values of the components. However, they are not necessarily realisable, for instance when the equations give negative values. The conditions for realisability are as follows:
