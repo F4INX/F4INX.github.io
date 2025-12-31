@@ -118,7 +118,7 @@ This technique exists in two common variants shown in the 2 figures below from t
 
 The operating principle is the same in the two cases: provide an high frequency and a low frequency feedback paths. The high frequency path, right at the operational amplifier output, undelayed, provides stability, while the low frequency path, at the load, provided an exact low frequency response.
 
-With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. The detailed equations, rather long, are presented in this page: <a href="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-stability-equations.html' | relative_url }}">{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-stability-equations.html' | relative_url }}</a>.
+With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. The detailed equations, rather long, are presented in this page: <a href="{{ '/posts/op-amp-capacitor-stability-equations.html' | relative_url }}">{{ '/postsop-amp-capacitor-stability-equations.html' | relative_url }}</a>.
 
 Simulation results with the values calculated using the equations are shown below:
 
