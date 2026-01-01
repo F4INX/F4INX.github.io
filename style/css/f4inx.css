@@ -2,7 +2,7 @@
 ---
 /*******************************************************/
 /* f4inx.css                                           */
-/* Hadrien Theveneau, 2024                             */
+/* Hadrien Theveneau, 2026                             */
 /* Parts based on Hyde (https://github.com/poole/hyde) */
 /* and Poole (https://github.com/poole/poole).         */
 /*******************************************************/
@@ -647,4 +647,41 @@ figure img {
 figure figcaption {
   font-style: italic;
   text-align: center;
+}
+
+/***********************/
+/* Collapsable content */
+/***********************/
+.collapsible-link {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+.collapsible-content {
+    display: none;
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 1px solid;
+    border-color: var(--fg-color);
+}
+.collapsible-content.show {
+    display: block;
+}
+.collapsible-content-aux {
+    display: none;
+}
+.collapsible-content-aux.show {
+    display: block;
+}
+/* Fallback when no javascript: show content by default */
+/* Note that in this case the equation won't be rendered... */
+.no-js .collapsible-link {
+    display: none;
+}
+.no-js .collapsible-content {
+    display: block;
+}
+.no-js .collapsible-content-aux {
+    display: block;
 }

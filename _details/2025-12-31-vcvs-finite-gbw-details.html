@@ -7,51 +7,6 @@ last_modified_at: 2025-12-31
 
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-<style>
-    .collapsible-link {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        text-align:center;
-    }
-    .collapsible-content {
-        display: none;
-        margin: 0.5em;
-        padding: 0.5em;
-        border: 1px solid;
-    }
-    @media (prefers-color-scheme: dark) {
-        .collapsible-content {
-            border-color: white;
-        }
-    }
-    @media (prefers-color-scheme: light) {
-        .collapsible-content {
-            border-color: dark;
-        }
-    }
-    .collapsible-content.show {
-        display: block;
-    }
-    .collapsible-content-aux {
-        display: none;
-    }
-    .collapsible-content-aux.show {
-        display: block;
-    }
-    /* Fallback when no javascript: show content by default */
-    /* Note that in this case the equation won't be rendered... */
-    .no-js .collapsible-link {
-        display: none;
-    }
-    .no-js .collapsible-content {
-        display: block;
-    }
-    .no-js .collapsible-content-aux {
-        display: block;
-    }
-</style>
-
 <!-- FIXME: move globally -->
 <style>
   .vcvs-finite-gbw-details .MathJax {
