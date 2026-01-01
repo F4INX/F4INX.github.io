@@ -15,8 +15,6 @@ last_modified_at: 2025-12-31
 
 <p class="begin-note">Many thanks to Christophe Basso to have showed me the factorisation technique which is the key of this work.</p>
 
-<p class="begin-note">TODO: add some comparison with the existing stuff: lack of compensation equations for the simple case, compensation scheme from TI efficient but with additionnal components.</p>
-
 ## Introduction
 
 Active operational amplifier filters, called VCVS in the jargon, are a convenient way to implement low frequency filtering, particularly when operational amplifiers are already used for amplification.
