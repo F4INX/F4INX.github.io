@@ -323,7 +323,9 @@ last_modified_at: 2025-12-31
         <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
         <div class="collapsible-content" :class="{ 'show': !hide }">
 
-            For an ideal VCVS filter with infinite GBW opamps[^1]:
+            <!-- FIXME: problem to return when section collapsed. -->
+            <!-- Quick fix: remove the backlink. -->
+            For an ideal VCVS filter with infinite GBW opamps<sup><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>:
 
             <latexmath>
                 \begin{align*}
@@ -337,18 +339,18 @@ last_modified_at: 2025-12-31
                 \end{align*}
             </latexmath>
 
-            Note this gain is called <latexinline>A^{'}</latexinline> and not <latexinline>A</latexinline> because it does not include the <latexinline>\frac{V_\text{TH}}{V_\text{in}}</latexinline>.
+            <p>Note this gain is called <latexinline>A^{'}</latexinline> and not <latexinline>A</latexinline> because it does not include the <latexinline>\frac{V_\text{TH}}{V_\text{in}}</latexinline>.</p>
 
             <latexmath>
                 \begin{align*}
-                    V_\text{out} = \frac{
+                    V_\text{out} &= \frac{
                         \frac{A^{'}}{Q \cdot \omega_0} s
                     }{
                         1
                         + \frac{1}{Q \cdot \omega_0} \cdot s
                         + \frac{1}{\omega_0^2} \cdot s^2
-                    } \cdot V_\text{TH}
-                    = \frac{
+                    } \cdot V_\text{TH}  \\
+                    &= \frac{
                         - R_2 \cdot C \cdot s
                     }{
                         1
@@ -357,6 +359,8 @@ last_modified_at: 2025-12-31
                     } \cdot V_\text{TH}
                 \end{align*}
             </latexmath>
+
+            <p></p>
 
             <latexmath>
                 \begin{align*}
@@ -368,7 +372,8 @@ last_modified_at: 2025-12-31
                 \end{align*}
             </latexmath>
 
-            <i>The ... are equations that will be filled in a future release of this page.</i>
+            <p><em>The ... are equations that will be filled in a future release of this page.</em></p>
+
             <latexmath>
                 \left\{
                     \begin{align*}
@@ -393,7 +398,7 @@ last_modified_at: 2025-12-31
         \right.
     </latexmath>
 
-    <p>Consistent with the equations for infinite GBW[^2].</p>
+    <p>Consistent with the equations for infinite GBW<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>.</p>
 
     <h3>Parameters for finite GBW</h3>
 
@@ -489,28 +494,33 @@ last_modified_at: 2025-12-31
                 + \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW}} \cdot s^3
     </latexmath>
 
-    <p></p>
+    <div x-data="{ hide: true }">
+        <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
+        <div class="collapsible-content" :class="{ 'show': !hide }">
 
-    <latexmath>
-        \cases{
-            \tau_p = \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}  \\
-            \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
-                        + \frac{
-                            2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
-                        }{\omega_\text{BW}}  \\
-            \frac{\tau_0}{Q} = 2 \cdot R_\text{TH} \cdot C + \frac{1}{\omega_\text{BW}} - \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}
-        }
-    </latexmath>
+            <latexmath>
+                \cases{
+                    \tau_p = \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}  \\
+                    \tau_0^2 = R_\text{TH} \cdot R_2 \cdot C^2
+                                + \frac{
+                                    2 \cdot R_\text{TH} \cdot C + R_2 \cdot C
+                                }{\omega_\text{BW}}  \\
+                    \frac{\tau_0}{Q} = 2 \cdot R_\text{TH} \cdot C + \frac{1}{\omega_\text{BW}} - \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2}
+                }
+            </latexmath>
 
-    <p></p>
+            <p></p>
 
-    <latexmath>
-    \frac{1}{\omega_\text{BW}} - \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2} =
-    \frac{\tau_0^2 - R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2} =
-    \frac{2 \cdot R_\text{TH} \cdot C + R_2 \cdot C}{\omega_\text{BW}^2 \cdot \tau_0^2}
-    </latexmath>
+            <latexmath>
+            \frac{1}{\omega_\text{BW}} - \frac{R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2} =
+            \frac{\tau_0^2 - R_\text{TH} \cdot R_2 \cdot C^2}{\omega_\text{BW} \cdot \tau_0^2} =
+            \frac{2 \cdot R_\text{TH} \cdot C + R_2 \cdot C}{\omega_\text{BW}^2 \cdot \tau_0^2}
+            </latexmath>
 
-    Leading to:
+        </div>  <!-- End of <div class="collapsible-content"...> -->
+    </div>  <!-- End of <div x-data="..."> -->
+
+    Leads to:
 
     <latexmath>
         \cases{
@@ -791,8 +801,8 @@ last_modified_at: 2025-12-31
 
     <div class="footnotes" role="doc-endnotes">
         <ol>
-            <li><p></p>https://electronics.stackexchange.com/questions/735869/cannot-find-the-derivation-for-gain-and-q-in-a-mfb-bandpass-filter-with-fixed-ga</li>
-            <li>https://www.changpuak.ch/electronics/downloads/sloa088.pdf</li>
+            <li id="fn:1"><p><a href="https://electronics.stackexchange.com/questions/735869/cannot-find-the-derivation-for-gain-and-q-in-a-mfb-bandpass-filter-with-fixed-ga">https://electronics.stackexchange.com/questions/735869/cannot-find-the-derivation-for-gain-and-q-in-a-mfb-bandpass-filter-with-fixed-ga</a><!-- FIXME: quick fix, see previous note. --><!-- <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a>--></p></li>
+            <li id="fn:2"><p><a href="https://www.changpuak.ch/electronics/downloads/sloa088.pdf">https://www.changpuak.ch/electronics/downloads/sloa088.pdf</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">↩</a></p></li>
         </ol>
     </div>
 
