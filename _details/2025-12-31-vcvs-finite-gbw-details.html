@@ -9,25 +9,26 @@ last_modified_at: 2025-12-31
 
 <style>
     .collapsible-link {
-        /* color: #0645ad; */
-        /* text-decoration: none; */
-        /* font-size: 0.9em; */
-        /* cursor: pointer; */
         display: block;
         margin-left: auto;
         margin-right: auto;
         text-align:center;
     }
-    .collapsible-link:hover {
-        /* text-decoration: underline; */
-    }
     .collapsible-content {
         display: none;
         margin: 0.5em;
         padding: 0.5em;
-        border: 1px solid blue;
-        /* border-radius: 0.25em;
-        /* background: #f8f9fa; */
+        border: 1px solid;
+    }
+    @media (prefers-color-scheme: dark) {
+        .collapsible-content {
+            border-color: white;
+        }
+    }
+    @media (prefers-color-scheme: light) {
+        .collapsible-content {
+            border-color: dark;
+        }
     }
     .collapsible-content.show {
         display: block;
@@ -38,16 +39,13 @@ last_modified_at: 2025-12-31
     .collapsible-content-aux.show {
         display: block;
     }
-    /* Fallback for no-JS: show content by default */
+    /* Fallback when no javascript: show content by default */
+    /* Note that in this case the equation won't be rendered... */
     .no-js .collapsible-link {
         display: none;
     }
     .no-js .collapsible-content {
         display: block;
-        /* opacity: 0.7; */
-        /* font-style: italic; */
-        /* border-left: 3px solid #ccc; */
-        /* padding-left: 1em; */
     }
     .no-js .collapsible-content-aux {
         display: block;
