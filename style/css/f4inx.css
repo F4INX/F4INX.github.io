@@ -665,6 +665,9 @@ figure figcaption {
     border: 1px solid;
     border-color: var(--fg-color);
 }
+.collapsible-content > p:first-child {
+    margin-top: 0;
+}
 .collapsible-content.show {
     display: block;
 }
