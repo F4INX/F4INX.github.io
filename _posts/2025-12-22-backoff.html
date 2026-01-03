@@ -320,10 +320,6 @@ P_\text{sat} - P_\text{out,dBm} = -\text{LF} + \frac{10 \cdot \log_{10}\left(6\r
 
 <p>The previous equations for the calculation need <latexinline>\text{LF} =\text{OIP3}_\text{dBm} - P_\text{sat,dBm}</latexinline>. To have estimates of its value, a review of several typical amplifiers was performed.</p>
 
-<h3>TWTA</h3>
-
-<p>LF between 4 and 6:</p>
-
 <!-- FIXME: replace by global setting -->
 <style>
     table.article-backoff {
@@ -340,111 +336,159 @@ P_\text{sat} - P_\text{out,dBm} = -\text{LF} + \frac{10 \cdot \log_{10}\left(6\r
     }
 </style>
 
-<table class="article-backoff">
-<tr><th>Mfg.</th><th>Name</th><th>Description</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
-<tr><td>CPI</td><td>T04UO-A1</td><td>400 W CW TWTA</td><td>400</td><td>56,0</td><td>-24,0</td><td>49,0</td><td>61,0</td><td>5,00</td></tr> 
-<tr><td>CPI</td><td>TL07UO</td><td markdown="1">
-750 W SuperLinear® TWTA<sup id="fnref:5"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">5</a></sup>
-</td><td>750</td><td>58,8</td><td>-24,0</td><td>51,2</td><td>63,2</td><td>4,45</td></tr>
-<tr><td>CPI</td><td>T07UO</td><td markdown="1">
-750 W CW TWTA<sup id="fnref:6"><a href="#fn:6" class="footnote" rel="footnote" role="doc-noteref">6</a></sup>
-</td><td>750</td><td>58,8</td><td>-24,0</td><td>51,1</td><td>63,1</td><td>4,35</td></tr>
-<tr><td>CPI</td><td>TL12UO-A1</td><td markdown="1">
-1.25 kW SuperLinear® TWTA (Air Cooled)<sup id="fnref:7"><a href="#fn:7" class="footnote" rel="footnote" role="doc-noteref">7</a></sup>
-</td><td>1250</td><td>61,0</td><td>-25,0</td><td>54,3</td><td>66,8</td><td>5,84</td></tr>
-<tr><td>CPI</td><td>TL12UO-L1</td><td>1.25 kW SuperLinear® TWTA (Liquid Cooled)</td><td>1250</td><td>61,0</td><td>-25,0</td><td>54,3</td><td>66,8</td><td>5,84</td></tr>
-</table>
+<h3>TWTA</h3>
 
-<p></p>
+<p>LF between 4 and 6.</p>
 
-<div class="mid-footnotes" role="doc-endnotes">
-    <ol start="5">
-        <li id="fn:5"><p><a href="https://www.cpii.com/docs/datasheets/817/tl07uo_mkt327.pdf">https://www.cpii.com/docs/datasheets/817/tl07uo_mkt327.pdf</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:6"><p><a href="https://www.cpii.com/docs/datasheets/817/MKT-285%202024%20rev%20V.pdf">https://www.cpii.com/docs/datasheets/817/MKT-285%202024%20rev%20V.pdf</a> <a href="#fnref:6" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:7"><p><a href="https://www.cpii.com/docs/datasheets/817/tl12uo-a1_mkt257.pdf">https://www.cpii.com/docs/datasheets/817/tl12uo-a1_mkt257.pdf</a> <a href="#fnref:7" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-    </ol>
-</div>
+<div x-data="{ hide: true }">
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
+    <!-- FIXME: dedicated class for collapsible content without borders. -->
+    <div class="collapsible-content" :class="{ 'show': !hide }" style="padding:0; margin:0; border:none;">
+
+    <!-- FIXME: better tuning than <p></p> -->
+    <p></p>
+
+    <table class="article-backoff" :class="{ 'show': !hide }">
+    <tr><th>Mfg.</th><th>Name</th><th>Description</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
+    <tr><td>CPI</td><td>T04UO-A1</td><td>400 W CW TWTA</td><td>400</td><td>56,0</td><td>-24,0</td><td>49,0</td><td>61,0</td><td>5,00</td></tr> 
+    <tr><td>CPI</td><td>TL07UO</td><td markdown="1">
+    750 W SuperLinear® TWTA<sup id="fnref:5"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">5</a></sup>
+    </td><td>750</td><td>58,8</td><td>-24,0</td><td>51,2</td><td>63,2</td><td>4,45</td></tr>
+    <tr><td>CPI</td><td>T07UO</td><td markdown="1">
+    750 W CW TWTA<sup id="fnref:6"><a href="#fn:6" class="footnote" rel="footnote" role="doc-noteref">6</a></sup>
+    </td><td>750</td><td>58,8</td><td>-24,0</td><td>51,1</td><td>63,1</td><td>4,35</td></tr>
+    <tr><td>CPI</td><td>TL12UO-A1</td><td markdown="1">
+    1.25 kW SuperLinear® TWTA (Air Cooled)<sup id="fnref:7"><a href="#fn:7" class="footnote" rel="footnote" role="doc-noteref">7</a></sup>
+    </td><td>1250</td><td>61,0</td><td>-25,0</td><td>54,3</td><td>66,8</td><td>5,84</td></tr>
+    <tr><td>CPI</td><td>TL12UO-L1</td><td>1.25 kW SuperLinear® TWTA (Liquid Cooled)</td><td>1250</td><td>61,0</td><td>-25,0</td><td>54,3</td><td>66,8</td><td>5,84</td></tr>
+    </table>
+
+    <p></p>
+
+    <div class="mid-footnotes" role="doc-endnotes">
+        <ol start="5">
+            <li id="fn:5"><p><a href="https://www.cpii.com/docs/datasheets/817/tl07uo_mkt327.pdf">https://www.cpii.com/docs/datasheets/817/tl07uo_mkt327.pdf</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:6"><p><a href="https://www.cpii.com/docs/datasheets/817/MKT-285%202024%20rev%20V.pdf">https://www.cpii.com/docs/datasheets/817/MKT-285%202024%20rev%20V.pdf</a> <a href="#fnref:6" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:7"><p><a href="https://www.cpii.com/docs/datasheets/817/tl12uo-a1_mkt257.pdf">https://www.cpii.com/docs/datasheets/817/tl12uo-a1_mkt257.pdf</a> <a href="#fnref:7" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+        </ol>
+    </div>
+
+    </div>  <!-- End of <div class="collapsible-content"...> -->
+</div>  <!-- End of <div x-data="..."> -->
 
 <h3>TWTA with linearizer</h3>
 
-<p>Same products as before but with linearizer option. LF between 8 and 9:</p>
+<p>Same products as before but with linearizer option. LF between 8 and 9.</p>
 
-<table class="article-backoff">
-<tr><th>Mfg.</th><th>Name</th><th>Description</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
-<tr><td>CPI</td><td>T04UO-A1</td><td>400 W CW TWTA</td><td>400</td><td>56,0</td><td>-24,0</td><td>52,0</td><td>64,0</td><td>8,00</td></tr>
-<tr><td>CPI</td><td>TL07UO</td><td>750 W SuperLinear® TWTA</td><td>750</td><td>58,8</td><td>-25,0</td><td>55,2</td><td>67,7</td><td>8,95</td></tr>
-<tr><td>CPI</td><td>T07UO</td><td>750 W CW TWTA</td><td>750</td><td>58,8</td><td>-26,0</td><td>54,1</td><td>67,1</td><td>8,35</td></tr>
-<tr><td>CPI</td><td>TL12UO-A1</td><td>1.25 kW SuperLinear® TWTA (Air Cooled)</td><td>1250</td><td>61,0</td><td>-25,0</td><td>57,3</td><td>69,8</td><td>8,85</td></tr>
-<tr><td>CPI</td><td>TL12UO-L1</td><td>1.25 kW SuperLinear® TWTA (Liquid Cooled)</td><td>1250</td><td>61,0</td><td>-25,0</td><td>57,3</td><td>69,8</td><td>8,85</td></tr>
-</table>
+<div x-data="{ hide: true }">
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
+    <!-- FIXME: dedicated class for collapsible content without borders. -->
+    <div class="collapsible-content" :class="{ 'show': !hide }" style="padding:0; margin:0; border:none;">
+
+    <!-- FIXME: better tuning than <p></p> -->
+    <p></p>
+
+    <table class="article-backoff">
+    <tr><th>Mfg.</th><th>Name</th><th>Description</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
+    <tr><td>CPI</td><td>T04UO-A1</td><td>400 W CW TWTA</td><td>400</td><td>56,0</td><td>-24,0</td><td>52,0</td><td>64,0</td><td>8,00</td></tr>
+    <tr><td>CPI</td><td>TL07UO</td><td>750 W SuperLinear® TWTA</td><td>750</td><td>58,8</td><td>-25,0</td><td>55,2</td><td>67,7</td><td>8,95</td></tr>
+    <tr><td>CPI</td><td>T07UO</td><td>750 W CW TWTA</td><td>750</td><td>58,8</td><td>-26,0</td><td>54,1</td><td>67,1</td><td>8,35</td></tr>
+    <tr><td>CPI</td><td>TL12UO-A1</td><td>1.25 kW SuperLinear® TWTA (Air Cooled)</td><td>1250</td><td>61,0</td><td>-25,0</td><td>57,3</td><td>69,8</td><td>8,85</td></tr>
+    <tr><td>CPI</td><td>TL12UO-L1</td><td>1.25 kW SuperLinear® TWTA (Liquid Cooled)</td><td>1250</td><td>61,0</td><td>-25,0</td><td>57,3</td><td>69,8</td><td>8,85</td></tr>
+    </table>
+
+    </div>  <!-- End of <div class="collapsible-content"...> -->
+</div>  <!-- End of <div x-data="..."> -->
 
 <h3>SSPA</h3>
 
-<p>LF between 8 and 10:</p>
+<p>LF between 8 and 10.</p>
 
-<table class="article-backoff">
-<tr><th>Mfg.</th><th>Name</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
-<tr><td>SpacePath</td><td markdown="1">
-STS16<sup id="fnref:8"><a href="#fn:8" class="footnote" rel="footnote" role="doc-noteref">8</a></sup>
-</td><td>20</td><td>43,0</td><td>-25,0</td><td>39,0</td><td>51,5</td><td>8,5</td></tr>
-<tr><td>SpacePath</td><td markdown="1">
-ST20<sup id="fnref:9"><a href="#fn:9" class="footnote" rel="footnote" role="doc-noteref">9</a></sup>
-</td><td>25</td><td>44,0</td><td>-25,0</td><td>40,0</td><td>52,5</td><td>8,5</td></tr>
-<tr><td>SpacePath</td><td markdown="1">
-ST25K<sup id="fnref:10"><a href="#fn:10" class="footnote" rel="footnote" role="doc-noteref">10</a></sup>
-</td><td>32</td><td>45,0</td><td>-25,0</td><td>41,0</td><td>53,5</td><td>8,5</td></tr>
-<tr><td>SpacePath</td><td markdown="1">
-STS250<sup id="fnref:11"><a href="#fn:11" class="footnote" rel="footnote" role="doc-noteref">11</a></sup>
-</td><td>251</td><td>54,0</td><td>-25,0</td><td>51,0</td><td>63,5</td><td>9,5</td></tr>
-<tr><td>SpacePath</td><td markdown="1">
-STS300<sup id="fnref:12"><a href="#fn:12" class="footnote" rel="footnote" role="doc-noteref">12</a></sup>
-</td><td>316</td><td>55,0</td><td>-25,0</td><td>52,0</td><td>64,5</td><td>9,5</td></tr>
-<tr><td>SpacePath</td><td markdown="1">
-STS400<sup id="fnref:13"><a href="#fn:13" class="footnote" rel="footnote" role="doc-noteref">13</a></sup>
-</td><td>398</td><td>56,0</td><td>-25,0</td><td>53,0</td><td>65,5</td><td>9,5</td></tr>
-<tr><td>SpacePath</td><td markdown="1">
-STS500<sup id="fnref:14"><a href="#fn:14" class="footnote" rel="footnote" role="doc-noteref">14</a></sup>
-</td><td>501</td><td>57,0</td><td>-25,0</td><td>54,0</td><td>66,5</td><td>9,5</td></tr>
-<tr><td>Advantech</td><td markdown="1">
-SapphireBlu<sup id="fnref:15"><a href="#fn:15" class="footnote" rel="footnote" role="doc-noteref">15</a></sup>
-</td><td>1000</td><td>60,0</td><td>-25,0</td><td>56,5</td><td>69,0</td><td>9,0</td></tr>
-</table>
+<div x-data="{ hide: true }">
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
+    <!-- FIXME: dedicated class for collapsible content without borders. -->
+    <div class="collapsible-content" :class="{ 'show': !hide }" style="padding:0; margin:0; border:none;">
 
-<p></p>
+    <!-- FIXME: better tuning than <p></p> -->
+    <p></p>
 
-<div class="mid-footnotes" role="doc-endnotes">
-    <ol start="8">
-        <li id="fn:8"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf">https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf</a> <a href="#fnref:8" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:9"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf">https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf</a> <a href="#fnref:9" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:10"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf">https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf</a> <a href="#fnref:10" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:11"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf">https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf</a> <a href="#fnref:11" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:12"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf">https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf</a> <a href="#fnref:12" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:13"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf">https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf</a> <a href="#fnref:13" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:14"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf">https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf</a> <a href="#fnref:14" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-        <li id="fn:15"><p><a href="https://advantechwireless.com/wp-content/uploads/2022/11/PB-SAPPH-2G-Ku-1000W-22245-LM.pdf">https://advantechwireless.com/wp-content/uploads/2022/11/PB-SAPPH-2G-Ku-1000W-22245-LM.pdf</a> <a href="#fnref:15" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-    </ol>
-</div>
+    <table class="article-backoff">
+    <tr><th>Mfg.</th><th>Name</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
+    <tr><td>SpacePath</td><td markdown="1">
+    STS16<sup id="fnref:8"><a href="#fn:8" class="footnote" rel="footnote" role="doc-noteref">8</a></sup>
+    </td><td>20</td><td>43,0</td><td>-25,0</td><td>39,0</td><td>51,5</td><td>8,5</td></tr>
+    <tr><td>SpacePath</td><td markdown="1">
+    ST20<sup id="fnref:9"><a href="#fn:9" class="footnote" rel="footnote" role="doc-noteref">9</a></sup>
+    </td><td>25</td><td>44,0</td><td>-25,0</td><td>40,0</td><td>52,5</td><td>8,5</td></tr>
+    <tr><td>SpacePath</td><td markdown="1">
+    ST25K<sup id="fnref:10"><a href="#fn:10" class="footnote" rel="footnote" role="doc-noteref">10</a></sup>
+    </td><td>32</td><td>45,0</td><td>-25,0</td><td>41,0</td><td>53,5</td><td>8,5</td></tr>
+    <tr><td>SpacePath</td><td markdown="1">
+    STS250<sup id="fnref:11"><a href="#fn:11" class="footnote" rel="footnote" role="doc-noteref">11</a></sup>
+    </td><td>251</td><td>54,0</td><td>-25,0</td><td>51,0</td><td>63,5</td><td>9,5</td></tr>
+    <tr><td>SpacePath</td><td markdown="1">
+    STS300<sup id="fnref:12"><a href="#fn:12" class="footnote" rel="footnote" role="doc-noteref">12</a></sup>
+    </td><td>316</td><td>55,0</td><td>-25,0</td><td>52,0</td><td>64,5</td><td>9,5</td></tr>
+    <tr><td>SpacePath</td><td markdown="1">
+    STS400<sup id="fnref:13"><a href="#fn:13" class="footnote" rel="footnote" role="doc-noteref">13</a></sup>
+    </td><td>398</td><td>56,0</td><td>-25,0</td><td>53,0</td><td>65,5</td><td>9,5</td></tr>
+    <tr><td>SpacePath</td><td markdown="1">
+    STS500<sup id="fnref:14"><a href="#fn:14" class="footnote" rel="footnote" role="doc-noteref">14</a></sup>
+    </td><td>501</td><td>57,0</td><td>-25,0</td><td>54,0</td><td>66,5</td><td>9,5</td></tr>
+    <tr><td>Advantech</td><td markdown="1">
+    SapphireBlu<sup id="fnref:15"><a href="#fn:15" class="footnote" rel="footnote" role="doc-noteref">15</a></sup>
+    </td><td>1000</td><td>60,0</td><td>-25,0</td><td>56,5</td><td>69,0</td><td>9,0</td></tr>
+    </table>
+
+    <p></p>
+
+    <div class="mid-footnotes" role="doc-endnotes">
+        <ol start="8">
+            <li id="fn:8"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf">https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf</a> <a href="#fnref:8" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:9"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf">https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf</a> <a href="#fnref:9" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:10"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf">https://www.space-path.com/sites/default/files/document-downloads/Datasheet%2016%2020%2025W%20Ku%20Band.pdf</a> <a href="#fnref:10" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:11"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf">https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf</a> <a href="#fnref:11" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:12"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf">https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf</a> <a href="#fnref:12" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:13"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf">https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf</a> <a href="#fnref:13" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:14"><p><a href="https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf">https://www.space-path.com/sites/default/files/document-downloads/STS250%20300%20400%20500%20K.pdf</a> <a href="#fnref:14" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+            <li id="fn:15"><p><a href="https://advantechwireless.com/wp-content/uploads/2022/11/PB-SAPPH-2G-Ku-1000W-22245-LM.pdf">https://advantechwireless.com/wp-content/uploads/2022/11/PB-SAPPH-2G-Ku-1000W-22245-LM.pdf</a> <a href="#fnref:15" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+        </ol>
+    </div>
+
+    </div>  <!-- End of <div class="collapsible-content"...> -->
+</div>  <!-- End of <div x-data="..."> -->
 
 <h3>SSPA with dubious linearization</h3>
 
 <p>To be continued. The example found has a surprisingly low LF.</p>
 
-<table class="article-backoff">
-<tr><th>Mfg.</th><th>Name</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
-<tr><td>Teledyne</td><td markdown="1">
-HPAK2600AHXXXXXG<sup id="fnref:16"><a href="#fn:16" class="footnote" rel="footnote" role="doc-noteref">16</a></sup>
-</td><td>600</td><td>57,8</td><td>-25</td><td>54,8</td><td>67,3</td><td>9,5</td></tr>
-</table>
+<div x-data="{ hide: true }">
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
+    <!-- FIXME: dedicated class for collapsible content without borders. -->
+    <div class="collapsible-content" :class="{ 'show': !hide }" style="padding:0; margin:0; border:none;">
 
-<p></p>
+    <!-- FIXME: better tuning than <p></p> -->
+    <p></p>
 
-<div class="footnotes" role="doc-endnotes">
-    <ol start="16">
-        <li id="fn:16"><p><a href="http://www.satcomsource.com/Teledyne-Paradise-Datacom-400W-Outdoor-Ku-Band-GAN-SSPA.pdf
-">http://www.satcomsource.com/Teledyne-Paradise-Datacom-400W-Outdoor-Ku-Band-GAN-SSPA.pdf
-</a> <a href="#fnref:16" class="reversefootnote" role="doc-backlink">↩</a></p></li>
-    </ol>
-</div>
+    <table class="article-backoff">
+    <tr><th>Mfg.</th><th>Name</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
+    <tr><td>Teledyne</td><td markdown="1">
+    HPAK2600AHXXXXXG<sup id="fnref:16"><a href="#fn:16" class="footnote" rel="footnote" role="doc-noteref">16</a></sup>
+    </td><td>600</td><td>57,8</td><td>-25</td><td>54,8</td><td>67,3</td><td>9,5</td></tr>
+    </table>
+
+    <p></p>
+
+    <div class="footnotes" role="doc-endnotes">
+        <ol start="16">
+            <li id="fn:16"><p><a href="http://www.satcomsource.com/Teledyne-Paradise-Datacom-400W-Outdoor-Ku-Band-GAN-SSPA.pdf
+    ">http://www.satcomsource.com/Teledyne-Paradise-Datacom-400W-Outdoor-Ku-Band-GAN-SSPA.pdf
+    </a> <a href="#fnref:16" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+        </ol>
+    </div>
+
+    </div>  <!-- End of <div class="collapsible-content"...> -->
+</div>  <!-- End of <div x-data="..."> -->
 
 <h2>Calculated values of backoff for -20dBc</h2>
 
