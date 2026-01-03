@@ -35,6 +35,14 @@ last_modified_at: 2025-12-22
 
 <h2>Modelling</h2>
 
+<p>An ideal amplifier has a linear transfer function in an infinite range.</p>
+
+<p>Real amplifiers have a limited linear range, here limited only as an amplitude transfer function with no phase effects. A typical model is the saturated cubic who behaves like the cubic model but with no decrase of output power at higher output levels.</p>
+
+<p>Since this saturated cubic model is hard to model, the simplest cubic model, valid until saturated power, can be used instead.</p>
+
+<img src="{{ '/posts/backoff/transfer-function-models.png' | relative_url }}"/>
+
 <p>The amplifier is modelled by the following transfer function of the complex amplitude, centred at the band’s centre frequency:</p>
 
 <latexmath>
