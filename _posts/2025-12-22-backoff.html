@@ -14,9 +14,24 @@ last_modified_at: 2025-12-22
 
 <h2>Introduction</h2>
 
-In many cases, an amplifier must process a signal containing multiple subcarriers. This occurs either due to multi-carrier modulation schemes or when an amplifier serves multiple users. To maintain sufficient linearity and minimize intermodulation distortion, a backoff is required between the average power of the amplified signal and the peak power of the amplifier. However, determining the appropriate backoff is not straightforward.
+<p>Power amplifiers have a limit on the maximum power they can amplity while staying linear, that is, keeping distorsion low enough.</p> <!-- This power is lower than the maximum power. -->
 
-Existing rules of thumb do not provide a precise method to make a compromise between an high backoff, which wastes power, and a low backoff, which may not provide enough linearity. The peak to average power ratio (PAPR) is insufficient since it does not indicate how often peak levels are reached. Using reasonable approximations, this report aims to provide a simple and effective approach to backoff estimation.
+<p>For sinusoidal signals, it is straightforward to keep the power of the signal below the maximum linear power. However, for multi-carrier signals, the signal has peaks much higher than its average power, and keeping these paks below the maximum linear power requires to have a maximum power much higher than the average power, which is costly and inefficient in power.</p>
+
+<p>Since these peaks are rare, it is possible to accept that some peaks go beyond the maximum linear power, provided that the resulting distorsion is acceptable. This allow to reduce the difference between the average power and the maximum power of the amplifier.</p>
+
+<p>The needed difference between the average power and the maximum power, called backoff, is not straightforward to calculate for multi-carrier signals. This article proposes an investigation of this topic and guidelines to estimate the needed backoff.</p>
+
+<div x-data="{ hide: true }">
+    <p><a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a></p>
+    <div class="collapsible-content" :class="{ 'show': !hide }">
+
+    <p>The multi-carrier signal occurs either due to multi-carrier modulation schemes or when an amplifier serves multiple users.</p>
+
+    <p>Existing rules of thumb do not provide a precise method to make a compromise between an high backoff, which wastes power, and a low backoff, which may not provide enough linearity. The peak to average power ratio (PAPR) is insufficient since it does not indicate how often peak levels are reached.</p>
+
+    </div>  <!-- End of <div class="collapsible-content"...> -->
+</div>  <!-- End of <div x-data="..."> -->
 
 <h2>Modelling</h2>
 
