@@ -37,23 +37,27 @@ last_modified_at: 2025-12-22
 
 <p>An ideal amplifier has a linear transfer function in an infinite range.</p>
 
-<p>Real amplifiers have a limited linear range, here limited only as an amplitude transfer function with no phase effects. A typical model is the saturated cubic who behaves like the cubic model but with no decrase of output power at higher output levels.</p>
+<p>Real amplifiers have a limited linear range and their transfer function is closer to the <q>saturated cubic</q> model of following curve.</p>
 
-<p>Since this saturated cubic model is hard to model, the simplest cubic model, valid until saturated power, can be used instead.</p>
+<p>This saturated cubic function is hard to model so the cubic model, valid for signals lower than saturation of the amplifier, is used instead. This is the domain of most often used in telecommunications.</p>
 
 <img src="{{ '/posts/backoff/transfer-function-models.png' | relative_url }}"/>
 
-<p>The amplifier is modelled by the following transfer function of the complex amplitude, centred at the band’s centre frequency:</p>
+<p>This cubic transfer function can be expressed by the following equation:</p>
 
 <latexmath>
-y = x + \alpha \cdot \left|x\right|^2 \cdot x
+y = x - \alpha \cdot \left|x\right|^2 \cdot x
 </latexmath>
 
-<p>This approach is based on the works of Roblin and Versprecht.</p>
+<p></p>
 
 <div x-data="{ hide: true }">
     <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <div class="collapsible-content" :class="{ 'show': !hide }">
+
+        <p>Signals are modelled as a complex amplitude at amplifiers centre frequency.</p>
+
+        <p>This approach is based on the works of Roblin and Versprecht.</p>
 
         <p>The following assumptions are made:</p>
 
