@@ -687,9 +687,6 @@ figure figcaption {
 .collapsible-content > p:last-child {
     margin-bottom: 0;
 }
-.collapsible-content > h3:first-child {
-    margin-top: 0;
-}
 .collapsible-content.show {
     display: block;
 }
