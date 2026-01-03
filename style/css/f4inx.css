@@ -531,6 +531,22 @@ a.reversefootnote {
   color: inherit;  /* People don't need color to guess they are clickable */
 }
 
+/******************************/
+/* Footnotes (middle of text) */
+/******************************/
+
+.mid-footnotes {
+    border-top: none;
+}
+.mid-footnotes:before {
+    border-top: var(--bar-2) solid var(--fg-color);
+    content: " ";
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /**************/
 /* Pagination */
 /**************/
