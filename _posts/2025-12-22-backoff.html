@@ -303,26 +303,41 @@ y_\text{NL} = \alpha \cdot \left|x\right|^2 \cdot x
 
 <h2>Power of the non-linear component in function of the OIP3 and the backoff</h2>
 
-<p>Combining the previous results:</p>
-
-<latexmath>
-P_\text{NL} = 6 \cdot \left|\alpha\right|^2 = 6 \cdot \frac{1}{A_\text{OIP3}^4}
-</latexmath>
-
-<p>This can be expressed as dB, and since the output power is normalized as unity, these dB are in fact dBc:</p>
-
-<latexmath>
-\begin{align*}
-P_\text{NL,dBc} &= 10 \cdot \log_{10}\left(6\right) - 40 \cdot \log_{10}\left(A_\text{OIP3}\right)  \\
-&= 10 \cdot \log_{10}\left(6\right) - 2 \cdot \text{OIP3}_\text{dBc}
-\end{align*}
-</latexmath>
-
-<p>Expressing the OIP3 in dBm:</p>
+<p>The ratio <latexinline>P_\text{NL,dBc}</latexinline> between the power of the non-linear perturbation and the wanted signal is: </p>
 
 <latexmath>
 P_\text{NL,dBc} = 10 \cdot \log_{10}\left(6\right) + 2 \cdot (P_\text{out,dBm} - \text{OIP3}_\text{dBm})
 </latexmath>
+
+<p></p>
+
+<div x-data="{ hide: true }">
+    <p><a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a></p>
+    <div class="collapsible-content" :class="{ 'show': !hide }">
+
+        <p>This can be calculated as follows by combining the previous results:</p>
+
+        <latexmath>
+        P_\text{NL} = 6 \cdot \left|\alpha\right|^2 = 6 \cdot \frac{1}{A_\text{OIP3}^4}
+        </latexmath>
+
+        <p>which can be expressed in dBc since the output power is normalized to unity:</p>
+
+        <latexmath>
+        \begin{align*}
+        P_\text{NL,dBc} &= 10 \cdot \log_{10}\left(6\right) - 40 \cdot \log_{10}\left(A_\text{OIP3}\right)  \\
+        &= 10 \cdot \log_{10}\left(6\right) - 2 \cdot \text{OIP3}_\text{dBc}
+        \end{align*}
+        </latexmath>
+
+        <p>and expressing the OIP3 in dBm:</p>
+
+        <latexmath>
+        P_\text{NL,dBc} = 10 \cdot \log_{10}\left(6\right) + 2 \cdot (P_\text{out,dBm} - \text{OIP3}_\text{dBm})
+        </latexmath>
+
+    </div>  <!-- End of <div class="collapsible-content"...> -->
+</div>  <!-- End of <div x-data="..."> -->
 
 <p>Reversing the equation:</p>
 
