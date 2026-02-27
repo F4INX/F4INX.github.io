@@ -187,3 +187,68 @@ They use a different architecture from classical voltage-feedback op-amps.
 Bandwidth is largely independent of gain, and very high slew rates can be achieved. On the other hand, the values of feedback components must be selected in accordance with manufacturer recommendations. <!-- TODO: reformulate this. -->
 
 <!-- From Hadrien: I know them very well, let me this one. :) -->
+
+## Op-amp input stage headroom according to structure
+
+This one is often overlooked but pay attention to this. With some training, it is possible to see at a first glance on the equivalent schematics an idea of the inputs headrooms.
+
+###	N input stage
+
+https://www.ti.com/lit/ds/symlink/tl081.pdf
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/tl081.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+Both transistors are source followers trying to apply to their source their input minus some voltage. Guess something between 1 V and 2 V. The current source needs also some headroom. On the other side, there is not so much constraint between the input and the drain.
+
+So, the input range can be inferred as: V- + headroom to Vcc. And indeed the datasheet:
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/tl081-datasheet.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+Input range: ground + headrom to slightly higher than Vcc.
+<!-- TODO: add explanation. -->
+
+### P input stage
+
+<!-- TODO: add explanations. -->
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/p-input.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+Input range: slightly lower than ground to Vcc – headroom.
+
+<!-- TODO: add explanation. -->
+
+### N+P input stage
+
+<!-- TODO: Write stuff. -->
+
+https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/n-p-input.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+### Input supplied with charge pump
+
+https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/charge-pump-input.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+https://www.ti.com/product/OPA391
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/opa391-input.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
