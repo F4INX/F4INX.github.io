@@ -114,3 +114,76 @@ From OPA391 data sheet, product information and support | TI.com.
 In summary, if the source impedance is low, a BJT input is preferred; for medium-to-high impedance sources, a JFET input; and for very high impedance and low power requirements, a CMOS input is generally the most suitable choice.
 
 This distinction plays a decisive role in measurement accuracy and system stability, regardless of the op-amp type.
+
+## Op-amp types according to application and performance purpose
+
+Operational amplifiers do not consist of a single structure; they are designed by prioritizing specific characteristics in line with different application requirements
+
+For this reason, op-amp types are classified not by how they operate, but by the intended use for which they are optimized.
+
+This classification constitutes the first and most important elimination step when selecting the correct component 
+
+### General-purpose op-amps
+
+They offer balanced performance among bandwidth, noise, offset, and power consumption.
+
+They are widely used in education, prototyping, and non-critical analog circuits. In most designs, the first op-amps tested belong to this group.
+
+### Precision op-amps
+
+They are designed for applications where DC accuracy is important, with low input offset voltage and low temperature drift.
+
+Sensor interfaces, current measurement circuits, and front-end stages of high-resolution ADCs are typical application areas for this class.
+
+High bandwidth is generally not a priority in these op-amps.
+
+### Auto-zero op-amps
+
+Auto-zero op-amps are based on the following principle (https://wiki.analog.com/university/courses/electronics/text/chapter-15):
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/auto-zero.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+They use internally two amplifiers and alternate between two modes:
+
+* The correcting amplifier zeros itself by connecting their inputs together and adjusting its own compensation capacitor to compensate its own offset until it sees a zero at its input
+
+* The correcting amplifier zeros the corrected amplifier by adjusting the compensation capacitor of the corrected amplifier to compensate its offset until it sees a zero at its input.
+
+With this technique, offset and drift is reduced to very low values.
+
+Usually, bipolar amplifiers are preferred when searching for low offsets. However, auto-zero amplifiers are often CMOS amplifiers because switches are much easier to realize in CMOS.
+
+While they provide a maor advantage in measurement systems where DC accurary (offset) and long-term stability (offset drive) are critical, they exhibit switching noise and can also have more subtle issues, like recovery from overload (the correcting amplifiers trying to compensate the input difference even if it is not due to an offset). Pay attention to the datasheet.
+
+<!-- TODO: Have a look on the most common pitfalls of auto-zero opamps. -->
+
+### Chopper op-amps
+
+<!-- TODO: write on these, often confused with the auto-zero. -->
+
+### Audio op-amps
+
+They are optimized for low distortion (deviation of the signal from the ideal waveform) and highly linear behavior within the human hearing band.
+
+Total harmonic distortion (THD) (the ratio of harmonic frequency components present in the output signal that are not present at the input), output drive capability, and linearity are prioritized; absolute DC accuracy is often of secondary importance.
+
+They are preferred in audio signal chains.
+
+### High-speed op-amps
+
+They are developed for applications requiring wide bandwidth and high slew rate. Video signals, fast data acquisition systems, and high-frequency analog processing fall into this category.
+
+These op-amps are more sensitive to layout, feedback network design, and stability issues.
+
+### Current-feedback amplifiers (CFA)
+
+<!-- Belong in theory to input stage, but better here. -->
+
+They use a different architecture from classical voltage-feedback op-amps.
+
+Bandwidth is largely independent of gain, and very high slew rates can be achieved. On the other hand, the values of feedback components must be selected in accordance with manufacturer recommendations. <!-- TODO: reformulate this. -->
+
+<!-- From Hadrien: I know them very well, let me this one. :) -->
