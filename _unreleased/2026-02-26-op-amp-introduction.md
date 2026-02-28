@@ -701,13 +701,17 @@ Some people are tempted to use operational amplifiers with ESD protection remove
 
 ### Decoupling
 
-Short version: decouple both supplies to the ground. Don’t just decouple between them. Capacitor selection strategy as usual.
+Operational amplifiers, particularly higher speed ones, should be decoupled like any other component.
 
-Long version: please find a beautiful cat before the long version.[
+Even if most operational amplifiers don't have a ground pin but just two supply voltages, in most cases, their supply voltages must be both decoupled to ground because the load will be referenced to the ground or to another voltage itself decoupled to ground.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+For this reason a mere decoupling between both supplies is insufficient, even more when taking into account the layout issues.
 
-<!-- TODO: use more cats, fill this section. -->
+The capacitor must have a low enough total inductance, including own ESL and traces, to handle the current spikes caused by high slew rates. And he must be high enough to provide the lower frequency transients while the current ramp up in the power supply inductor, mostly the inductor of the supply distribution.
+
+A long time ago, this would have been made using capacitors of several values. Now, available capacitor values in a given size has increased much.
+
+So, the go-to strategy is always the same: select the capacitor size consistent with the component to decouple (similar to pin sizes) and select the highest convenient available value in this size, maybe with some rounding.
 
 </div>
 
