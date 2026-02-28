@@ -5,6 +5,36 @@ permalink: /posts/op-amp-introduction.html
 last_modified_at: 2026-02-26
 ---
 
+<style>
+  .op-amp-introduction {
+    counter-reset: h2-counter h3-counter;
+  }
+
+  .op-amp-introduction h2::before {
+    counter-increment: h2-counter;
+    counter-set: h3-counter;
+    content: counter(h2-counter) " ";
+  }
+
+  .op-amp-introduction .related h2::before {
+    counter-increment: unset;
+    counter-set: unset;
+    content: unset;
+  }
+
+  .op-amp-introduction h3::before {
+    counter-increment: h3-counter;
+    content: counter(h2-counter) "." counter(h3-counter) " ";
+  }
+
+  .op-amp-introduction .related h3::before {
+    counter-increment: unset;
+    content: unset;
+  }
+</style>
+
+<div markdown="1" class="op-amp-introduction">
+
 <p class="begin-note">After some discussions on grounding and various subjects with Gönül Demir, we thought that it could be a good idea to combine our both approaches to make a join page. Indeed I began my series by writing detailed articles about complex points and not by an introduction. We hope that this gentle (or not so) introduction to the topic would fill the gap.</p>
 
 ## What is an op-amp?
@@ -609,3 +639,5 @@ Rail-to-rail output refers to the ability of the op-amp output voltage to swing 
 **In summary**
 
 Rail-to-rail output is not a simple "yes/no" feature, but a condition-dependent capability; the datasheet must be examined carefully.
+
+</div>
