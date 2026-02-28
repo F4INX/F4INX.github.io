@@ -456,13 +456,25 @@ It is the small DC current that flows from the inputs to enable the operation of
 
 ### CMRR (common-mode rejection ratio)
 
-It is a measure of how well the op-amp can suppress signals that are common to both inputs (common-mode signals).
+The CMRR of an amplifier circuit is the ratio between its differential-mode gain and its common-mode gain, expressing its ability to extract a small differential signal superposed to a big common-mode signal.
 
-**Critical applications:** differential measurements, current sensing, noisy industrial environments.
+Before even looking at the datasheet, it should be emphasized that bit factor in the CMRR (or the lack of) is the topology of the circuit and the mismatch of the resistors. Most operational amplifiers have CMRR higher than 70 dB while common resistors are closer to 1 % tolerance. Solutions exists to overcome this point, like the classical 3 operational amplifier differential amplifier, but must be studied carefully before even having a look on the CMRR number of the datasheet.
 
-**Of secondary importance:** simple, ground-referenced single-ended amplifiers.
+#### Applications for which this parameter is critical
 
-**Disadvantage:** in practice, CMRR depends not only on the op-amp but also on the matching of external resistors; <!-- TODO for Hadrien: add details. --> the datasheet value cannot always be achieved in the system.
+* Differential measurements.
+
+* Current sensing.
+
+* Noisy industrial environments.
+
+#### Applications for which this parameter is of secondary importance
+
+* Simple, ground-referenced single-ended amplifiers.
+
+#### Beware of
+
+* In practice, CMRR depends not only on the op-amp but also on the matching of external resistors. The datasheet value cannot always be achieved in the system.
 
 ### PSRR (power supply rejection ratio)
 
