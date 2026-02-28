@@ -325,7 +325,7 @@ In other words, it is a DC error arising from the op-amp’s internal imbalance.
   <figcaption>Simulation schematic and output waveform of a LT1010 buffer with input offset voltage.</figcaption>
 </figure>
 
-#### Applications for which this is critical
+#### Applications for which this parameter is critical
 
 * Low-level DC measurements.
 
