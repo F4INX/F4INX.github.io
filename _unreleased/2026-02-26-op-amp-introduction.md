@@ -612,6 +612,14 @@ If some IC you want to use as an operational amplifier has an open-drain or open
 
 Rail-to-rail output refers to the ability of the op-amp output voltage to swing very close to the supply rails. This feature becomes especially critical at low supply voltages.
 
+### Conclusion on output types
+
+The output type determines not how many volts an op-amp amplifies, but under which conditions and with which system compatibility those volts are delivered.
+
+Choosing the correct output type is the key to system-level performance and stability.
+
+References: [1], [3], [6], [7].
+
 **Typical applications**
 
 * Battery-powered devices
