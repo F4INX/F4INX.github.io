@@ -322,11 +322,8 @@ In other words, it is a DC error arising from the op-amp’s internal imbalance.
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/offset.png' | relative_url }}" />
-  <figcaption>Output waveform of a noninverting amplifier when there is input offset voltage.</figcaption>
-  <!-- TODO: rework caption. -->
+  <figcaption>Simulation schematic and output waveform of a LT1010 buffer with input offset voltage.</figcaption>
 </figure>
-
-<!-- TODO: add source. -->
 
 #### Applications for which this is critical
 
