@@ -420,11 +420,19 @@ When this parameter is important, for DC or near DC, pay attention also to the b
 
 It is the rate at which the input offset voltage changes with temperature (typically µV/°C).
 
-**Critical applications:** long-term measurements, industrial and field systems operating over a wide temperature range.
+#### Applications for which this parameter is critical
 
-**Of secondary importance:** short-term systems with stable temperature.
+* Long-term measurements.
 
-**Disadvantage:** very low drift often requires zero-drift or chopper architecture, which can generate additional low-frequency noise.
+* Industrial and field systems operating over a wide temperature range.
+
+#### Applications for which this parameter is of secondary importance:
+
+* Short-term systems with stable temperature.
+
+#### Disadvantage
+
+* Very low drift often requires zero-drift or chopper architecture, which can generate additional low-frequency noise.
 
 ### Input Bias Current
 
