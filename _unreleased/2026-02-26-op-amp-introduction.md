@@ -252,3 +252,207 @@ https://www.ti.com/product/OPA391
   <img src="{{ '/posts/op-amp-intro/opa391-input.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
+
+## Basic op-amp parameters
+
+Op-amp parameters describe the extent to which the amplifier deviates from ideal behavior.
+
+None of these parameters is “good” or “bad” on its own; what matters is which one is decisive for a given application
+
+### Availability
+
+Cost, distributors, delays, MOQ, …
+
+<!-- TODO: continue. -->
+
+###	Convenience stuff
+
+Packages, ...
+
+<!-- TODO: continue. -->
+
+### (Input) offset Voltage
+
+It is the small differential input voltage required for the output to be exactly zero when the op-amp inputs are theoretically at the same voltage.
+
+In other words, it is a DC error arising from the op-amp’s internal imbalance.
+
+**Critical applications:** low-level DC measurements, sensor interfaces, current sensing, bridge circuits.
+
+**Of secondary importance:** AC-coupled circuits, audio signal processing, high-amplitude signals.
+
+**Disadvantage:** very low offset generally implies a more complex internal architecture and higher cost.
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/offset.png' | relative_url }}" />
+  <figcaption>Output waveform of a noninverting amplifier when there is input offset voltage.</figcaption>
+  <!-- TODO: rework caption. -->
+</figure>
+
+<!-- TODO: add source. -->
+
+### Input (dynamic) resistance
+
+The input (dynamic) resistance of an operational amplifier circuit should be high enough compared to the output impedance of the signal source to avoid loading it.
+
+In inverting or substracting amplifiers, this input resistance is determined mostly by the resistors of the network, which must be carefully selected: not too big to avoid loading the signal source and not too high to avoid noise and issues with parasitic capacitances.
+
+When the signal source is directly connected at the input of an operational amplifier, the impedance it sees it directly determined by the operational amplifier input impedance, so it is an important parameter to check in these cases with an high-impedance source.
+
+According to https://www.ti.com/lit/an/sloa011b/sloa011b.pdf, the input resistances and capacitances of an operational amplifier are as follows:
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/resistances.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+Datasheets give the elements between the inputs and the elements to ground in different ways.
+
+In the LM324 datasheet (https://www.ti.com/lit/ds/symlink/lm324.pdf), the differential-mode input resistance rid = Rd || (Rn + Rp) and the common-mode ric = Rp || Rn are given:
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/lm324-datasheet.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+The common mode resistance is 400 times higher than the differential due to the operation of the input stage, which is a common behaviour.
+
+The common-mode is indeed much higher than the differential mode.
+
+In the NE5532 datasheet (https://www.ti.com/lit/ds/symlink/ne5532.pdf), the impedance of one input when the other is tied to ground, called single-ended in the jargon, ri = Rd || Rn is given.
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/ne5532-datasheet.png' | relative_url }}" />
+  <!-- <figcaption>TODO: title</figcaption> -->
+</figure>
+
+No information is given on the common-mode, but is can be reasonably guessed for most purposes that ri ≈ Rd and that Rp and Rn are much higher than Rd.
+
+Due to feedback, the effective input resistance will be higher, but this is still a low value for an op-amp. This is because this operational amplifier is optimized for low-noise.
+
+Most often this value is a check of being in the right ballpark for the use rather than a precise calculation. Here, this amplified is clearly suited only for low input impedances.
+
+When this parameter is important, for DC or near DC, pay attention also to the bias current, and for higher frequencies, pay attention also to the capacitances. For the values of the LM324, the common-mode capacitance starts to dominate the differential-mode resistance from only 11 kHz.
+
+Advantages of high input resistance
+
+* The signal source is not loaded
+
+* The measured voltage is transferred to the op-amp without distortion
+
+* High-impedance sensors (e.g., thermistors, piezo elements, electrodes) can be read correctly
+
+Disadvantages of high input resistance
+
+* Higher 1/f noise is generally observed in MOSFET/CMOS inputs
+
+Beware of
+
+*	Bias currents
+
+*	Capacitances
+
+* Static electricity (whole circuit, not just the op-amp, often including ESD protection)
+
+*	Leakage currents (rather due to the need for high impedance than due to the op-amp)
+
+* PCB contamination and humidity (idem)
+
+### (Input) offset drift
+
+<!-- TODO: Add a comment about thermal drift vs. time drift. -->
+
+It is the rate at which the input offset voltage changes with temperature (typically µV/°C).
+
+**Critical applications:** long-term measurements, industrial and field systems operating over a wide temperature range.
+
+**Of secondary importance:** short-term systems with stable temperature.
+
+**Disadvantage:** very low drift often requires zero-drift or chopper architecture, which can generate additional low-frequency noise.
+
+### Input Bias Current
+
+It is the small DC current that flows from the inputs to enable the operation of the op-amp’s input transistors.
+
+**Critical applications:** high-impedance sensors, piezoelectric elements, circuits operating with large-value resistors.
+
+**Of secondary importance:** low-impedance sources (e.g., <1 kΩ).
+
+**Disadvantage:** very low bias current is usually achieved with MOSFET/JFET inputs, which in some cases leads to higher 1/f noise.
+
+### CMRR (common-mode rejection ratio)
+
+It is a measure of how well the op-amp can suppress signals that are common to both inputs (common-mode signals).
+
+**Critical applications:** differential measurements, current sensing, noisy industrial environments.
+
+**Of secondary importance:** simple, ground-referenced single-ended amplifiers.
+
+**Disadvantage:** in practice, CMRR depends not only on the op-amp but also on the matching of external resistors; <!-- TODO for Hadrien: add details. --> the datasheet value cannot always be achieved in the system.
+
+### PSRR (power supply rejection ratio)
+
+It expresses how much fluctuations in the supply voltage are reflected at the output.
+
+**Critical applications:** battery-powered systems, switching or noisy power supplies.
+
+**Of secondary importance:** well-regulated, low-noise laboratory power supplies.
+
+**Disadvantage:** high PSRR generally requires a more complex internal circuit structure.
+
+### Gain–bandwidth product (GBW)
+
+It defines the fundamental limit between gain and frequency of the op-amp; as gain increases, the usable bandwidth decreases.
+
+**Critical applications:** wideband signals, fast control loops, video and high-speed analog processing.
+
+**Of secondary importance:** slowly varying DC measurements.
+
+**Disadvantage:** unnecessarily high GBW can lead to excess noise <!-- TODO: why ? --> and stability problems <!-- TODO: why ? -->.
+
+### Slew rate
+
+It is the maximum rate at which the output voltage can change over time (V/µs).
+
+**Critical applications:** high-frequency and high-amplitude signals.
+
+**Of secondary importance:** low-frequency and slowly varying signals.
+
+**Disadvantage:** high slew rate often comes with higher power consumption
+
+<!-- TODO: LTSpice simulation. -->
+
+<figure>
+  <img src="{{ '/posts/op-amp-intro/slew-rate.png' | relative_url }}" />
+  <figcaption>Slew-induced waveform distortion.</figcaption>
+  <!-- TODO: Rework figure caption. -->
+</figure>
+**Source:** https://toshiba.semicon-storage.com/eu/semiconductor/knowledge/faq/linear_opamp/what-is-the-maximum-frequency-at-which-an-op-amp-can-be-used.html
+
+### Noise
+
+<!-- TODO: Add voltage and current noise. -->
+
+Noise consists of unwanted random signal components generated internally by the op-amp; it includes wideband noise and low-frequency 1/f noise <!-- TODO for Hadrien: improve this. -->.
+
+**Critical applications:** low-level signals, high-impedance sources, precision measurements.
+
+**Of secondary importance:** high-amplitude or digitally dominated systems.
+
+**Disadvantage:** low noise is often achieved at the expense of power consumption or bandwidth.
+
+### Headroom
+
+Headroom expresses how close the op-amp inputs and outputs can approach the supply rails.
+
+**Critical applications:** it is a critical parameter in single-supply, low-voltage, and non–rail-to-rail designs; insufficient headroom leads to signal clipping and loss of linear behavior.
+
+In wide dual-supply (±12 V, ±15 V) circuits operating far from the rails <!-- TODO: reformulate. -->, it is generally of secondary importance.
+
+### Summary
+
+Op-amp selection is not about making all parameters "the best".
+
+Correct design means prioritizing the parameters that are critical for the application and keeping the others at a sufficient level.
+
+References: [1], [2], [3], [6]
