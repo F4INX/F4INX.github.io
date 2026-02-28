@@ -496,11 +496,21 @@ It expresses how much fluctuations in the supply voltage are reflected at the ou
 
 It defines the fundamental limit between gain and frequency of the op-amp; as gain increases, the usable bandwidth decreases.
 
-**Critical applications:** wideband signals, fast control loops, video and high-speed analog processing.
+#### Applications where this parameter is critical
 
-**Of secondary importance:** slowly varying DC measurements.
+* Wideband signals.
 
-**Disadvantage:** unnecessarily high GBW can lead to excess noise <!-- TODO: why ? --> and stability problems <!-- TODO: why ? -->.
+* Fast control loops.
+
+* Video and high-speed analog processing.
+
+#### Applications where this parameter is of secondary importance
+
+* Slowly varying DC measurements.
+
+#### Disadvantage of good parameter values
+
+* Unnecessarily high GBW can lead to excess noise <!-- TODO: why ? --> and stability problems<!-- TODO: why ? -->.
 
 ### Slew rate
 
