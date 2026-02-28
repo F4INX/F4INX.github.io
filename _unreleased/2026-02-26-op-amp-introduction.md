@@ -685,3 +685,21 @@ Long version: please find a beautiful cat before the long version.[
 <!-- TODO: use more cats, fill this section. -->
 
 </div>
+
+## References
+
+[1] R. Mancini (Ed.), Op Amps for Everyone, Texas Instruments, SLOD006B, 2002.
+
+[2] P. Horowitz, W. Hill, The Art of Electronics, 3rd Edition, Cambridge University Press, 2015.
+
+[3] A. S. Sedra, K. C. Smith, Microelectronic Circuits, 7th Edition, Oxford University Press, 2014.
+
+[4] Texas Instruments, Current Feedback vs Voltage Feedback Amplifiers, Application Report.
+
+[5] Analog Devices, Op Amp Input Structures: BJT, JFET, CMOS, Technical Article.
+
+[6] Texas Instruments, Understanding Rail-to-Rail Input and Output Amplifiers, Application Note.
+
+[7] Texas Instruments, Fully Differential Amplifiers, Application Report.
+
+[8] https://www.youtube.com/watch?v=4PYjRmtSth8
