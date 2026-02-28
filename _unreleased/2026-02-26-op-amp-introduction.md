@@ -482,7 +482,9 @@ It expresses how much fluctuations in the supply voltage are reflected at the ou
 
 #### Applications where this parameter is critical
 
-* Battery-powered systems, switching or noisy power supplies.
+* Battery-powered switching power supplies, typically used with low voltage batteries or when multiple voltages are needed.
+
+* Noisy supply rails, either due to the supply of due to the loads.
 
 #### Applications where this parameter is of secondary importance
 
