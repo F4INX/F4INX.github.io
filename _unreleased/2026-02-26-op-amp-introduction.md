@@ -104,10 +104,6 @@ The following oscillator works in a comparator mode, which can be seen by the ou
 
 Some sources on the internet use a 741 in this schematic. Don’t spread this mistake!
 
-## Applications of op-amps and their important parameters
-
-<!-- TODO. -->
-
 ## Op-amps according to input stage (BJT, JFET, MOSFET)
 
 Operational amplifiers differ not only according to which application they are optimized for, but also according to the transistor technology used in the input stage.
@@ -202,10 +198,6 @@ Usually, bipolar amplifiers are preferred when searching for low offsets. Howeve
 While they provide a maor advantage in measurement systems where DC accurary (offset) and long-term stability (offset drive) are critical, they exhibit switching noise and can also have more subtle issues, like recovery from overload (the correcting amplifiers trying to compensate the input difference even if it is not due to an offset). Pay attention to the datasheet.
 
 <!-- TODO: Have a look on the most common pitfalls of auto-zero opamps. -->
-
-### Chopper op-amps
-
-<!-- TODO: write on these, often confused with the auto-zero. -->
 
 ### Audio op-amps
 
