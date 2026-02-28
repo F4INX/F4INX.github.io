@@ -724,6 +724,24 @@ So, the go-to strategy is always the same: select the capacitor size consistent 
 
 Same principles as before, but even more simple. One of the supplies, almost always the negative one, is tied to the ground plane. The other is decoupled as usual. From a layout point of view, dont try to decouple "between the supplies": tie the grounded one to the ground plane and decouple the other to the ground plane.
 
+### Decoupling of mid-supply reference
+
+This problem is not often explained. Beginners will simply forget it and experts will do it without even thinking about it.
+
+In single-supply operational amplifiers, since there are no convenient negative values, a common practice is to center them around the middle of the supplies. This is often performed with a voltage divider. The problem of a naive voltage divider is that it amplifies any noise on the voltage supplies. It is a shame to use operational amplifiers with power supply rejection ratios (PSRR) much higher than 60 dB and getting eventually only 6 dB due to such mistakes.
+
+Solutions to this problem can be summarized as follows:
+
+* decouple the mid-supply voltage divider,
+
+* use a regulator to provide the mid-supply voltage (Zener or linear).
+
+This application note from Analog Devices [https://www.analog.com/en/resources/app-notes/an-581.html](https://www.analog.com/en/resources/app-notes/an-581.html) provides a good summary of the problem, as well as valuable hints to solve it. However, a few points are more questionable:
+
+* star grounding is often a bad practice and need some care to properly perform in the rare cases it is useful;
+
+* the low-pass cut-off frequency of the decoupling of the mid-supply reference is not so much a problem in robust circuits because 1/ supplies are often the output of a regulator who will take care of these low frequencies and 2/ such schemes are often coupled in such ways which limit this issue (AC coupled or kind differential).
+
 ## References
 
 [1] R. Mancini (Ed.), Op Amps for Everyone, Texas Instruments, SLOD006B, 2002.
