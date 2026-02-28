@@ -683,7 +683,7 @@ Confusing them is a great way to fail your circuit, don't fail in this trap.
 
 ### Capacitive load, stability
 
-See article. <!-- TODO: put link. -->
+See article on this subject:  <a href="{{ '/posts/op-amp-capacitor-stability.html' | relative_url }}">{{ '/posts/op-amp-capacitor-stability.html' | relative_url }}</a>.
 
 ### Botched current measurement circuits
 
