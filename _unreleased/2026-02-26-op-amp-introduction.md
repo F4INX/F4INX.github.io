@@ -707,6 +707,11 @@ Even if most operational amplifiers don't have a ground pin but just two supply 
 
 For this reason a mere decoupling between both supplies is insufficient, even more when taking into account the layout issues.
 
+<figure>
+  <img src="{{ '/posts/op-amp-introduction/decoupling.png' | relative_url }}" />
+  <!-- TODO: add caption <figcaption>...</figcaption> -->
+</figure>
+
 The capacitor must have a low enough total inductance, including own ESL and traces, to handle the current spikes caused by high slew rates. And he must be high enough to provide the lower frequency transients while the current ramp up in the power supply inductor, mostly the inductor of the supply distribution.
 
 A long time ago, this would have been made using capacitors of several values. Now, available capacitor values in a given size has increased much.
