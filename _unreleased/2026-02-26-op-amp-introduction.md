@@ -85,7 +85,7 @@ However…… comparators are NOT operational amplifiers, and their use cases sh
 The following oscillator works in a comparator mode, which can be seen by the output taken discrete levels, and thus a comparator should be used for this schematic.
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/rc-oscillator.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" />
   <!-- <figcaption>TODO: put title here.</figcaption> -->
 </figure>
 
@@ -110,12 +110,12 @@ In active-output sensors or low-impedance analog sources, noise performance is g
 On the other hand, since the input bias current is relatively high, they can lead to additional offset errors when used with high-impedance sources.
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/bjt-amp-1.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" />
   <figcaption>Figure xx: Schematic diagram of a BJT differential amplifier, from https://en.wikipedia.org/wiki/Differential_amplifier</figcaption>
 </figure>
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/bjt-amp-2.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" />
   <figcaption>Figure xx: Schematic diagram of a BJT differential amplifier, from https://en.wikipedia.org/wiki/Differential_amplifier</figcaption>
 </figure>
 
@@ -133,7 +133,7 @@ Battery-powered systems and long-term DC measurements fall into this category. H
 A simplified schematic of a typical CMOS operational amplifier is shown below:
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/fet-amp.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -172,7 +172,7 @@ High bandwidth is generally not a priority in these op-amps.
 Auto-zero op-amps are based on the following principle (https://wiki.analog.com/university/courses/electronics/text/chapter-15):
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/auto-zero.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/auto-zero.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -227,7 +227,7 @@ This one is often overlooked but pay attention to this. With some training, it i
 https://www.ti.com/lit/ds/symlink/tl081.pdf
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/tl081.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/tl081.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -236,7 +236,7 @@ Both transistors are source followers trying to apply to their source their inpu
 So, the input range can be inferred as: V- + headroom to Vcc. And indeed the datasheet:
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/tl081-datasheet.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/tl081-datasheet.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -248,7 +248,7 @@ Input range: ground + headrom to slightly higher than Vcc.
 <!-- TODO: add explanations. -->
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/p-input.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/p-input.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -263,7 +263,7 @@ Input range: slightly lower than ground to Vcc – headroom.
 https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/n-p-input.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/n-p-input.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -272,14 +272,14 @@ https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-yo
 https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/charge-pump-input.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/charge-pump-input.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
 https://www.ti.com/product/OPA391
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/opa391-input.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/opa391-input.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -314,7 +314,7 @@ In other words, it is a DC error arising from the op-amp’s internal imbalance.
 **Disadvantage:** very low offset generally implies a more complex internal architecture and higher cost.
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/offset.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/offset.png' | relative_url }}" />
   <figcaption>Output waveform of a noninverting amplifier when there is input offset voltage.</figcaption>
   <!-- TODO: rework caption. -->
 </figure>
@@ -332,7 +332,7 @@ When the signal source is directly connected at the input of an operational ampl
 According to https://www.ti.com/lit/an/sloa011b/sloa011b.pdf, the input resistances and capacitances of an operational amplifier are as follows:
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/resistances.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/resistances.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -341,7 +341,7 @@ Datasheets give the elements between the inputs and the elements to ground in di
 In the LM324 datasheet (https://www.ti.com/lit/ds/symlink/lm324.pdf), the differential-mode input resistance rid = Rd || (Rn + Rp) and the common-mode ric = Rp || Rn are given:
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/lm324-datasheet.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/lm324-datasheet.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -352,7 +352,7 @@ The common-mode is indeed much higher than the differential mode.
 In the NE5532 datasheet (https://www.ti.com/lit/ds/symlink/ne5532.pdf), the impedance of one input when the other is tied to ground, called single-ended in the jargon, ri = Rd || Rn is given.
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/ne5532-datasheet.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/ne5532-datasheet.png' | relative_url }}" />
   <!-- <figcaption>TODO: title</figcaption> -->
 </figure>
 
@@ -453,7 +453,7 @@ It is the maximum rate at which the output voltage can change over time (V/µs).
 <!-- TODO: LTSpice simulation. -->
 
 <figure>
-  <img src="{{ '/posts/op-amp-intro/slew-rate.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/slew-rate.png' | relative_url }}" />
   <figcaption>Slew-induced waveform distortion.</figcaption>
   <!-- TODO: Rework figure caption. -->
 </figure>
