@@ -687,9 +687,11 @@ See article on this subject:  <a href="{{ '/posts/op-amp-capacitor-stability.htm
 
 ### Botched current measurement circuits
 
-Botched current measurement circuits (various ways to botch them).
+A typical current measurement circuit uses a current measurement resistor on a 5 V rail accross which the voltage difference is about 10 mV to ensure not too much power is dissipated in the resistor and to ensure the voltage drop stays reasonable. Assuming a 10 % full scale accuracy, which is already a bad accuracy, this would lead to a needed common-mode rejection ratio of at least 5 000. Naive circuit using even 1 % resistors are much likely to not meet this target.
 
-<!-- TODO: complete this section. -->
+Another way to botch current measurement circuits is to ignore the input range. Input common-mode range include often the supply voltage of the operational amplifier, and can be in some cases even higher, like for instance when measuring the current on a 50 V rail using a 5 V operational amplifier.
+
+Solutions exists to overcome these problems. They are outside the scope of this introduction article. But we give just an advice: study well the applications notes on this topic before even thinking.
 
 ### Operational amplifiers without ESD protection
 
