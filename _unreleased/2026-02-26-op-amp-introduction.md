@@ -480,11 +480,17 @@ Before even looking at the datasheet, it should be emphasized that bit factor in
 
 It expresses how much fluctuations in the supply voltage are reflected at the output.
 
-**Critical applications:** battery-powered systems, switching or noisy power supplies.
+#### Applications where this parameter is critical
 
-**Of secondary importance:** well-regulated, low-noise laboratory power supplies.
+* Battery-powered systems, switching or noisy power supplies.
 
-**Disadvantage:** high PSRR generally requires a more complex internal circuit structure.
+#### Applications where this parameter is of secondary importance
+
+* Well-regulated, low-noise laboratory power supplies.
+
+#### Disadvantage of good parameter values
+
+* High PSRR generally requires a more complex internal circuit structure.
 
 ### Gain–bandwidth product (GBW)
 
