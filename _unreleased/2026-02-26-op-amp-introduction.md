@@ -640,4 +640,28 @@ Rail-to-rail output refers to the ability of the op-amp output voltage to swing 
 
 Rail-to-rail output is not a simple "yes/no" feature, but a condition-dependent capability; the datasheet must be examined carefully.
 
+## Common traps
+
+### Comparators vs. op-amps
+
+This section is still to write. In the meanwhile, please find this picture of a beautiful cat.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+
+<!-- TODO: put contents. -->
+
+### Capacitive load, stability
+
+See article. <!-- TODO: put link. -->
+
+### Botched current measurement circuits
+
+Botched current measurement circuits (various ways to botch them).
+
+<!-- TODO: complete this section. -->
+
+### Operational amplifiers without ESD protection
+
+Some people are tempted to use operational amplifiers with ESD protection removed for increased performance. Don’t. Even. Think. Of. It.
+
 </div>
