@@ -390,7 +390,7 @@ Most often this value is a check of being in the right ballpark for the use rath
 
 When this parameter is important, for DC or near DC, pay attention also to the bias current, and for higher frequencies, pay attention also to the capacitances. For the values of the LM324, the common-mode capacitance starts to dominate the differential-mode resistance from only 11 kHz.
 
-Advantages of high input resistance
+#### Advantages of high input resistance
 
 * The signal source is not loaded
 
@@ -398,11 +398,11 @@ Advantages of high input resistance
 
 * High-impedance sensors (e.g., thermistors, piezo elements, electrodes) can be read correctly
 
-Disadvantages of high input resistance
+#### Disadvantages of high input resistance
 
 * Higher 1/f noise is generally observed in MOSFET/CMOS inputs
 
-Beware of
+#### Beware of
 
 *	Bias currents
 
