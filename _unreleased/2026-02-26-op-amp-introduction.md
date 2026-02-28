@@ -438,11 +438,21 @@ It is the rate at which the input offset voltage changes with temperature (typic
 
 It is the small DC current that flows from the inputs to enable the operation of the op-amp’s input transistors.
 
-**Critical applications:** high-impedance sensors, piezoelectric elements, circuits operating with large-value resistors.
+#### Applications for which this parameter is critical
 
-**Of secondary importance:** low-impedance sources (e.g., <1 kΩ).
+* High-impedance sensors.
 
-**Disadvantage:** very low bias current is usually achieved with MOSFET/JFET inputs, which in some cases leads to higher 1/f noise.
+* Piezoelectric elements.
+
+* Circuits operating with large-value resistors.
+
+#### Applications for which this parameter is of secondary importance
+
+* Low-impedance sources (e.g., <1 kΩ).
+
+#### Disadvantages of good parameter values
+
+* Very low bias current is usually achieved with MOSFET/JFET inputs, which in some cases leads to higher 1/f noise.
 
 ### CMRR (common-mode rejection ratio)
 
