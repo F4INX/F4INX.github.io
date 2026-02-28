@@ -320,12 +320,6 @@ It is the small differential input voltage required for the output to be exactly
 
 In other words, it is a DC error arising from the op-amp’s internal imbalance.
 
-**Critical applications:** low-level DC measurements, sensor interfaces, current sensing, bridge circuits.
-
-**Of secondary importance:** AC-coupled circuits, audio signal processing, high-amplitude signals.
-
-**Disadvantage:** very low offset generally implies a more complex internal architecture and higher cost.
-
 <figure>
   <img src="{{ '/posts/op-amp-introduction/offset.png' | relative_url }}" />
   <figcaption>Output waveform of a noninverting amplifier when there is input offset voltage.</figcaption>
@@ -333,6 +327,28 @@ In other words, it is a DC error arising from the op-amp’s internal imbalance.
 </figure>
 
 <!-- TODO: add source. -->
+
+#### Applications for which this is critical
+
+* Low-level DC measurements.
+
+* Sensor interfaces.
+
+* Current sensing.
+
+* Bridge circuits.
+
+#### Applications for which this parameter is secondary
+
+* AC-coupled circuits.
+
+* Audio signal processing.
+
+* High-amplitude signals.
+
+#### Disadvantages of good values
+
+* Very low offset generally implies a more complex internal architecture and higher cost.
 
 ### Input (dynamic) resistance
 
