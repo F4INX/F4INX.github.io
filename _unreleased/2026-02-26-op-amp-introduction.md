@@ -744,12 +744,12 @@ This application note from Analog Devices [https://www.analog.com/en/resources/a
 
 The following schematic shows the previous points:
 
-* forgotten in the currently manufactured version, the filtering capacitor in black;
+* Mid-voltage reference it not filtered. Since the analog to digital converter of the arduino use the Vcc as a reference voltage, filtering this alone would not bring much improvement. Adding some filtering in this case would have needed a little more work than just filtering the mid-supply.
 
-* chain of operational amplifiers U1A to U1C are wired in a pseudo-differential configuration, all using the same reference, so the supply gain is only 1/2.
+* Chain of operational amplifiers U1A to U1C are wired in a pseudo-differential configuration, all using the same reference, so the supply gain is only 1/2.
 
 <figure>
-  <img src="{{ '/posts/op-amp-introduction/ultrasonic-pcb-decoupling.png' | relative_url }}" />
+  <img src="{{ '/posts/op-amp-introduction/ultrasonic-pcb.svg' | relative_url }}" />
   <!-- TODO: add caption <figcaption>...</figcaption> -->
 </figure>
 
