@@ -563,9 +563,13 @@ Noise consists of unwanted random signal components generated internally by the 
 
 Headroom expresses how close the op-amp inputs and outputs can approach the supply rails.
 
-**Critical applications:** it is a critical parameter in single-supply, low-voltage, and non–rail-to-rail designs; insufficient headroom leads to signal clipping and loss of linear behavior.
+#### Applications where this parameter is critical
 
-In wide dual-supply (±12 V, ±15 V) circuits operating far from the rails <!-- TODO: reformulate. -->, it is generally of secondary importance.
+* Single low-voltage supply with non–rail-to-rail amplifiers; insufficient headroom leads to signal clipping and loss of linear behavior.
+
+#### Applications where this parameter is of seconrady importance
+
+* Wide dual-supply (±12 V, ±15 V) circuits operating far from the rails.
 
 ### Summary
 
