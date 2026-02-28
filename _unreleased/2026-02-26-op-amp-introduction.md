@@ -664,4 +664,16 @@ Botched current measurement circuits (various ways to botch them).
 
 Some people are tempted to use operational amplifiers with ESD protection removed for increased performance. Don’t. Even. Think. Of. It.
 
+## Care and feeding
+
+### Decoupling
+
+Short version: decouple both supplies to the ground. Don’t just decouple between them. Capacitor selection strategy as usual.
+
+Long version: please find a beautiful cat before the long version.[
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+
+<!-- TODO: use more cats, fill this section. -->
+
 </div>
