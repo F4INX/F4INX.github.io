@@ -663,13 +663,23 @@ Rail-to-rail output is not a simple "yes/no" feature, but a condition-dependent 
 
 ## Common traps
 
-### Comparators vs. op-amps
+### Operational amplifiers vs. comparators.
 
-This section is still to write. In the meanwhile, please find this picture of a beautiful cat.
+Altough they look like similar, operational amplifiers and comparators are very different components.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+Operational amplifiers are designed to work in a linear operation, with the difference between their inputs low, due to the effect of a negative feedback. They sometimes can handle other cases, particularly in transients or during input overload, but such cases are not their intended mode of operation. Negative feedback is used to set the gain and ensure linearity.
 
-<!-- TODO: put contents. -->
+Quite the contrary, comparators are designed to work in a nonlinear way, with an high difference between their input, and are designed to produce a constant value, near one of the supply rails, depending on the sign of the difference. Positive feedback is used to help the comparator to transition quicker from one state to another.
+
+These differences in the intended operation lead to the following differences of what is inside:
+
+* Operational amplifiers have an internal compensation capacitor (1/3 of the chip area of the original 741 !) to help stability when used with negative feedback while this would be a strange idea for comparators using positive feedback.
+
+* Slew rate of comparators is much higher than of operational amplifiers.
+
+* Comparators have often what could be called "logic convenience": rail-to-rail outputs, open drain output, ...
+
+Confusing them is a great way to fail your circuit, don't fail in this trap.
 
 ### Capacitive load, stability
 
