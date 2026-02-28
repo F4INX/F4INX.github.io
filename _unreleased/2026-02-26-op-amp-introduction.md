@@ -426,7 +426,7 @@ It is the rate at which the input offset voltage changes with temperature (typic
 
 * Industrial and field systems operating over a wide temperature range.
 
-#### Applications for which this parameter is of secondary importance:
+#### Applications for which this parameter is of secondary importance
 
 * Short-term systems with stable temperature.
 
@@ -591,14 +591,14 @@ In a single-ended output, the signal produced by the op-amp is taken from a sing
 
 When one says "the output is 1.4 V", it is clear with respect to which reference this value is measured. <!-- Comment from Hadrien: But how the op-amp produces an output referred to ground when it has not even connections to it ? You asked without knowing a very good question and open a can of worms… ☺️ --> The vast majority of general-purpose op-amps produce this type of output.
 
-**Typical applications:**
+#### Typical applications
 
 * General-purpose analog amplifiers
 * Sensor interfaces (short distance, low-noise environments)
 * Active filters
 * Laboratory and bench-top measurement circuits
 
-**Advantages:**
+#### Advantages
 
 <!-- TODO: rework. -->
 
@@ -610,7 +610,7 @@ When one says "the output is 1.4 V", it is clear with respect to which reference
 
 * Direct compatibility with most ADCs and analog blocks
 
-**Disadvantages:**
+#### Disadvantages
 
 * Limited noise immunity
 
@@ -618,7 +618,7 @@ When one says "the output is 1.4 V", it is clear with respect to which reference
 
 * Noise at the reference point (ground) directly couples into the signal
 
-**In summary:**
+#### In summary
 
 Single-ended output is sufficient for simple and local analog circuits; however, as the system grows and the environment becomes noisier, it becomes a limiting factor.
 
@@ -626,7 +626,7 @@ Single-ended output is sufficient for simple and local analog circuits; however,
 
 In a differential output, the signal is not defined as the absolute voltage of a single node, but as the voltage difference between two output nodes. Information is carried in the difference between these two lines; simultaneous shifts of both lines with respect to ground do not change the signal’s meaning.
 
-**Typical applications:**
+#### Typical applications
 
 * Differential-input ADC drivers <!-- And not only ADCs -->
 
@@ -636,7 +636,7 @@ In a differential output, the signal is not defined as the absolute voltage of a
 
 * High-resolution data acquisition systems
 
-**Advantages:**
+#### Advantages
 
 * Common-mode noise is largely suppressed  <!-- TODO: Rework. -->
 
@@ -646,24 +646,25 @@ In a differential output, the signal is not defined as the absolute voltage of a
 
 * Natural compatibility with modern ADC architectures
 
-**Disadvantages:**
+#### Disadvantages
 
 * More complex circuitry and routing
 
 * Requires a differential receiver or ADC
 
-**Pay attention to:**
+#### Pay attention to
 
 * Output common-mode voltage (VOCM) must be set correctly
 
-**In summary:**
+#### In summary
+
 Differential output provides a clear advantage in systems where signal integrity is critical; however, this advantage comes at the cost of increased design complexity.
 
 ### Push-pull output
 
 The push-pull output stage is an active structure capable of driving a load by both sourcing and sinking current. The output voltage is actively controlled by the op-amp in both the upward and downward directions. In most classical op-amps, this structure is implemented as Class AB.
 
-**Typical applications:**
+#### Typical applications
 
 * Linear analog amplifiers
 
@@ -674,7 +675,7 @@ The push-pull output stage is an active structure capable of driving a load by b
 * Analog signal processing chains
 
 
-**Advantages:**
+#### Advantages
 
 * Suitable for linear signal generation
 
@@ -684,11 +685,11 @@ The push-pull output stage is an active structure capable of driving a load by b
 
 * Low output impedance
 
-**Disadvantages:**
+#### Disadvantages
 
 * Output swing may be reduced at high currents
 
-**In summary:**
+#### In summary
 
 Push-pull output is the default and most general solution for analog op-amps.
 
@@ -712,13 +713,13 @@ Choosing the correct output type is the key to system-level performance and stab
 
 References: [1], [3], [6], [7].
 
-**Typical applications**
+#### Typical applications
 
 * Battery-powered devices
 
 * Circuits requiring full-scale ADC utilization
 
-**Advantages**
+#### Advantages
 
 * More efficient use of the supply voltage
 
@@ -726,7 +727,7 @@ References: [1], [3], [6], [7].
 
 * More flexible design under low supply voltages
 
-**Disadvantages**
+#### Disadvantages
 
 * Rail-to-rail behavior depends on load current
 
@@ -736,7 +737,7 @@ References: [1], [3], [6], [7].
 
 * Beware of output impedance <!-- TODO for Hadrien: write more about this one. -->
 
-**In summary**
+#### In summary
 
 Rail-to-rail output is not a simple "yes/no" feature, but a condition-dependent capability; the datasheet must be examined carefully.
 
