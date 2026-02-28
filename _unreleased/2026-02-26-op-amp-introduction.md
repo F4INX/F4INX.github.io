@@ -724,7 +724,7 @@ So, the go-to strategy is always the same: select the capacitor size consistent 
 
 Same principles as before, but even more simple. One of the supplies, almost always the negative one, is tied to the ground plane. The other is decoupled as usual. From a layout point of view, dont try to decouple "between the supplies": tie the grounded one to the ground plane and decouple the other to the ground plane.
 
-### Decoupling of mid-supply reference
+### Filtering of mid-supply reference
 
 This problem is not often explained. Beginners will simply forget it and experts will do it without even thinking about it.
 
@@ -732,7 +732,7 @@ In single-supply operational amplifiers, since there are no convenient negative 
 
 Solutions to this problem can be summarized as follows:
 
-* decouple the mid-supply voltage divider,
+* filter the mid-supply voltage divider,
 
 * use a regulator to provide the mid-supply voltage (Zener or linear).
 
@@ -741,6 +741,17 @@ This application note from Analog Devices [https://www.analog.com/en/resources/a
 * star grounding is often a bad practice and need some care to properly perform in the rare cases it is useful;
 
 * the low-pass cut-off frequency of the decoupling of the mid-supply reference is not so much a problem in robust circuits because 1/ supplies are often the output of a regulator who will take care of these low frequencies and 2/ such schemes are often coupled in such ways which limit this issue (AC coupled or kind differential).
+
+The following schematic shows the previous points:
+
+* forgotten in the currently manufactured version, the filtering capacitor in black;
+
+* chain of operational amplifiers U1A to U1C are wired in a pseudo-differential configuration, all using the same reference, so the supply gain is only 1/2.
+
+<figure>
+  <img src="{{ '/posts/op-amp-introduction/ultrasonic-pcb-decoupling.png' | relative_url }}" />
+  <!-- TODO: add caption <figcaption>...</figcaption> -->
+</figure>
 
 ## References
 
