@@ -699,7 +699,7 @@ Some people are tempted to use operational amplifiers with ESD protection remove
 
 ## Care and feeding
 
-### Decoupling
+### Decoupling, dual supply case
 
 Operational amplifiers, particularly higher speed ones, should be decoupled like any other component.
 
@@ -719,6 +719,10 @@ A long time ago, this would have been made using capacitors of several values. N
 So, the go-to strategy is always the same: select the capacitor size consistent with the component to decouple (similar to pin sizes) and select the highest convenient available value in this size, maybe with some rounding.
 
 </div>
+
+### Decoupling, single supply case
+
+Same principles as before, but even more simple. One of the supplies, almost always the negative one, is tied to the ground plane. The other is decoupled as usual. From a layout point of view, dont try to decouple "between the supplies": tie the grounded one to the ground plane and decouple the other to the ground plane.
 
 ## References
 
