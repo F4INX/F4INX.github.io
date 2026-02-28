@@ -85,7 +85,20 @@ However…… comparators are NOT operational amplifiers, and their use cases sh
 The following oscillator works in a comparator mode, which can be seen by the output taken discrete levels, and thus a comparator should be used for this schematic.
 
 <figure>
-  <img src="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" />
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" style="width:25%;"/>
+  </picture>
+  <!-- <figcaption>TODO: put title here.</figcaption> -->
+</figure>
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/rc-oscillator-plot.png' | relative_url }}" style="width:100%;"/>
+  </picture>
   <!-- <figcaption>TODO: put title here.</figcaption> -->
 </figure>
 
