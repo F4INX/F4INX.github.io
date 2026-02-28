@@ -456,3 +456,156 @@ Op-amp selection is not about making all parameters "the best".
 Correct design means prioritizing the parameters that are critical for the application and keeping the others at a sufficient level.
 
 References: [1], [2], [3], [6]
+
+## Op-amps according to output types
+
+The output stage of an op-amp determines how the amplified signal is presented, with respect to which reference it is defined, and which loads it can drive.
+
+Although often overlooked, the output type directly affects design success, especially at low supply voltages, when driving ADCs, and in digital–analog interfaces.
+
+### Single-Ended Output
+
+In a single-ended output, the signal produced by the op-amp is taken from a single output node and is expressed with respect to a fixed reference (most commonly system ground or a defined reference voltage).
+
+When one says "the output is 1.4 V", it is clear with respect to which reference this value is measured. <!-- Comment from Hadrien: But how the op-amp produces an output referred to ground when it has not even connections to it ? You asked without knowing a very good question and open a can of worms… ☺️ --> The vast majority of general-purpose op-amps produce this type of output.
+
+**Typical applications:**
+
+* General-purpose analog amplifiers
+* Sensor interfaces (short distance, low-noise environments)
+* Active filters
+* Laboratory and bench-top measurement circuits
+
+**Advantages:**
+
+<!-- TODO: rework. -->
+
+* Simple circuit topology
+
+* No additional receiver circuitry required
+
+* Easy measurement and debugging
+
+* Direct compatibility with most ADCs and analog blocks
+
+**Disadvantages:**
+
+* Limited noise immunity
+
+* Not suitable for long cables or noisy environments
+
+* Noise at the reference point (ground) directly couples into the signal
+
+**In summary:**
+
+Single-ended output is sufficient for simple and local analog circuits; however, as the system grows and the environment becomes noisier, it becomes a limiting factor.
+
+### Differential output
+
+In a differential output, the signal is not defined as the absolute voltage of a single node, but as the voltage difference between two output nodes. Information is carried in the difference between these two lines; simultaneous shifts of both lines with respect to ground do not change the signal’s meaning.
+
+**Typical applications:**
+
+* Differential-input ADC drivers <!-- And not only ADCs -->
+
+* Long-cable analog connections
+
+* Noisy industrial environments
+
+* High-resolution data acquisition systems
+
+**Advantages:**
+
+* Common-mode noise is largely suppressed  <!-- TODO: Rework. -->
+
+* Higher signal integrity is achieved
+
+* Higher effective dynamic range can be obtained under the same supply voltage
+
+* Natural compatibility with modern ADC architectures
+
+**Disadvantages:**
+
+* More complex circuitry and routing
+
+* Requires a differential receiver or ADC
+
+**Pay attention to:**
+
+* Output common-mode voltage (VOCM) must be set correctly
+
+**In summary:**
+Differential output provides a clear advantage in systems where signal integrity is critical; however, this advantage comes at the cost of increased design complexity.
+
+### Push-pull output
+
+The push-pull output stage is an active structure capable of driving a load by both sourcing and sinking current. The output voltage is actively controlled by the op-amp in both the upward and downward directions. In most classical op-amps, this structure is implemented as Class AB.
+
+**Typical applications:**
+
+* Linear analog amplifiers
+
+* ADC input drivers
+
+* Low-impedance loads
+
+* Analog signal processing chains
+
+
+**Advantages:**
+
+* Suitable for linear signal generation
+
+* No external pull-up or additional components required
+
+* Can both source and sink current
+
+* Low output impedance
+
+**Disadvantages:**
+
+* Output swing may be reduced at high currents
+
+**In summary:**
+
+Push-pull output is the default and most general solution for analog op-amps.
+
+### Open-drain (open-collector) output
+
+This one is a trap.
+
+Often, operational amplifiers and comparators are confused due to their common points despite important differences in their internal construction and operation.
+
+If some IC you want to use as an operational amplifier has an open-drain or open-collector output, this is the sign it is instead a comparator and that it should not be used in operational amplifier circuits without a true good reason. Details on this point are given in the dedicated section <!-- TODO: add reference. -->.
+
+### Rail-to-rail output
+
+Rail-to-rail output refers to the ability of the op-amp output voltage to swing very close to the supply rails. This feature becomes especially critical at low supply voltages.
+
+**Typical applications**
+
+* Battery-powered devices
+
+* Circuits requiring full-scale ADC utilization
+
+**Advantages**
+
+* More efficient use of the supply voltage
+
+* Increased dynamic range
+
+* More flexible design under low supply voltages
+
+**Disadvantages**
+
+* Rail-to-rail behavior depends on load current
+
+* Reaching the exact rails is usually not ideal
+
+* More complex internal architecture (may increase noise <!-- TODO for Hadrien: check a bit this one. Usually noise is more dependent on input, but often rail-to-rail is wanted in both sides. --> or cost)
+
+* Beware of output impedance <!-- TODO for Hadrien: write more about this one. -->
+
+**In summary**
+
+Rail-to-rail output is not a simple "yes/no" feature, but a condition-dependent capability; the datasheet must be examined carefully.
