@@ -516,11 +516,17 @@ It defines the fundamental limit between gain and frequency of the op-amp; as ga
 
 It is the maximum rate at which the output voltage can change over time (V/µs).
 
-**Critical applications:** high-frequency and high-amplitude signals.
+#### Applications where this parameter is critical
 
-**Of secondary importance:** low-frequency and slowly varying signals.
+* High-frequency or high-amplitude signals.
 
-**Disadvantage:** high slew rate often comes with higher power consumption
+#### Applications where this parameter is of secondary importance
+
+* Low-frequency and slowly varying signals.
+
+#### Disadvantage of good parameter values
+
+* High slew rate often comes with higher power consumption.
 
 <!-- TODO: LTSpice simulation. -->
 
@@ -537,11 +543,21 @@ It is the maximum rate at which the output voltage can change over time (V/µs).
 
 Noise consists of unwanted random signal components generated internally by the op-amp; it includes wideband noise and low-frequency 1/f noise <!-- TODO for Hadrien: improve this. -->.
 
-**Critical applications:** low-level signals, high-impedance sources, precision measurements.
+#### Applications where this parameter is critical
 
-**Of secondary importance:** high-amplitude or digitally dominated systems.
+* Low-level signals.
 
-**Disadvantage:** low noise is often achieved at the expense of power consumption or bandwidth.
+* High-impedance sources.
+
+* Precision measurements.
+
+#### Applications where this parameter is of secondary importance
+
+* High-amplitude or digitally dominated systems.
+
+#### Disadvantage of good parameter values
+
+* Low noise is often achieved at the expense of power consumption or bandwidth.
 
 ### Headroom
 
