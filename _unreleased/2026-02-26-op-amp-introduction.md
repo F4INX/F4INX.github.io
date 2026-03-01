@@ -94,7 +94,7 @@ Simulation and output waveform of wien bridge oscillator without automatic gain 
   <figcaption>Output after startup of a wien bridge oscillator without automatic gain control. Note the clipping of the waveforms.</figcaption>
 </figure>
 
-To avoid clipping, automatic gain control (AGC) can be used like in the example below:
+To avoid the drawbacks of the clipping method to set the loop gain, automatic gain control (AGC) can be used instead, like in the example below. The time constant of the exponential increase or decrease of the amplitudes of the oscillations is sufficienly high to allow setting the gain to the **exact** value of gain through a feedback look, called an automatic gain control. Note that the variation of the amplitude in function of the gain had a behavior similar to an integrator, so the unity gain can be reached for different amplitudes, and the gain is controlled indirectly through the amplitude. The plot show in blue the start of the oscillator with AGC and in green the output of the detector which, once below the threshold voltage of the JFET Q1, increases his resistance and lowers the gain set by the feedback loop R1 and R2+Q1.
 
 <figure>
   <picture>
