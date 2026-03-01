@@ -74,6 +74,8 @@ An operational amplifier is almost never used without negative feedback, at leas
 
 Although if less often used than negative feedback, the positive feedback is used typically for oscillators. Two configurations are worth mentioning: the Wien bridge oscillator and the RC feedback oscillator.
 
+#### Wien bridge oscillator
+
 Simulation and output waveform of wien bridge oscillator without automatic gain control are shown below. Note the clipping of the waveform, which creates distorsion and harmonics. The root cause is that the loop gain must be equal to **exactly** 1 for sustained oscillation. Due to the tolerances of the various passives, the only way to get this condition **exactly** is to set the linear loop gain slightly higher than 1 and to count on the non-linear clipping of the amplifier to lower the actual non-linear loop gain to 1. This process creates distorsion and harmonics.
 
 <figure>
@@ -134,10 +136,9 @@ Details on the oscillations in etablished regime, shown below, show the absence 
   <figcaption>Waveform details of a wien bridge oscillator with automatic gain control. No clipping is present.</figcaption>
 </figure>
 
-
 We have also additional simulations for another article, stay in touch.
 
-<!-- TODO: put the LTSpice stuff. -->
+<!-- TODO: add the RC oscillator stuff. -->
 
 ### Comparators and positive feedback
 
