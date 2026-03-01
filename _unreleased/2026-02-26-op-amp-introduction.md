@@ -72,9 +72,73 @@ An operational amplifier is almost never used without negative feedback, at leas
 
 ### Operational amplifiers and positive feedback
 
-Although if less often used than negative feedback, the positive feedback is used typically for oscillators. Two configurations are worth mentioning: the Wien bridge oscillators and the RC feedback oscillator.
+Although if less often used than negative feedback, the positive feedback is used typically for oscillators. Two configurations are worth mentioning: the Wien bridge oscillator and the RC feedback oscillator.
 
-<!-- TODO: put the LTSpice stuff. -->
+#### Wien bridge oscillator
+
+Simulation and output waveform of wien bridge oscillator without automatic gain control are shown below. Note the clipping of the waveform, which creates distorsion and harmonics. The root cause is that the loop gain must be equal to **exactly** 1 for sustained oscillation. Due to the tolerances of the various passives, the only way to get this condition **exactly** is to set the linear loop gain slightly higher than 1 and to count on the non-linear clipping of the amplifier to lower the actual non-linear loop gain to 1. This process creates distorsion and harmonics.
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" style="width:75%;"/>
+  </picture>
+  <figcaption>Schematic of a wien bridge oscillator without automatic gain control.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-without-agc-plot.png' | relative_url }}" style="width:100%;"/>
+  </picture>
+  <figcaption>Output after startup of a wien bridge oscillator without automatic gain control. Note the clipping of the waveforms.</figcaption>
+</figure>
+
+To avoid the drawbacks of the clipping method to set the loop gain, automatic gain control (AGC) can be used instead, like in the example below. The time constant of the exponential increase or decrease of the amplitudes of the oscillations is sufficienly high to allow setting the gain to the **exact** value of gain through a feedback look, called an automatic gain control. Note that the variation of the amplitude in function of the gain had a behavior similar to an integrator, so the unity gain can be reached for different amplitudes, and the gain is controlled indirectly through the amplitude. The plot show in blue the start of the oscillator with AGC and in green the output of the detector which, once below the threshold voltage of the JFET Q1, increases his resistance and lowers the gain set by the feedback loop R1 and R2+Q1.
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-with-agc-dark.png' | relative_url }}" style="width:75%;"/>
+  </picture>
+  <figcaption>Schematic of a wien bridge oscillator without automatic gain control.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-wit-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-with-agc-plot.png' | relative_url }}" style="width:100%;"/>
+  </picture>
+  <figcaption>Output of a wien bridge oscillator with automatic gain control. The waveform has no clipping.</figcaption>
+</figure>
+
+Details on the oscillations in etablished regime, shown below, show the absence of the clipping effect and the purity of the oscillations. The maximum timestep was reduced for easier plotting of the now beautiful shape of the waveform.
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-dark.png' | relative_url }}" style="width:75%;"/>
+  </picture>
+  <figcaption>Simulation setup for etablished regime waveform details.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-wit-agc-zoom-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot.png' | relative_url }}" style="width:100%;"/>
+  </picture>
+  <figcaption>Waveform details of a wien bridge oscillator with automatic gain control. No clipping is present.</figcaption>
+</figure>
+
+We have also additional simulations for another article, stay in touch.
+
+<!-- TODO: add the RC oscillator stuff. -->
 
 ### Comparators and positive feedback
 
