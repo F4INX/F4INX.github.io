@@ -114,6 +114,27 @@ To avoid the drawbacks of the clipping method to set the loop gain, automatic ga
   <figcaption>Output of a wien bridge oscillator with automatic gain control. The waveform has no clipping.</figcaption>
 </figure>
 
+Details on the oscillations in etablished regime, shown below, show the absence of the clipping effect and the purity of the oscillations. The maximum timestep was reduced for easier plotting of the now beautiful shape of the waveform.
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-dark.png' | relative_url }}" style="width:75%;"/>
+  </picture>
+  <figcaption>Simulation setup for etablished regime waveform details.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-wit-agc-zoom-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot.png' | relative_url }}" style="width:100%;"/>
+  </picture>
+  <figcaption>Waveform details of a wien bridge oscillator with automatic gain control. No clipping is present.</figcaption>
+</figure>
+
+
 We have also additional simulations for another article, stay in touch.
 
 <!-- TODO: put the LTSpice stuff. -->
