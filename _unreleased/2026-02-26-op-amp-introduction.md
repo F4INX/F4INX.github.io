@@ -72,7 +72,29 @@ An operational amplifier is almost never used without negative feedback, at leas
 
 ### Operational amplifiers and positive feedback
 
-Although if less often used than negative feedback, the positive feedback is used typically for oscillators. Two configurations are worth mentioning: the Wien bridge oscillators and the RC feedback oscillator.
+Although if less often used than negative feedback, the positive feedback is used typically for oscillators. Two configurations are worth mentioning: the Wien bridge oscillator and the RC feedback oscillator.
+
+Simulation and output waveform of wien bridge oscillator without automatic gain control are shown below. Note the clipping of the waveform, which creates distorsion and harmonics. The root cause is that the loop gain must be equal to **exactly** 1 for sustained oscillation. Due to the tolerances of the various passives, the only way to get this condition **exactly** is to set the linear loop gain slightly higher than 1 and to count on the non-linear clipping of the amplifier to lower the actual non-linear loop gain to 1. This process creates distorsion and harmonics.
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" style="width:75%;"/>
+  </picture>
+  <figcaption>Schematic of a wien bridge oscillator without automatic gain control.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <img src="{{ '/posts/op-amp-introduction/wien-without-agc-plot.png' | relative_url }}" style="width:100%;"/>
+  </picture>
+  <figcaption>Output after startup of a wien bridge oscillator without automatic gain control. Note the clipping of the waveforms.</figcaption>
+</figure>
+
+We have also additional simulations for another article, stay in touch.
 
 <!-- TODO: put the LTSpice stuff. -->
 
