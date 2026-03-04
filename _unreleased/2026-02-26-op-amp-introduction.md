@@ -150,18 +150,18 @@ The following oscillator works in a comparator mode, which can be seen by the ou
 
 <figure>
   <picture>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
-      <img src="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" style="width:25%;"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/rc-comp-oscillator.png' | relative_url }}" style="width:25%;"/>
   </picture>
   <!-- <figcaption>TODO: put title here.</figcaption> -->
 </figure>
 
 <figure>
   <picture>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
-      <img src="{{ '/posts/op-amp-introduction/rc-oscillator-plot.png' | relative_url }}" style="width:100%;"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/rc-comp-oscillator-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <!-- <figcaption>TODO: put title here.</figcaption> -->
 </figure>
