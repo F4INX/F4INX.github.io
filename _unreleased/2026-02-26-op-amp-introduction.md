@@ -155,11 +155,10 @@ The schematic and the output waveform are shown below:
   <figcaption>Schematic of an RC phase shift oscillator.</figcaption>
 </figure>
 
-<!-- FIXME: add dark plot. -->
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-plot.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/rc-phase-shift-oscillator-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Output of a RC phase shift oscillator.</figcaption>
