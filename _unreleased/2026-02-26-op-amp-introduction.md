@@ -146,12 +146,11 @@ It must be emphasized that at least 2 variants of this circuit exists with diffe
 
 The schematic and the output waveform are shown below:
 
-<!-- FIXME: add light schematics. -->
 <figure>
   <picture>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
       <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
-      <img src="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-dark.png' | relative_url }}" style="width:75%;"/>
+      <img src="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator.png' | relative_url }}" style="width:75%;"/>
   </picture>
   <figcaption>Schematic of an RC phase shift oscillator.</figcaption>
 </figure>
