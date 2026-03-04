@@ -138,7 +138,37 @@ Details on the oscillations in etablished regime, shown below, show the absence 
 
 We have also additional simulations for another article, stay in touch.
 
-<!-- TODO: add the RC oscillator stuff. -->
+### RC phase shift oscillator
+
+Less popular than the Wien bridge oscillator, the RC phase shift oscillator works by using a chain of 3 high-pass RC networks having a -180° phase shift at the oscillation frequency followed by an inverser amplifier having a 180° phase shift circuit.
+
+It must be emphasized that at least 2 variants of this circuit exists with differences in their operation, particularly in how the phase shift is split between sections.
+
+The schematic and the output waveform are shown below:
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator.png' | relative_url }}" style="width:75%;"/>
+  </picture>
+  <figcaption>Schematic of an RC phase shift oscillator.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-phase-shift-oscillator-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/rc-phase-shift-oscillator-plot.png' | relative_url }}" style="width:100%;"/>
+  </picture>
+  <figcaption>Output of a RC phase shift oscillator.</figcaption>
+</figure>
+
+Note that the last RC section does not use a shunt resistor to ground but rather the input impedance of the inverting amplifier.
+
+The analysis of this circuit is complex. The attenuation and phase shift of the different sections is not the same since each RC section is loaded by a different impedance: C3+R5 behave as an unloaded RC network, C2+R2 are loaded by C3+R5, C1+R1 are loaded by the chain starting with C2+R2.
+
+Despite the complex analysis, provided that all RC sections use the sames R and C values, simpler formulas are available. See [https://en.wikipedia.org/wiki/Phase-shift_oscillator](https://en.wikipedia.org/wiki/Phase-shift_oscillator).
 
 ### Comparators and positive feedback
 
@@ -150,18 +180,18 @@ The following oscillator works in a comparator mode, which can be seen by the ou
 
 <figure>
   <picture>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
-      <img src="{{ '/posts/op-amp-introduction/rc-oscillator.png' | relative_url }}" style="width:25%;"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/rc-comp-oscillator.png' | relative_url }}" style="width:25%;"/>
   </picture>
   <!-- <figcaption>TODO: put title here.</figcaption> -->
 </figure>
 
 <figure>
   <picture>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <source srcset="{{ '/posts/op-amp-introduction/rc-oscillator-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
-      <img src="{{ '/posts/op-amp-introduction/rc-oscillator-plot.png' | relative_url }}" style="width:100%;"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+      <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/rc-comp-oscillator-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <!-- <figcaption>TODO: put title here.</figcaption> -->
 </figure>
