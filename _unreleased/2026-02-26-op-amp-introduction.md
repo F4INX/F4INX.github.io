@@ -224,16 +224,18 @@ In active-output sensors or low-impedance analog sources, noise performance is g
 On the other hand, since the input bias current is relatively high, they can lead to additional offset errors when used with high-impedance sources.
 
 <figure>
-  <img src="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" />
-  <figcaption>Figure xx: Schematic diagram of a BJT differential amplifier, from https://en.wikipedia.org/wiki/Differential_amplifier</figcaption>
+<table class="images-table">
+<tr>
+<td>
+<img src="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" alt="Schematic diagram of a BJT differential amplifier with load resistors.">
+</td>
+<td>
+<img src="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" alt="Schematic diagram of a BJT differential amplifier with current mirror.">
+</td>
+</tr>
+</table>
+<figcaption>Simplified schematics of a typical input of a BJT differential amplifier, from https://en.wikipedia.org/wiki/Differential_amplifier. Left use resistors as loads and right uses a better current mirror.</figcaption>
 </figure>
-
-<figure>
-  <img src="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" />
-  <figcaption>Figure xx: Schematic diagram of a BJT differential amplifier, from https://en.wikipedia.org/wiki/Differential_amplifier</figcaption>
-</figure>
-
-<!-- TODO: Explain why two schematics. -->
 
 ### JFET-input op-amps
 
