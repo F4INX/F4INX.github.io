@@ -49,12 +49,12 @@ In practice, op-amps are not used merely as “high-gain amplifiers”; they are
 
 ### Negative feedback
 
-Negative feedback was invented by Harold S. Black based on earlier works during his research on amplifiers for long distance analog telephony with multiple carriers multiplexing [https://brewer.ece.gatech.edu/ece3043/FBBlack.pdf] <!-- Reformat. -->.
+Negative feedback was invented by Harold S. Black based on earlier works during his research on amplifiers for long distance analog telephony with multiple carriers multiplexing [https://brewer.ece.gatech.edu/ece3043/FBBlack.pdf](https://brewer.ece.gatech.edu/ece3043/FBBlack.pdf).
 
 The gain of these tube amplifiers was not stable, which was troublesome because a wrong value of the gain compound with the multiple stages and lead to too low or too high outputs. 
 
 These amplifiers had also non-linearities issues which caused not only distortion of the individual carriers but also intermodulation between carriers.
-Applying a negative feedback to an amplifier allow to trade a big gain against a stable gain. In the example given in [ref H&H], an amplifier with a voltage open-loop gain varying from 1000 (60 dB) to 10000 (80 dB) end up with a 0.1 feedback (-10 dB) with a gain varying from 9.90 (19.91 dB) to 9.99 (19,99 dB), that is going from a +- 10 dB flatness to a +- 0.04 dB flatness.
+Applying a negative feedback to an amplifier allow to trade a big gain against a stable gain. In the example given by Horowitz and Hill [2], an amplifier with a voltage open-loop gain varying from 1000 (60 dB) to 10000 (80 dB) end up with a 0.1 feedback (-10 dB) with a gain varying from 9.90 (19.91 dB) to 9.99 (19,99 dB), that is going from a +- 10 dB flatness to a +- 0.04 dB flatness.
 
 A similar although more complex analysis would show that feedback reduces non-linearities. This is left as an exercise for one my the people I’m currently mentoring. In the meanwhile, please find a beautiful picture of a cat <!-- When I start putting pictures of cats, it’s the sign I got myself tired of equations. 😃 -->.
 
@@ -66,7 +66,7 @@ Without diving too much in the theory <!-- I am now tired of equations after the
 
 The integrator configuration is also convenient to have high gains at DC, and for most practical purposes the DC gain of an operational amplifier can be considered as infinite, and the operational amplifier as a pure integrator until its unity gain frequency, without the corner due to the finite DC gain.
 
-Even if an integrator is not stable alone, this behavior is considered as much “stability friendly”, and H&H tells that making an integrator oscillate needs a real talent. (Sorry, I don’t remember if it is in the 2nd or 3rd edition.)
+Even if an integrator is not stable alone, this behavior is considered as much “stability friendly”, and Horowitz and Hill [2] tells that making an integrator oscillate needs a real talent. (Sorry, I don’t remember if it is in the 2nd or 3rd edition.)
 
 An operational amplifier is almost never used without negative feedback, at least because its high DC gain combined with its offset would make it saturate. A word of caution: a common mistake by beginners dealing with AC coupled signals is to forget the DC feedback.
 
