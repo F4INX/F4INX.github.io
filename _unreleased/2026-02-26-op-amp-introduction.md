@@ -515,9 +515,11 @@ When this parameter is important, for DC or near DC, pay attention also to the b
 
 ### (Input) offset drift
 
-<!-- TODO: Add a comment about thermal drift vs. time drift. -->
+Input offset drive belong to two main categories: thermal drift, depending on temperature, and time drift, which is a longer term aging.
 
-It is the rate at which the input offset voltage changes with temperature (typically µV/°C).
+Thermal drive is typically specified in µV/°C.
+
+Time drift is often specified in µV/month or µV/1000 hours. However, **these units can be misleading**. Since aging is a random walk ("drunkard's walk") phenomenon, it is proportional to the **square root** of the elapsed time (https://www.analog.com/media/en/training-seminars/tutorials/MT-037.pdf)[https://www.analog.com/media/en/training-seminars/tutorials/MT-037.pdf] and 1 µV/1000 hour actually corresponds to 3 µV/year instead of 9 µV/year.
 
 #### Applications for which this parameter is critical
 
