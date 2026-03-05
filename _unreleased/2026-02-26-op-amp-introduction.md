@@ -184,7 +184,7 @@ The following oscillator works in a comparator mode, which can be seen by the ou
       <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/op-amp-introduction/rc-comp-oscillator.png' | relative_url }}" style="width:25%;"/>
   </picture>
-  <!-- <figcaption>TODO: put title here.</figcaption> -->
+  <figcaption>Schematic of an RC comparator oscillator circuit using positive feedback.</figcaption>
 </figure>
 
 <figure>
@@ -193,7 +193,7 @@ The following oscillator works in a comparator mode, which can be seen by the ou
       <source srcset="{{ '/posts/op-amp-introduction/rc-comp-oscillator-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/op-amp-introduction/rc-comp-oscillator-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
-  <!-- <figcaption>TODO: put title here.</figcaption> -->
+  <figcaption>Output waveform of the RC comparator oscillator showing discrete voltage levels characteristic of comparator operation.</figcaption>
 </figure>
 
 Some sources on the internet use a 741 in this schematic. Don’t spread this mistake!
@@ -237,7 +237,7 @@ A simplified schematic of a typical CMOS operational amplifier is shown below:
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>Simplified schematic of a typical CMOS operational amplifier input stage from the OPA391 datasheet.</figcaption>
 </figure>
 
 From OPA391 data sheet, product information and support | TI.com.
@@ -276,7 +276,7 @@ Auto-zero op-amps are based on the following principle (https://wiki.analog.com/
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/auto-zero.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>Block diagram of an auto-zero operational amplifier showing the two amplifier stages and switching mechanism.</figcaption>
 </figure>
 
 They use internally two amplifiers and alternate between two modes:
@@ -327,7 +327,7 @@ https://www.ti.com/lit/ds/symlink/tl081.pdf
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/tl081.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>Simplified schematic of the TL081 operational amplifier showing N-channel JFET input stage.</figcaption>
 </figure>
 
 Both transistors are source followers trying to apply to their source their input minus some voltage. Guess something between 1 V and 2 V. The current source needs also some headroom. On the other side, there is not so much constraint between the input and the drain.
@@ -336,7 +336,7 @@ So, the input range can be inferred as: V- + headroom to Vcc. And indeed the dat
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/tl081-datasheet.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>TL081 datasheet specification showing input voltage range extending from ground + headroom to slightly above Vcc.</figcaption>
 </figure>
 
 Input range: ground + headrom to slightly higher than Vcc.
@@ -348,7 +348,7 @@ Input range: ground + headrom to slightly higher than Vcc.
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/p-input.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>Simplified schematic showing P-channel input stage configuration with input range from slightly below ground to Vcc - headroom.</figcaption>
 </figure>
 
 Input range: slightly lower than ground to Vcc – headroom.
@@ -363,7 +363,7 @@ https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-yo
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/n-p-input.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>Rail-to-rail input stage combining both N-channel and P-channel devices for extended input voltage range.</figcaption>
 </figure>
 
 ### Input supplied with charge pump
@@ -372,14 +372,14 @@ https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-yo
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/charge-pump-input.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>Charge pump circuit used to extend input voltage range beyond supply rails.</figcaption>
 </figure>
 
 https://www.ti.com/product/OPA391
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/opa391-input.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>OPA391 operational amplifier input stage schematic showing charge pump implementation.</figcaption>
 </figure>
 
 ## Basic op-amp parameters
@@ -445,7 +445,7 @@ According to https://www.ti.com/lit/an/sloa011b/sloa011b.pdf, the input resistan
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/resistances.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>Operational amplifier input resistance model showing differential (Rd) and common-mode (Rn, Rp) components.</figcaption>
 </figure>
 
 Datasheets give the elements between the inputs and the elements to ground in different ways.
@@ -454,7 +454,7 @@ In the LM324 datasheet (https://www.ti.com/lit/ds/symlink/lm324.pdf), the differ
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/lm324-datasheet.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>LM324 datasheet showing differential-mode input resistance (rid) and common-mode input resistance (ric) specifications.</figcaption>
 </figure>
 
 The common mode resistance is 400 times higher than the differential due to the operation of the input stage, which is a common behaviour.
@@ -465,7 +465,7 @@ In the NE5532 datasheet (https://www.ti.com/lit/ds/symlink/ne5532.pdf), the impe
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/ne5532-datasheet.png' | relative_url }}" />
-  <!-- <figcaption>TODO: title</figcaption> -->
+  <figcaption>NE5532 datasheet specification for single-ended input resistance (ri) measurement configuration.</figcaption>
 </figure>
 
 No information is given on the common-mode, but is can be reasonably guessed for most purposes that ri ≈ Rd and that Rp and Rn are much higher than Rd.
@@ -620,8 +620,7 @@ It is the maximum rate at which the output voltage can change over time (V/µs).
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/slew-rate.png' | relative_url }}" />
-  <figcaption>Slew-induced waveform distortion.</figcaption>
-  <!-- TODO: Rework figure caption. -->
+  <figcaption>Illustration of slew rate limitation showing how finite slew rate causes waveform distortion in high-frequency signals.</figcaption>
 </figure>
 **Source:** https://toshiba.semicon-storage.com/eu/semiconductor/knowledge/faq/linear_opamp/what-is-the-maximum-frequency-at-which-an-op-amp-can-be-used.html
 
@@ -877,7 +876,7 @@ For this reason a mere decoupling between both supplies is insufficient, even mo
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/decoupling.png' | relative_url }}" />
-  <!-- TODO: add caption <figcaption>...</figcaption> -->
+  <figcaption>Proper decoupling capacitor placement for dual-supply operational amplifier showing separate capacitors to ground for each supply.</figcaption>
 </figure>
 
 The capacitor must have a low enough total inductance, including own ESL and traces, to handle the current spikes caused by high slew rates. And he must be high enough to provide the lower frequency transients while the current ramp up in the power supply inductor, mostly the inductor of the supply distribution.
@@ -918,7 +917,7 @@ The following schematic shows the previous points:
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/ultrasonic-pcb.svg' | relative_url }}" />
-  <!-- TODO: add caption <figcaption>...</figcaption> -->
+  <figcaption>Ultrasonic sensor circuit showing operational amplifier chain U1A-U1C in pseudo-differential configuration with unfiltered mid-supply reference.</figcaption>
 </figure>
 
 ## References
