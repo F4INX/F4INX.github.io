@@ -66,7 +66,7 @@ Without diving too much in the theory <!-- I am now tired of equations after the
 
 The integrator configuration is also convenient to have high gains at DC, and for most practical purposes the DC gain of an operational amplifier can be considered as infinite, and the operational amplifier as a pure integrator until its unity gain frequency, without the corner due to the finite DC gain.
 
-Even if an integrator is not stable alone, this behavior is considered as much “stability friendly”, and Horowitz and Hill [2] tells that making an integrator oscillate needs a real talent. (Sorry, I don’t remember if it is in the 2nd or 3rd edition.)
+Even if an integrator is not stable without a feedback look, integrators are very friendly for designers, even from a stability point of view, when used in a feedback loop. In addition, the internal feedback used to provide this integrator behavior pushes other poles further in frequency, due to a phenomena called "pole splitting", so they don't add too much phase before the unity gain frequency.
 
 An operational amplifier is almost never used without negative feedback, at least because its high DC gain combined with its offset would make it saturate. A word of caution: a common mistake by beginners dealing with AC coupled signals is to forget the DC feedback.
 
