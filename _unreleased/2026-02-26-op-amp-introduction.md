@@ -851,7 +851,7 @@ References: [1], [3], [6], [7].
 
 * More complex internal architecture (may increase noise <!-- TODO for Hadrien: check a bit this one. Usually noise is more dependent on input, but often rail-to-rail is wanted in both sides. --> or cost)
 
-* Beware of output impedance <!-- TODO for Hadrien: write more about this one. -->
+* Beware of open loop output impedance. Non rail to rail output stages use voltages followers with low impedance but high headroom while rail to rail output stages use corrent sources with low headroom but high impedance. The circuits often used to properly bias both positive and negative sides of the output stage makes also the frequency behavior a bit strange. Feedback makes the closed loop impedance low, but the output impedance can cause stability issues with unconvenient loads like capacitors.
 
 #### In summary
 
