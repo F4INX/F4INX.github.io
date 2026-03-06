@@ -814,7 +814,7 @@ This one is a trap.
 
 Often, operational amplifiers and comparators are confused due to their common points despite important differences in their internal construction and operation.
 
-If some IC you want to use as an operational amplifier has an open-drain or open-collector output, this is the sign it is instead a comparator and that it should not be used in operational amplifier circuits without a true good reason. Details on this point are given in the dedicated section <!-- TODO: add reference. -->.
+If some IC you want to use as an operational amplifier has an open-drain or open-collector output, this is the sign it is instead a comparator and that it should not be used in operational amplifier circuits without a true good reason. Details on this point are given in the <a href="#operational-amplifiers-vs-comparators">operational amplifiers vs. comparators</a> section.
 
 ### Rail-to-rail output
 
@@ -858,7 +858,7 @@ Rail-to-rail output is not a simple "yes/no" feature, but a condition-dependent 
 
 ## Common traps
 
-### Operational amplifiers vs. comparators.
+<h3 id="operational-amplifiers-vs-comparators">Operational amplifiers vs. comparators</h3>
 
 Altough they look like similar, operational amplifiers and comparators are very different components.
 
