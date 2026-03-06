@@ -735,6 +735,26 @@ For these cases, fully-differential output operational amplifiers can be used. T
 
 An example circuit using a fully differential amplifier is given in ([{{"/posts/diff-amp-equations.html" | relative_url }}]({{"/posts/diff-amp-equations.html" | relative_url }})).
 
+#### Typical applications of single-ended output operational amplifiers
+
+* Single-ended output, even if the input is differential
+
+* Differential outputs with other needs like low cost, availability of the components, and other special characteristics
+
+* Various convenience considerations like circuits having already single-ended amplifiers (BOM) or use of multiple units packages
+
+#### Typical applications of fully differential output operational amplifiers
+
+* Circuits with a differential output needing matching between their outputs
+
+* Drivers for differential ADC inputs
+
+* Drivers for differential RF mixers
+
+* Drivers for differential pair cables
+
+* Interfaces between two differential circuits with different common-mode voltages
+
 ### Push-pull output
 
 The push-pull output stage is an active structure capable of driving a load by both sourcing and sinking current. The output voltage is actively controlled by the op-amp in both the upward and downward directions. In most classical op-amps, this structure is implemented as Class AB.
