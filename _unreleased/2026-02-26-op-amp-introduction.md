@@ -591,7 +591,7 @@ Before even looking at the datasheet, it should be emphasized that bit factor in
 
 * In practice, CMRR depends not only on the op-amp but also on the matching of external resistors. The datasheet value cannot always be achieved in the system.
 
-<h3 id="power-supply-rejection-ratio">PSRR (power supply rejection ratio)</h3>
+### <span id="power-supply-rejection-ratio">PSRR (power supply rejection ratio)</span>
 
 The power supply rejection ratio (PSRR) is the ratio of the variations of the input/output of an operational amplifier relative to the variation of their power supplies.
 
@@ -870,7 +870,7 @@ Rail-to-rail output is not a simple "yes/no" feature, but a condition-dependent 
 
 ## Common traps
 
-<h3 id="operational-amplifiers-vs-comparators">Operational amplifiers vs. comparators</h3>
+### <span id="operational-amplifiers-vs-comparators">Operational amplifiers vs. comparators</span>
 
 Altough they look like similar, operational amplifiers and comparators are very different components.
 
