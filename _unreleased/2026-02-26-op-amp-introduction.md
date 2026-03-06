@@ -790,7 +790,6 @@ The push-pull output stage is an active structure capable of driving a load by b
 
 * Analog signal processing chains
 
-
 #### Advantages
 
 * Suitable for linear signal generation
