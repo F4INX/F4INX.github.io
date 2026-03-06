@@ -591,9 +591,17 @@ Before even looking at the datasheet, it should be emphasized that bit factor in
 
 * In practice, CMRR depends not only on the op-amp but also on the matching of external resistors. The datasheet value cannot always be achieved in the system.
 
-### PSRR (power supply rejection ratio)
+<h3 id="power-supply-rejection-ratio">PSRR (power supply rejection ratio)</h3>
 
-It expresses how much fluctuations in the supply voltage are reflected at the output.
+The power supply rejection ratio (PSRR) is the ratio of the variations of the input/output of an operational amplifier relative to the variation of their power supplies.
+
+According to https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf which gives lots of valuable explanations on this topic, this quantity should named PSRR when expressed in linear units, and PSR when expressed in dB, but nobody seems to follows exactly this convention.
+
+This quantity can be referred either to the input or to the output, so the datasheet must be read carefully, as advised in https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf. However, this precision of sometimes forgotten from the datasheet itself, like in this one from their own colleagues: https://www.analog.com/media/en/technical-documentation/data-sheets/op1177_2177_4177.pdf .
+
+So, in doubt, assume worst case for your circuit between input and outpout.
+
+PSRR can be measured and specified either for the positive supply, either for the negative supply, or for a symmetrical change in both supply. The latter case is often seen but not realistic, because noise on both supplies is likely to be different. In this last case, since the middle of both supplies is likely to move also, not only the "symmetrical PSRR" but also the CMRR must be taken into account for a detailed calculation. Anyway, both quantities have similar origins and similar values.
 
 #### Applications where this parameter is critical
 
@@ -703,9 +711,13 @@ Although often overlooked, the output type directly affects design success, espe
 
 ### Single-Ended Output
 
-In a single-ended output, the signal produced by the op-amp is taken from a single output node and is expressed with respect to a fixed reference (most commonly system ground or a defined reference voltage).
+Most operational amplifies have a single signal output, configuration called "single-ended output". This output is often referred to the ground. While amplifiers used with a single supply are connected to this ground and to the positive supply, amplifiers used with a dual supply are connected to the negative and to the positive supply voltages, but almost never directly to the ground.
 
-When one says "the output is 1.4 V", it is clear with respect to which reference this value is measured. <!-- Comment from Hadrien: But how the op-amp produces an output referred to ground when it has not even connections to it ? You asked without knowing a very good question and open a can of worms… ☺️ --> The vast majority of general-purpose op-amps produce this type of output.
+So, and particularly in cases where the supply voltages move for whatever reason like noise, which is the reference actually used by the operational amplifier ?
+
+Turns out that this question depends a lot on the internal structure, can even be different between input and output stages, and even depends on the common-mode input voltage and output voltage for rail-to-rail operational amplifiers.
+
+So, for pratical purposesn, the reference can be considered as being the ground, the power supplies must be decoupled to it, and the PSRR (see section <a href="#power-supply-rejection-radio">power supply rejection ratio</a>) must be checked because this ratio will precisely tell to which extents your "ground reference" hypothesis is accurate.
 
 #### Typical applications
 
