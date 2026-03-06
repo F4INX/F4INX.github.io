@@ -300,8 +300,6 @@ Usually, bipolar amplifiers are preferred when searching for low offsets. Howeve
 
 While they provide a maor advantage in measurement systems where DC accurary (offset) and long-term stability (offset drive) are critical, they exhibit switching noise and can also have more subtle issues, like recovery from overload (the correcting amplifiers trying to compensate the input difference even if it is not due to an offset). Pay attention to the datasheet.
 
-<!-- TODO: Have a look on the most common pitfalls of auto-zero opamps. -->
-
 ### Audio op-amps
 
 They are optimized for low distortion (deviation of the signal from the ideal waveform) and highly linear behavior within the human hearing band.
