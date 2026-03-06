@@ -316,13 +316,33 @@ These op-amps are more sensitive to layout, feedback network design, and stabili
 
 ### Current-feedback amplifiers (CFA)
 
+<!-- TODO: more pictures. -->
+
 <!-- Belong in theory to input stage, but better here. -->
 
-They use a different architecture from classical voltage-feedback op-amps.
+They use a different architecture from voltage-feedback op-amps.
 
-Bandwidth is largely independent of gain, and very high slew rates can be achieved. On the other hand, the values of feedback components must be selected in accordance with manufacturer recommendations. <!-- TODO: reformulate this. -->
+While voltage-feedback amplifiers have their output depending on the difference between the voltages at their inputs, current feedback amplifier apply on their IN- terminal the voltage they get on their IN+ input and have their output depending on the **current** flowing in the IN- input.
 
-<!-- From Hadrien: I know them very well, let me this one. :) -->
+Voltage feedback amplifiers are usually compensated to be stable when used as unity gain followers, a more difficult situation for stability than amplifiers having a gain higher than unity, since the feedback for unity gain is higher. When such amplifiers ar used for higher gains, they are clearly over-compensated, which reduced their performance.
+
+On the contrary, with current feedback amplifiers, compensation is adjusted using the feedback resistor, so it has the right value when using higher gains.
+
+This is one of the reason they are very popular, and also why this feedback resistor must have the value recommended by the manufacturer.
+
+The need of a rather low feedback resistance seems inconvenient, but current feedback amplifiers are almost always used for high-speed design where voltage feedback amplifiers would also need a low feedback resistances to avoid the effects of input capacitances. Indeed, in some circuits, both families are in practice almost interchangeable.
+
+For instance, the differential amplifier which gave me the opportunity to write this note ([{{"/posts/diff-amp-equations.html" | relative_url }}]({{"/posts/diff-amp-equations.html" | relative_url }})), used actually an ADA4927 which is a **current feedback** amplifier, but for some reason the demo circuit used in the webpage uses an ADA4937 which is a **voltage feedback** amplifier. But this works well because:
+
+* both have the same footprints, even if not relevant for an LTSpice simulation,
+
+* the recommended feedback resistor value for the current feedback amplifiers are often in the range of recommanded values of high-speed voltage amplifiers, and
+
+* feedback allows to have a similar circuit work with both types: input current or voltage is low enough for calculations.
+
+The feedback **must** be resistive, at least the resistive part of it must be dominant. **Never** directly a capacitor as a feed back.
+
+Slew rates are also faster than voltage-feedback op-amps. In voltage-feedback amplifiers, the output current of the first stage is limited by the current source which in combination with the compensation capacitor limits the slew rage. On the contrary, in current-feedback ampflifiers, this current is directly fed by the user. More details can be found in [https://www.analog.com/en/resources/analog-dialogue/articles/current-feedback-amplifiers-1.html](https://www.analog.com/en/resources/analog-dialogue/articles/current-feedback-amplifiers-1.html).
 
 ## Op-amp input stage headroom according to structure
 
