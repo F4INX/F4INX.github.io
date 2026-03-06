@@ -709,7 +709,7 @@ The output stage of an op-amp determines how the amplified signal is presented, 
 
 Although often overlooked, the output type directly affects design success, especially at low supply voltages, when driving ADCs, and in digital–analog interfaces.
 
-### Single-Ended Output
+### Single-ended vs. fully differential output
 
 Most operational amplifies have a single signal output, configuration called "single-ended output". This output is often referred to the ground. While amplifiers used with a single supply are connected to this ground and to the positive supply, amplifiers used with a dual supply are connected to the negative and to the positive supply voltages, but almost never directly to the ground.
 
@@ -719,74 +719,41 @@ Turns out that this question depends a lot on the internal structure, can even b
 
 So, for pratical purposesn, the reference can be considered as being the ground, the power supplies must be decoupled to it, and the PSRR (see section <a href="#power-supply-rejection-radio">power supply rejection ratio</a>) must be checked because this ratio will precisely tell to which extents your "ground reference" hypothesis is accurate.
 
-#### Typical applications
+Single-ended output operational amplifiers are obviously sufficient when only a single-ended output is needed, but sometimes a differential output is needed, to drive either a differential wire or some component needing a differential input.
 
-* General-purpose analog amplifiers
-* Sensor interfaces (short distance, low-noise environments)
-* Active filters
-* Laboratory and bench-top measurement circuits
+Multiple single-ended ampilfiers can be used in this case, but this solution is not perfect:
 
-#### Advantages
+* need of multiple components,
 
-<!-- TODO: rework. -->
+* amplitude matching between outputs,
 
-* Simple circuit topology
+* phase matching, particularly at higher frequencies, and
 
-* No additional receiver circuitry required
+* output impedane mismatch.
 
-* Easy measurement and debugging
+For these cases, fully-differential output operational amplifiers can be used. They have directly a differential output, plus a Vocm input to set up the common-mode range.
 
-* Direct compatibility with most ADCs and analog blocks
+An example circuit using a fully differential amplifier is given in ([{{"/posts/diff-amp-equations.html" | relative_url }}]({{"/posts/diff-amp-equations.html" | relative_url }})).
 
-#### Disadvantages
+#### Typical applications of single-ended output operational amplifiers
 
-* Limited noise immunity
+* Single-ended output, even if the input is differential
 
-* Not suitable for long cables or noisy environments
+* Differential outputs with other needs like low cost, availability of the components, and other special characteristics
 
-* Noise at the reference point (ground) directly couples into the signal
+* Various convenience considerations like circuits having already single-ended amplifiers (BOM) or use of multiple units packages
 
-#### In summary
+#### Typical applications of fully differential output operational amplifiers
 
-Single-ended output is sufficient for simple and local analog circuits; however, as the system grows and the environment becomes noisier, it becomes a limiting factor.
+* Circuits with a differential output needing matching between their outputs
 
-### Differential output
+* Drivers for differential ADC inputs
 
-In a differential output, the signal is not defined as the absolute voltage of a single node, but as the voltage difference between two output nodes. Information is carried in the difference between these two lines; simultaneous shifts of both lines with respect to ground do not change the signal’s meaning.
+* Drivers for differential RF mixers
 
-#### Typical applications
+* Drivers for differential pair cables
 
-* Differential-input ADC drivers <!-- And not only ADCs -->
-
-* Long-cable analog connections
-
-* Noisy industrial environments
-
-* High-resolution data acquisition systems
-
-#### Advantages
-
-* Common-mode noise is largely suppressed  <!-- TODO: Rework. -->
-
-* Higher signal integrity is achieved
-
-* Higher effective dynamic range can be obtained under the same supply voltage
-
-* Natural compatibility with modern ADC architectures
-
-#### Disadvantages
-
-* More complex circuitry and routing
-
-* Requires a differential receiver or ADC
-
-#### Pay attention to
-
-* Output common-mode voltage (VOCM) must be set correctly
-
-#### In summary
-
-Differential output provides a clear advantage in systems where signal integrity is critical; however, this advantage comes at the cost of increased design complexity.
+* Interfaces between two differential circuits with different common-mode voltages
 
 ### Push-pull output
 
