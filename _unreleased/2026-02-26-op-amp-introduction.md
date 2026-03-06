@@ -250,12 +250,8 @@ A simplified schematic of a typical CMOS operational amplifier is shown below:
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" />
-  <figcaption>Simplified schematic of a typical CMOS operational amplifier input stage from the OPA391 datasheet.</figcaption>
+  <figcaption>Simplified schematic of a typical CMOS operational amplifier input stage from the OPA391 datasheet (<a href="https://www.ti.com/product/OPA391">https://www.ti.com/product/OPA391</a>).</figcaption>
 </figure>
-
-From OPA391 data sheet, product information and support | TI.com.
-
-<!-- TODO: reformat. -->
 
 In summary, if the source impedance is low, a BJT input is preferred; for medium-to-high impedance sources, a JFET input; and for very high impedance and low power requirements, a CMOS input is generally the most suitable choice.
 
