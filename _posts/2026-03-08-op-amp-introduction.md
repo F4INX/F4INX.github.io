@@ -900,4 +900,4 @@ The following schematic shows the previous points:
 
 [7] Texas Instruments, Fully Differential Amplifiers, Application Report.
 
-[8] https://www.youtube.com/watch?v=4PYjRmtSth8
+[8] IFE - TU Graz, Differential amplifiers - basics, principle, common and differential mode gains, ideal vs. real, CMRR [https://www.youtube.com/watch?v=4PYjRmtSth8](https://www.youtube.com/watch?v=4PYjRmtSth8)
