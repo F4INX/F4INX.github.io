@@ -20,6 +20,8 @@ collections:
     output: true
   details:
     output: true
+  drafts:
+    output: true
 
 # Feed
 feed:
