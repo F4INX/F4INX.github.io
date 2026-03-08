@@ -214,7 +214,11 @@ Battery-powered systems and long-term DC measurements fall into this category. H
 A simplified schematic of a typical CMOS operational amplifier is shown below:
 
 <figure>
-  <img src="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" />
+  <picture>
+    <source srcset="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/op-amp-introduction/fet-amp-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" style="width:75%;"/>
+  </picture>
   <figcaption>Simplified schematic of a typical CMOS operational amplifier input stage from the OPA391 datasheet (<a href="https://www.ti.com/product/OPA391">https://www.ti.com/product/OPA391</a>).</figcaption>
 </figure>
 
