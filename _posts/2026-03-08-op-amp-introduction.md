@@ -85,8 +85,8 @@ Simulation and output waveform of wien bridge oscillator without automatic gain 
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
-      <img src="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" style="width:75%;"/>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/wien-without-agc.png' | relative_url }}" style="width:75%;"/>
   </picture>
   <figcaption>Schematic of a wien bridge oscillator without automatic gain control.</figcaption>
 </figure>
