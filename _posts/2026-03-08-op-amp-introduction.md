@@ -2,7 +2,7 @@
 layout: post
 title: A (not so) gentle introduction to operational amplifiers.
 permalink: /posts/op-amp-introduction.html
-last_modified_at: 2026-02-26
+last_modified_at: 2026-03-08
 ---
 
 <style>
@@ -35,7 +35,7 @@ last_modified_at: 2026-02-26
 
 <div markdown="1" class="op-amp-introduction">
 
-<p class="begin-note">After some discussions on grounding and various subjects with Gönül Demir, we thought that it could be a good idea to combine our both approaches to make a join page. Indeed I began my series by writing detailed articles about complex points and not by an introduction. We hope that this gentle (or not so) introduction to the topic would fill the gap.</p>
+<p class="begin-note">After some discussions on grounding and various subjects with <a href="https://www.linkedin.com/in/gonul-demir-49413433/">Gönül Demir</a>, we thought that it could be a good idea to combine our both approaches to make a join page. Indeed I began my series by writing detailed articles about complex points and not by an introduction. We hope that this gentle (or not so) introduction to the topic would fill the gap.</p>
 
 ## What is an op-amp?
 
@@ -56,7 +56,11 @@ The gain of these tube amplifiers was not stable, which was troublesome because 
 These amplifiers had also non-linearities issues which caused not only distortion of the individual carriers but also intermodulation between carriers.
 Applying a negative feedback to an amplifier allow to trade a big gain against a stable gain. In the example given by Horowitz and Hill [2], an amplifier with a voltage open-loop gain varying from 1000 (60 dB) to 10000 (80 dB) end up with a 0.1 feedback (-10 dB) with a gain varying from 9.90 (19.91 dB) to 9.99 (19,99 dB), that is going from a +- 10 dB flatness to a +- 0.04 dB flatness.
 
-A similar although more complex analysis would show that feedback reduces non-linearities. This is left as an exercise for one my the people I’m currently mentoring. In the meanwhile, please find a beautiful picture of a cat <!-- When I start putting pictures of cats, it’s the sign I got myself tired of equations. 😃 -->.
+A similar although more complex analysis would show that feedback reduces non-linearities. This is left as an exercise for one my the people I’m currently mentoring. In the meanwhile, please find a beautiful picture of 2 cats, courtesy of Wikipedia:
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+
+<!-- When I start telling that I will put pictures of a cat instead of equations, and even forget them, it’s the sign I got myself rally tired of equations. 😃 -->
 
 ### Operational amplifiers and negative feedback
 
@@ -81,8 +85,8 @@ Simulation and output waveform of wien bridge oscillator without automatic gain 
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
-      <img src="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" style="width:75%;"/>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/wien-without-agc.png' | relative_url }}" style="width:75%;"/>
   </picture>
   <figcaption>Schematic of a wien bridge oscillator without automatic gain control.</figcaption>
 </figure>
@@ -90,7 +94,7 @@ Simulation and output waveform of wien bridge oscillator without automatic gain 
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/op-amp-introduction/wien-without-agc-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Output after startup of a wien bridge oscillator without automatic gain control. Note the clipping of the waveforms.</figcaption>
@@ -101,8 +105,8 @@ To avoid the drawbacks of the clipping method to set the loop gain, automatic ga
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
-      <img src="{{ '/posts/op-amp-introduction/wien-with-agc-dark.png' | relative_url }}" style="width:75%;"/>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/wien-with-agc.png' | relative_url }}" style="width:75%;"/>
   </picture>
   <figcaption>Schematic of a wien bridge oscillator without automatic gain control.</figcaption>
 </figure>
@@ -110,7 +114,7 @@ To avoid the drawbacks of the clipping method to set the loop gain, automatic ga
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-wit-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/op-amp-introduction/wien-with-agc-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Output of a wien bridge oscillator with automatic gain control. The waveform has no clipping.</figcaption>
@@ -130,7 +134,7 @@ Details on the oscillations in etablished regime, shown below, show the absence 
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-wit-agc-zoom-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Waveform details of a wien bridge oscillator with automatic gain control. No clipping is present.</figcaption>
@@ -184,10 +188,18 @@ On the other hand, since the input bias current is relatively high, they can lea
 <table class="images-table">
 <tr>
 <td>
-<img src="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" alt="Schematic diagram of a BJT differential amplifier with load resistors.">
+  <picture>
+    <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-1-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts//posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" style="width:100%;"/>
+  </picture>
 </td>
 <td>
-<img src="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" alt="Schematic diagram of a BJT differential amplifier with current mirror.">
+  <picture>
+    <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-2-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" style="width:100%;"/>
+  </picture>
 </td>
 </tr>
 </table>
@@ -206,7 +218,11 @@ Battery-powered systems and long-term DC measurements fall into this category. H
 A simplified schematic of a typical CMOS operational amplifier is shown below:
 
 <figure>
-  <img src="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" />
+  <picture>
+    <source srcset="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/op-amp-introduction/fet-amp-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/op-amp-introduction/fet-amp.png' | relative_url }}" style="width:75%;"/>
+  </picture>
   <figcaption>Simplified schematic of a typical CMOS operational amplifier input stage from the OPA391 datasheet (<a href="https://www.ti.com/product/OPA391">https://www.ti.com/product/OPA391</a>).</figcaption>
 </figure>
 
@@ -241,7 +257,11 @@ High bandwidth is generally not a priority in these op-amps.
 Auto-zero op-amps are based on the following principle (https://wiki.analog.com/university/courses/electronics/text/chapter-15):
 
 <figure>
-  <img src="{{ '/posts/op-amp-introduction/auto-zero.png' | relative_url }}" />
+  <picture>
+    <source srcset="{{ '/posts/op-amp-introduction/auto-zero.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/op-amp-introduction/auto-zero-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/op-amp-introduction/auto-zero.png' | relative_url }}" style="width:75%;"/>
+  </picture>
   <figcaption>Block diagram of an auto-zero operational amplifier showing the two amplifier stages and switching mechanism.</figcaption>
 </figure>
 
@@ -900,4 +920,4 @@ The following schematic shows the previous points:
 
 [7] Texas Instruments, Fully Differential Amplifiers, Application Report.
 
-[8] https://www.youtube.com/watch?v=4PYjRmtSth8
+[8] IFE - TU Graz, Differential amplifiers - basics, principle, common and differential mode gains, ideal vs. real, CMRR [https://www.youtube.com/watch?v=4PYjRmtSth8](https://www.youtube.com/watch?v=4PYjRmtSth8)
