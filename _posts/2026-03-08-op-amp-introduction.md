@@ -35,7 +35,7 @@ last_modified_at: 2026-03-08
 
 <div markdown="1" class="op-amp-introduction">
 
-<p class="begin-note">After some discussions on grounding and various subjects with Gönül Demir, we thought that it could be a good idea to combine our both approaches to make a join page. Indeed I began my series by writing detailed articles about complex points and not by an introduction. We hope that this gentle (or not so) introduction to the topic would fill the gap.</p>
+<p class="begin-note">After some discussions on grounding and various subjects with <a href="https://www.linkedin.com/in/gonul-demir-49413433/">Gönül Demir</a>, we thought that it could be a good idea to combine our both approaches to make a join page. Indeed I began my series by writing detailed articles about complex points and not by an introduction. We hope that this gentle (or not so) introduction to the topic would fill the gap.</p>
 
 ## What is an op-amp?
 
