@@ -90,7 +90,7 @@ Simulation and output waveform of wien bridge oscillator without automatic gain 
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <source srcset="{{ '/posts/op-amp-introduction/wien-without-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/op-amp-introduction/wien-without-agc-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Output after startup of a wien bridge oscillator without automatic gain control. Note the clipping of the waveforms.</figcaption>
@@ -101,8 +101,8 @@ To avoid the drawbacks of the clipping method to set the loop gain, automatic ga
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
-      <img src="{{ '/posts/op-amp-introduction/wien-with-agc-dark.png' | relative_url }}" style="width:75%;"/>
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+      <img src="{{ '/posts/op-amp-introduction/wien-with-agc.png' | relative_url }}" style="width:75%;"/>
   </picture>
   <figcaption>Schematic of a wien bridge oscillator without automatic gain control.</figcaption>
 </figure>
@@ -110,7 +110,7 @@ To avoid the drawbacks of the clipping method to set the loop gain, automatic ga
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-wit-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/op-amp-introduction/wien-with-agc-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Output of a wien bridge oscillator with automatic gain control. The waveform has no clipping.</figcaption>
@@ -130,7 +130,7 @@ Details on the oscillations in etablished regime, shown below, show the absence 
 <figure>
   <picture>
       <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
-      <!-- <source srcset="{{ '/posts/op-amp-introduction/wien-wit-agc-zoom-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/> -->
+      <source srcset="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
       <img src="{{ '/posts/op-amp-introduction/wien-with-agc-zoom-plot.png' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Waveform details of a wien bridge oscillator with automatic gain control. No clipping is present.</figcaption>
