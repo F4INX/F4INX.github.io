@@ -257,7 +257,11 @@ High bandwidth is generally not a priority in these op-amps.
 Auto-zero op-amps are based on the following principle (https://wiki.analog.com/university/courses/electronics/text/chapter-15):
 
 <figure>
-  <img src="{{ '/posts/op-amp-introduction/auto-zero.png' | relative_url }}" />
+  <picture>
+    <source srcset="{{ '/posts/op-amp-introduction/auto-zero.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/op-amp-introduction/auto-zero-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/op-amp-introduction/auto-zero.png' | relative_url }}" style="width:75%;"/>
+  </picture>
   <figcaption>Block diagram of an auto-zero operational amplifier showing the two amplifier stages and switching mechanism.</figcaption>
 </figure>
 
