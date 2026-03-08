@@ -184,10 +184,18 @@ On the other hand, since the input bias current is relatively high, they can lea
 <table class="images-table">
 <tr>
 <td>
-<img src="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" alt="Schematic diagram of a BJT differential amplifier with load resistors.">
+  <picture>
+    <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-1-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts//posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" style="width:100%;"/>
+  </picture>
 </td>
 <td>
-<img src="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" alt="Schematic diagram of a BJT differential amplifier with current mirror.">
+  <picture>
+    <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
+    <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-2-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
+    <img src="{{ '/posts/op-amp-introduction/bjt-amp-2.png' | relative_url }}" style="width:100%;"/>
+  </picture>
 </td>
 </tr>
 </table>
