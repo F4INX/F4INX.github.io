@@ -51,11 +51,13 @@ I was thinking this is typical from Cătălina when she lacks coffee... until I 
 
 Holy damn. The resistor which should have no effect DOES HAVE an effect, and now the frequency is even further away from the theory: 4.5 kHz.
 
-## Better understanding the problem
+## ...even further
 
-*Section to write. In the meantime, please find a picture of a beautiful cat:*
+Next I simulate the first version proposed by Andreas "Bullterrier" which uses the input resistor of the inverting operational amplifier as an equivalent of the final shunt resistor:
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+<img src="{{ '/posts/how-not-to-do-oscillators/03-rc-phase-shift-oscillator.png' | relative_url }}"/>
+
+The frequency is far from the theory, 5.0 kHz instead of 6.5 kHz, and the gain needed for a quick start higher than the theory.
 
 ## Straight to a solution
 
