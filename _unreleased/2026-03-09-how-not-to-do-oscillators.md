@@ -69,6 +69,8 @@ I made a Lissajous diagram to have a first look at the impedance:
 
 We see that for low amplitudes the trajectory (green) is close to a 1 kΩ resistance (blue) but that for higher amplitudes the trajectory becomes much more complex, with a mixture of reactive behavior and of non-linearities for an equivalent impedance around 7 kΩ, much higher than expected at a first glance.
 
+<img src="{{ '/posts/how-not-to-do-oscillators/03-rc-phase-shift-oscillator-voltages.png' | relative_url }}"/>
+
 ## Straight to a solution
 
 *Details coming soon*
