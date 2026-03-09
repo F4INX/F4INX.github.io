@@ -54,13 +54,14 @@ Negative feedback was invented by Harold S. Black based on earlier works during 
 The gain of these tube amplifiers was not stable, which was troublesome because a wrong value of the gain compound with the multiple stages and lead to too low or too high outputs. 
 
 These amplifiers had also non-linearities issues which caused not only distortion of the individual carriers but also intermodulation between carriers.
+
 Applying a negative feedback to an amplifier allow to trade a big gain against a stable gain. In the example given by Horowitz and Hill [2], an amplifier with a voltage open-loop gain varying from 1000 (60 dB) to 10000 (80 dB) end up with a 0.1 feedback (-10 dB) with a gain varying from 9.90 (19.91 dB) to 9.99 (19,99 dB), that is going from a +- 10 dB flatness to a +- 0.04 dB flatness.
 
-A similar although more complex analysis would show that feedback reduces non-linearities. This is left as an exercise for one of the people I’m currently mentoring. In the meanwhile, please find a beautiful picture of 2 cats, courtesy of Wikipedia:
+This gain stabilization works no matter the root cause of the original gain variation. It works as well against changes in gain with time (thermal drift and aging), or changes in gain with frequency (dispersion), or changes in gain with amplitude (non-linearities).
+
+*Here, some beautiful cats instead of more complex maths.*
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
-
-<!-- When I start telling that I will put pictures of a cat instead of equations, and even forget them, it’s the sign I got myself rally tired of equations. 😃 -->
 
 ### Operational amplifiers and negative feedback
 
@@ -903,6 +904,8 @@ The following schematic shows the previous points:
   <img src="{{ '/posts/op-amp-introduction/ultrasonic-pcb.svg' | relative_url }}" />
   <figcaption>Ultrasonic sensor circuit showing operational amplifier chain U1A-U1C in pseudo-differential configuration with unfiltered mid-supply reference.</figcaption>
 </figure>
+
+###
 
 ## References
 
