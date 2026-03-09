@@ -59,6 +59,16 @@ Next I simulate the first version proposed by Andreas "Bullterrier" which uses t
 
 The frequency is far from the theory, 5.0 kHz instead of 6.5 kHz, and the gain needed for a quick start higher than the theory.
 
+## Digging in the problem
+
+All this stuff semm to have one question in common: what is actually the impedance of the operational amplifier circuit, no matter its variant.
+
+I made a Lissajous diagram to have a first look at the impedance:
+
+<img src="{{ '/posts/how-not-to-do-oscillators/03-rc-phase-shift-oscillator-Lissajous.png' | relative_url }}"/>
+
+We see that for low amplitudes the trajectory (green) is close to a 1 kΩ resistance (blue) but that for higher amplitudes the trajectory becomes much more complex, with a mixture of reactive behavior and of non-linearities for an equivalent impedance around 7 kΩ, much higher than expected at a first glance.
+
 ## Straight to a solution
 
 *Details coming soon*
