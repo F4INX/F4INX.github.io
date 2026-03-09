@@ -192,7 +192,7 @@ On the other hand, since the input bias current is relatively high, they can lea
   <picture>
     <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" media="(prefers-color-scheme: light)"/>
     <source srcset="{{ '/posts/op-amp-introduction/bjt-amp-1-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)"/>
-    <img src="{{ '/posts//posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" style="width:100%;"/>
+    <img src="{{ '/posts/op-amp-introduction/bjt-amp-1.png' | relative_url }}" style="width:100%;"/>
   </picture>
 </td>
 <td>
