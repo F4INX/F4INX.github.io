@@ -50,3 +50,26 @@ I was thinking this is typical from Cătălina when she lacks coffee... until I 
 <img src="{{ '/posts/how-not-to-do-oscillators/02-rc-phase-shift-oscillator.png' | relative_url }}"/>
 
 Holy damn. The resistor which should have no effect DOES HAVE an effect, and now the frequency is even further away from the theory: 4.5 kHz.
+
+## Better understanding the problem
+
+*Section to write. In the meantime, please find a picture of a beautiful cat:*
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+
+## Straight to a solution
+
+*Details coming soon*
+
+<figure>
+<table class="images-table">
+<tr>
+<td>
+  <img src="{{ '/posts/how-not-to-do-oscillators/dds-module.jpg' | relative_url }}" style="width:100%;"/>
+</td>
+<td>
+  <img src="{{ '/posts/how-not-to-do-oscillators/dds-module-use.jpg' | relative_url }}" style="width:100%;"/>
+</td>
+</tr>
+</table>
+</figure>
