@@ -26,3 +26,27 @@ Riiiiiiiiiiiing.
 * Indeed a great match... But they will be off a few days and...
 
 * Got it...
+
+## Digging in the problem...
+
+I start simulating the very first version of this circuit by Cătălina "Tank":
+
+<img src="{{ '/posts/how-not-to-do-oscillators/01-rc-phase-shift-oscillator.png' | relative_url }}"/>
+
+On a first glance, nothing worth a fight. Seems to be a boring oscillator.
+
+Next I found this mail of Andreas "Bullterrier":
+
+*"Weird circuit... First, R3 should not have any effect. Second, why your frequency is shifted from the theoretical 6.5 kHz to 6.0 kHz ?"*
+
+First point seems rather sound...
+
+A few mails later, this mail by Cătălina "Tank":
+
+*"You stubborn! Simulations DOES show it has an effect."*
+
+I was thinking this is typical from Cătălina when she lacks coffee... until I ran a simulation:
+
+<img src="{{ '/posts/how-not-to-do-oscillators/02-rc-phase-shift-oscillator.png' | relative_url }}"/>
+
+Holy damn. The resistor which should have no effect DOES HAVE an effect, and now the frequency is even further away from the theory: 4.5 kHz.
