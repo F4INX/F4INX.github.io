@@ -71,6 +71,12 @@ We see that for low amplitudes the trajectory (green) is close to a 1 kΩ resist
 
 <img src="{{ '/posts/how-not-to-do-oscillators/03-rc-phase-shift-oscillator-voltages.png' | relative_url }}"/>
 
+## Andreas striked back
+
+Andreas seems to have seen that the input impedance of the inverting amplifier what not the expected value since he made this second version I simulate:
+
+<img src="{{ '/posts/how-not-to-do-oscillators/04-rc-phase-shift-oscillator.png' | relative_url }}"/>
+
 ## Straight to a solution
 
 *Details coming soon*
