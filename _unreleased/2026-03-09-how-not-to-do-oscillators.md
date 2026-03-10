@@ -77,6 +77,18 @@ Andreas seems to have seen that the input impedance of the inverting amplifier w
 
 <img src="{{ '/posts/how-not-to-do-oscillators/04-rc-phase-shift-oscillator.png' | relative_url }}"/>
 
+Indeed he used a shunt resistor and did not rely anymore on the input impedance of the operational amplifier. The oscillation frequency, 6.2 kHz, is closer to the expected value of 6.5 kHz. Again the needed gain is higher. But seems rather fine except...
+
+## Cătălina stikes back
+
+<em markdown=0>"You ******* cheater. You made a comparison between circuits but changed the operational amplifier. Your damn **** does not work with the original amplifier while my circuit does."</em>
+
+Indeed I missed this change. And when simulating with the original amplifier:
+
+<img src="{{ '/posts/how-not-to-do-oscillators/05-rc-phase-shift-oscillator.png' | relative_url }}"/>
+
+I need feedback amplifier gains **much** higher than the theoretical value, and the oscillation frequency, somewhere around 4.5 kHz <!-- TODO: precise value. --> was very far from the expected 6.5 kHz.
+
 ## Straight to a solution
 
 *Details coming soon*
