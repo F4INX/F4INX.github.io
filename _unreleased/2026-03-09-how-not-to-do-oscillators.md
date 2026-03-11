@@ -97,7 +97,15 @@ I tried first to check for any loading effects by introducing ideal followers be
 
 Same tendencies, and the needed resistances are even worse. So, this problem is not in the impedances but really in the transfert functions. Since this problem depends on the operational amplifier, it is the point to check. And since it concerns also the low amplitude part, it should be seen also in small signal.
 
+So I made a small signal simulation of the amplifying part with both operational amplifier models to compare:
+
 <img src="{{ '/posts/how-not-to-do-oscillators/06-rc-phase-shift-oscillator-amplifier.png' | relative_url }}"/>
+
+The LT1001 has a low gain-bandwidth product, around 400 kHz in simulation, sufficient to provide the gain requested by the feedback, but with a 15.5° phase delay compared to the ideal value. On the contrary, the ADA4077 had only a 3.1° phase delay. Note the gain with both amplifiers is almost identical.
+
+15.5° would not seem enough to wreak a circuit, but maybe RC phase shift oscillators are pricky ?
+
+I begin to realize that this circuit might be monster and that it drove mad Andreas and Cătălina for a reason...
 
 ## Straight to a solution
 
