@@ -97,6 +97,8 @@ I tried first to check for any loading effects by introducing ideal followers be
 
 Same tendencies, and the needed resistances are even worse. So, this problem is not in the impedances but really in the transfert functions. Since this problem depends on the operational amplifier, it is the point to check. And since it concerns also the low amplitude part, it should be seen also in small signal.
 
+<img src="{{ '/posts/how-not-to-do-oscillators/06-rc-phase-shift-oscillator-amplifier.png' | relative_url }}"/>
+
 ## Straight to a solution
 
 *Details coming soon*
