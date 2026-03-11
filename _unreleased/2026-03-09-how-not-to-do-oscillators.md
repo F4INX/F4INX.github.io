@@ -113,6 +113,18 @@ Next step is to simulate the RC network:
 
 At the frequency shift needed to have a 15.5° phase advance to compensate the amplifier phase delay, a +5.2dB gain increase is needed to compensate the increased losses of the RC network. This is a beginning of explanation, but only partial, since this value is not sufficient alone to explain the needed resistor values, and at the lowered frequency of oscillation the phase shift is also lower.
 
+## Digging not more in oscillator theory
+
+At this point, we would have to dig more in oscillator theory.
+
+But enough fiddling with such stuff. Time for cats, courtesy of Wikipedia:
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+
+Enough of such falsely simple circuits. Lots of experimenters think they are simple because they manage to get something. But after how many hours of work ? And working reliably ? And at the correct frequency ? And so on. Making such oscillators is not as simple as it looks, and the story of Andreas and Cătălina is here to remind us this.
+
+Time to enter in the 21th century.
+
 ## Straight to a solution
 
 *Details coming soon*
