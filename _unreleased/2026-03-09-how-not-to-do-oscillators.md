@@ -89,6 +89,14 @@ Indeed I missed this change. And when simulating with the original amplifier:
 
 I need feedback amplifier gains **much** higher than the theoretical value, and the oscillation frequency, somewhere around 4.5 kHz <!-- TODO: precise value. --> was very far from the expected 6.5 kHz.
 
+## Digging
+
+I tried first to check for any loading effects by introducing ideal followers before the RC and before the operational amplifier with its feedback:
+
+<img src="{{ '/posts/how-not-to-do-oscillators/06-rc-phase-shift-oscillator.png' | relative_url }}"/>
+
+Same tendencies, and the needed resistances are even worse. So, this problem is not in the impedances but really in the transfert functions. Since this problem depends on the operational amplifier, it is the point to check. And since it concerns also the low amplitude part, it should be seen also in small signal.
+
 ## Straight to a solution
 
 *Details coming soon*
