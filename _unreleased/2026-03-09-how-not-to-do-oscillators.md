@@ -107,6 +107,12 @@ The LT1001 has a low gain-bandwidth product, around 400 kHz in simulation, suffi
 
 I begin to realize that this circuit might be monster and that it drove mad Andreas and Cătălina for a reason...
 
+Next step is to simulate the RC network:
+
+<img src="{{ '/posts/how-not-to-do-oscillators/06-rc-phase-shift-oscillator-rc.png' | relative_url }}"/>
+
+At the frequency shift needed to have a 15.5° phase advance to compensate the amplifier phase delay, a +5.2dB gain increase is needed to compensate the increased losses of the RC network. This is a beginning of explanation, but only partial, since this value is not sufficient alone to explain the needed resistor values, and at the lowered frequency of oscillation the phase shift is also lower.
+
 ## Straight to a solution
 
 *Details coming soon*
