@@ -577,7 +577,7 @@ The power supply rejection ratio (PSRR) is the ratio of the variations of the in
 
 According to [https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf ) which gives lots of valuable explanations on this topic, this quantity should named PSRR when expressed in linear units, and PSR when expressed in dB, but nobody seems to follows exactly this convention.
 
-This quantity can be referred either to the input or to the output, so the datasheet must be read carefully, as advised in [https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf). However, this precision of sometimes forgotten from the datasheet itself, like in this one from their own colleagues: [https://www.analog.com/media/en/technical-documentation/data-sheets/op1177_2177_4177.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/op1177_2177_4177.pdf) .
+This quantity can be referred either to the input or to the output, so the datasheet must be read carefully, as advised in [https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf) . However, this precision of sometimes forgotten from the datasheet itself, like in this one from their own colleagues: [https://www.analog.com/media/en/technical-documentation/data-sheets/op1177_2177_4177.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/op1177_2177_4177.pdf) .
 
 So, in doubt, assume worst case for your circuit between input and outpout.
 
