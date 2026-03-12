@@ -148,7 +148,7 @@ Before detailing the subject, it is interesting to ask why using digital logic a
 
 The digital stuff and its thoussand of transistors can be easily integrated in integrated circuits, while the RC stuff is harder and takes lots of space. For instance, the compensation capacitor of the original 741 takes 1/3 of the chip according to Horowitz&Hill. The development is very costly, but can be reused in a much higher number of circuits than a particular RC oscillator.
 
-I will explain the theory a bit later, in waiting...
+Before the details, please take a break with a cat, courtesy of Wikipedia:
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Blackcat-Lilith.jpg" alt="Lilith black cat."/>
 
