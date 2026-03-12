@@ -81,3 +81,9 @@ posts/vcvs-finite-gbw/*.net
 posts/op-amp-introduction/*.op.raw
 posts/op-amp-introduction/*.raw
 posts/op-amp-introduction/*.net
+
+# Ignore temp of how-not-to-do-oscillators (LTSpice)
+posts/how-not-to-do-oscillators/*.op.raw
+posts/how-not-to-do-oscillators/*.raw
+posts/how-not-to-do-oscillators/*.net
+posts/how-not-to-do-oscillators/*.fft
