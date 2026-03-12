@@ -172,6 +172,32 @@ The schematic of the MIKROE waveform 3 click schematic, shown below, is self exp
 
 However, **the layout and ground split is more dubious**. I would advise as first intension a single ground plane and read again the "seven habits of successful 2-layer board designers" by Eric Bogatin at [https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/1207-seven-habits-of-successful-2-layer-board-designers](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/1207-seven-habits-of-successful-2-layer-board-designers).
 
+The schematif of the DDS itself, shown below, deserve more comments:
+
+<img src="{{ '/posts/how-not-to-do-oscillators/dds-chip-explain.png' | relative_url }}"/>
+
+Parts not needed for understanding the base principle were lowered <!-- FIXME: put right word here. -->.
+
+A synchronous serial interface allows to configure the chip. Particularly it allows to set the contents of a register containing the frequency. For each output sample, the phase of the output sinus is calculated by an addition. The phase accumulator overflows determine the signal period.
+
+From this phase accumulator, an approximate sinus table is used to calculate the actual values of the samples. The two main sources of approximation are the truncature of the phase register, which determines the level of spurious, and the numbers of bits, which is the same as the ADC. After the sinus table, which converts the phase into a digital value, the digital to analog converter produces the actual voltage.
+
+Other stuff in the schematic are:
+
+* A second frequency register to allow to easily commute between two frequencies.
+
+* A phase shift register to allow to easily commute between two phases of the signals. Note this register would not be very interesting if there were only one.
+
+* A control register to control the various parts (frequency and phase register selection, ...).
+
+* A 2.5V regulator to supply the inners of the chip and to avoid the user to do this itself.
+
+* A bypass of the sinus table to produce ramps.
+
+* A circuit to directly produce a divided clock instead of a sinus.
+
+* A circuit to control precisely the full scale amplitude of the digital to analog converter.
+
 Now, time to write the report and to ask for payment in liters of coffee.
 
 ## Epilogue
