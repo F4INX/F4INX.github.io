@@ -127,7 +127,7 @@ Time to enter in the 21th century.
 
 ## Straight to a solution
 
-*Details coming soon*
+The solution is simple and straightforward and is called direct digital synthesis (DDS):
 
 <figure>
 <table class="images-table">
@@ -140,4 +140,24 @@ Time to enter in the 21th century.
 </td>
 </tr>
 </table>
-</figure>
+</figure>.
+
+Before detailing the subject, it is interesting to ask why using digital logic and digital to analog converters with their thoussands of integrated circuit transistors gets simpler than analog circuits with less than 20 integrated circuit transistors. The answer is in the question:
+
+*Because it leverages the specificities of integrated circuits.*
+
+The digital stuff and its thoussand of transistors can be easily integrated in integrated circuits, while the RC stuff is harder and takes lots of space. For instance, the compensation capacitor of the original 741 takes 1/3 of the chip according to Horowitz&Hill. The development is very costly, but can be reused in a much higher number of circuits than a particular RC oscillator.
+
+I will explain the theory a bit later, in waiting...
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Blackcat-Lilith.jpg" alt="Lilith black cat."/>
+
+From a practical point of view, to use a DDS, you need:
+
+* A stable reference clock. But even the lowest cost crystal oscillator is better than RC oscillators. Advice: take an integrated stuff directly outputting a logic level clock. Making an oscillator from a crystal is not very hard, but don't bring anything.
+
+* A DDS integrated circuit. Either bare or in a demo board which also integrates the quartz.
+
+* A microcontroller to set the DDS frequency. For this, use whatever you like. Also, the microcontroller is often already here.
+
+Now, time to write the report and to ask for payment in liters of coffee.
