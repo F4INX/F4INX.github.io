@@ -161,3 +161,13 @@ From a practical point of view, to use a DDS, you need:
 * A microcontroller to set the DDS frequency. For this, use whatever you like. Also, the microcontroller is often already here.
 
 Now, time to write the report and to ask for payment in liters of coffee.
+
+## Epilogue
+
+I received as a payment for this stuff approximately 50 liters of coffee, the standard currency in use at ACME labs.
+
+The fancy oscillator stuff was dropped and replaced by very convenient DDS synthesizers.
+
+Andreas and Cătălina have stopped their fight and promised to never touch damn circuits.
+
+And on my side, still have a few cats to replace by more explanations, nothing new on the sun.
