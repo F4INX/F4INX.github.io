@@ -160,6 +160,18 @@ From a practical point of view, to use a DDS, you need:
 
 * A microcontroller to set the DDS frequency. For this, use whatever you like. Also, the microcontroller is often already here.
 
+The schematic of the MIKROE waveform 3 click schematic, shown below, is self explanatory, **except the dubious layout and grounding**:
+
+<img src="{{ '/posts/how-not-to-do-oscillators/dds-module-schematic.png' | relative_url }}"/>
+
+* Greed LED and its resistor are mere convenience gadgets.
+
+* They used an integrated crystal like I advised.
+
+* And the DDS needs no other components than the decoupling capacitors.
+
+However, **the layout and ground split is more dubious**. I would advise as first intension a single ground plane and read again the "seven habits of successful 2-layer board designers" by Eric Bogatin at [https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/1207-seven-habits-of-successful-2-layer-board-designers](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/1207-seven-habits-of-successful-2-layer-board-designers).
+
 Now, time to write the report and to ask for payment in liters of coffee.
 
 ## Epilogue
