@@ -111,21 +111,17 @@ Next step is to simulate the RC network:
 
 <img src="{{ '/posts/how-not-to-do-oscillators/06-rc-phase-shift-oscillator-rc.png' | relative_url }}"/>
 
-At the frequency shift needed to have a 15.5° phase advance to compensate the amplifier phase delay, a +5.2dB gain increase is needed to compensate the increased losses of the RC network. This is a beginning of explanation, but only partial, since this value is not sufficient alone to explain the needed resistor values, and at the lowered frequency of oscillation the phase shift is also lower.
+At the frequency shift needed to have a 15.5° phase advance to compensate the amplifier phase delay, a +5.2dB gain increase is needed to compensate the increased losses of the RC network. The value alone is not sufficient to explain the needed resistor values. However, when increasing the gain feedback resistor:
 
-## Digging not more in oscillator theory
+<img src="{{ '/posts/how-not-to-do-oscillators/06-rc-phase-shift-oscillator-rc-steps.png' | relative_url }}"/>
 
-At this point, we would have to dig more in oscillator theory.
+... the phase shift also increases, which increases again the losses of the RC network, which explains well the needed resistor values.
 
-But enough fiddling with such stuff. Time for cats, courtesy of Wikipedia:
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
+## Straight to a solution
 
 Enough of such falsely simple circuits. Lots of experimenters think they are simple because they manage to get something. But after how many hours of work ? And working reliably ? And at the correct frequency ? And so on. Making such oscillators is not as simple as it looks, and the story of Andreas and Cătălina is here to remind us this.
 
 Time to enter in the 21th century.
-
-## Straight to a solution
 
 The solution is simple and straightforward and is called direct digital synthesis (DDS):
 
@@ -209,3 +205,9 @@ The fancy oscillator stuff was dropped and replaced by very convenient DDS synth
 Andreas and Cătălina have stopped their fight and promised to never touch damn circuits.
 
 And on my side, still have a few cats to replace by more explanations, nothing new on the sun.
+
+## Appendix
+
+A previous version of this article included some picture of a cat instead in waiting of the explanations to come. Please find it again:
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bombay_Katzen_of_Blue_Sinfonie.JPG" alt="Bombay black cats of blue symphonie."/>
