@@ -204,7 +204,7 @@ On the other hand, since the input bias current is relatively high, they can lea
 </td>
 </tr>
 </table>
-<figcaption>Simplified schematics of a typical input of a BJT differential amplifier, from https://en.wikipedia.org/wiki/Differential_amplifier. Left use resistors as loads and right uses a better current mirror.</figcaption>
+<figcaption>Simplified schematics of a typical input of a BJT differential amplifier, from <a href="https://en.wikipedia.org/wiki/Differential_amplifier">https://en.wikipedia.org/wiki/Differential_amplifier</a>. Left use resistors as loads and right uses a better current mirror.</figcaption>
 </figure>
 
 ### JFET-input op-amps
@@ -255,7 +255,7 @@ High bandwidth is generally not a priority in these op-amps.
 
 ### Auto-zero op-amps
 
-Auto-zero op-amps are based on the following principle (https://wiki.analog.com/university/courses/electronics/text/chapter-15):
+Auto-zero op-amps are based on the following principle ([https://wiki.analog.com/university/courses/electronics/text/chapter-15](https://wiki.analog.com/university/courses/electronics/text/chapter-15)):
 
 <figure>
   <picture>
@@ -320,7 +320,7 @@ For instance, the differential amplifier which gave me the opportunity to write 
 
 The feedback **must** be resistive, at least the resistive part of it must be dominant. **Never** directly a capacitor as a feed back.
 
-Slew rates are also faster than voltage-feedback op-amps. In voltage-feedback amplifiers, the output current of the first stage is limited by the current source which in combination with the compensation capacitor limits the slew rage. On the contrary, in current-feedback ampflifiers, this current is directly fed by the user. More details can be found in [https://www.analog.com/en/resources/analog-dialogue/articles/current-feedback-amplifiers-1.html](https://www.analog.com/en/resources/analog-dialogue/articles/current-feedback-amplifiers-1.html).
+Slew rates are also faster than voltage-feedback op-amps. In voltage-feedback amplifiers, the output current of the first stage is limited by the current source which in combination with the compensation capacitor limits the slew rage. On the contrary, in current-feedback ampflifiers, this current is directly fed by the user. More details can be found in [https://www.analog.com/en/resources/analog-dialogue/articles/current-feedback-amplifiers-1.html](https://www.analog.com/en/resources/analog-dialogue/articles/current-feedback-amplifiers-1.html) .
 
 ## Op-amp input stage headroom according to structure
 
@@ -328,7 +328,7 @@ This one is often overlooked but pay attention to this. With some training, it i
 
 ###	N input stage
 
-https://www.ti.com/lit/ds/symlink/tl081.pdf
+[https://www.ti.com/lit/ds/symlink/tl081.pdf](https://www.ti.com/lit/ds/symlink/tl081.pdf)
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/tl081.png' | relative_url }}" />
@@ -364,7 +364,7 @@ Input range: slightly lower than ground to Vcc – headroom.
 
 <!-- TODO: Write stuff. -->
 
-https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know
+[https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know](https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know)
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/n-p-input.png' | relative_url }}" />
@@ -373,14 +373,14 @@ https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-yo
 
 ### Input supplied with charge pump
 
-https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know
+[https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know](https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know)
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/charge-pump-input.png' | relative_url }}" />
   <figcaption>Charge pump circuit used to extend input voltage range beyond supply rails.</figcaption>
 </figure>
 
-https://www.ti.com/product/OPA391
+[https://www.ti.com/product/OPA391](https://www.ti.com/product/OPA391)
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/opa391-input.png' | relative_url }}" />
@@ -446,7 +446,7 @@ In inverting or substracting amplifiers, this input resistance is determined mos
 
 When the signal source is directly connected at the input of an operational amplifier, the impedance it sees it directly determined by the operational amplifier input impedance, so it is an important parameter to check in these cases with an high-impedance source.
 
-According to https://www.ti.com/lit/an/sloa011b/sloa011b.pdf, the input resistances and capacitances of an operational amplifier are as follows:
+According to [https://www.ti.com/lit/an/sloa011b/sloa011b.pdf](https://www.ti.com/lit/an/sloa011b/sloa011b.pdf), the input resistances and capacitances of an operational amplifier are as follows:
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/resistances.png' | relative_url }}" />
@@ -455,7 +455,8 @@ According to https://www.ti.com/lit/an/sloa011b/sloa011b.pdf, the input resistan
 
 Datasheets give the elements between the inputs and the elements to ground in different ways.
 
-In the LM324 datasheet (https://www.ti.com/lit/ds/symlink/lm324.pdf), the differential-mode input resistance rid = Rd || (Rn + Rp) and the common-mode ric = Rp || Rn are given:
+<!-- Fix an issue caused by the || -->
+<p markdown=0>In the LM324 datasheet (<a href="https://www.ti.com/lit/ds/symlink/lm324.pdf">https://www.ti.com/lit/ds/symlink/lm324.pdf</a>), the differential-mode input resistance rid = Rd || (Rn + Rp) and the common-mode ric = Rp || Rn are given:</p>
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/lm324-datasheet.png' | relative_url }}" />
@@ -466,7 +467,8 @@ The common mode resistance is 400 times higher than the differential due to the 
 
 The common-mode is indeed much higher than the differential mode.
 
-In the NE5532 datasheet (https://www.ti.com/lit/ds/symlink/ne5532.pdf), the impedance of one input when the other is tied to ground, called single-ended in the jargon, ri = Rd || Rn is given.
+<!-- Fix an issue caused by the || -->
+<p markdown=0>In the NE5532 datasheet (<a href="https://www.ti.com/lit/ds/symlink/ne5532.pdf">https://www.ti.com/lit/ds/symlink/ne5532.pdf</a>), the impedance of one input when the other is tied to ground, called single-ended in the jargon, ri = Rd || Rn is given:</p>
 
 <figure>
   <img src="{{ '/posts/op-amp-introduction/ne5532-datasheet.png' | relative_url }}" />
@@ -511,7 +513,7 @@ Input offset drive belong to two main categories: thermal drift, depending on te
 
 Thermal drive is typically specified in µV/°C.
 
-Time drift is often specified in µV/month or µV/1000 hours. However, **these units can be misleading**. Since aging is a random walk ("drunkard's walk") phenomenon, it is proportional to the **square root** of the elapsed time (https://www.analog.com/media/en/training-seminars/tutorials/MT-037.pdf)[https://www.analog.com/media/en/training-seminars/tutorials/MT-037.pdf] and 1 µV/1000 hour actually corresponds to 3 µV/year instead of 9 µV/year.
+Time drift is often specified in µV/month or µV/1000 hours. However, **these units can be misleading**. Since aging is a random walk ("drunkard's walk") phenomenon, it is proportional to the **square root** of the elapsed time [https://www.analog.com/media/en/training-seminars/tutorials/MT-037.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-037.pdf) and 1 µV/1000 hour actually corresponds to 3 µV/year instead of 9 µV/year.
 
 #### Applications for which this parameter is critical
 
@@ -573,9 +575,9 @@ Before even looking at the datasheet, it should be emphasized that bit factor in
 
 The power supply rejection ratio (PSRR) is the ratio of the variations of the input/output of an operational amplifier relative to the variation of their power supplies.
 
-According to https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf which gives lots of valuable explanations on this topic, this quantity should named PSRR when expressed in linear units, and PSR when expressed in dB, but nobody seems to follows exactly this convention.
+According to [https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf ) which gives lots of valuable explanations on this topic, this quantity should named PSRR when expressed in linear units, and PSR when expressed in dB, but nobody seems to follows exactly this convention.
 
-This quantity can be referred either to the input or to the output, so the datasheet must be read carefully, as advised in https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf. However, this precision of sometimes forgotten from the datasheet itself, like in this one from their own colleagues: https://www.analog.com/media/en/technical-documentation/data-sheets/op1177_2177_4177.pdf .
+This quantity can be referred either to the input or to the output, so the datasheet must be read carefully, as advised in [https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-043.pdf). However, this precision of sometimes forgotten from the datasheet itself, like in this one from their own colleagues: [https://www.analog.com/media/en/technical-documentation/data-sheets/op1177_2177_4177.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/op1177_2177_4177.pdf) .
 
 So, in doubt, assume worst case for your circuit between input and outpout.
 
@@ -637,7 +639,7 @@ It is the maximum rate at which the output voltage can change over time (V/µs).
   <img src="{{ '/posts/op-amp-introduction/slew-rate.png' | relative_url }}" />
   <figcaption>Illustration of slew rate limitation showing how finite slew rate causes waveform distortion in high-frequency signals.</figcaption>
 </figure>
-**Source:** https://toshiba.semicon-storage.com/eu/semiconductor/knowledge/faq/linear_opamp/what-is-the-maximum-frequency-at-which-an-op-amp-can-be-used.html
+**Source:** [https://toshiba.semicon-storage.com/eu/semiconductor/knowledge/faq/linear_opamp/what-is-the-maximum-frequency-at-which-an-op-amp-can-be-used.html](https://toshiba.semicon-storage.com/eu/semiconductor/knowledge/faq/linear_opamp/what-is-the-maximum-frequency-at-which-an-op-amp-can-be-used.html)
 
 ### Noise
 
@@ -904,8 +906,6 @@ The following schematic shows the previous points:
   <img src="{{ '/posts/op-amp-introduction/ultrasonic-pcb.svg' | relative_url }}" />
   <figcaption>Ultrasonic sensor circuit showing operational amplifier chain U1A-U1C in pseudo-differential configuration with unfiltered mid-supply reference.</figcaption>
 </figure>
-
-###
 
 ## References
 
