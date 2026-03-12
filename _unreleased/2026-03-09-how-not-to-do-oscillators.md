@@ -140,7 +140,7 @@ The solution is simple and straightforward and is called direct digital synthesi
 </td>
 </tr>
 </table>
-</figure>.
+</figure>
 
 Before detailing the subject, it is interesting to ask why using digital logic and digital to analog converters with their thoussands of integrated circuit transistors gets simpler than analog circuits with less than 20 integrated circuit transistors. The answer is in the question:
 
