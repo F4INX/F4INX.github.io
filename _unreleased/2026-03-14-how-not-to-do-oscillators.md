@@ -2,7 +2,7 @@
 layout: post
 title: The fine art of (not) doing oscillators
 permalink: /posts/how-not-to-do-oscillators.html
-last_modified_at: 2026-03-09
+last_modified_at: 2026-03-14
 ---
 
 ## A day in life...
