@@ -7,6 +7,8 @@ last_modified_at: 2026-03-09
 
 ## A day in life...
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Catch_cats.JPG" alt="Cats fighting."/>
+
 Riiiiiiiiiiiing.
 
 * Hello the ACME labs. What can I do for you ?
