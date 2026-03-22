@@ -9,7 +9,8 @@ Hadrien Theveneau, Gönül Demir
 
 ## A day in life...
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Catch_cats.JPG" alt="Cats fighting."/>
+<img src="{{ '/posts/how-not-to-do-oscillators/fighting-cats.png' | relative_url }}" alt="Cats fighting."/>
+*Cats fighting, from Wikipedia.*
 
 Riiiiiiiiiiiing.
 
