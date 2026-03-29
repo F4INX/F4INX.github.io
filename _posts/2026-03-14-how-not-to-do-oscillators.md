@@ -5,7 +5,7 @@ permalink: /posts/how-not-to-do-oscillators.html
 last_modified_at: 2026-03-14
 ---
 
-Hadrien Theveneau, Gönül Demir
+Hadrien Theveneau, [Gönül Demir](https://www.linkedin.com/in/gonul-demir-49413433/)
 
 ## A day in life...
 
