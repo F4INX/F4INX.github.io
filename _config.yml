@@ -1,7 +1,7 @@
 # Setup
-title:            F4INX corner
-tagline:          'Radiofrequency electronics, EM simulations, ...'
-description:      "Hadrien F4INX's blog: radiofrequency electronics, EM simulations, ...."
+title:            RF cat corner
+tagline:          'analog electronics, RF, EM simulations, ...'
+description:      "Blog edited by Hadrien F4INX on analog electronics, RF, EM simulations, ...."
 baseurl:          '/'
 paginate:         5
 
