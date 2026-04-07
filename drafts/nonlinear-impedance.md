@@ -13,10 +13,10 @@ In section \ref{section-utilite-transitions-impedance}, we set aside the real be
 
 Let us consider a simplified nonlinear amplifier. We will initially assume that it reacts instantaneously to its inputs, i.e., its response is frequency-independent. The model will be extended to incorporate frequency variations in the following section. Suppose its response can be described in the time domain by the equation below:
 
-\begin{equation}
+<latexmath>
 \label{eq:b2_t}
 \btwo(t) = \underbrace{G \cdot \aone(t)}_{\parbox{12ex}{\centering Gain in\\small signals}} - \underbrace{\gamma \cdot a_{1}^{3}(t)}_{\parbox{10ex}{\centering Gain compression}} + \underbrace{\Gamma \cdot \atwo(t)}_{\parbox{20ex}{\centering Output reflection\\ in small signals}}  - \underbrace{\lambda \cdot a_{1}^{2}(t) \cdot \atwo(t)}_{\parbox{20ex}{\centering Variation of reflection with input Self-biasing}}
-\end{equation}
+</latexmath>
 
 This model is highly simplified but already contains the effects found in real amplifiers: small-signal gain, gain compression for large signals, output reflection, self-biasing, and variation of the output reflection coefficient as a function of input power.
 
@@ -67,41 +67,41 @@ a_{2}(t) &= \frac{ \delta \Atwo \cdot e^{i \omega t} + \conj{\delta A_{2}} \cdot
 
 By combining equations \ref{eq:b2_t}, \ref{eq:a1_t} and \ref{eq:a2_t} we obtain:
 
-\begin{equation}
+<latexmath>
 \begin{split}
 b_{2}(t) &= G\cdot\left[\frac{\Aone \cdot e^{i \omega t}+\conj{A_{1}}\cdot e^{- i \omega t}}{2}\right] + \Gamma\cdot\left[\frac{\delta\Atwo \cdot e^{i \omega t}+\delta\conj{A_{2}}\cdot e^{- i \omega t}}{2}\right]\\
 &-\gamma\cdot\left[\frac{\delta\Atwo\cdot e^{i \omega t}+\delta\conj{A_{2}}\cdot e^{- i \omega t}}{2}\right]^3\\
 &-\lambda\cdot\left[\frac{\Aone\cdot e^{i \omega t}+\conj{A_{1}}\cdot e^{- i \omega t}}{2}\right]^2\cdot\left[\frac{\delta\Atwo\cdot e^{i \omega t}+\conj{A_{2}}\cdot e^{- i \omega t}}{2}\right]
 \end{split}
-\end{equation}
+</latexmath>
 
 By expanding the previous expression and grouping the terms, we obtain:
 
-\begin{equation}
+<latexmath>
 \begin{split}
 b_{2}(t) &= \left[ \frac{G}{2} \cdot \Aone - \frac{3 \gamma}{8} \left|\Aone\right|^2 \cdot \Aone + \frac{\Gamma}{2} \cdot \delta\Atwo - \frac{\Aone \cdot \conj{A_{1}} }{4} \cdot \lambda \cdot \delta\Atwo - \frac{A_{1}^{2} \cdot \lambda}{8} \cdot \delta\conj{A_{2}} \right] \cdot e^{i \omega t} \\
 &+ \left[ - \frac{A_{1}^{2}}{8} \cdot \left(\Aone \cdot \gamma + \delta\Atwo \cdot \lambda \right) \right] \cdot e^{3 i \omega t} \\
 &+ \text{conjugate terms}
 \end{split}
-\end{equation}
+</latexmath>
 
 We ignore the terms in e^{3 i \omega t} and e^{-3 i \omega t} which correspond to the third harmonic of the signal, and we are interested in the amplitude of the terms in e^{i \omega t} and e^{i \omega t}:
 
-\begin{equation}
+<latexmath>
 b_{2}(t) = \frac{ \Btwo \cdot e^{i \omega t} + \conj{B_{2}} \cdot e^{- i \omega t} }{2} + \text{terms in } e^{3 i \omega t} \text{ and } e^{-3 i \omega t}
-\end{equation}
+</latexmath>
 
 with
 
-\begin{equation}
+<latexmath>
 B_{2} = G \cdot A_{1} - \frac{3 \cdot \gamma}{4} \left|A_1\right|^2 \cdot A_{1} + \Gamma \cdot A_{2} - \frac{\Aone \cdot \conj{A_{1}}}{2} \cdot \lambda \cdot \delta A_{2} - \frac{A_{1}^{2} \cdot \lambda}{4} \cdot \conj{\delta A_{2}}
-\end{equation}
+</latexmath>
 
 which we rewrite in a simpler form:
 
-\begin{equation}
+<latexmath>
 B_{2} = \underbrace{S_{21}^{\phantom{*}}(\Aone)\cdot \Aone}_\text{Amplification} + \underbrace{S_{22}^{\phantom{*}}(\Aone)\cdot \delta\Atwo}_\text{Normal reflection} + \underbrace{T_{22}^{\phantom{*}}(\Aone)\cdot \delta\conj{A_2}}_\text{Conjugate reflection}
-\end{equation}
+</latexmath>
 
 with:
 
@@ -113,7 +113,7 @@ T_{22}(A_1) &=  - \frac{A_{1}^{2} \cdot \lambda}{4}
 
 These coefficients depend on the phase of A\textsubscript{1}, which is not very practical. We will therefore renormalize them. Let P = e^{i\cdot\phi(A_1)}. Thus:
 
-\begin{equation}
+<latexmath>
 \begin{split}
 S_{21}(A_1) &= S_{21}(\left|A_1\right| \cdot P) \\
             &= G - \frac{3 \cdot \gamma}{4} \cdot \big||A_1| \cdot P\big|^2 \\
@@ -121,7 +121,7 @@ S_{21}(A_1) &= S_{21}(\left|A_1\right| \cdot P) \\
             &= G - \frac{3 \cdot \gamma}{4} \cdot \big||A_1|\big|^2 \\
             &=  S_{21}(\left|A_1\right|)
 \end{split}
-\end{equation}
+</latexmath>
 
 Similarly:
 
@@ -132,9 +132,9 @@ T_{22}(A_1) &= T_{22}(\left|A_1\right|) \cdot P^2 \\
 
 and therefore:
 
-\begin{equation}
+<latexmath>
 B_{2} = \underbrace{S_{21}^{\phantom{*}}(|A_1|)\cdot \Aone}_\text{Amplification} + \underbrace{S_{22}^{\phantom{*}}(|A_1|)\cdot \delta\Atwo}_\text{Normal reflection} + \underbrace{T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot \delta\conj{A_2}}_\text{Conjugate reflection}
-\end{equation}
+</latexmath>
 
 This linearization is a simplified version of the X parameters \cite{versprecht2006polyharmonic,root2013x}.
 
@@ -156,21 +156,21 @@ The amplitude of B\textsubscript{2} in large signal regime for A\textsubscript{2
 
 The contribution of δA\textsubscript{2} to B\textsubscript{2} is denoted δ\textsubscript{2}B\textsubscript{2} and is given by
 
-\begin{equation}
+<latexmath>
 \delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}} = S_{22}^{\phantom{*}}(|A_1|)\cdot A_{2}^{\phantom{*}} + T_{22}^{\phantom{*}}(|A_1|)\cdot \conj{A_2}
-\end{equation}
+</latexmath>
 
 This allows us to calculate the apparent reflection coefficient of the output Γ\textsubscript{2}:
 
-\begin{equation}
+<latexmath>
 \Gamma_2 = \frac{\delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}}}{B_{2}^{\phantom{*}}} = S_{22}^{\phantom{*}}(|A_1|) + T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot \frac{\conj{A_2}}{\Atwo}
-\end{equation}
+</latexmath>
 
 which can be rewritten by replacing P with its value:
 
-\begin{equation}
+<latexmath>
 \Gamma_2 = \frac{\delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}}}{B_{2}^{\phantom{*}}} = S_{22}^{\phantom{*}}(|A_1|) + T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot e^{i \cdot 2 \cdot [\phi(A_2) - \phi(A_1)]}
-\end{equation}
+</latexmath>
 
 B\textsubscript{2} and δB\textsubscript{2} are shown respectively in \cref{fig-plt-non-lineaire-complexe-b2-b2-a1} and \cref{fig-plt-non-lineaire-complexe-deltab2-b2-a1} when δA\textsubscript{2} describes a circle.
 
