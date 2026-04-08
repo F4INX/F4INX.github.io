@@ -48,7 +48,7 @@ This nonlinear equation can be linearized \cite{versprecht2006polyharmonic,root2
 
 <latexmath>
 \begin{align}
-a_{1,\text{LSOP}}(t) &= \frac{ \Aone \cdot e^{i \omega t} + \conj{A_{1}} \cdot e^{- i \omega t} }{2} \\
+a_{1,\text{LSOP}}(t) &= \frac{ A_1 \cdot e^{i \omega t} + A_1^* \cdot e^{- i \omega t} }{2} \\
 a_{2,\text{LSOP}}(t) &= 0
 \end{align}
 </latexmath>
@@ -58,7 +58,7 @@ and we apply to this operating point a perturbation at the output:
 <latexmath>
 \begin{align}
 a_{1}(t) &= a_{1,\text{LSOP}}(t) \\
-a_{2}(t) &= a_{2,\text{LSOP}}(t) + \frac{ \delta \Atwo \cdot e^{i \omega t} + \conj{\delta A_{2}} \cdot e^{- i \omega t} }{2}
+a_{2}(t) &= a_{2,\text{LSOP}}(t) + \frac{ \delta \Atwo \cdot e^{i \omega t} + (\delta A_{2})^* \cdot e^{- i \omega t} }{2}
 \end{align}
 </latexmath>
 
@@ -67,9 +67,9 @@ Which gives the following equations:
 <latexmath>
 \begin{align}
 \label{eq:a1_t}
-a_{1}(t) &= \frac{ \Aone \cdot e^{i \omega t} + \conj{A_{1}} \cdot e^{- i \omega t} }{2}\\
+a_{1}(t) &= \frac{ A_1 \cdot e^{i \omega t} + A_1^* \cdot e^{- i \omega t} }{2}\\
 \label{eq:a2_t}
-a_{2}(t) &= \frac{ \delta \Atwo \cdot e^{i \omega t} + \conj{\delta A_{2}} \cdot e^{- i \omega t} }{2}
+a_{2}(t) &= \frac{ \delta \Atwo \cdot e^{i \omega t} + (\delta A_{2})^* \cdot e^{- i \omega t} }{2}
 \end{align}
 </latexmath>
 
@@ -77,9 +77,9 @@ By combining equations \ref{eq:b2_t}, \ref{eq:a1_t} and \ref{eq:a2_t} we obtain:
 
 <latexmath>
 \begin{split}
-b_{2}(t) &= G\cdot\left[\frac{\Aone \cdot e^{i \omega t}+\conj{A_{1}}\cdot e^{- i \omega t}}{2}\right] + \Gamma\cdot\left[\frac{\delta\Atwo \cdot e^{i \omega t}+\delta\conj{A_{2}}\cdot e^{- i \omega t}}{2}\right]\\
-&-\gamma\cdot\left[\frac{\delta\Atwo\cdot e^{i \omega t}+\delta\conj{A_{2}}\cdot e^{- i \omega t}}{2}\right]^3\\
-&-\lambda\cdot\left[\frac{\Aone\cdot e^{i \omega t}+\conj{A_{1}}\cdot e^{- i \omega t}}{2}\right]^2\cdot\left[\frac{\delta\Atwo\cdot e^{i \omega t}+\conj{A_{2}}\cdot e^{- i \omega t}}{2}\right]
+b_{2}(t) &= G\cdot\left[\frac{\Aone \cdot e^{i \omega t}+A_{1}^*\cdot e^{- i \omega t}}{2}\right] + \Gamma\cdot\left[\frac{\delta\Atwo \cdot e^{i \omega t}+(\delta A_{2})^*\cdot e^{- i \omega t}}{2}\right]\\
+&-\gamma\cdot\left[\frac{\delta\Atwo\cdot e^{i \omega t}+(\delta A_{2})^*\cdot e^{- i \omega t}}{2}\right]^3\\
+&-\lambda\cdot\left[\frac{\Aone\cdot e^{i \omega t}+A_{1}^*\cdot e^{- i \omega t}}{2}\right]^2\cdot\left[\frac{\delta\Atwo\cdot e^{i \omega t}+(\delta A_{2})^*\cdot e^{- i \omega t}}{2}\right]
 \end{split}
 </latexmath>
 
@@ -87,7 +87,7 @@ By expanding the previous expression and grouping the terms, we obtain:
 
 <latexmath>
 \begin{split}
-b_{2}(t) &= \left[ \frac{G}{2} \cdot \Aone - \frac{3 \gamma}{8} \left|\Aone\right|^2 \cdot \Aone + \frac{\Gamma}{2} \cdot \delta\Atwo - \frac{\Aone \cdot \conj{A_{1}} }{4} \cdot \lambda \cdot \delta\Atwo - \frac{A_{1}^{2} \cdot \lambda}{8} \cdot \delta\conj{A_{2}} \right] \cdot e^{i \omega t} \\
+b_{2}(t) &= \left[ \frac{G}{2} \cdot \Aone - \frac{3 \gamma}{8} \left|\Aone\right|^2 \cdot \Aone + \frac{\Gamma}{2} \cdot \delta\Atwo - \frac{\Aone \cdot A_{1}^* }{4} \cdot \lambda \cdot \delta\Atwo - \frac{A_{1}^{2} \cdot \lambda}{8} \cdot (\delta A_{2})^* \right] \cdot e^{i \omega t} \\
 &+ \left[ - \frac{A_{1}^{2}}{8} \cdot \left(\Aone \cdot \gamma + \delta\Atwo \cdot \lambda \right) \right] \cdot e^{3 i \omega t} \\
 &+ \text{conjugate terms}
 \end{split}
@@ -96,19 +96,19 @@ b_{2}(t) &= \left[ \frac{G}{2} \cdot \Aone - \frac{3 \gamma}{8} \left|\Aone\righ
 We ignore the terms in e^{3 i \omega t} and e^{-3 i \omega t} which correspond to the third harmonic of the signal, and we are interested in the amplitude of the terms in e^{i \omega t} and e^{i \omega t}:
 
 <latexmath>
-b_{2}(t) = \frac{ \Btwo \cdot e^{i \omega t} + \conj{B_{2}} \cdot e^{- i \omega t} }{2} + \text{terms in } e^{3 i \omega t} \text{ and } e^{-3 i \omega t}
+b_{2}(t) = \frac{ \Btwo \cdot e^{i \omega t} + B_{2}^* \cdot e^{- i \omega t} }{2} + \text{terms in } e^{3 i \omega t} \text{ and } e^{-3 i \omega t}
 </latexmath>
 
 with
 
 <latexmath>
-B_{2} = G \cdot A_{1} - \frac{3 \cdot \gamma}{4} \left|A_1\right|^2 \cdot A_{1} + \Gamma \cdot A_{2} - \frac{\Aone \cdot \conj{A_{1}}}{2} \cdot \lambda \cdot \delta A_{2} - \frac{A_{1}^{2} \cdot \lambda}{4} \cdot \conj{\delta A_{2}}
+B_{2} = G \cdot A_{1} - \frac{3 \cdot \gamma}{4} \left|A_1\right|^2 \cdot A_{1} + \Gamma \cdot A_{2} - \frac{\Aone \cdot A_{1}^*}{2} \cdot \lambda \cdot \delta A_{2} - \frac{A_{1}^{2} \cdot \lambda}{4} \cdot (\delta A_{2})^*
 </latexmath>
 
 which we rewrite in a simpler form:
 
 <latexmath>
-B_{2} = \underbrace{S_{21}^{\phantom{*}}(\Aone)\cdot \Aone}_\text{Amplification} + \underbrace{S_{22}^{\phantom{*}}(\Aone)\cdot \delta\Atwo}_\text{Normal reflection} + \underbrace{T_{22}^{\phantom{*}}(\Aone)\cdot \delta\conj{A_2}}_\text{Conjugate reflection}
+B_{2} = \underbrace{S_{21}^{\phantom{*}}(\Aone)\cdot \Aone}_\text{Amplification} + \underbrace{S_{22}^{\phantom{*}}(\Aone)\cdot \delta\Atwo}_\text{Normal reflection} + \underbrace{T_{22}^{\phantom{*}}(\Aone)\cdot (\delta A_2)^*}_\text{Conjugate reflection}
 </latexmath>
 
 with:
@@ -145,7 +145,7 @@ T_{22}(A_1) &= T_{22}(\left|A_1\right|) \cdot P^2 \\
 and therefore:
 
 <latexmath>
-B_{2} = \underbrace{S_{21}^{\phantom{*}}(|A_1|)\cdot \Aone}_\text{Amplification} + \underbrace{S_{22}^{\phantom{*}}(|A_1|)\cdot \delta\Atwo}_\text{Normal reflection} + \underbrace{T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot \delta\conj{A_2}}_\text{Conjugate reflection}
+B_{2} = \underbrace{S_{21}^{\phantom{*}}(|A_1|)\cdot \Aone}_\text{Amplification} + \underbrace{S_{22}^{\phantom{*}}(|A_1|)\cdot \delta\Atwo}_\text{Normal reflection} + \underbrace{T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot (\delta A_2)^*}_\text{Conjugate reflection}
 </latexmath>
 
 This linearization is a simplified version of the X parameters \cite{versprecht2006polyharmonic,root2013x}.
@@ -169,13 +169,13 @@ The amplitude of B\textsubscript{2} in large signal regime for A\textsubscript{2
 The contribution of δA\textsubscript{2} to B\textsubscript{2} is denoted δ\textsubscript{2}B\textsubscript{2} and is given by
 
 <latexmath>
-\delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}} = S_{22}^{\phantom{*}}(|A_1|)\cdot A_{2}^{\phantom{*}} + T_{22}^{\phantom{*}}(|A_1|)\cdot \conj{A_2}
+\delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}} = S_{22}^{\phantom{*}}(|A_1|)\cdot A_{2}^{\phantom{*}} + T_{22}^{\phantom{*}}(|A_1|)\cdot A_2^*
 </latexmath>
 
 This allows us to calculate the apparent reflection coefficient of the output Γ\textsubscript{2}:
 
 <latexmath>
-\Gamma_2 = \frac{\delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}}}{B_{2}^{\phantom{*}}} = S_{22}^{\phantom{*}}(|A_1|) + T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot \frac{\conj{A_2}}{\Atwo}
+\Gamma_2 = \frac{\delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}}}{B_{2}^{\phantom{*}}} = S_{22}^{\phantom{*}}(|A_1|) + T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot \frac{A_2^*}{\Atwo}
 </latexmath>
 
 which can be rewritten by replacing P with its value:
