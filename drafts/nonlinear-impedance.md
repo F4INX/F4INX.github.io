@@ -15,16 +15,18 @@ Let us consider a simplified nonlinear amplifier. We will initially assume that 
 
 <latexmath>
 \label{eq:b2_t}
-\btwo(t) = \underbrace{G \cdot \aone(t)}_{\parbox{12ex}{\centering Gain in\\small signals}} - \underbrace{\gamma \cdot a_{1}^{3}(t)}_{\parbox{10ex}{\centering Gain compression}} + \underbrace{\Gamma \cdot \atwo(t)}_{\parbox{20ex}{\centering Output reflection\\ in small signals}}  - \underbrace{\lambda \cdot a_{1}^{2}(t) \cdot \atwo(t)}_{\parbox{20ex}{\centering Variation of reflection with input Self-biasing}}
+b_2(t) = \underbrace{G \cdot a_1(t)}_{\text{Gain in small signals}} - \underbrace{\gamma \cdot a_{1}^{3}(t)}_{\text{Gain compression}} + \underbrace{\Gamma \cdot a_2(t)}_{\text{Output reflection in small signals}}  - \underbrace{\lambda \cdot a_{1}^{2}(t) \cdot a_2(t)}_{\text{Variation of reflection with input, self-biasing}}
 </latexmath>
 
 This model is highly simplified but already contains the effects found in real amplifiers: small-signal gain, gain compression for large signals, output reflection, self-biasing, and variation of the output reflection coefficient as a function of input power.
 
 For numerical examples, let us take the following values:
 
+<latexmath>
 \begin{flalign}
 G &= 4 & \gamma &= 0{,}083 & \Gamma &= 0{,}73 & \lambda &= 0{,}06
 \end{flalign}
+</latexmath>
 
 Figures \ref{fig-plt-non-lineaire-b2-a1} and \ref{fig-plt-non-lineaire-r2-a1} show respectively the instantaneous value of the output b\textsubscript{2}(t) and the instantaneous reflection coefficient \frac{db_{2}(t)}{da_{2}(t)}, both as a function of the input a\textsubscript{1}(t).
 
@@ -44,26 +46,32 @@ Figures \ref{fig-plt-non-lineaire-b2-a1} and \ref{fig-plt-non-lineaire-r2-a1} sh
 
 This nonlinear equation can be linearized \cite{versprecht2006polyharmonic,root2013x} around an operating point, which we will call "LSOP" for "large signal operating point". This operating point is:
 
+<latexmath>
 \begin{align}
 a_{1,\text{LSOP}}(t) &= \frac{ \Aone \cdot e^{i \omega t} + \conj{A_{1}} \cdot e^{- i \omega t} }{2} \\
 a_{2,\text{LSOP}}(t) &= 0
 \end{align}
+</latexmath>
 
 and we apply to this operating point a perturbation at the output:
 
+<latexmath>
 \begin{align}
 a_{1}(t) &= a_{1,\text{LSOP}}(t) \\
 a_{2}(t) &= a_{2,\text{LSOP}}(t) + \frac{ \delta \Atwo \cdot e^{i \omega t} + \conj{\delta A_{2}} \cdot e^{- i \omega t} }{2}
 \end{align}
+</latexmath>
 
 Which gives the following equations:
 
+<latexmath>
 \begin{align}
 \label{eq:a1_t}
 a_{1}(t) &= \frac{ \Aone \cdot e^{i \omega t} + \conj{A_{1}} \cdot e^{- i \omega t} }{2}\\
 \label{eq:a2_t}
 a_{2}(t) &= \frac{ \delta \Atwo \cdot e^{i \omega t} + \conj{\delta A_{2}} \cdot e^{- i \omega t} }{2}
 \end{align}
+</latexmath>
 
 By combining equations \ref{eq:b2_t}, \ref{eq:a1_t} and \ref{eq:a2_t} we obtain:
 
@@ -105,11 +113,13 @@ B_{2} = \underbrace{S_{21}^{\phantom{*}}(\Aone)\cdot \Aone}_\text{Amplification}
 
 with:
 
+<latexmath>
 \begin{align}
 S_{21}(A_1) &= G - \frac{3 \cdot \gamma}{4} \cdot \left|A_1\right|^2 \\
 S_{22}(A_1) &= \Gamma - \frac{\left|A_1\right|^2}{2} \\
 T_{22}(A_1) &=  - \frac{A_{1}^{2} \cdot \lambda}{4}
 \end{align}
+</latexmath>
 
 These coefficients depend on the phase of A\textsubscript{1}, which is not very practical. We will therefore renormalize them. Let P = e^{i\cdot\phi(A_1)}. Thus:
 
@@ -125,10 +135,12 @@ S_{21}(A_1) &= S_{21}(\left|A_1\right| \cdot P) \\
 
 Similarly:
 
+<latexmath>
 \begin{align*}
 S_{22}(A_1) &= S_{22}(\left|A_1\right|) \\
 T_{22}(A_1) &= T_{22}(\left|A_1\right|) \cdot P^2 \\
 \end{align*}
+</latexmath>
 
 and therefore:
 
@@ -208,15 +220,19 @@ The coefficient T\textsubscript{22} is simply neglected in classical large-signa
 
 The strange behavior of the T\textsubscript{22} term deserves further discussion. Surprisingly, and although it arises from nonlinear phenomena, this term translates a linear behavior. Indeed, if the perturbation δA\textsubscript{2,total} is the superposition of two perturbations:
 
+<latexmath>
 \begin{equation*}
 \delta A_{2,total} = \delta A_{2,a} + \delta  A_{2,b}
 \end{equation*}
+</latexmath>
 
 then:
 
+<latexmath>
 \begin{equation*}
 \delta_{2}B_{2,total} = \delta_{2}B_{2,a} + \delta_{2}B_{2,b}
 \end{equation*}
+</latexmath>
 
 which is the very definition of linear behavior.
 
