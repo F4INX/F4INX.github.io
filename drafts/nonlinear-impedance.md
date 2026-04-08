@@ -14,7 +14,6 @@ In section \ref{section-utilite-transitions-impedance}, we set aside the real be
 Let us consider a simplified nonlinear amplifier. We will initially assume that it reacts instantaneously to its inputs, i.e., its response is frequency-independent. The model will be extended to incorporate frequency variations in the following section. Suppose its response can be described in the time domain by the equation below:
 
 <latexmath>
-\label{eq:b2_t}
 b_2(t) = \underbrace{G \cdot a_1(t)}_{\text{Gain in small signals}} - \underbrace{\gamma \cdot a_{1}^{3}(t)}_{\text{Gain compression}} + \underbrace{\Gamma \cdot a_2(t)}_{\text{Output reflection in small signals}}  - \underbrace{\lambda \cdot a_{1}^{2}(t) \cdot a_2(t)}_{\text{Variation of reflection with input, self-biasing}}
 </latexmath>
 
@@ -66,9 +65,7 @@ Which gives the following equations:
 
 <latexmath>
 \begin{align}
-\label{eq:a1_t}
 a_{1}(t) &= \frac{ A_1 \cdot e^{i \omega t} + A_1^* \cdot e^{- i \omega t} }{2}\\
-\label{eq:a2_t}
 a_{2}(t) &= \frac{ \delta A_{2} \cdot e^{i \omega t} + (\delta A_{2})^* \cdot e^{- i \omega t} }{2}
 \end{align}
 </latexmath>
