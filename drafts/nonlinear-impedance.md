@@ -28,20 +28,20 @@ G &= 4 & \gamma &= 0{,}083 & \Gamma &= 0{,}73 & \lambda &= 0{,}06
 \end{flalign}
 </latexmath>
 
-Figures \ref{fig-plt-non-lineaire-b2-a1} and \ref{fig-plt-non-lineaire-r2-a1} show respectively the instantaneous value of the output b\textsubscript{2}(t) and the instantaneous reflection coefficient \frac{db_{2}(t)}{da_{2}(t)}, both as a function of the input a\textsubscript{1}(t).
+Figures \ref{fig-plt-non-lineaire-b2-a1} and \ref{fig-plt-non-lineaire-r2-a1} show respectively the instantaneous value of the output <latexinline>b_2(t)</latexinline> and the instantaneous reflection coefficient <latexinline>\frac{db_{2}(t)}{da_{2}(t)}</latexinline>, both as a function of the input <latexinline>a_1(t)</latexinline>.
 
 <figure>
   <picture>
       <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-b2-a1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
-  <figcaption>Output b\textsubscript{2}(t) as a function of input a\textsubscript{1}(t).</figcaption>
+  <figcaption>Output <latexinline>b_2(t)</latexinline> as a function of input <latexinline>a_1(t)</latexinline>.</figcaption>
 </figure>
 
 <figure>
   <picture>
       <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-r2-a1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
-  <figcaption>Instantaneous reflection coefficient \frac{db_{2}(t)}{da_{2}(t)} of the output as a function of input a\textsubscript{1}(t).</figcaption>
+  <figcaption>Instantaneous reflection coefficient <latexinline>\frac{db_{2}(t)}{da_{2}(t)}</latexinline> of the output as a function of input <latexinline>a_1(t)</latexinline>.</figcaption>
 </figure>
 
 This nonlinear equation can be linearized \cite{versprecht2006polyharmonic,root2013x} around an operating point, which we will call "LSOP" for "large signal operating point". This operating point is:
@@ -121,7 +121,7 @@ T_{22}(A_1) &=  - \frac{A_{1}^{2} \cdot \lambda}{4}
 \end{align}
 </latexmath>
 
-These coefficients depend on the phase of A\textsubscript{1}, which is not very practical. We will therefore renormalize them. Let P = e^{i\cdot\phi(A_1)}. Thus:
+These coefficients depend on the phase of <latexinline>A_1</latexinline>, which is not very practical. We will therefore renormalize them. Let P = e^{i\cdot\phi(A_1)}. Thus:
 
 <latexmath>
 \begin{split}
@@ -150,29 +150,29 @@ B_{2} = \underbrace{S_{21}^{\phantom{*}}(|A_1|)\cdot A_1}_\text{Amplification} +
 
 This linearization is a simplified version of the X parameters \cite{versprecht2006polyharmonic,root2013x}.
 
-The amplitude of B\textsubscript{2} in large signal regime for A\textsubscript{2}=0 as a function of A\textsubscript{1} is shown in \cref{fig-plt-non-lineaire-complexe-B2-A1}. This figure is different from \cref{fig-plt-non-lineaire-b2-a1} because the latter is an instantaneous transfer function while the former is a sinusoidal regime transfer function. The nonlinear gain S\textsubscript{21}(|A\textsubscript{1}|) is shown as a function of |A\textsubscript{1}| in \cref{fig-plt-non-lineaire-S21}. We recognize the classic gain compression of nonlinear amplifiers.
+The amplitude of <latexinline>B_2</latexinline> in large signal regime for <latexinline>A_2=0</latexinline> as a function of <latexinline>A_1</latexinline> is shown in \cref{fig-plt-non-lineaire-complexe-B2-A1}. This figure is different from \cref{fig-plt-non-lineaire-b2-a1} because the latter is an instantaneous transfer function while the former is a sinusoidal regime transfer function. The nonlinear gain <latexinline>S_{21}(|A_1|)</latexinline> is shown as a function of <latexinline>|A_1|</latexinline> in \cref{fig-plt-non-lineaire-S21}. We recognize the classic gain compression of nonlinear amplifiers.
 
 <figure>
   <picture>
       <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-complexe-B2-A1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
-  <figcaption>Output amplitude B\textsubscript{2} as a function of |A\textsubscript{1}| in large signal regime.</figcaption>
+  <figcaption>Output amplitude <latexinline>B_2</latexinline> as a function of <latexinline>|A_1|</latexinline> in large signal regime.</figcaption>
 </figure>
 
 <figure>
   <picture>
       <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-S21.svg' | relative_url }}" style="width:100%;"/>
   </picture>
-  <figcaption>Nonlinear gain S\textsubscript{21}(|A\textsubscript{1}|) as a function of |A\textsubscript{1}|.</figcaption>
+  <figcaption>Nonlinear gain <latexinline>S_{21}(|A_1|)</latexinline> as a function of <latexinline>|A_1|</latexinline>.</figcaption>
 </figure>
 
-The contribution of δA\textsubscript{2} to B\textsubscript{2} is denoted δ\textsubscript{2}B\textsubscript{2} and is given by
+The contribution of <latexinline>\delta A_2</latexinline> to <latexinline>B_2</latexinline> is denoted <latexinline>\delta_2 B_2</latexinline> and is given by
 
 <latexmath>
 \delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}} = S_{22}^{\phantom{*}}(|A_1|)\cdot A_{2}^{\phantom{*}} + T_{22}^{\phantom{*}}(|A_1|)\cdot A_2^*
 </latexmath>
 
-This allows us to calculate the apparent reflection coefficient of the output Γ\textsubscript{2}:
+This allows us to calculate the apparent reflection coefficient of the output <latexinline>\Gamma_2</latexinline>:
 
 <latexmath>
 \Gamma_2 = \frac{\delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}}}{B_{2}^{\phantom{*}}} = S_{22}^{\phantom{*}}(|A_1|) + T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot \frac{A_2^*}{A_2}
@@ -184,41 +184,41 @@ which can be rewritten by replacing P with its value:
 \Gamma_2 = \frac{\delta_{2}^{\phantom{*}}B_{2}^{\phantom{*}}}{B_{2}^{\phantom{*}}} = S_{22}^{\phantom{*}}(|A_1|) + T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot e^{i \cdot 2 \cdot [\phi(A_2) - \phi(A_1)]}
 </latexmath>
 
-B\textsubscript{2} and δB\textsubscript{2} are shown respectively in \cref{fig-plt-non-lineaire-complexe-b2-b2-a1} and \cref{fig-plt-non-lineaire-complexe-deltab2-b2-a1} when δA\textsubscript{2} describes a circle.
+<latexinline>B_2</latexinline> and <latexinline>\delta B_2</latexinline> are shown respectively in \cref{fig-plt-non-lineaire-complexe-b2-b2-a1} and \cref{fig-plt-non-lineaire-complexe-deltab2-b2-a1} when <latexinline>\delta A_2</latexinline> describes a circle.
 
 <figure>
   <picture>
       <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-complexe-B2-B2-A1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
-  <figcaption>δB\textsubscript{2} when δA\textsubscript{2} describes a unit circle for different values of A\textsubscript{1}.</figcaption>
+  <figcaption><latexinline>\delta B_2</latexinline> when <latexinline>\delta A_2</latexinline> describes a unit circle for different values of <latexinline>A_1</latexinline>.</figcaption>
 </figure>
 
 <figure>
   <picture>
       <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-complexe-deltaB2-B2-A1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
-  <figcaption>δB\textsubscript{2} when δA\textsubscript{2} describes a unit circle for different values of A\textsubscript{1}.</figcaption>
+  <figcaption><latexinline>\delta B_2</latexinline> when <latexinline>\delta A_2</latexinline> describes a unit circle for different values of <latexinline>A_1</latexinline>.</figcaption>
 </figure>
 
-The first term depends only on the amplitude of A\textsubscript{1} and behaves exactly like a classic S\textsubscript{22} (except, of course, for the amplitude dependence) \cite{versprecht2006polyharmonic,root2013x}. On the other hand, the second term is more particular. It depends not only on the amplitude of A\textsubscript{1} but also on the phase difference between A\textsubscript{2} and A\textsubscript{1} \cite{versprecht2006polyharmonic,root2013x}.
+The first term depends only on the amplitude of <latexinline>A_1</latexinline> and behaves exactly like a classic <latexinline>S_{22}</latexinline> (except, of course, for the amplitude dependence) \cite{versprecht2006polyharmonic,root2013x}. On the other hand, the second term is more particular. It depends not only on the amplitude of <latexinline>A_1</latexinline> but also on the phase difference between <latexinline>A_2</latexinline> and <latexinline>A_1</latexinline> \cite{versprecht2006polyharmonic,root2013x}.
 
-The coefficient T\textsubscript{22} is simply neglected in classical large-signal S-parameter approaches \cite{versprecht2006polyharmonic,root2013x}. This term is zero at low power but can exceed S\textsubscript{22} when approaching saturation \cite{versprecht2006polyharmonic,root2013x}, as shown in \cref{fig-plt-non-lineaire-s22-t22}. Therefore, two terms are needed to completely describe the output reflection of the amplifier. Note that it is clearly seen in \cref{fig-plt-non-lineaire-s22-t22} that the output matching of this amplifier is very poor at low power but excellent at full power. This is also a classic effect of real power amplifiers.
+The coefficient <latexinline>T_{22}</latexinline> is simply neglected in classical large-signal S-parameter approaches \cite{versprecht2006polyharmonic,root2013x}. This term is zero at low power but can exceed <latexinline>S_{22}</latexinline> when approaching saturation \cite{versprecht2006polyharmonic,root2013x}, as shown in \cref{fig-plt-non-lineaire-s22-t22}. Therefore, two terms are needed to completely describe the output reflection of the amplifier. Note that it is clearly seen in \cref{fig-plt-non-lineaire-s22-t22} that the output matching of this amplifier is very poor at low power but excellent at full power. This is also a classic effect of real power amplifiers.
 
 <figure>
   <picture>
       <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-S22-T22.svg' | relative_url }}" style="width:100%;"/>
   </picture>
-  <figcaption>Coefficients S\textsubscript{22} and T\textsubscript{22}. The coefficient T\textsubscript{22} is zero at low power but exceeds S\textsubscript{22} in saturation.</figcaption>
+  <figcaption>Coefficients <latexinline>S_{22}</latexinline> and <latexinline>T_{22}</latexinline>. The coefficient <latexinline>T_{22}</latexinline> is zero at low power but exceeds <latexinline>S_{22}</latexinline> in saturation.</figcaption>
 </figure>
 
 <figure>
   <picture>
       <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-Gamma2.svg' | relative_url }}" style="width:100%;"/>
   </picture>
-  <figcaption>Apparent reflection coefficient of the output Γ\textsubscript{2} for different input amplitudes |A\textsubscript{1}|.</figcaption>
+  <figcaption>Apparent reflection coefficient of the output <latexinline>\Gamma_2</latexinline> for different input amplitudes <latexinline>|A_1|</latexinline>.</figcaption>
 </figure>
 
-The strange behavior of the T\textsubscript{22} term deserves further discussion. Surprisingly, and although it arises from nonlinear phenomena, this term translates a linear behavior. Indeed, if the perturbation δA\textsubscript{2,total} is the superposition of two perturbations:
+The strange behavior of the <latexinline>T_{22}</latexinline> term deserves further discussion. Surprisingly, and although it arises from nonlinear phenomena, this term translates a linear behavior. Indeed, if the perturbation <latexinline>\delta A_{2,\text{total}}</latexinline> is the superposition of two perturbations:
 
 <latexmath>
 \begin{equation*}
@@ -240,7 +240,7 @@ This linearity, surprisingly again, is perfectly normal. Indeed, we spent an ent
 
 However, this is not ordinary linear behavior, and ordinary linear systems, which can be described by classical S parameters, do not exhibit it. Why this paradox?
 
-Because the T\textsubscript{22} term translates a time-varying linear behavior. However, classical linear systems are time-invariant.
+Because the <latexinline>T_{22}</latexinline> term translates a time-varying linear behavior. However, classical linear systems are time-invariant.
 
 In summary, the linearization of a time-invariant nonlinear system around a time-varying operating point (it's a cosine!) results in a time-varying linear model. This linear model cannot be described by S parameters because these S parameters are reserved for time-invariant linear systems.
 
@@ -248,7 +248,7 @@ The correct way to describe this linearization is the use of X parameters \cite{
 
 It is always possible to calculate an apparent output impedance from the apparent reflection coefficient of the previous section, but is it correct to speak of the output impedance of a nonlinear amplifier? \cref{fig-plt-non-lineaire-Gamma2} clearly shows that a power amplifier in saturation has multiple impedances depending on the output perturbation. Which one is correct? Moreover, is the term "impedance" still appropriate, given that this impedance does not have the usual properties of an impedance?
 
-One way to see things is to say that a power amplifier does not have a well-defined impedance. Another is to say that a power amplifier has two output impedances: one for signals in phase with the input signal and another for quadrature signals. But it is wrong to say that a power amplifier has a single output impedance independent of the phase of B\textsubscript{2}.
+One way to see things is to say that a power amplifier does not have a well-defined impedance. Another is to say that a power amplifier has two output impedances: one for signals in phase with the input signal and another for quadrature signals. But it is wrong to say that a power amplifier has a single output impedance independent of the phase of <latexinline>B_2</latexinline>.
 
 This poses a problem because we need an output impedance, or something close to it, to perform our matching calculations. We will therefore reverse the problem. Instead of asking what the output impedance of the power amplifier is, we will ask what its optimal load impedance is. In our applications, the load is the input of a power combiner followed by an antenna. This load is linear and time-invariant. The load impedance is therefore well defined.
 
