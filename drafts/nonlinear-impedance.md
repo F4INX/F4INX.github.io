@@ -7,7 +7,7 @@ last_modified_at: 2026-03-08
 
 ### A few words on the notion of transistor output impedance
 
-In section \ref{section-utilite-transitions-impedance}, we set aside the real behavior of power amplifiers to focus on the behavior of their loads, i.e., the inputs of the power combiner. Power amplifiers operating at high power are nonlinear, which causes particular effects on the behavior of their outputs. We will detail these effects in the following section.
+In [PhD thesis section 16.1], we set aside the real behavior of power amplifiers to focus on the behavior of their loads, i.e., the inputs of the power combiner. Power amplifiers operating at high power are nonlinear, which causes particular effects on the behavior of their outputs. We will detail these effects in the following section.
 
 ### Behavior of a simplified nonlinear power amplifier
 
