@@ -92,7 +92,7 @@ b_{2}(t) &= \left[ \frac{G}{2} \cdot A_1 - \frac{3 \gamma}{8} \left|A_1\right|^2
 \end{split}
 </latexmath>
 
-We ignore the terms in e^{3 i \omega t} and e^{-3 i \omega t} which correspond to the third harmonic of the signal, and we are interested in the amplitude of the terms in e^{i \omega t} and e^{i \omega t}:
+We ignore the terms in <latexinline>e^{3 i \omega t}</latexinline> and <latexinline>e^{-3 i \omega t}</latexinline> which correspond to the third harmonic of the signal, and we are interested in the amplitude of the terms in <latexinline>e^{i \omega t}</latexinline> and <latexinline>e^{i \omega t}</latexinline>:
 
 <latexmath>
 b_{2}(t) = \frac{ B_2 \cdot e^{i \omega t} + B_{2}^* \cdot e^{- i \omega t} }{2} + \text{terms in } e^{3 i \omega t} \text{ and } e^{-3 i \omega t}
@@ -120,7 +120,7 @@ T_{22}(A_1) &=  - \frac{A_{1}^{2} \cdot \lambda}{4}
 \end{align}
 </latexmath>
 
-These coefficients depend on the phase of <latexinline>A_1</latexinline>, which is not very practical. We will therefore renormalize them. Let P = e^{i\cdot\phi(A_1)}. Thus:
+These coefficients depend on the phase of <latexinline>A_1</latexinline>, which is not very practical. We will therefore renormalize them. Let <latexinline>P = e^{i\cdot\phi(A_1)}</latexinline>. Thus:
 
 <latexmath>
 \begin{split}
