@@ -43,7 +43,7 @@ Figures \ref{fig-plt-non-lineaire-b2-a1} and \ref{fig-plt-non-lineaire-r2-a1} sh
   <figcaption>Instantaneous reflection coefficient <latexinline>\frac{db_{2}(t)}{da_{2}(t)}</latexinline> of the output as a function of input <latexinline>a_1(t)</latexinline>.</figcaption>
 </figure>
 
-This nonlinear equation can be linearized \cite{versprecht2006polyharmonic,root2013x} around an operating point, which we will call "LSOP" for "large signal operating point". This operating point is:
+This nonlinear equation can be linearized <sup>[1,2]</sup> around an operating point, which we will call "LSOP" for "large signal operating point". This operating point is:
 
 <latexmath>
 \begin{align}
@@ -145,7 +145,7 @@ and therefore:
 B_{2} = \underbrace{S_{21}^{\phantom{*}}(|A_1|)\cdot A_1}_\text{Amplification} + \underbrace{S_{22}^{\phantom{*}}(|A_1|)\cdot \delta A_{2}}_\text{Normal reflection} + \underbrace{T_{22}^{\phantom{*}}(|A_1|) \cdot P^2 \cdot (\delta A_2)^*}_\text{Conjugate reflection}
 </latexmath>
 
-This linearization is a simplified version of the X parameters \cite{versprecht2006polyharmonic,root2013x}.
+This linearization is a simplified version of the X parameters <sup>[1,2]</sup>.
 
 The amplitude of <latexinline>B_2</latexinline> in large signal regime for <latexinline>A_2=0</latexinline> as a function of <latexinline>A_1</latexinline> is shown in \cref{fig-plt-non-lineaire-complexe-B2-A1}. This figure is different from \cref{fig-plt-non-lineaire-b2-a1} because the latter is an instantaneous transfer function while the former is a sinusoidal regime transfer function. The nonlinear gain <latexinline>S_{21}(|A_1|)</latexinline> is shown as a function of <latexinline>|A_1|</latexinline> in \cref{fig-plt-non-lineaire-S21}. We recognize the classic gain compression of nonlinear amplifiers.
 
@@ -197,9 +197,9 @@ which can be rewritten by replacing P with its value:
   <figcaption><latexinline>\delta B_2</latexinline> when <latexinline>\delta A_2</latexinline> describes a unit circle for different values of <latexinline>A_1</latexinline>.</figcaption>
 </figure>
 
-The first term depends only on the amplitude of <latexinline>A_1</latexinline> and behaves exactly like a classic <latexinline>S_{22}</latexinline> (except, of course, for the amplitude dependence) \cite{versprecht2006polyharmonic,root2013x}. On the other hand, the second term is more particular. It depends not only on the amplitude of <latexinline>A_1</latexinline> but also on the phase difference between <latexinline>A_2</latexinline> and <latexinline>A_1</latexinline> \cite{versprecht2006polyharmonic,root2013x}.
+The first term depends only on the amplitude of <latexinline>A_1</latexinline> and behaves exactly like a classic <latexinline>S_{22}</latexinline> (except, of course, for the amplitude dependence) <sup>[1,2]</sup>. On the other hand, the second term is more particular. It depends not only on the amplitude of <latexinline>A_1</latexinline> but also on the phase difference between <latexinline>A_2</latexinline> and <latexinline>A_1</latexinline> <sup>[1,2]</sup>.
 
-The coefficient <latexinline>T_{22}</latexinline> is simply neglected in classical large-signal S-parameter approaches \cite{versprecht2006polyharmonic,root2013x}. This term is zero at low power but can exceed <latexinline>S_{22}</latexinline> when approaching saturation \cite{versprecht2006polyharmonic,root2013x}, as shown in \cref{fig-plt-non-lineaire-s22-t22}. Therefore, two terms are needed to completely describe the output reflection of the amplifier. Note that it is clearly seen in \cref{fig-plt-non-lineaire-s22-t22} that the output matching of this amplifier is very poor at low power but excellent at full power. This is also a classic effect of real power amplifiers.
+The coefficient <latexinline>T_{22}</latexinline> is simply neglected in classical large-signal S-parameter approaches <sup>[1,2]</sup>. This term is zero at low power but can exceed <latexinline>S_{22}</latexinline> when approaching saturation <sup>[1,2]</sup>, as shown in \cref{fig-plt-non-lineaire-s22-t22}. Therefore, two terms are needed to completely describe the output reflection of the amplifier. Note that it is clearly seen in \cref{fig-plt-non-lineaire-s22-t22} that the output matching of this amplifier is very poor at low power but excellent at full power. This is also a classic effect of real power amplifiers.
 
 <figure>
   <picture>
@@ -241,7 +241,7 @@ Because the <latexinline>T_{22}</latexinline> term translates a time-varying lin
 
 In summary, the linearization of a time-invariant nonlinear system around a time-varying operating point (it's a cosine!) results in a time-varying linear model. This linear model cannot be described by S parameters because these S parameters are reserved for time-invariant linear systems.
 
-The correct way to describe this linearization is the use of X parameters \cite{versprecht2006polyharmonic,root2013x}. The coefficients of the previous section are almost X parameters.
+The correct way to describe this linearization is the use of X parameters <sup>[1,2]</sup>. The coefficients of the previous section are almost X parameters.
 
 It is always possible to calculate an apparent output impedance from the apparent reflection coefficient of the previous section, but is it correct to speak of the output impedance of a nonlinear amplifier? \cref{fig-plt-non-lineaire-Gamma2} clearly shows that a power amplifier in saturation has multiple impedances depending on the output perturbation. Which one is correct? Moreover, is the term "impedance" still appropriate, given that this impedance does not have the usual properties of an impedance?
 
@@ -251,7 +251,7 @@ This poses a problem because we need an output impedance, or something close to 
 
 To simplify the reasoning, and by abuse of language, we will call "output impedance" the conjugate of the optimal load impedance. But it is indeed a fiction, given the previous reservations about the notion of output impedance applied to nonlinear systems.
 
-We have talked about amplifiers but not yet about transistors. The same remarks apply to a transistor, but with an additional reservation: since transistors are not matched, the operating point is more complex to define \cite{root2013x}. The conclusions are however globally similar \cite{root2013x}.
+We have talked about amplifiers but not yet about transistors. The same remarks apply to a transistor, but with an additional reservation: since transistors are not matched, the operating point is more complex to define <sup>[1]</sup>. The conclusions are however globally similar <sup>[1]</sup>.
 
 Reasoning with load impedances is a common practice in the field of transistor amplifiers. This is the principle of load-pull, whether performed in reality or on a simulator. Similarly, in its datasheets, an example of which is shown in \cref{fig-CGHV14500-datasheet-impedances}, Wolfspeed (formerly CREE) does not provide the output impedances of its transistors but rather the optimal load impedances. QED.
 
@@ -261,3 +261,9 @@ Reasoning with load impedances is a common practice in the field of transistor a
   </picture>
   <figcaption>Extract from the CGHV14500 datasheet showing optimal source and load impedances. Not those of the transistor.</figcaption>
 </figure>
+
+### References
+
+[1] David E. ROOT, Jan VERSPECHT, Jason HORN, Mihai MARCU. "X-Parameters: Characterization, Modeling, and Design of Nonlinear RF and Microwave Components." Cambridge University Press, 2013.
+
+[2] Jan VERSPECHT et David E. ROOT. "Polyharmonic distortion modeling." In: IEEE Microwave Magazine 7.3, IEEE (juin 2006), p. 44-57. URL: http://www.janverspecht.com/pdf/phd_ieeemicrowavemagazine.pdf
