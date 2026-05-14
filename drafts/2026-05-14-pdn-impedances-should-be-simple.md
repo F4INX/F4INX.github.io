@@ -33,7 +33,7 @@ We propose here an alternative approach:
 
 1/ As usual.
 
-2/ From the curves, allocates a maximum R and L such that Rit+Ldi/dt<=ΔVmax. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
+2/ From the curves, allocates a maximum R and L such that <asciimath>R \cdot i(t) + L \cdot (di(t))/(dt) <= Delta V_"max"</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
 
 3/ From R and L, calculate a maximum allowed impedance vs. frequency.
 
@@ -51,13 +51,13 @@ The repetition rate of the charge of the capacitive loads might seem an importan
 
 * CLK ↓, output =
 
-Peak current can be calculated from charge conservation from the curve: Ipk=Cl×Vcc/tr.
+Peak current can be calculated from charge conservation from the curve: <asciimath>I_"pk" = C_l \cdot V_"cc" / t_r</asciimath>.
 
 ## Current drawn by chip consumption (cross-conduction of the gates)
 
 This one is more tricky. Most circuits are synchronous nowadays so mainly this case will be studied. Circuits having multiple clock domains can also be studied with this method. It will also be asumed that the current spikes will be dominant on rising edges rather than on falling edges, which is a reasonable worst case.
 
-The calculation is better made from the total consumption, easier to measure and to define, than from other parameters like Cpd. From similar charge conservation considerations than previously, calculation lead to ITOTAL=Ipk×tr×fCLK, and thus Ipk=ITOTAL/fCLK/tr.
+The calculation is better made from the total consumption, easier to measure and to define, than from other parameters like Cpd. From similar charge conservation considerations than previously, calculation lead to <asciimath>I_"TOTAL" = I_"pk" \cdot t_r \cdot f_"CLK"</asciimath>, and thus <asciimath>I_"pk" = I_"TOTAL" / (f_"CLK" \cdot t_r)</asciimath>.
 
 ## What to do if tr is missing ?
 
