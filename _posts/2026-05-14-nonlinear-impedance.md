@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Nonlinear impedance
-permalink: /drafts/nonlinear-impedance.html
-last_modified_at: 2026-03-08
+title: Nonlinear impedance (draft)
+permalink: /posts/nonlinear-impedance.html
+last_modified_at: 2026-05-14
 ---
 
-<p class="begin-note">This page is a quick and dirty translation of a previous French document. Various editing issues are susceptible to be present.</p>
+<p class="begin-note">Although it is still in draft stage, this document is released before finishing due to its interest. This page is a quick and dirty translation of a previous French document. Various editing issues are susceptible to be present.</p>
 
 ### A few words on the notion of transistor output impedance
 
@@ -33,14 +33,14 @@ Figures \ref{fig-plt-non-lineaire-b2-a1} and \ref{fig-plt-non-lineaire-r2-a1} sh
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-b2-a1.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/non-lineaire-b2-a1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Output <latexinline>b_2(t)</latexinline> as a function of input <latexinline>a_1(t)</latexinline>.</figcaption>
 </figure>
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-r2-a1.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/non-lineaire-r2-a1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Instantaneous reflection coefficient <latexinline>\frac{db_{2}(t)}{da_{2}(t)}</latexinline> of the output as a function of input <latexinline>a_1(t)</latexinline>.</figcaption>
 </figure>
@@ -153,14 +153,14 @@ The amplitude of <latexinline>B_2</latexinline> in large signal regime for <late
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-complexe-B2-A1.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/non-lineaire-complexe-B2-A1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Output amplitude <latexinline>B_2</latexinline> as a function of <latexinline>|A_1|</latexinline> in large signal regime.</figcaption>
 </figure>
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-S21.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/non-lineaire-S21.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Nonlinear gain <latexinline>S_{21}(|A_1|)</latexinline> as a function of <latexinline>|A_1|</latexinline>.</figcaption>
 </figure>
@@ -187,14 +187,14 @@ which can be rewritten by replacing P with its value:
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-complexe-B2-B2-A1.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/non-lineaire-complexe-B2-B2-A1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption><latexinline>\delta B_2</latexinline> when <latexinline>\delta A_2</latexinline> describes a unit circle for different values of <latexinline>A_1</latexinline>.</figcaption>
 </figure>
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-complexe-deltaB2-B2-A1.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/non-lineaire-complexe-deltaB2-B2-A1.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption><latexinline>\delta B_2</latexinline> when <latexinline>\delta A_2</latexinline> describes a unit circle for different values of <latexinline>A_1</latexinline>.</figcaption>
 </figure>
@@ -205,14 +205,14 @@ The coefficient <latexinline>T_{22}</latexinline> is simply neglected in classic
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-S22-T22.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/non-lineaire-S22-T22.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Coefficients <latexinline>S_{22}</latexinline> and <latexinline>T_{22}</latexinline>. The coefficient <latexinline>T_{22}</latexinline> is zero at low power but exceeds <latexinline>S_{22}</latexinline> in saturation.</figcaption>
 </figure>
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/non-lineaire-Gamma2.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/non-lineaire-Gamma2.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Apparent reflection coefficient of the output <latexinline>\Gamma_2</latexinline> for different input amplitudes <latexinline>|A_1|</latexinline>.</figcaption>
 </figure>
@@ -259,7 +259,7 @@ Reasoning with load impedances is a common practice in the field of transistor a
 
 <figure>
   <picture>
-      <img src="{{ '/drafts/nonlinear-impedance/CGHV14500-datasheet-impedances.svg' | relative_url }}" style="width:100%;"/>
+      <img src="{{ '/posts/nonlinear-impedance/CGHV14500-datasheet-impedances.svg' | relative_url }}" style="width:100%;"/>
   </picture>
   <figcaption>Extract from the CGHV14500 datasheet showing optimal source and load impedances. Not those of the transistor.</figcaption>
 </figure>
