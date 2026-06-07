@@ -53,7 +53,7 @@ We propose here an alternative approach:
 
 1/ As usual.
 
-2/ From the curves, allocates a maximum R and L such that <asciimath>R \cdot i(t) + L \cdot (di(t))/(dt) <= Delta V_"max"</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
+2/ From the curves, allocates a maximum R and L such that <asciimath>R \cdot I_(pk) + L \cdot I_(pk)/t_r <= Delta V_"max"</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
 
 3/ (Optional) from R and L, calculate a maximum allowed impedance vs. frequency.
 
