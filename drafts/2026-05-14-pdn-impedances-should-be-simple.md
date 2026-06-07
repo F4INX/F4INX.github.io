@@ -37,7 +37,11 @@ where <asciimath>\Delta V</asciimath> "is the allowable power supply transient v
 
 ![](pdn-impedances-should-be-simple/zt-curve.png)
 
-3/ Make something with this maximum allowed impedance, using math again, for instance calculate a maximum allowed R and L.
+3/ From this curve, calculate the maximum allowed impedance as (Ott, eqn. 11-7 rearranged, p. 445):
+
+<latexmath>
+L_\text{max} = \frac{Z_t \cdot t_r}{2}
+</latexmath>
 
 Oh. God. Why cannot we make things simple ?
 
