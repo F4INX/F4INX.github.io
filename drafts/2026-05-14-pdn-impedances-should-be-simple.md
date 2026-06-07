@@ -25,6 +25,12 @@ From Ott, p. 428.
 
 From Ott, pages 429-430.
 
+![](pdn-impedances-should-be-simple/zt-low-frequency.png)
+
+![](pdn-impedances-should-be-simple/zt-curve.png)
+
+From Ott, pages 446-447.
+
 3/ Make something with this maximum allowed impedance, using math again, for instance calculate a maximum allowed R and L.
 
 Oh. God. Why cannot we make things simple ?
