@@ -17,19 +17,25 @@ The typical approach, well explained by Ott, is as follows:
 
 From Ott, p. 428.
 
-2/ Make some math to calculate a maximum allowed impedance from this, with some nasty constants like π.
+2/ Express the Fourier transform of this current as such (Ott, p. 429):
 
-![](pdn-impedances-should-be-simple/edges-fourier-1.png)
+<latexmath>
+I_n = \frac{2 \cdot I \cdot t_r}{T} \cdot \left[ \frac{\sin(\frac{n \cdot \pi \cdot t_r}{T})}{\frac{n \cdot \pi \cdot t_r}{T}} \right]^2
+</latexmath>
 
-![](pdn-impedances-should-be-simple/edges-fourier-2.png)
+Use the following enveloppe as a simpler upper bound (Ott, p. 430):
 
-From Ott, pages 429-430.
+![](pdn-impedances-should-be-simple/edges-fourier.png)
 
-![](pdn-impedances-should-be-simple/zt-low-frequency.png)
+Calculate the low frequency part as such:
+
+<latexmath>
+Z_t = \frac{k \cdot \Delta V}{\Delta I}
+</latexmath>
+
+where <asciimath>\Delta V</asciimath> "is the allowable power supply transient voltage variation", <asciimath>\Delta I</asciimath> "is the amplitude of the transient power supply current drawn by the IC", and k a correction factor taking into account the part of the current "contained in the frequencies below the 1/π t<sub>r</sub> frequency" (Ott, pp. 446-447).
 
 ![](pdn-impedances-should-be-simple/zt-curve.png)
-
-From Ott, pages 446-447.
 
 3/ Make something with this maximum allowed impedance, using math again, for instance calculate a maximum allowed R and L.
 
