@@ -9,6 +9,8 @@ Calculation of the maximum impedance a PDN should provide is often a complex tas
 
 ## Comments on PDN maximum impedance calculation method
 
+### Typical approach
+
 The typical approach, well explained by Ott, is as follows:
 
 1/ Approximate the current drawn by the chip by a series of trapezoidal pulses:
@@ -45,13 +47,15 @@ L_\text{max} = \frac{Z_t \cdot t_r}{2}
 
 Oh. God. Why cannot we make things simple ?
 
+### Alternative time-domain approach
+
 We propose here an alternative approach:
 
 1/ As usual.
 
 2/ From the curves, allocates a maximum R and L such that <asciimath>R \cdot i(t) + L \cdot (di(t))/(dt) <= Delta V_"max"</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
 
-3/ From R and L, calculate a maximum allowed impedance vs. frequency.
+3/ (Optional) from R and L, calculate a maximum allowed impedance vs. frequency.
 
 Note that, here, R and L can be seen not only as physical elements, but also as convenient calculation tools, for example when modelling something whose behavior is more complex than a pure R and L.
 
