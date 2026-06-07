@@ -19,9 +19,9 @@ From Ott, p. 428.
 
 2/ Make some math to calculate a maximum allowed impedance from this, with some nasty constants like π.
 
-![](edges-fourier-1.png)
+![](pdn-impedances-should-be-simple/edges-fourier-1.png)
 
-![](edges-fourier-2.png)
+![](pdn-impedances-should-be-simple/edges-fourier-2.png)
 
 From Ott, pages 429-430.
 
