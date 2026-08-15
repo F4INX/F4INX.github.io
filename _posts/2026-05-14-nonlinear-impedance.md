@@ -3,6 +3,8 @@ layout: post
 title: Nonlinear impedance (draft)
 permalink: /posts/nonlinear-impedance.html
 last_modified_at: 2026-05-14
+categories: [RF Design, Power Amplifiers]
+excerpt: A comprehensive analysis of nonlinear impedance effects in power amplifiers, including transistor output impedance behavior and gain compression.
 ---
 
 <p class="begin-note">Although it is still in draft stage, this document is released before finishing due to its interest. This page is a quick and dirty translation of a previous French document. Various editing issues are susceptible to be present.</p>

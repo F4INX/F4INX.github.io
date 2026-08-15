@@ -3,6 +3,8 @@ layout: post
 title: The fine art of (not) doing oscillators
 permalink: /posts/how-not-to-do-oscillators.html
 last_modified_at: 2026-03-14
+categories: [Oscillators, Circuit Design]
+excerpt: Practical insights and common pitfalls in oscillator circuit design, with real-world examples and solutions.
 ---
 
 Hadrien Theveneau, [Gönül Demir](https://www.linkedin.com/in/gonul-demir-49413433/)
