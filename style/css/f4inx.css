@@ -728,7 +728,7 @@ figure figcaption {
 
 .card {
   background: var(--bg-color);
-  border: 1px solid #e5e7eb;
+  border: 1px solid #333;
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -738,7 +738,8 @@ figure figcaption {
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-color: var(--primary, #2563eb);
+  border-color: #000;
+  background: #f8f8f8;
 }
 
 .card-content {
@@ -757,11 +758,11 @@ figure figcaption {
 }
 
 .card-title a:hover {
-  color: var(--primary, #2563eb);
+  color: #000;
 }
 
 .card-excerpt {
-  color: #4b5563;
+  color: #333;
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0.75rem 0;
@@ -769,7 +770,7 @@ figure figcaption {
 
 .card-category {
   display: inline-block;
-  background: var(--primary, #2563eb);
+  background: #000;
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
@@ -782,7 +783,7 @@ figure figcaption {
   display: flex;
   justify-content: space-between;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: #666;
   margin-top: 1rem;
 }
 
