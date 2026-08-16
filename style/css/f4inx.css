@@ -834,22 +834,11 @@ figure figcaption {
   font-family: monospace;
 }
 
-.hover-collapsible {
-  position: relative;
-}
-
 .hover-collapsible .collapsible-section {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 100%;
-  background: var(--bg-color);
-  z-index: 10;
   list-style: none;
   padding-left: 1rem;
-  margin: 0;
+  margin: 0.25rem 0 0 0;
   display: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hover-collapsible:hover .collapsible-section {
