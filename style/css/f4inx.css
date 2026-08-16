@@ -841,7 +841,7 @@ figure figcaption {
 .hover-collapsible .collapsible-section {
   position: absolute;
   top: 0;
-  left: 100%;
+  left: calc(100% - 20px);
   min-width: 200px;
   background: var(--bg-color);
   z-index: 10;
@@ -858,9 +858,12 @@ figure figcaption {
 }
 
 .hover-collapsible .collapsible-indicator {
-  transform: rotate(180deg);
+  display: inline-block;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+  font-family: monospace;
 }
 
 .hover-collapsible:hover .collapsible-indicator {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
