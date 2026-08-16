@@ -841,7 +841,7 @@ figure figcaption {
 .hover-collapsible .collapsible-section {
   position: absolute;
   top: 0;
-  left: calc(100% - 20px);
+  left: calc(100% - 40px);
   min-width: 200px;
   background: var(--bg-color);
   z-index: 10;
