@@ -16,8 +16,10 @@
       </li>
 
       <li>
-        Posts
-        <ul>
+        <button class="collapsible-button" onclick="toggleCollapsible('posts-section')" aria-expanded="false" aria-controls="posts-section">
+          Posts <span class="collapsible-indicator" aria-hidden="true">+</span>
+        </button>
+        <ul id="posts-section" class="collapsible-section" aria-labelledby="posts-header">
           {% for post in site.posts %}
             <li>
               <a class="{% if page.url == post.url %}active{% endif %}" href="{{ post.url }}">
