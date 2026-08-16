@@ -852,7 +852,3 @@ figure figcaption {
 .hover-collapsible:hover .collapsible-indicator {
   transform: rotate(0deg);
 }
-
-.collapsible-button[aria-expanded="false"] .collapsible-indicator {
-  transform: rotate(90deg);
-}
