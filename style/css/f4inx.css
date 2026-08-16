@@ -845,8 +845,12 @@ figure figcaption {
   display: block;
 }
 
-.hover-collapsible:hover .collapsible-indicator {
+.hover-collapsible .collapsible-indicator {
   transform: rotate(180deg);
+}
+
+.hover-collapsible:hover .collapsible-indicator {
+  transform: rotate(0deg);
 }
 
 .collapsible-button[aria-expanded="false"] .collapsible-indicator {
