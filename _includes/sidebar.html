@@ -30,9 +30,11 @@
         </ul>
       </li>
 
-      <li>
-        Misc pages
-        <ul>
+      <li class="hover-collapsible">
+        <span class="collapsible-button">
+          Misc pages <span class="collapsible-indicator">^</span>
+        </span>
+        <ul class="collapsible-section">
           {% for node in site.pages | sort:"order" %}
             {% if node.title != null %}
               {% if node.layout == "page" %}
