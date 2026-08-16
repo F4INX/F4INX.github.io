@@ -15,11 +15,11 @@
         <a class="{% if page.title == "Home" %}active{% endif %}" href="{{ "/" | relative_url }}">Home</a>
       </li>
 
-      <li>
-        <button class="collapsible-button" onclick="toggleCollapsible('posts-section')" aria-expanded="false" aria-controls="posts-section">
-          Posts <span class="collapsible-indicator" aria-hidden="true">+</span>
-        </button>
-        <ul id="posts-section" class="collapsible-section" aria-labelledby="posts-header">
+      <li class="hover-collapsible">
+        <span class="collapsible-button">
+          Posts <span class="collapsible-indicator">^</span>
+        </span>
+        <ul class="collapsible-section">
           {% for post in site.posts %}
             <li>
               <a class="{% if page.url == post.url %}active{% endif %}" href="{{ post.url }}">

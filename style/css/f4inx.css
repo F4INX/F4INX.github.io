@@ -818,12 +818,13 @@ figure figcaption {
 }
 
 .collapsible-button:focus {
-  outline: 2px solid #000;
+  outline: 2px solid #fff;
 }
 
 .collapsible-button .collapsible-indicator {
   display: inline-block;
   font-weight: bold;
+  transition: transform 0.2s ease;
 }
 
 .collapsible-indicator {
@@ -833,15 +834,19 @@ figure figcaption {
   font-family: monospace;
 }
 
-.collapsible-section {
+.hover-collapsible .collapsible-section {
   list-style: none;
   padding-left: 1rem;
   margin: 0.25rem 0 0 0;
+  display: none;
+}
+
+.hover-collapsible:hover .collapsible-section {
   display: block;
 }
 
-.collapsible-section.collapsed {
-  display: none;
+.hover-collapsible:hover .collapsible-indicator {
+  transform: rotate(180deg);
 }
 
 .collapsible-button[aria-expanded="false"] .collapsible-indicator {
