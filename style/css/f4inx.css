@@ -872,7 +872,7 @@ figure figcaption {
   font-family: monospace;
 }
 
-.hover-collapsible:hover .collapsible-indicator {
+.hover-collapsible .collapsible-indicator.rotated {
   transform: rotate(180deg);
 }
 

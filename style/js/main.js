@@ -34,6 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var buttons = document.querySelectorAll('.hover-collapsible .collapsible-button');
   buttons.forEach(function(button) {
     button.setAttribute('aria-expanded', 'false');
+    var indicator = button.querySelector('.collapsible-indicator');
+    if (indicator) {
+      indicator.classList.remove('rotated');
+    }
   });
 
   // Click-based toggle for collapsible sections on mobile
@@ -44,13 +48,20 @@ document.addEventListener('DOMContentLoaded', function() {
       e.stopPropagation();
       
       var section = this.parentNode.querySelector('.collapsible-section');
+      var indicator = this.querySelector('.collapsible-indicator');
       if (section) {
         if (section.classList.contains('collapsed')) {
           section.classList.remove('collapsed');
           this.setAttribute('aria-expanded', 'true');
+          if (indicator) {
+            indicator.classList.add('rotated');
+          }
         } else {
           section.classList.add('collapsed');
           this.setAttribute('aria-expanded', 'false');
+          if (indicator) {
+            indicator.classList.remove('rotated');
+          }
         }
       }
     });
