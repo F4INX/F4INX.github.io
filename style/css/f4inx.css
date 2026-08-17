@@ -843,8 +843,9 @@ figure figcaption {
   top: 0;
   left: calc(50%);
   min-width: 200px;
-  background: #ffffff;
-  color: #000000;
+  /* Use reverse colors compared to sidebar for contrast */
+  background: var(--fg-color);
+  color: var(--bg-color);
   z-index: 10;
   list-style: none;
   padding: 0.5rem 1rem;
