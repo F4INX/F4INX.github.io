@@ -753,16 +753,22 @@ figure figcaption {
 }
 
 .card-title a {
-  color: inherit;
+  color: var(--fg-color);
   text-decoration: none;
 }
 
+.card:hover .card-title a,
+.card:hover .card-excerpt,
+.card:hover .card-meta {
+  color: #000000;
+}
+
 .card-title a:hover {
-  color: #000;
+  color: #000000;
 }
 
 .card-excerpt {
-  color: #333;
+  color: var(--fg-color);
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0.75rem 0;
@@ -783,7 +789,7 @@ figure figcaption {
   display: flex;
   justify-content: space-between;
   font-size: 0.875rem;
-  color: #666;
+  color: var(--fg-color);
   margin-top: 1rem;
 }
 
