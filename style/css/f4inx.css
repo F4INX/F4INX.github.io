@@ -872,6 +872,14 @@ figure figcaption {
   font-family: monospace;
 }
 
+.hover-collapsible .collapsible-indicator::before {
+  content: ">";
+}
+
+.hover-collapsible .collapsible-indicator.rotated::before {
+  content: "<";
+}
+
 .hover-collapsible .collapsible-indicator.rotated {
   transform: rotate(180deg);
 }
@@ -915,5 +923,18 @@ figure figcaption {
   .sidebar nav > ul > li {
     font-size: 1rem;
     padding: 0.25rem 0;
+  }
+
+  .collapsible-button {
+    font-size: 1rem;
+  }
+
+  /* Use ^ and v indicators on mobile instead of > and < */
+  .hover-collapsible .collapsible-indicator::before {
+    content: "^";
+  }
+  
+  .hover-collapsible .collapsible-indicator.rotated::before {
+    content: "v";
   }
 }
