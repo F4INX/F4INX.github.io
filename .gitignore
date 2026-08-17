@@ -47,6 +47,10 @@ node_modules
 # Ignore Gemfile.lock
 Gemfile.lock
 
+# Ignore generated files from other branches
+package-lock.json
+style/css/blackcat.compiled.css
+
 # Ignore temp of diff-amp-equations (LTSpice, emf)
 posts/diff-amp-equations/diff-amp-SE-LTSpice.op.raw
 posts/diff-amp-equations/diff-amp-SE-LTSpice.raw
