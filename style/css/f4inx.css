@@ -875,3 +875,36 @@ figure figcaption {
 .hover-collapsible:hover .collapsible-indicator {
   transform: rotate(180deg);
 }
+
+/*************/
+/* Mobile Menu - Collapsible Sections */
+/*************/
+
+@media (max-width: 48em) {
+  /* Modify collapsible sections for mobile */
+  .hover-collapsible .collapsible-section {
+    position: static;
+    left: auto;
+    min-width: auto;
+    width: 100%;
+    background: transparent;
+    color: var(--fg-color);
+    padding-left: 1rem;
+    box-shadow: none;
+    display: none;
+  }
+
+  .hover-collapsible:hover .collapsible-section {
+    display: block;
+  }
+
+  /* Mobile sidebar adjustments */
+  .sidebar nav > ul {
+    padding-left: 0;
+  }
+
+  .sidebar nav > ul > li {
+    font-size: 1rem;
+    padding: 0.25rem 0;
+  }
+}
