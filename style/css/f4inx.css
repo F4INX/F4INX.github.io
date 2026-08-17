@@ -894,7 +894,16 @@ figure figcaption {
     display: none;
   }
 
+  /* On mobile, use class-based toggle only - ignore hover */
+  .hover-collapsible .collapsible-section:not(.collapsed) {
+    display: block;
+  }
+
+  /* Disable hover behavior on mobile by overriding desktop rule */
   .hover-collapsible:hover .collapsible-section {
+    display: none;
+  }
+  .hover-collapsible:hover .collapsible-section:not(.collapsed) {
     display: block;
   }
 
