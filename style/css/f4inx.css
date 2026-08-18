@@ -707,3 +707,194 @@ figure figcaption {
 .no-js .collapsible-content-aux {
     display: block;
 }
+
+/*************/
+/* Card Layout */
+/*************/
+
+.content {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.card {
+  background: var(--bg-color);
+  border: 1px solid #333;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #000;
+  background: #f8f8f8;
+}
+
+.card-content {
+  padding: 1.25rem;
+}
+
+.card-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-title a {
+  color: var(--fg-color);
+  text-decoration: none;
+}
+
+.card:hover .card-title a,
+.card:hover .card-excerpt,
+.card:hover .card-meta {
+  color: #000000;
+}
+
+.card-title a:hover {
+  color: #000000;
+}
+
+.card-excerpt {
+  color: var(--fg-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0.75rem 0;
+}
+
+.card-category {
+  display: inline-block;
+  background: #000;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--fg-color);
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*******************/
+/* Sidebar Collapsible */
+/*******************/
+
+.collapsible-button {
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  margin: 0;
+  font: inherit;
+  color: var(--fg-color);
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 0.8;
+}
+
+.collapsible-button:hover {
+  text-decoration: underline;
+}
+
+.collapsible-button:focus {
+  outline: 2px solid #fff;
+}
+
+.collapsible-button .collapsible-indicator {
+  display: inline-block;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.collapsible-indicator {
+  margin-left: 0.5rem;
+  font-size: 1em;
+  transition: transform 0.2s ease;
+  font-family: monospace;
+}
+
+.hover-collapsible {
+  position: relative;
+}
+
+.hover-collapsible .collapsible-section {
+  list-style: none;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  display: none;
+  padding-left: 1rem;
+}
+
+/* Use class-based toggle for all screen sizes */
+.hover-collapsible .collapsible-section:not(.collapsed) {
+  display: block;
+}
+
+.hover-collapsible .collapsible-indicator {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='%23fff'><path d='m16.7 8-6 6H9.3l-6-6 1.4-1.4 5.3 5.3 5.3-5.3z'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+  margin-right: 0.3em;
+  margin-left: 0;
+}
+
+.hover-collapsible .collapsible-indicator::before {
+  content: none;
+}
+
+.hover-collapsible .collapsible-indicator.rotated {
+  transform: rotate(180deg);
+}
+
+/*************/
+/* Mobile Menu - Collapsible Sections */
+/*************/
+
+@media (max-width: 48em) {
+  /* Mobile sidebar adjustments */
+  .sidebar nav > ul {
+    padding-left: 0;
+  }
+
+  .sidebar nav > ul > li {
+    font-size: 1rem;
+    padding: 0.25rem 0;
+  }
+
+  .collapsible-button {
+    font-size: 1rem;
+  }
+}

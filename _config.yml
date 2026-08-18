@@ -3,7 +3,6 @@ title:            RF cat corner
 tagline:          'analog electronics, RF, EM simulations, ...'
 description:      "Blog edited by Hadrien F4INX on analog electronics, RF, EM simulations, ...."
 baseurl:          '/'
-paginate:         5
 
 # About and contact
 author:
@@ -30,7 +29,6 @@ feed:
 # Gems
 plugins:
   # Jekyll dependencies
-  - jekyll-paginate
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag

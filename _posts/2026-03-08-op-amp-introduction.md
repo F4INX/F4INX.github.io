@@ -3,6 +3,8 @@ layout: post
 title: A (not so) gentle introduction to operational amplifiers.
 permalink: /posts/op-amp-introduction.html
 last_modified_at: 2026-03-08
+categories: [Analog Design, Operational Amplifiers]
+excerpt: A comprehensive guide to understanding operational amplifiers, their characteristics, configurations, and practical applications in analog circuits.
 ---
 
 <style>
