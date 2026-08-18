@@ -859,17 +859,19 @@ figure figcaption {
 
 .hover-collapsible .collapsible-indicator {
   display: inline-block;
-  font-weight: bold;
+  width: 0.8em;
+  height: 0.8em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='%23fff'><path d='m16.7 8-6 6H9.3l-6-6 1.4-1.4 5.3 5.3 5.3-5.3z'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   transition: transform 0.2s ease;
-  font-family: monospace;
+  vertical-align: middle;
+  margin-right: 0.3em;
 }
 
 .hover-collapsible .collapsible-indicator::before {
-  content: "^";
-}
-
-.hover-collapsible .collapsible-indicator.rotated::before {
-  content: "v";
+  content: none;
 }
 
 .hover-collapsible .collapsible-indicator.rotated {
