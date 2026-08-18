@@ -845,33 +845,56 @@ figure figcaption {
 }
 
 .hover-collapsible .collapsible-section {
-  position: absolute;
-  top: 0;
-  left: calc(50%);
-  min-width: 200px;
-  /* Use reverse colors compared to sidebar for contrast */
-  background: var(--fg-color);
-  color: var(--bg-color);
-  z-index: 10;
   list-style: none;
   padding: 0.5rem 1rem;
   margin: 0;
   display: none;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-  border-radius: 0 0.5rem 0.5rem 0;
+  padding-left: 1rem;
 }
 
-.hover-collapsible:hover .collapsible-section {
+/* Use class-based toggle for all screen sizes */
+.hover-collapsible .collapsible-section:not(.collapsed) {
   display: block;
 }
 
 .hover-collapsible .collapsible-indicator {
   display: inline-block;
-  font-weight: bold;
+  width: 0.8em;
+  height: 0.8em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='%23fff'><path d='m16.7 8-6 6H9.3l-6-6 1.4-1.4 5.3 5.3 5.3-5.3z'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   transition: transform 0.2s ease;
-  font-family: monospace;
+  vertical-align: middle;
+  margin-right: 0.3em;
+  margin-left: 0;
 }
 
-.hover-collapsible:hover .collapsible-indicator {
+.hover-collapsible .collapsible-indicator::before {
+  content: none;
+}
+
+.hover-collapsible .collapsible-indicator.rotated {
   transform: rotate(180deg);
+}
+
+/*************/
+/* Mobile Menu - Collapsible Sections */
+/*************/
+
+@media (max-width: 48em) {
+  /* Mobile sidebar adjustments */
+  .sidebar nav > ul {
+    padding-left: 0;
+  }
+
+  .sidebar nav > ul > li {
+    font-size: 1rem;
+    padding: 0.25rem 0;
+  }
+
+  .collapsible-button {
+    font-size: 1rem;
+  }
 }
