@@ -868,6 +868,7 @@ figure figcaption {
   transition: transform 0.2s ease;
   vertical-align: middle;
   margin-right: 0.3em;
+  margin-left: 0;
 }
 
 .hover-collapsible .collapsible-indicator::before {
