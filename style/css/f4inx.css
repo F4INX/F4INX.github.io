@@ -845,23 +845,15 @@ figure figcaption {
 }
 
 .hover-collapsible .collapsible-section {
-  position: absolute;
-  top: 0;
-  left: calc(50%);
-  min-width: 200px;
-  /* Use reverse colors compared to sidebar for contrast */
-  background: var(--fg-color);
-  color: var(--bg-color);
-  z-index: 10;
   list-style: none;
   padding: 0.5rem 1rem;
   margin: 0;
   display: none;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-  border-radius: 0 0.5rem 0.5rem 0;
+  padding-left: 1rem;
 }
 
-.hover-collapsible:hover .collapsible-section {
+/* Use class-based toggle for all screen sizes */
+.hover-collapsible .collapsible-section:not(.collapsed) {
   display: block;
 }
 
@@ -873,11 +865,11 @@ figure figcaption {
 }
 
 .hover-collapsible .collapsible-indicator::before {
-  content: ">";
+  content: "^";
 }
 
 .hover-collapsible .collapsible-indicator.rotated::before {
-  content: "<";
+  content: "v";
 }
 
 .hover-collapsible .collapsible-indicator.rotated {
@@ -889,32 +881,6 @@ figure figcaption {
 /*************/
 
 @media (max-width: 48em) {
-  /* Modify collapsible sections for mobile */
-  .hover-collapsible .collapsible-section {
-    position: static;
-    left: auto;
-    min-width: auto;
-    width: 100%;
-    background: transparent;
-    color: var(--fg-color);
-    padding-left: 1rem;
-    box-shadow: none;
-    display: none;
-  }
-
-  /* On mobile, use class-based toggle only - ignore hover */
-  .hover-collapsible .collapsible-section:not(.collapsed) {
-    display: block;
-  }
-
-  /* Disable hover behavior on mobile by overriding desktop rule */
-  .hover-collapsible:hover .collapsible-section {
-    display: none;
-  }
-  .hover-collapsible:hover .collapsible-section:not(.collapsed) {
-    display: block;
-  }
-
   /* Mobile sidebar adjustments */
   .sidebar nav > ul {
     padding-left: 0;
@@ -927,14 +893,5 @@ figure figcaption {
 
   .collapsible-button {
     font-size: 1rem;
-  }
-
-  /* Use ^ and v indicators on mobile instead of > and < */
-  .hover-collapsible .collapsible-indicator::before {
-    content: "^";
-  }
-  
-  .hover-collapsible .collapsible-indicator.rotated::before {
-    content: "v";
   }
 }
