@@ -10,7 +10,9 @@ order: 1
       <a href="{{ post.url | relative_url }}" class="card-link">
         <div class="card-content">
           {% if post.categories and post.categories.size > 0 %}
-            <span class="card-category">{{ post.categories | first }}</span>
+            {% for category in post.categories %}
+              <span class="card-category">{{ category }}</span>
+            {% endfor %}
           {% endif %}
           <h2 class="card-title">{{ post.title }}</h2>
           <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
