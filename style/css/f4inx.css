@@ -735,11 +735,19 @@ figure figcaption {
   transition: all 0.2s ease;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-color: #000;
-  background: #f8f8f8;
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  /* Stretch to fill card */
+  width: 100%;
+  height: 100%;
+}
+
+/* With these color settings, underlining */
+/* is annoying.                           */
+.card-link:hover {
+  text-decoration: none;
 }
 
 .card-content {
@@ -752,19 +760,28 @@ figure figcaption {
   font-weight: 600;
 }
 
-.card-title a {
+.card-title {
   color: var(--fg-color);
-  text-decoration: none;
 }
 
-.card:hover .card-title a,
+.card:hover {
+  background: #000000;
+}
+.card:hover .card-title,
 .card:hover .card-excerpt,
 .card:hover .card-meta {
-  color: #000000;
+  text-decoration: none;
+  color: #ffffff;
 }
-
-.card-title a:hover {
-  color: #000000;
+@media (prefers-color-scheme: dark) {
+  .card:hover {
+    background: #ffffff;
+  }
+  .card:hover .card-title,
+  .card:hover .card-excerpt,
+  .card:hover .card-meta {
+    color: #000000;
+  }
 }
 
 .card-excerpt {
@@ -783,6 +800,20 @@ figure figcaption {
   font-size: 0.75rem;
   font-weight: 500;
   margin-bottom: 0.75rem;
+}
+.card:hover .card-category {
+  background: white;
+  color: #000;
+}
+@media (prefers-color-scheme: dark) {
+  .card-category {
+    background: white;
+    color: #000;
+  }
+  .card:hover .card-category {
+    background: #000;
+    color: white;
+  }
 }
 
 .card-meta {
