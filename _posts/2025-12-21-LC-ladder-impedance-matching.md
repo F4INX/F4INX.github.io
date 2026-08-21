@@ -3,6 +3,7 @@ layout: post
 title: LC ladder impedance matching.
 permalink: /posts/LC-ladder-impedance-matching.html
 last_modified_at: 2025-12-21
+categories: [Impedance Matching, LC Networks]
 ---
 
 <p class="begin-note">2025-12-21: Replace statically generated plots by dynamically generated and interactive plots using plotly.js. Note the javascript code is also for you: if you need to calculate such structures, feel free to have a look on it.</p>

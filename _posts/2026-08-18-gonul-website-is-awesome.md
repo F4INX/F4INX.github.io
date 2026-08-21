@@ -3,6 +3,7 @@ layout: post
 title: Gönül's website is awesome
 permalink: /posts/gonul-website-is-awesome.html
 last_modified_at: 2026-08-18
+categories: [Site, Announcements]
 ---
 
 ![](/posts/gonul-website-is-awesome/gonul-website-screenshot.png)

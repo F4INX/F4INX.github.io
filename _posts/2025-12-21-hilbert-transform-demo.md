@@ -3,6 +3,7 @@ layout: post
 title: Hilbert transform demo.
 permalink: /posts/hilbert-transform-demo.html
 last_modified_at: 2025-12-21
+categories: [DSP, Signal Processing]
 ---
 
 The discrete Hilbert transform seems rather mysterious. However, the principle as well as his mathematics are not so complicated: the Hilbert transform is mainly a way to add a 90° phase shift to a signal and its equation can be explained from simple mathematical principles and an Excel spreadshet.

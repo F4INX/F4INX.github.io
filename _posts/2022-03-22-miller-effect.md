@@ -3,6 +3,7 @@ layout: post
 title: Miller effect and solutions.
 permalink: /posts/miller-effect-1.html
 last_modified_at: 2022-03-22 19:42
+categories: [Amplifiers, Miller Effect]
 ---
 
 <p class="begin-note">This content was originally published on Microwaves 101 (<a href="https://www.microwaves101.com/encyclopedias/miller-effect">https://www.microwaves101.com/encyclopedias/miller-effect</a>). Many thanks to Steve for improvements on the original version. Have a look on his website for more interesting content.</p>
