@@ -73,6 +73,12 @@ a {
   /* Prevent long urls to make horizontal scroll in small width displays. */
   overflow-wrap: anywhere;
 }
+/* Icon only in posts to avoid putting it   */
+/* in titles or cards or any place where it */
+/* would not look like good.                */
+.post a::after {
+  content: " 🔗";
+}
 h1 a,
 h2 a,
 h3 a,
