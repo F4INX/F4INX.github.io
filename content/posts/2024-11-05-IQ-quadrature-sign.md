@@ -54,8 +54,7 @@ Using ChatGPT and Plotly, the following plots were easily generated:
 <div id="phase-plot-1"></div>
 <div id="phase-difference-plot-1"></div>
 
-{{% raw %}}
-<script>
+```html
     // Helper function to unwrap phase
     function unwrapPhase(phase) {
         let unwrappedPhase = [phase[0]];
@@ -173,8 +172,7 @@ Using ChatGPT and Plotly, the following plots were easily generated:
     }
 
     fetchAndPlot_1();
-</script>
-{{% /raw %}}
+```
 
 It's clear from the plots than the quadrature output has a +90° phase (lead) compared to the in-phase output.
 
@@ -220,8 +218,7 @@ This part was performed in two steps. First, using scikit-rf with a some help of
 <div id="phase-plot-2"></div>
 <div id="phase-difference-plot-2"></div>
 
-{{% raw %}}
-<script>
+```html
     async function fetchAndPlot_2() {
         url = "../posts/IQ-quadrature-sign/branchline_coupler.s4p";  // FIXME: temp fix.
         const data = await loadS4P(url, 2e9);
@@ -278,8 +275,7 @@ This part was performed in two steps. First, using scikit-rf with a some help of
     }
 
     fetchAndPlot_2();
-</script>
-{{% /raw %}}
+```
 
 Contrary to coupled lines, which have a very broadband quadrature effect, the branch-line coupler has a narrowband quadrature effect. This is still useful for narrowband applications.
 
