@@ -3,9 +3,9 @@ name: Hugo Build and Deploy to Pages
 on:
   push:
     branches:
-      - main
-      - hugo
+      - master
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
         run: hugo --minify --baseURL "https://f4inx.github.io/"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
@@ -35,7 +35,7 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/hugo'
+    if: github.ref == 'refs/heads/master'
 
     permissions:
       pages: write
@@ -47,11 +47,11 @@ jobs:
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: github-pages
           path: ./public
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v5

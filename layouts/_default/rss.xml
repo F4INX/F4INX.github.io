@@ -6,7 +6,7 @@
     <link>{{ .Site.BaseURL | default "/" }}</link>
     <atom:link href="{{ "/atom.xml" | absURL }}" rel="self" type="application/rss+xml" />
     <language>en-us</language>
-    {{- with .Site.Author.name -}}
+    {{- with .Site.Params.author -}}
     <managingEditor>{{ . }}@f4inx.github.io</managingEditor>
     {{- end -}}
     <pubDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>

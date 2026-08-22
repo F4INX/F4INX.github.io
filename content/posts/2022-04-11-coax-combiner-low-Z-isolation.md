@@ -1,7 +1,7 @@
 ---
 title: "Design of a coaxial power combiner with low-impedance inputs and increased isolation."
 date: 2022-04-11
-lastmod: 2022-04-02 12-59
+lastmod: 2022-04-02T12:59:00+02:00
 categories: [Power Combiners, Coaxial, RF Design]
 url: /posts/coax-combiner-low-Z-isolation.html
 excerpt: "Unpublished article about coaxial power combiners with low-impedance inputs and increased isolation."

@@ -2,16 +2,13 @@
 # For production: HUGO_BASEURL=https://f4inx.github.io/ hugo
 # For development: hugo server uses / as baseURL for relative URLs
 baseURL = "/"
-languageCode = "en-us"
+locale = "en-US"
 title = "RF cat corner"
 tagline = "analog electronics, RF, EM simulations, ..."
 
-[author]
-  name = "Hadrien Theveneau"
-  url = "https://f4inx.github.io"
-
 [params]
   description = "Blog edited by Hadrien F4INX on analog electronics, RF, EM simulations, ...."
+  author = "Hadrien Theveneau"
 
 # Output formats
 [outputs]

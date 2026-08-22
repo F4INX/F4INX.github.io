@@ -1,7 +1,7 @@
 ---
 title: "Miller effect and solutions."
 date: 2022-03-22
-lastmod: 2022-03-22 19:42
+lastmod: 2022-03-22T19:42:00+01:00
 categories: [Amplifiers, Miller Effect]
 url: /posts/miller-effect-1.html
 excerpt: "Originally published on Microwaves 101, a comprehensive explanation of the Miller effect in electronics."

@@ -29,7 +29,7 @@ Active filters are a convenient way to implement low frequency bandpass filters,
 
 <p><img src="/posts/vcvs-finite-gbw/schematic.svg"/></p>
 
-<script>
+```html
     function vcvsCalculator () {
         return {	
             /* Initial values, will be changed by the user. */
@@ -106,7 +106,7 @@ Active filters are a convenient way to implement low frequency bandpass filters,
             }
         };
     }
-</script>
+```
 <section x-data="vcvsCalculator()" x-init="calculate">
     <div class="calculator">
         <h3>Input parameters</h3>
