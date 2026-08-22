@@ -7,7 +7,6 @@ url: /posts/nfc-coils-should-not-be-grounded.html
 excerpt: "While putting a solid ground plane in a good practice in most PCBs, RFID coils should not have ground planes below them."
 related_posts:
   - "Why RFID antennas should not be called antennas ?"
-  - "On group delay of antennas."
 ---
 
 

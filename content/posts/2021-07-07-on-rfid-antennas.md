@@ -7,7 +7,6 @@ categories: [RFID, Antennas]
 excerpt: "A friend of mine told me that he was looking for an \"expert antenna engineer\" to design RFID antennas, but are RFID coils really antennas ?"
 related_posts:
   - "RFID coils should not be grounded."
-  - "On group delay of antennas."
 ---
 
 
