@@ -12,14 +12,18 @@
   <h2>Related posts</h2>
   <ul class="related-posts">
     {{- range first 3 . -}}
+    {{- $related := where site.RegularPages "Title" . -}}
+    {{- if $related -}}
+    {{- $related := index $related 0 -}}
     <li>
       <h3>
-        <a href="{{ .Permalink | relURL }}">
-          {{ .Title }}
-          <small>{{ .Date.Format "Jan 02, 2006" }}</small>
+        <a href="{{ $related.Permalink | relURL }}">
+          {{ $related.Title }}
+          <small>{{ $related.Date.Format "Jan 02, 2006" }}</small>
         </a>
       </h3>
     </li>
+    {{- end -}}
     {{- end -}}
   </ul>
 </div>

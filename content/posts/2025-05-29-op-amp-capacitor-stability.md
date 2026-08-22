@@ -5,6 +5,10 @@ lastmod: 2025-10-10
 categories: [Operational Amplifiers, Stability]
 url: /posts/op-amp-capacitor-stability.html
 excerpt: "Operational amplifiers are often use with capacitive loads, typically to split a rail, but stability can be tricky."
+related_posts:
+  - "A (not so) gentle introduction to operational amplifiers."
+  - "Simple calculations for active bandpass filter with finite GBW operational amplifier."
+  - "Equations for terminating a differential amplifier in single-ended input."
 ---
 
 

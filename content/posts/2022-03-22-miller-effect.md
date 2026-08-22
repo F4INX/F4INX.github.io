@@ -5,6 +5,9 @@ lastmod: 2022-03-22T19:42:00+01:00
 categories: [Amplifiers, Miller Effect]
 url: /posts/miller-effect-1.html
 excerpt: "Originally published on Microwaves 101, a comprehensive explanation of the Miller effect in electronics."
+related_posts:
+  - "On stability of capacitive loaded op-amps."
+  - "A (not so) gentle introduction to operational amplifiers."
 ---
 
 

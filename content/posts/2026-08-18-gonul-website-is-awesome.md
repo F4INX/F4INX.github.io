@@ -5,6 +5,9 @@ lastmod: 2026-08-18
 categories: [Site, Announcements]
 url: /posts/gonul-website-is-awesome.html
 excerpt: "Impressed by the awesome new website of co-author Gönül Demir, I started relooking this blog."
+related_posts:
+  - "New co-authors"
+  - "Switch to Hugo"
 ---
 
 
