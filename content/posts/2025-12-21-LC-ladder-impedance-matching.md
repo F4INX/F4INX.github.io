@@ -4,7 +4,7 @@ date: 2025-12-21
 lastmod: 2025-12-21
 categories: [Impedance Matching, LC Networks]
 url: /posts/LC-ladder-impedance-matching.html
-excerpt: "A comprehensive guide to LC ladder impedance matching networks, with interactive calculation tools..."
+excerpt: "A comprehensive guide to LC ladder impedance matching networks, with interactive calculation tools."
 ---
 
 

@@ -4,7 +4,7 @@ date: 2024-04-24
 lastmod: 2025-05-14
 categories: [Components, Capacitors]
 url: /posts/mlcc-voltage-dependence.html
-excerpt: "On the voltage dependence of MLCC capacitors, originally published on Microwaves 101..."
+excerpt: "On the voltage dependence of MLCC capacitors, originally published on Microwaves 101."
 ---
 
 

@@ -4,7 +4,7 @@ date: 2024-11-05
 lastmod: 2024-11-05
 categories: [Couplers, IQ Modulators, RF Design]
 url: /posts/IQ-quadrature-sign.html
-excerpt: "On IQ quadrature sign conventions in branchline couplers, originally published on Microwaves 101..."
+excerpt: "On IQ quadrature sign conventions in branchline couplers, originally published on Microwaves 101."
 ---
 
 
