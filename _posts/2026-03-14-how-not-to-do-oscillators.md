@@ -7,7 +7,7 @@ categories: [Oscillators, Circuit Design]
 excerpt: Practical insights and common pitfalls in oscillator circuit design, with real-world examples and solutions.
 ---
 
-Hadrien Theveneau, [Gönül Demir](https://www.linkedin.com/in/gonul-demir-49413433/)
+Hadrien Theveneau, [Gönül Demir](https://gonuldemir.github.io/)
 
 ## A day in life...
 

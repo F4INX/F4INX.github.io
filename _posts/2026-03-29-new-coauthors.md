@@ -8,7 +8,7 @@ categories: [Site, Announcements]
 
 At the beginning, this site had one author, Hadrien Theveneau F4INX. Since some coauthors are now contributing on a more or less regular basis, I updated the title to reflect the introduction of guest authors.
 
-Very welcome to [Gönül Demir](https://www.linkedin.com/in/gonul-demir-49413433/) who up to now has co-authored 2 great pages.
+Very welcome to [Gönül Demir](https://gonuldemir.github.io/) who up to now has co-authored 2 great pages.
 
 I would like to take this opportunity to welcome all the people who gave me very useful hints for articles, among them Steve Huettner of [https://www.microwaves101.com/](https://www.microwaves101.com/), where I also posted some material, Chris Basso, who give me lots of advice on active filter topics.
 
