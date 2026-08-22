@@ -29,7 +29,7 @@ related_posts:
 <p>The needed difference between the average power and the maximum power, called backoff, is not straightforward to calculate for multi-carrier signals. This article proposes an investigation of this topic and guidelines to estimate the needed backoff.</p>
 
 <div x-data="{ hide: true }">
-    <p><a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a></p>
+    <p><a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a></p>
     <div class="collapsible-content" :class="{ 'show': !hide }">
 
     <p>The multi-carrier signal occurs either due to multi-carrier modulation schemes or when an amplifier serves multiple users.</p>
@@ -58,7 +58,7 @@ y = x - \alpha \cdot \left|x\right|^2 \cdot x
 <p></p>
 
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <div class="collapsible-content" :class="{ 'show': !hide }">
 
         <p>Signals are modelled as a complex amplitude at amplifiers centre frequency.</p>
@@ -91,7 +91,7 @@ x = A \cdot \left( e^{j \cdot \omega_1 \cdot t} + e^{j \cdot \omega_2 \cdot t} \
 <p>where A is the amplitude of each sinusoid.</p>
 
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <div class="collapsible-content" :class="{ 'show': !hide }">
 
         <p>To compute the tones produced by the transfer function:</p>
@@ -137,7 +137,7 @@ x = A \cdot \left( e^{j \cdot \omega_1 \cdot t} + e^{j \cdot \omega_2 \cdot t} \
 <p>The total output can be split into fundamental and intermodulation components.</p>
 
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <div class="collapsible-content" :class="{ 'show': !hide }">
 
         <p>The total fundamental part is:</p>
@@ -204,14 +204,16 @@ x(t) = a_1(t) \cdot e^{j \cdot \omega_1 \cdot t} + ... + a_n(t) \cdot e^{j \cdot
 
 <p></p>
 
+```html
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <div class="collapsible-content" :class="{ 'show': !hide }">
 
         <p>The complex amplitudes <latexmath>x_i(t)</latexmath> contains not only the base complex amplitudes of the signals <latexmath>a_i(t)</latexmath> but also the frequency shift <latexmath>\omega_i-\omega_c</latexmath> of each signal relative to the device’s centre frequency. <latexmath>a_i(t)</latexmath> can be modelled as a complex random variable <strong>without</strong> rotational symmetry. However, due to the frequency shift, <latexmath>x_i(t)</latexmath> can be modelled as a complex random variable <strong>with</strong> rotational symmetry.</p>
 
     </div>  <!-- End of <div class="collapsible-content"...> -->
 </div>  <!-- End of <div x-data="..."> -->
+```
 
 </p>The sum of the complex amplitudes <latexinline>x(t)=x_1 (t)+...+x_n(t)</latexinline> can be approximated by a zero-mean Gaussian probability distribution with a variance corresponding to its power. The following curve<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, for a rolling dice, shows that starting from 3 rolls, the curve is close enough to gaussian.</p>
 
@@ -266,7 +268,7 @@ y_\text{NL} = \alpha \cdot \left|x\right|^2 \cdot x
 <p></p>
 
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <div class="collapsible-content" :class="{ 'show': !hide }">
 
         <p>It can be calculated as follows:</p>
@@ -318,7 +320,7 @@ P_\text{NL,dBc} = 10 \cdot \log_{10}\left(6\right) + 2 \cdot (P_\text{out,dBm} -
 <p></p>
 
 <div x-data="{ hide: true }">
-    <p><a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a></p>
+    <p><a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a></p>
     <div class="collapsible-content" :class="{ 'show': !hide }">
 
         <p>This can be calculated as follows by combining the previous results:</p>
@@ -392,7 +394,7 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
 <p>LF between 4 and 6.</p>
 
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <!-- FIXME: dedicated class for collapsible content without borders. -->
     <div class="collapsible-content" :class="{ 'show': !hide }" style="padding:0; margin:0; border:none;">
 
@@ -432,7 +434,7 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
 <p>Same products as before but with linearizer option. LF between 8 and 9.</p>
 
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <!-- FIXME: dedicated class for collapsible content without borders. -->
     <div class="collapsible-content" :class="{ 'show': !hide }" style="padding:0; margin:0; border:none;">
 
@@ -456,7 +458,7 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
 <p>LF between 8 and 10.</p>
 
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <!-- FIXME: dedicated class for collapsible content without borders. -->
     <div class="collapsible-content" :class="{ 'show': !hide }" style="padding:0; margin:0; border:none;">
 
@@ -514,7 +516,7 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
 <p>To be continued. The example found has a surprisingly low LF.</p>
 
 <div x-data="{ hide: true }">
-    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]: '[Show details.]'"></a>
+    <a class="collapsible-link" @click="hide = !hide" x-text="!hide ? '[Hide details.]' : '[Show details.]'"></a>
     <!-- FIXME: dedicated class for collapsible content without borders. -->
     <div class="collapsible-content" :class="{ 'show': !hide }" style="padding:0; margin:0; border:none;">
 
