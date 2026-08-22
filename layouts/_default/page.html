@@ -1,8 +1,33 @@
 {{ define "main" }}
 
-<div class="page">
-  <h1 class="page-title">{{ .Title }}</h1>
+<div class="post">
+  <h1 class="post-title">{{ .Title }}</h1>
+  <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
   {{ .Content }}
 </div>
+
+{{- with .Params.related_posts -}}
+  {{- if ge (len .) 1 -}}
+    <div class="related">
+      <h2>Related posts</h2>
+      <ul class="related-posts">
+        {{- range first 3 . -}}
+          {{- $relatedPage := where $.Site.Pages "Title" . -}}
+          {{- if $relatedPage -}}
+            {{- $page := index $relatedPage 0 -}}
+            <li>
+              <h3>
+                <a href="{{ $page.RelPermalink }}">
+                  {{ $page.Title }}
+                  <small>{{ $page.Date.Format "Jan 02, 2006" }}</small>
+                </a>
+              </h3>
+            </li>
+          {{- end -}}
+        {{- end -}}
+      </ul>
+    </div>
+  {{- end -}}
+{{- end -}}
 
 {{ end }}

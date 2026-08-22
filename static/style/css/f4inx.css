@@ -79,6 +79,10 @@ a {
 .post a::after {
   content: " 🔗";
 }
+/* Exclude link icon from collapsible links */
+.post a.collapsible-link::after {
+  content: none;
+}
 h1 a,
 h2 a,
 h3 a,

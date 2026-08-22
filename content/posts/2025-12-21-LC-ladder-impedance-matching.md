@@ -47,16 +47,14 @@ with[^errorsite] <asciimath>\omega_0=sqrt((\omega_a^2+\omega_b^2)/2)</asciimath>
 
 Next figure shows the reflection coefficient seen from the source of an example of an (output) LC matching network going from 5&#8239;Ω towards 50&#8239;Ω from 1 to 2,5&#8239;GHz. These values are approximately those of the first wideband amplifier of the PhD thesis.
 
-{% comment %}
-FIXME: Translate French titles, add alt text.
-{% endcomment %}
+<!-- FIXME: Translate French titles, add alt text. --> 
 <figure>
   <div id="LC-ladder-gamma-2"></div>
   <figcaption>Fig.&#8239;1. Example of squared reflection coefficient seen from the source of an LC matching network. See text for parameters.</figcaption>
 </figure>
 
 <!-- Thanks to Mistral le Chat. -->
-```html
+<script>
     /* Light/dark mode */
     /* FIXME: Does not handle yet the red/blue lines, works here by luck... */
     function dark_mode() {
@@ -68,27 +66,27 @@ FIXME: Translate French titles, add alt text.
             /* Background */
             layout['paper_bgcolor'] = 'rgba(0,0,0,0)';
             layout['plot_bgcolor'] = 'rgba(0,0,0,0)';
-            if (!('xaxisin layout))
+            if (!('xaxis' in layout))
             {
                 layout['xaxis'] = {};
             }
             layout['xaxis']['color'] = 'white';
-            if (!('yaxisin layout))
+            if (!('yaxis' in layout))
             {
                 layout['yaxis'] = {};
             }
             layout['yaxis']['color'] = 'white';
             /* Foreground */
-            if (!('linein trace))
+            if (!('line' in trace))
             {
                 trace['line'] = {};
             }
             trace['line']['color'] = 'white';
             /* Marker if needed */
             /* Fill missing dict keys */
-            if (!('markerin trace)) {trace['marker'] = {};}
-            if (!('linein trace['marker'])) {trace['marker']['line'] = {};}
-            if (!('colorin trace['marker']['line'])) {
+            if (!('marker' in trace)) {trace['marker'] = {};}
+            if (!('line' in trace['marker'])) {trace['marker']['line'] = {};}
+            if (!('color' in trace['marker']['line'])) {
                 /* Case 1: missing color value */
                 trace['marker']['line']['color'] = 'white';
             }
@@ -206,7 +204,7 @@ FIXME: Translate French titles, add alt text.
         Plotly.newPlot('LC-ladder-gamma-2', [trace], layout);
     }
     plot_gamma_2();
-```
+</script>
 
 In previous expression, <asciimath>\epsilon</asciimath> is chosen such as:
 
@@ -225,9 +223,7 @@ In the passband, maximum reflection coefficient and maximum insertion losses are
 |S_(21,min)|^2=1/(1+\epsilon^2)
 </asciimath>
 
-{% comment %}
-Needs <asciimath></asciimath> tags instead of && &&. Not sure why.
-{% endcomment %}
+<!-- Needs <asciimath></asciimath> tags instead of && &&. Not sure why. -->
 The first step of the calculation is to determine the first n such as <asciimath>|\Gamma_max|^2</asciimath> is less than the requirements. This calcul is done numerically, by testing all the integers n from 1 until this requirement is met.
 
 This n is half the number of elements of the final network [^ref84].
@@ -250,9 +246,7 @@ At the beginning of our work on the subject, factorization was performed numeric
 
 The calculation, more long than complex, won't be detailed. The roots of the numerator and of the denominator are given by the following formulas[^errorphd]:
 
-{% comment %}
-FIXME: Math style
-{% endcomment %}
+<!-- FIXME: Math style -->
 <asciimath>
   {: ( +- j \cdot sqrt(\omega_0^2 + Delta omega^2 \cdot cos[(pi)/(2 \cdot n) \cdot (1 + 2 \cdot k)]) , k in [0, 2n - 1] ),
      ( +- j \cdot sqrt( \omega_0^2 + Delta omega^2 \cdot cos[1/n \cdot [arccos(j/epsilon) + k \cdot \pi ]]) , k in [0, 2n - 1] ) :}
@@ -260,15 +254,13 @@ FIXME: Math style
 
 In the implementation of this method, the negative real part roots are sorted numerically.
 
-{% comment %}
-FIXME: Translate French titles, add alt text.
-{% endcomment %}
+<!-- FIXME: Translate French titles, add alt text. -->
 <figure>
   <div id="LC-ladder-num"></div>
   <figcaption>Fig.&#8239;2. Roots of the numerator in the example. The roots of the numerator are double and purely imaginary.</figcaption>
 </figure>
 
-```html
+<script>
     function plot_num() {
         // Roots of the numerator
         const roots_real = [];
@@ -303,8 +295,8 @@ FIXME: Translate French titles, add alt text.
         };
         
         const layout = {
-            xaxis: { title: 'Real part},
-            yaxis: { title: 'Imaginary part},
+            xaxis: { title: 'Real part' },
+            yaxis: { title: 'Imaginary part' },
             showlegend: false
         };
 
@@ -317,17 +309,15 @@ FIXME: Translate French titles, add alt text.
         Plotly.newPlot('LC-ladder-num', [trace], layout);
     }
     plot_num();
-```
+</script>
 
-{% comment %}
-FIXME: Translate French titles, add alt text.
-{% endcomment %}
+<!-- FIXME: Translate French titles, add alt text. -->
 <figure>
   <div id="LC-ladder-denum"></div>
   <figcaption>Fig.&#8239;3. Roots of the denominator in the example. The roots of interest are marked in blue, while the ones in red are ignored.</figcaption>
 </figure>
 
-```html
+<script>
     function plot_denum() {
         // Roots of the denominator
         const roots_left_real = [];
@@ -419,8 +409,8 @@ FIXME: Translate French titles, add alt text.
         };
 
         const layout = {
-            xaxis: { title: 'Real part},
-            yaxis: { title: 'Imaginary part},
+            xaxis: { title: 'Real part' },
+            yaxis: { title: 'Imaginary part' },
             showlegend: false
         };
 
@@ -430,7 +420,7 @@ FIXME: Translate French titles, add alt text.
         Plotly.newPlot('LC-ladder-denum', [trace_left, trace_right], layout);
     }
     plot_denum();
-```
+</script>
 
 A polynomial is defined by the set of its roots, but up to a multiplicative factor. The next step is to determine this multiplicative factor. Details of the calculation won't be given here, but only the result:
 
