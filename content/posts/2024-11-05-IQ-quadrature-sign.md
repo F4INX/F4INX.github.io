@@ -131,10 +131,10 @@ Using ChatGPT and Plotly, the following plots were easily generated:
 
         // Plotting magnitude using Plotly
         const magData = [
-            { x: data.freq, y: data.s11, mode: 'lines', name: 'S11 Magnitude},
-            { x: data.freq, y: data.s21, mode: 'lines', name: 'S21 Magnitude},
-            { x: data.freq, y: data.s31, mode: 'lines', name: 'S31 Magnitude},
-            { x: data.freq, y: data.s41, mode: 'lines', name: 'S41 Magnitude}
+            { x: data.freq, y: data.s11, mode: 'lines', name: 'S11 Magnitude' },
+            { x: data.freq, y: data.s21, mode: 'lines', name: 'S21 Magnitude' },
+            { x: data.freq, y: data.s31, mode: 'lines', name: 'S31 Magnitude' },
+            { x: data.freq, y: data.s41, mode: 'lines', name: 'S41 Magnitude' }
         ];
 
         const magLayout = {
@@ -147,27 +147,27 @@ Using ChatGPT and Plotly, the following plots were easily generated:
 
         // Plotting phase using Plotly
         const phaseData = [
-            { x: data.freq, y: data.phase31, mode: 'lines', name: 'S31 Phase},
-            { x: data.freq, y: data.phase41, mode: 'lines', name: 'S41 Phase}
+            { x: data.freq, y: data.phase31, mode: 'lines', name: 'S31 Phase' },
+            { x: data.freq, y: data.phase41, mode: 'lines', name: 'S41 Phase' }
         ];
 
         const phaseLayout = {
             title: 'S-Parameters Phase Plot (0 to 500 MHz)',
             xaxis: { title: 'Frequency (Hz)', range: [0, 500e6] },
-            yaxis: { title: 'Phase (Degrees)}
+            yaxis: { title: 'Phase (Degrees)' }
         };
 
         Plotly.newPlot('phase-plot-1', phaseData, phaseLayout);
 
         // Plotting phase difference using Plotly
         const phaseDiffData = [
-            { x: data.freq, y: phaseDiff, mode: 'lines', name: 'Phase Difference (S41 - S31)}
+            { x: data.freq, y: phaseDiff, mode: 'lines', name: 'Phase Difference (S41 - S31)' }
         ];
 
         const phaseDiffLayout = {
             title: 'Phase Difference Plot (S41 - S31)',
             xaxis: { title: 'Frequency (Hz)', range: [0, 500e6] },
-            yaxis: { title: 'Phase Difference (Degrees)}
+            yaxis: { title: 'Phase Difference (Degrees)' }
         };
 
         Plotly.newPlot('phase-difference-plot-1', phaseDiffData, phaseDiffLayout);
@@ -234,10 +234,10 @@ This part was performed in two steps. First, using scikit-rf with a some help of
 
         // Plotting magnitude using Plotly
         const magData = [
-            { x: data.freq, y: data.s11, mode: 'lines', name: 'S11 Magnitude},
-            { x: data.freq, y: data.s21, mode: 'lines', name: 'S21 Magnitude},
-            { x: data.freq, y: data.s31, mode: 'lines', name: 'S31 Magnitude},
-            { x: data.freq, y: data.s41, mode: 'lines', name: 'S41 Magnitude}
+            { x: data.freq, y: data.s11, mode: 'lines', name: 'S11 Magnitude' },
+            { x: data.freq, y: data.s21, mode: 'lines', name: 'S21 Magnitude' },
+            { x: data.freq, y: data.s31, mode: 'lines', name: 'S31 Magnitude' },
+            { x: data.freq, y: data.s41, mode: 'lines', name: 'S41 Magnitude' }
         ];
 
         const magLayout = {
@@ -250,27 +250,27 @@ This part was performed in two steps. First, using scikit-rf with a some help of
 
         // Plotting phase using Plotly
         const phaseData = [
-            { x: data.freq, y: data.phase21, mode: 'lines', name: 'S21 Phase},
-            { x: data.freq, y: data.phase31, mode: 'lines', name: 'S31 Phase}
+            { x: data.freq, y: data.phase21, mode: 'lines', name: 'S21 Phase' },
+            { x: data.freq, y: data.phase31, mode: 'lines', name: 'S31 Phase' }
         ];
 
         const phaseLayout = {
             title: 'S-Parameters Phase Plot (0 to 2 GHz)',
             xaxis: { title: 'Frequency (Hz)', range: [0, 2e9] },
-            yaxis: { title: 'Phase (Degrees)}
+            yaxis: { title: 'Phase (Degrees)' }
         };
 
         Plotly.newPlot('phase-plot-2', phaseData, phaseLayout);
 
         // Plotting phase difference using Plotly
         const phaseDiffData = [
-            { x: data.freq, y: phaseDiff, mode: 'lines', name: 'Phase Difference (S31 - S21)}
+            { x: data.freq, y: phaseDiff, mode: 'lines', name: 'Phase Difference (S31 - S21)' }
         ];
 
         const phaseDiffLayout = {
             title: 'Phase Difference Plot (S31 - S21)',
             xaxis: { title: 'Frequency (Hz)', range: [0, 2e9] },
-            yaxis: { title: 'Phase Difference (Degrees)}
+            yaxis: { title: 'Phase Difference (Degrees)' }
         };
 
         Plotly.newPlot('phase-difference-plot-2', phaseDiffData, phaseDiffLayout);
