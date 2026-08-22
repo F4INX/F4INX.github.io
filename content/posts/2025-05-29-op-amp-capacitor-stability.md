@@ -4,6 +4,7 @@ date: 2025-05-29
 lastmod: 2025-10-10
 categories: [Operational Amplifiers, Stability]
 url: /posts/op-amp-capacitor-stability.html
+excerpt: "Operational amplifiers are often, and for good reason, the go-to building block of many analog functions. They are often used with capacitive loads, for two main reasons. One, when operational amplifiers are used to produce DC voltage supplies, in which cases the capacitive load is used to ensure DC voltage stays constant. Second, when operational amplifiers are used to drive some capacitive load, typically the gate of the transistor of an RF power amplifier, including the capacitors of the biasing network."
 ---
 
 

@@ -4,6 +4,7 @@ date: 2022-07-10
 lastmod: 2022-07-10 16-54
 categories: [Antennas, Group Delay]
 url: /posts/on-antennas-group-delay.html
+excerpt: "Many thanks, in the order of appearance in the LinkedIn discussion, to Dr. Pierre-Antoine Garcia, Theunis Beukman, Benoit Derat, Hüseyin Yiğit, Andreas Barchanski for the insightful LinkedIn discussion which led to this post."
 ---
 
 

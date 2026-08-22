@@ -4,6 +4,7 @@ date: 2026-03-08
 lastmod: 2026-03-08
 categories: [Analog Design, Operational Amplifiers]
 url: /posts/op-amp-introduction.html
+excerpt: "A comprehensive guide to understanding operational amplifiers, their characteristics, configurations, and practical applications in analog circuits."
 ---
 
 

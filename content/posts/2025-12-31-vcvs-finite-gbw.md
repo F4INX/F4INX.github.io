@@ -4,6 +4,7 @@ date: 2025-12-31
 lastmod: 2025-12-31
 categories: [Operational Amplifiers, Filters, Analog Design]
 url: /posts/vcvs-finite-gbw.html
+excerpt: "Many thanks to Christophe Basso for his help in this work."
 ---
 
 

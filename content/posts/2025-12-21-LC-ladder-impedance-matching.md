@@ -4,6 +4,7 @@ date: 2025-12-21
 lastmod: 2025-12-21
 categories: [Impedance Matching, LC Networks]
 url: /posts/LC-ladder-impedance-matching.html
+excerpt: "2025-12-21: Replace statically generated plots by dynamically generated and interactive plots using plotly.js. Note the javascript code is also for you: if you need to calculate such structures, feel free to have a look on it."
 ---
 
 

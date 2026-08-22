@@ -4,6 +4,7 @@ date: 2022-03-23
 lastmod: 2022-03-23 13:30
 categories: [S-parameters, Network Analysis]
 url: /posts/transfer-S-parameters.html
+excerpt: "This content was originally published on Microwaves 101 (https://www.microwaves101.com/encyclopedias/transfer-s-parameters). Many thanks to Steve for hosting the original version. Have a look on his website for more interesting content."
 ---
 
 

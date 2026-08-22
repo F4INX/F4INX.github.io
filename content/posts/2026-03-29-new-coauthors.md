@@ -4,6 +4,7 @@ date: 2026-03-29
 lastmod: 2026-03-29
 categories: [Site, Announcements]
 url: /posts/new-coauthors.html
+excerpt: "At the beginning, this site had one author, Hadrien Theveneau F4INX. Since some coauthors are now contributing on a more or less regular basis, I updated the title to reflect the introduction of guest authors."
 ---
 
 

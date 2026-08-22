@@ -4,6 +4,7 @@ date: 2024-07-07
 lastmod: 2025-05-14
 categories: [Transmission Lines, Microstrip]
 url: /posts/microstrip-formulas-comparison.html
+excerpt: "The designer has several tools and formulas available to calculate the characteristic impedance of microstrip lines. Some are highly precise but rather complex like the Hammerstad and Jensen formulas, while others are rather simple but with questionable accuracy like the IPC-2141 formulas. While approximations can be useful for the first steps of a design, their accuracy must be evaluated before use. The authors of Qucs made some comparison, but this comparison don't include the common IPC formulas. A comparison of the most common microstrip calculation formulas is shown here."
 ---
 
 

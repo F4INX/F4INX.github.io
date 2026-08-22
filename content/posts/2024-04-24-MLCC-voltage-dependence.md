@@ -4,6 +4,7 @@ date: 2024-04-24
 lastmod: 2025-05-14
 categories: [Components, Capacitors]
 url: /posts/mlcc-voltage-dependence.html
+excerpt: "This content was originally published on Microwaves 101 (https://www.microwaves101.com/encyclopedias/capacitor-voltage-effects). Many thanks to Steve for improvements on the original version. Have a look on his website for more interesting content."
 ---
 
 

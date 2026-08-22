@@ -4,6 +4,7 @@ date: 2022-03-22
 lastmod: 2022-03-22 16:44
 categories: [RFID, NFC, Circuit Design]
 url: /posts/nfc-coils-should-not-be-grounded.html
+excerpt: "Putting a solid ground plane in a PCB is a good practice. This allows to have good interconnexions between the different grounds of the components, to have a proximity shielding of the lines, and to reduce the cross coupling between the lines. All these effects have one root cause: a ground plane reacts to an electric or magnetic field by generating induced currents which tend to reduce this incoming field."
 ---
 
 

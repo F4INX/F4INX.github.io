@@ -4,6 +4,7 @@ date: 2024-11-05
 lastmod: 2024-11-05
 categories: [Couplers, IQ Modulators, RF Design]
 url: /posts/IQ-quadrature-sign.html
+excerpt: "Update from 2024-11-05: Steve from Microwaves 101 also tackled this topic (https://www.microwaves101.com/encyclopedias/branchline-coupler-port-definition), proposing a different port-naming convention for the branchline coupler. Steve names the direct and coupled outputs in reverse compared to the approach I use. His convention offers some interesting arguments: the output he names \"forward\" exhibits a higher bandwidth and flatter phase response."
 ---
 
 
