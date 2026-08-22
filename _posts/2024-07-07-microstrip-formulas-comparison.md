@@ -3,6 +3,7 @@ layout: post
 title: Microstrip formulas comparison.
 permalink: /posts/microstrip-formulas-comparison.html
 last_modified_at: 2025-05-14
+categories: [Transmission Lines, Microstrip]
 ---
 
 ## Introduction

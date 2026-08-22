@@ -3,6 +3,7 @@ layout: post
 title: On stability of capacitive loaded op-amps.
 permalink: /posts/op-amp-capacitor-stability.html
 last_modified_at: 2025-10-10
+categories: [Operational Amplifiers, Stability]
 ---
 
 ## Introduction

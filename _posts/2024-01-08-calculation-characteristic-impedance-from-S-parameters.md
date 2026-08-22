@@ -3,6 +3,7 @@ layout: post
 title: Calculation of characteristic impedance from S parameters.
 permalink: /posts/calculation-characteristic-impedance-from-S-parameters.html
 last_modified_at: 2024-01-08 05:03
+categories: [S-parameters, Transmission Lines]
 ---
 
 ## Introduction

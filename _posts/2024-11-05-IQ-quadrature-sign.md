@@ -3,6 +3,7 @@ layout: post
 title: IQ modulator and quadrature coupler sign issues.
 permalink: /posts/IQ-quadrature-sign.html
 last_modified_at: 2024-11-05
+categories: [Couplers, IQ Modulators, RF Design]
 ---
 
 <p class="begin-note"><b>Update from 2024-11-05:</b> Steve from Microwaves 101 also tackled this topic (<a href="https://www.microwaves101.com/encyclopedias/branchline-coupler-port-definition">https://www.microwaves101.com/encyclopedias/branchline-coupler-port-definition</a>), proposing a different port-naming convention for the branchline coupler. Steve names the direct and coupled outputs in reverse compared to the approach I use. His convention offers some interesting arguments: the output he names "forward" exhibits a higher bandwidth and flatter phase response.</p>
