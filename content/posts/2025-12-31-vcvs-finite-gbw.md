@@ -5,6 +5,9 @@ lastmod: 2025-12-31
 categories: [Operational Amplifiers, Filters, Analog Design]
 url: /posts/vcvs-finite-gbw.html
 excerpt: "Simple calculations for active bandpass filters taking into account the finite GBW of operational amplifiers."
+related_posts:
+  - "A (not so) gentle introduction to operational amplifiers."
+  - "On stability of capacitive loaded op-amps."
 ---
 
 

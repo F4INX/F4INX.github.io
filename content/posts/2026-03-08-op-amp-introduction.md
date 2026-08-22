@@ -5,6 +5,10 @@ lastmod: 2026-03-08
 categories: [Analog Design, Operational Amplifiers]
 url: /posts/op-amp-introduction.html
 excerpt: "A comprehensive guide to understanding operational amplifiers, their characteristics, configurations, and practical applications in analog circuits."
+related_posts:
+  - "On stability of capacitive loaded op-amps."
+  - "Simple calculations for active bandpass filter with finite GBW operational amplifier."
+  - "Equations for terminating a differential amplifier in single-ended input."
 ---
 
 

@@ -5,6 +5,9 @@ lastmod: 2025-06-16
 categories: [Operational Amplifiers, Differential Amplifiers]
 url: /posts/diff-amp-equations.html
 excerpt: "A few years ago, I had to terminate a differential amplifier in single-ended input. Analog Devices AN-0990 gives equations for that. Unfortunately, there are an inaccuracy in these equations."
+related_posts:
+  - "A (not so) gentle introduction to operational amplifiers."
+  - "On stability of capacitive loaded op-amps."
 ---
 
 

@@ -5,6 +5,9 @@ lastmod: 2026-08-22
 categories: [Site, Meta]
 url: /posts/switch-to-hugo.html
 excerpt: "Following several annoying issues with Jekyll, I decided to switch to Hugo."
+related_posts:
+  - "New co-authors"
+  - "Gönül's website is awesome"
 ---
 
 When I started this website, I decided to use a static site generator because it could run for long periods without maintenance, unlike dynamic websites which are subject to security issues and sometimes need emergency patches. I chose GitHub and Jekyll because it was included.

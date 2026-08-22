@@ -5,6 +5,9 @@ lastmod: 2022-07-10T16:54:00+02:00
 categories: [Antennas, Group Delay]
 url: /posts/on-antennas-group-delay.html
 excerpt: "Following a very interesting discussion on LinkedIn, an investigation into antenna group delay."
+related_posts:
+  - "Why RFID antennas should not be called antennas ?"
+  - "RFID coils should not be grounded."
 ---
 
 

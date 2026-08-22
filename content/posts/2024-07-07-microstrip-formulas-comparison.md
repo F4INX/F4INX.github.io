@@ -5,6 +5,8 @@ lastmod: 2025-05-14
 categories: [Transmission Lines, Microstrip]
 url: /posts/microstrip-formulas-comparison.html
 excerpt: "A comparison of microstrip characteristic impedance calculation formulas."
+related_posts:
+  - "Calculation of characteristic impedance from S parameters."
 ---
 
 

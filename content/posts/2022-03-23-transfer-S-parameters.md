@@ -5,6 +5,8 @@ lastmod: 2022-03-23T13:30:00+01:00
 categories: [S-parameters, Network Analysis]
 url: /posts/transfer-S-parameters.html
 excerpt: "Originally published on Microwaves 101, an explanation of transfer S-parameters and their applications."
+related_posts:
+  - "Calculation of characteristic impedance from S parameters."
 ---
 
 

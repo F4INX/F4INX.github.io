@@ -5,6 +5,9 @@ lastmod: 2025-12-21
 categories: [Impedance Matching, LC Networks]
 url: /posts/LC-ladder-impedance-matching.html
 excerpt: "A comprehensive guide to LC ladder impedance matching networks, with interactive calculation tools."
+related_posts:
+  - "Design of a coaxial power combiner with low-impedance inputs and increased isolation."
+  - "MLCC voltage dependence."
 ---
 
 

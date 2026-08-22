@@ -5,6 +5,9 @@ lastmod: 2025-05-14
 categories: [Components, Capacitors]
 url: /posts/mlcc-voltage-dependence.html
 excerpt: "On the voltage dependence of MLCC capacitors, originally published on Microwaves 101."
+related_posts:
+  - "LC ladder impedance matching."
+  - "Design of a coaxial power combiner with low-impedance inputs and increased isolation."
 ---
 
 

@@ -5,6 +5,9 @@ lastmod: 2024-01-08T05:03:00+01:00
 categories: [S-parameters, Transmission Lines]
 url: /posts/calculation-characteristic-impedance-from-S-parameters.html
 excerpt: "Suppose one wants to measure or simulate the characteristic impedance of something similar to a transmission line. This can be for example a 75 Ω coax cable or a via structure on HFSS. The characteristic impedance can be calculated form its measured or simulated S parameters references to 50 Ω."
+related_posts:
+  - "Transfer S parameters."
+  - "Microstrip formulas comparison."
 ---
 
 
