@@ -568,28 +568,6 @@ a.reversefootnote {
   }
 }
 
-/**************/
-/* Pagination */
-/**************/
-/* Pagination items can be `span`s or `a`s */
-.pagination-item {
-  padding-top: calc(0.5em - 5px);
-  padding-bottom: calc(0.5em - 5px);
-  padding-left: calc(2em - 5px);
-  padding-right: calc(2em - 5px);
-  border: solid black 5px;  /* To make both buttons equal width. */
-  border-radius: 999px;
-  color: var(--bg-color);
-  background: var(--fg-color);
-}
-.pagination-item:hover,
-.pagination-item.hover-test {
-  color: var(--fg-color);
-  background: var(--bg-color);
-  border: solid var(--fg-color) 5px;
-  text-decoration: none;
-}
-
 /*************/
 /* Dark mode */
 /*************/
@@ -619,24 +597,6 @@ a.reversefootnote {
   .dark-mode-invert {
     background: unset;
     filter: invert();
-  }
-  /* Buttons have reversed shape in dark mode. */
-  .pagination-item {
-    color: var(--fg-color);
-    background: var(--bg-color);
-    border: solid var(--fg-color) 5px;
-    text-decoration: none;
-  }
-  .pagination-item:hover,
-  .pagination-item.hover-test {
-    padding-top: calc(0.5em - 5px);
-    padding-bottom: calc(0.5em - 5px);
-    padding-left: calc(2em - 5px);
-    padding-right: calc(2em - 5px);
-    border: solid black 5px;  /* To make both buttons equal width. */
-    border-radius: 999px;
-    color: var(--bg-color);
-    background: var(--fg-color);
   }
 }
 
