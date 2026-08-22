@@ -8,11 +8,11 @@ order: 3
 
 Parts from other authors (e.g. quotes) are copyright their respective authors. All right reserved.
 
-Parts from the main author Hadrien Theveneau, including both technical content and support source code, is released under the BSD 3-clause licence. See below.
+Parts from both the main author Hadrien Theveneau and co-author Gönül Demir, including both technical content and support source code, is released under the BSD 3-clause licence. See below.
 
 ## BSD 3-clause licence
 
-Copyright (c) 2022 Hadrien Theveneau. All rights reserved.
+Copyright (c) 2026 Hadrien Theveneau and Gönül Demir. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
