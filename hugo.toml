@@ -53,3 +53,7 @@ tagline = "analog electronics, RF, EM simulations, ..."
 # Copy static files as-is
 [build]
   writeStats = true
+
+# text/html needs to be whitelisted since hugo update
+[security]
+  allowContent = ['^text/html$', '^text/markdown$']
