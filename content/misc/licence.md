@@ -8,7 +8,7 @@ order: 3
 
 Parts from other authors (e.g. quotes) are copyright their respective authors. All right reserved.
 
-Parts from the main author {{ site.author.name }}, including both technical content and support source code, is released under the BSD 3-clause licence. See below.
+Parts from the main author Hadrien Theveneau, including both technical content and support source code, is released under the BSD 3-clause licence. See below.
 
 ## BSD 3-clause licence
 
