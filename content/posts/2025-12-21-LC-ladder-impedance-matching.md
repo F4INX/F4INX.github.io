@@ -53,6 +53,7 @@ FIXME: Translate French titles, add alt text.
 </figure>
 
 <!-- Thanks to Mistral le Chat. -->
+{{% raw %}}
 <script>
     /* Light/dark mode */
     /* FIXME: Does not handle yet the red/blue lines, works here by luck... */
@@ -204,6 +205,7 @@ FIXME: Translate French titles, add alt text.
     }
     plot_gamma_2();
 </script>
+{{% /raw %}}
 
 In previous expression, <asciimath>\epsilon</asciimath> is chosen such as:
 
@@ -265,6 +267,7 @@ FIXME: Translate French titles, add alt text.
   <figcaption>Fig.&#8239;2. Roots of the numerator in the example. The roots of the numerator are double and purely imaginary.</figcaption>
 </figure>
 
+{{% raw %}}
 <script>
     function plot_num() {
         // Roots of the numerator
@@ -315,6 +318,7 @@ FIXME: Translate French titles, add alt text.
     }
     plot_num();
 </script>
+{{% /raw %}}
 
 {% comment %}
 FIXME: Translate French titles, add alt text.
@@ -324,6 +328,7 @@ FIXME: Translate French titles, add alt text.
   <figcaption>Fig.&#8239;3. Roots of the denominator in the example. The roots of interest are marked in blue, while the ones in red are ignored.</figcaption>
 </figure>
 
+{{% raw %}}
 <script>
     function plot_denum() {
         // Roots of the denominator
@@ -428,6 +433,7 @@ FIXME: Translate French titles, add alt text.
     }
     plot_denum();
 </script>
+{{% /raw %}}
 
 A polynomial is defined by the set of its roots, but up to a multiplicative factor. The next step is to determine this multiplicative factor. Details of the calculation won't be given here, but only the result:
 
