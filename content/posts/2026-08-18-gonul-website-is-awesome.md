@@ -4,7 +4,7 @@ date: 2026-08-18
 lastmod: 2026-08-18
 categories: [Site, Announcements]
 url: /posts/gonul-website-is-awesome.html
-excerpt: "Co-author Gönül Demir has followed my advice to make a website to promote her work. When I first saw it, I was really impressed."
+excerpt: "Impressed by the awesome new website of co-author Gönül Demir, I started relooking this blog..."
 ---
 
 
