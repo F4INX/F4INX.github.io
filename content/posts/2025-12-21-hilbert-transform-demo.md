@@ -4,11 +4,11 @@ date: 2025-12-21
 lastmod: 2025-12-21
 categories: [DSP, Signal Processing]
 url: /posts/hilbert-transform-demo.html
-excerpt: "The discrete Hilbert transform seems rather mysterious. However, the principle as well as his mathematics are not so complicated: the Hilbert transform is mainly a way to add a 90° phase shift to a signal and its equation can be explained from simple mathematical principles and an Excel spreadshet."
+excerpt: "The discrete Hilbert transform seems rather mysterious. However, the principle as well as his mathematics are not so complicated: the Hilbert transform is mainly a way to add a 90° phase shift to a signal and its equation can be explained from simple mathematical principles and an Excel spreadsheet..."
 ---
 
 
-The discrete Hilbert transform seems rather mysterious. However, the principle as well as his mathematics are not so complicated: the Hilbert transform is mainly a way to add a 90° phase shift to a signal and its equation can be explained from simple mathematical principles and an Excel spreadshet.
+The discrete Hilbert transform seems rather mysterious. However, the principle as well as his mathematics are not so complicated: the Hilbert transform is mainly a way to add a 90° phase shift to a signal and its equation can be explained from simple mathematical principles and an Excel spreadsheet.
 
 ## Pulse
 
