@@ -4,6 +4,7 @@ date: 2026-05-14
 lastmod: 2026-05-14
 categories: [RF Design, Power Amplifiers]
 url: /posts/nonlinear-impedance.html
+excerpt: "A comprehensive analysis of nonlinear impedance effects in power amplifiers, including transistor output impedance behavior and gain compression."
 ---
 
 

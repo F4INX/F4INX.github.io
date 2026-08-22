@@ -4,6 +4,7 @@ date: 2026-03-14
 lastmod: 2026-03-14
 categories: [Oscillators, Circuit Design]
 url: /posts/how-not-to-do-oscillators.html
+excerpt: "Practical insights and common pitfalls in oscillator circuit design, with real-world examples and solutions."
 ---
 
 

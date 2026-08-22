@@ -4,6 +4,7 @@ date: 2026-03-29
 lastmod: 2026-03-29
 categories: [Site, Announcements]
 url: /posts/new-coauthors.html
+excerpt: "This site had first an only author. Following the joining of co-author Gönul Demir, I updated the title to reflect the introduction of guest authors."
 ---
 
 

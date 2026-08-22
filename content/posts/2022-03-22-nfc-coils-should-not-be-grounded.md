@@ -4,6 +4,7 @@ date: 2022-03-22
 lastmod: 2022-03-22 16:44
 categories: [RFID, NFC, Circuit Design]
 url: /posts/nfc-coils-should-not-be-grounded.html
+excerpt: "While putting a solid ground plane in a good practice in most PCBs, RFID coils should not have ground planes below them."
 ---
 
 

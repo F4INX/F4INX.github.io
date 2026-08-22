@@ -13,7 +13,7 @@
             {{- end -}}
           {{- end -}}
           <h2 class="card-title">{{ .Title }}</h2>
-          <p class="card-excerpt">{{ .Summary | plainify | truncate 50 }}</p>
+          <p class="card-excerpt">{{ .Params.excerpt | default (.Summary | plainify | truncate 50) }}</p>
           <div class="card-meta">
             <span class="date">{{ .Date.Format "Jan 02, 2006" }}</span>
           </div>

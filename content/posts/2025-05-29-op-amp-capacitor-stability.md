@@ -4,6 +4,7 @@ date: 2025-05-29
 lastmod: 2025-10-10
 categories: [Operational Amplifiers, Stability]
 url: /posts/op-amp-capacitor-stability.html
+excerpt: "Operational amplifiers are often use with capacitive loads, typically to split a rail, but stability can be tricky."
 ---
 
 

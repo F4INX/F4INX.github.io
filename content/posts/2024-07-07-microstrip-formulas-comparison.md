@@ -4,6 +4,7 @@ date: 2024-07-07
 lastmod: 2025-05-14
 categories: [Transmission Lines, Microstrip]
 url: /posts/microstrip-formulas-comparison.html
+excerpt: "A comparison of microstrip characteristic impedance calculation formulas."
 ---
 
 
