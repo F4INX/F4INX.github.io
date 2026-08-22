@@ -1,7 +1,7 @@
 ---
 title: "On group delay of antennas."
 date: 2022-07-10
-lastmod: 2022-07-10 16-54
+lastmod: 2022-07-10T16:54:00+02:00
 categories: [Antennas, Group Delay]
 url: /posts/on-antennas-group-delay.html
 excerpt: "Following a very interesting discussion on LinkedIn, an investigation into antenna group delay."

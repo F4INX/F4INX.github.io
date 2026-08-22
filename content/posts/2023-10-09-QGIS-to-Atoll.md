@@ -1,7 +1,7 @@
 ---
 title: "Export QGIS maps and terrain height data to Forsk Atoll."
 date: 2023-10-09
-lastmod: 2023-10-09 12:17
+lastmod: 2023-10-09T12:17:00+02:00
 categories: [Software, QGIS, Tools]
 url: /posts/QGIS-to-Atoll.html
 excerpt: "Forsk Atoll antenna planning software is not so hard to use when a suitable map and terrain height data is available for import into Atoll. However such ready to use data is rather hard to find and finding such data is the top question asked in the comments of most Atoll tutorials."
