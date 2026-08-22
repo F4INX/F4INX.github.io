@@ -1,0 +1,871 @@
+/*******************************************************/
+/* f4inx.css                                           */
+/* Hadrien Theveneau, 2026                             */
+/* Parts based on Hyde (https://github.com/poole/hyde) */
+/* and Poole (https://github.com/poole/poole).         */
+/*******************************************************/
+
+/*****************/
+/* Global layout */
+/*****************/
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  /* Vars for background and foreground colors for easy global change. */
+  --bg-color: #ffffff;
+  --fg-color: #000000;
+  background: var(--bg-color);
+  color: var(--fg-color);
+  /* Vars for bars thickness, from thickest to thinnest. */
+  --bar-1: 3px;
+  --bar-2: 2px;
+  --bar-3: 1px;
+}
+body > * {
+  flex: 1;
+}
+.sidebar {
+  /* Uncomment the following line to make sidebar not stretch until bottom. */
+  /* align-self: start; */
+  /* Margins are taken into account differenly in original theme. */
+  max-width: 14rem;
+  /* Force the sidebar to be long when content is short */
+  min-height: 100vh;
+}
+/* For mobiles */
+@media (max-width: 48em) {
+  .sidebar {
+    flex: 1 100%;
+    max-width: none;
+    /* Since the sidebar is at the head, make it as short as possible. */
+    min-height: unset;
+  }
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: justify
+}
+@media (min-width: 48em) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (min-width: 58em) {
+  html {
+    font-size: 20px;
+  }
+}
+
+/*********/
+/* Links */
+/*********/
+
+a {
+  --links-color: darkblue;
+  color: var(--links-color);
+  text-decoration: none;
+  /* Prevent long urls to make horizontal scroll in small width displays. */
+  overflow-wrap: anywhere;
+}
+h1 a,
+h2 a,
+h3 a,
+a strong {
+  color: inherit;
+}
+/* `:focus` is linked to `:hover` for basic accessibility */
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+/************/
+/* Headings */
+/************/
+
+/* Taken from poole.css */
+
+/* Space for first title already taken into account in .content */
+.content .post:first-child h1 {
+  margin-top: 0;
+}
+
+/* The following settings are already close to the defaults,
+   but allows to keep the same values for headings in .related
+   lists */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: .5rem;
+  font-weight: bold;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+h2 + h3 {
+  margin-top: 1rem;
+}
+h3 {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+h4, h5, h6 {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+/***********/
+/* Sidebar */
+/***********/
+
+.sidebar {
+  padding: 2rem 2rem;
+  /* Vars for background and foreground colors for easy global change. */
+  --bg-color: #000000;
+  --fg-color: #ffffff;
+  background: var(--bg-color);
+  color: var(--fg-color);
+}
+
+/* Sidebar logo */
+.sidebar-about img {
+  display: block;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0.4em;
+  width: 85%;
+}
+@media (max-width: 48em) {
+  .sidebar-about img {
+    width: 0.83em;
+    vertical-align: baseline;
+    display: unset;
+    margin-left: unset;
+    margin-right: unset;
+    margin-top: unset;
+    /* Align the cat */
+    margin-bottom: -0.18em;
+  }
+}
+
+/* Sidebar links */
+.sidebar a {
+  color: inherit;  /* Turn off usual color of links */
+  text-decoration-thickness: 2px;
+}
+
+/* About section */
+.sidebar-about h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 3.25rem;
+  line-height: 0.8;
+}
+.sidebar-about .lead {
+  /* font-size: 1.25rem; */
+  /* font-weight: 300; */
+}
+
+/* Sidebar nav */
+.sidebar nav * {
+  display: block;
+}
+.sidebar nav a:hover,
+.sidebar nav a:focus {
+  text-decoration: underline;
+}
+.sidebar nav .active {
+  font-weight: bold;
+}
+
+/* Sidebar recent posts*/
+/* First level only */
+.sidebar nav > ul {
+  padding-left: 0;
+}
+.sidebar nav > ul > li {
+  font-size: 1.25rem;
+}
+/* Second level only */
+.sidebar nav > ul > li > ul {
+  padding-left: 1rem;
+}
+.sidebar nav > ul > li > ul > li {
+  font-size: 1rem;
+  line-height: normal;
+  margin-bottom: 0.5rem;
+}
+
+/* Space for last already taken into account in .sidebar */
+/* when sidebar is on top in mobile viewing.             */
+/*                                                       */
+/* :last-child doesn't work due to a .print-only element */
+/*                                                       */
+/* @media not currently useless because margin: 0 when   */
+/* printing but left in case this changes.               */
+@media not print {
+  .sidebar .last-not-print {
+    margin-bottom: 0;
+  }
+}
+
+/****************/
+/* Print layout */
+/****************/
+
+@media print {
+  body {
+    flex-flow: column;
+  }
+  .sidebar {
+    background-color: unset;
+    color: unset;
+    max-width: unset;
+    padding: unset;
+    /* min-height forces the sidebar to be long when content is short */
+    /* Useless by printing. */
+    min-height: unset;
+  }
+  .sidebar-about > *:last-child {
+    margin-bottom: 0;
+  }
+  .sidebar > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .sidebar img {
+    content: url("/style/img/f4inx-black.svg | absolute_url}}");
+    width: 0.83em;
+    vertical-align: baseline;
+    display: unset;
+    margin-left: unset;
+    margin-right: unset;
+    margin-top: unset;
+    margin-bottom: -0.18em;  /* Align the cat */
+  }
+  .sidebar nav {
+    display: none;
+  }
+  /* When printing, sidebar becomes an header. */
+  /* So, links are displayed as for normal content. */
+  .sidebar > a {
+    color: var(--links-color);
+    text-decoration: none;
+  }
+}
+@media not print {
+  .print-only {
+    display: none;
+  }
+}
+
+/****************************************************************************/
+/* Posts and pages                                                          */
+/*                                                                          */
+/* Each post is wrapped in `.post` and is used on default and post layouts. */
+/* Each page is wrapped in `.page` and is only used on the page layout.     */
+/****************************************************************************/
+
+.page,
+.post {
+  margin-bottom: 2em;
+}
+
+/* Separation bar between posts */
+.post + .post {
+  margin-top: 2em;
+  border-top: var(--bar-2) solid;
+}
+.post:last-of-type {
+  padding-bottom: 1em;  /* FIXME: better substraction. */
+  border-bottom: var(--bar-2) solid;
+}
+
+/* Blog post or page title */
+.page-title,
+.post-title,
+.post-title a {
+  color: inherit;
+  text-decoration-thickness: 2px;
+}
+
+/* Meta data line below post title */
+.post-date {
+  display: block;
+  margin-top: -.5rem;
+  /* margin-bottom: 1rem; */
+}
+
+/* Introductory note at beginning */
+.begin-note {
+  font-style: italic;
+}
+
+/* Related posts */
+.related {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-top: var(--bar-2) solid black;
+}
+.related h2 {
+  margin-top: 0;
+}
+.related-posts {
+  padding-left: 0;
+  list-style: none;
+}
+.related-posts h3 {
+  margin-top: 0;
+  font-size: 1rem;  /* Better separation in this use case. */
+}
+.related-posts li small {
+  font-size: 75%;
+  font-weight: normal;
+}
+/* `:focus` is linked to `:hover` for basic accessibility */
+.related-posts li a:hover,
+.related-posts li a:focus {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+/* Print links urls only in related posts section since they */
+/* are usually already shown in the remaining of the site.   */
+@media print {
+  .related-posts li a:after {
+    content: attr(href);
+    font-size: 75%;
+    font-weight: normal;
+  }
+}
+
+
+/************/
+/* Contents */
+/************/
+
+.content {
+    padding-top:    3rem;  /* To visually look likes a square */
+    padding-bottom: 4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    max-width: 37rem;  /* Smaller margins than Hyde/Poole */
+    /* Prevent horizontal scrolling due to large math tables */
+    /* in small width displays. */
+    overflow-x: auto;
+}
+
+@media (max-width: 48em) {
+  .content {
+    padding-top:    0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left:    0.5rem;
+    padding-right: 0.5rem;
+    max-width: none;
+  }
+}
+@media (max-width: 64em) {
+  .content {
+    padding-top:    2.0rem;
+    padding-bottom: 2.0rem;
+    padding-left:   2.0rem;
+    padding-right:  2.0rem;
+    max-width: 39rem;  /* Smaller margins than Hyde/Poole */
+  }
+}
+@media print {
+  .content {
+    max-width: unset;
+    /* Remove padding because paper has already margins.     */
+    padding-left: unset;
+    padding-right: unset;
+    /* Keep top and bottom paddings for contents separation. */
+    padding-top:    2.0rem;
+    padding-bottom: 2.0rem;
+  }
+}
+
+/* Citations */
+blockquote,
+cite {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+blockquote {
+  display: block;
+  quotes: "«\2005" "\2005»";
+  font-style: italic;
+}
+blockquote > p:first-child:before {
+  content: open-quote;
+}
+blockquote > p:last-child:after {
+  content: close-quote;
+}
+cite {
+  font-style: inherit;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+}
+p > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Tables for images formatting */
+table.images-table td {
+  line-height: 0;
+}
+
+/* Text only tables and figures */
+figure.text-table {
+  margin-left: auto;
+  margin-right: auto;
+  display: table;  /* For caption. */
+}
+figure.text-table table,
+table.text-table {
+  border-collapse: collapse;
+}
+figure.text-table table thead,
+figure.text-table table tbody,
+table.text-table thead,
+table.text-table tbody {
+  border-top: var(--bar-2) solid var(--fg-color);
+  border-bottom: var(--bar-2) solid var(--fg-color);
+}
+figure.text-table table tr,
+figure.text-table table td,
+table.text-table tr,
+table.text-table td {
+  border: none;
+  padding-left: 1em;
+  padding-right: 1em;
+  line-height: unset;
+}
+figure.text-table table tbody tr,
+figure.text-table table tbody td,
+table.text-table tbody tr,
+table.text-table tbody td {
+  border-bottom: var(--bar-3) solid var(--fg-color);
+}
+figure.text-table figcaption {
+  display: table-caption;
+  caption-side: top;
+  text-align: center;
+}
+
+/* Custom tag containing MathJax AsciiMath defined in mathjax-asciimath.html. */
+asciimath,
+latexmath {
+  /* Math equations centering. */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  /* Prevent horizontal scrolling due to large math tables */
+  /* in small width displays. */
+  overflow-x: auto;
+  /* Prevents spurious vertical scrolling. */
+  overflow-y: clip;
+}
+/* When inline, unset previous settings. */
+p > asciimath,
+p > latexmath {
+  display: unset;
+  margin-left: unset;
+  margin-right: unset;
+  text-align: unset;
+  overflow-x: unset;
+  overflow-y: unset;
+}
+
+/* Math spacing in tables */
+td mjx-container {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+/* Border */
+asciimath.framed mjx-math,
+latexmath.framed mjx-math {
+    border: solid;
+}
+
+/*************/
+/* Footnotes */
+/*************/
+
+.footnotes{
+  border-top: var(--bar-2) solid var(--fg-color);
+}
+/* 80% size only in main page post footnotes */
+.posts > .post > .footnotes{
+  border-top: none;
+}
+.posts > .post > .footnotes:before {
+  border-top: var(--bar-2) solid var(--fg-color);
+  content: " ";
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a.reversefootnote {
+  color: inherit;  /* People don't need color to guess they are clickable */
+}
+
+/******************************/
+/* Footnotes (middle of text) */
+/******************************/
+
+.mid-footnotes {
+    border-top: none;
+}
+.mid-footnotes:before {
+    border-top: var(--bar-2) solid var(--fg-color);
+    content: " ";
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/**************/
+/* Pagination */
+/**************/
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+@media (min-width: 30em) {
+  .pagination {
+    margin-top: 3rem;
+  }
+}
+@media print {
+  .pagination {
+    display: none;
+  }
+}
+
+/*************/
+/* Dark mode */
+/*************/
+@media (prefers-color-scheme: dark) {
+  body {
+    --bg-color: black;
+    --fg-color: white;
+  }
+  .sidebar {
+    border-right: var(--bar-1) solid white;
+    border-bottom: none;
+  }
+  @media (max-width: 48em) {
+    .sidebar {
+      border-right: none;
+      border-bottom: var(--bar-1) solid white;
+    }
+  }
+  a {
+  --links-color: aqua;
+  }
+  /* Default white background on transparent images. */
+  .post img:not(.dark-mode-no-bg) {
+    background: #ffffff;
+  }
+  /* When ready for dark mode, apply dark mode settings. */
+  .dark-mode-invert {
+    background: unset;
+    filter: invert();
+  }
+}
+
+/************/
+/* Articles */
+/************/
+.footnotes li cite {
+  margin-left: inherit;
+  margin-right: inherit;
+}
+.footnotes li .article-title {
+  font-style: italic;
+}
+.footnotes li .article-journal {
+}
+.footnotes li time {
+}
+
+figure img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+figure figcaption {
+  font-style: italic;
+  text-align: center;
+}
+
+/***********************/
+/* Collapsable content */
+/***********************/
+.collapsible-link {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+.collapsible-content {
+    display: none;
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 1px solid;
+    border-color: var(--fg-color);
+}
+.collapsible-content > p:first-child {
+    margin-top: 0;
+}
+.collapsible-content > p:last-child {
+    margin-bottom: 0;
+}
+.collapsible-content.show {
+    display: block;
+}
+.collapsible-content-aux {
+    display: none;
+}
+.collapsible-content-aux.show {
+    display: block;
+}
+/* Fallback when no javascript: show content by default */
+/* Note that in this case the equation won't be rendered... */
+.no-js .collapsible-link {
+    display: none;
+}
+.no-js .collapsible-content {
+    display: block;
+}
+.no-js .collapsible-content-aux {
+    display: block;
+}
+
+/*************/
+/* Card Layout */
+/*************/
+
+.content {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+/* Note that --bg-color and --fg-color */
+/* are swapped in dark mode.           */
+.card {
+  background: var(--bg-color);
+  border: 1px solid var(--fg-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  /* Stretch to fill card */
+  width: 100%;
+  height: 100%;
+}
+
+/* With these color settings, underlining */
+/* is annoying.                           */
+.card-link:hover {
+  text-decoration: none;
+}
+
+.card-content {
+  padding: 1.25rem;
+}
+
+.card-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-title {
+  color: var(--fg-color);
+}
+
+
+.card:hover {
+  background: var(--fg-color);
+}
+.card:hover .card-title,
+.card:hover .card-excerpt,
+.card:hover .card-meta {
+  text-decoration: none;
+  color: var(--bg-color);
+}
+
+.card-excerpt {
+  color: var(--fg-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0.75rem 0;
+}
+
+.card-category {
+  display: inline-block;
+  background: var(--fg-color);
+  color: var(--bg-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+.card:hover .card-category {
+  background: var(--bg-color);
+  color: var(--fg-color);
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--fg-color);
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*******************/
+/* Sidebar Collapsible */
+/*******************/
+
+.collapsible-button {
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  margin: 0;
+  font: inherit;
+  color: var(--fg-color);
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 0.8;
+}
+
+.collapsible-button:hover {
+  text-decoration: underline;
+}
+
+.collapsible-button:focus {
+  outline: 2px solid #fff;
+}
+
+.collapsible-button .collapsible-indicator {
+  display: inline-block;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.collapsible-indicator {
+  margin-left: 0.5rem;
+  font-size: 1em;
+  transition: transform 0.2s ease;
+  font-family: monospace;
+}
+
+.hover-collapsible {
+  position: relative;
+}
+
+.hover-collapsible .collapsible-section {
+  list-style: none;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  display: none;
+  padding-left: 1rem;
+}
+
+/* Use class-based toggle for all screen sizes */
+.hover-collapsible .collapsible-section:not(.collapsed) {
+  display: block;
+}
+
+.hover-collapsible .collapsible-indicator {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='%23fff'><path d='m16.7 8-6 6H9.3l-6-6 1.4-1.4 5.3 5.3 5.3-5.3z'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+  margin-right: 0.3em;
+  margin-left: 0;
+}
+
+.hover-collapsible .collapsible-indicator::before {
+  content: none;
+}
+
+.hover-collapsible .collapsible-indicator.rotated {
+  transform: rotate(180deg);
+}
+
+/*************/
+/* Mobile Menu - Collapsible Sections */
+/*************/
+
+@media (max-width: 48em) {
+  /* Mobile sidebar adjustments */
+  .sidebar nav > ul {
+    padding-left: 0;
+  }
+
+  .sidebar nav > ul > li {
+    font-size: 1rem;
+    padding: 0.25rem 0;
+  }
+
+  .collapsible-button {
+    font-size: 1rem;
+  }
+}

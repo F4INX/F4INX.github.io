@@ -1,0 +1,53 @@
+<div class="sidebar">
+  <div class="sidebar-about">
+    <h1>
+      <a href="{{ "/" | relURL }}">
+        <img src="/style/img/f4inx-white.svg" alt=""/>
+        {{ .Site.Title }}
+      </a>
+    </h1>
+    <p class="lead">{{ .Site.Params.description }}</p>
+  </div>
+
+  <nav>
+    <ul>
+      <li>
+        <a class="{{ if eq .Title "Home" }}active{{ end }}" href="{{ "/" | relURL }}">Home</a>
+      </li>
+
+      <li class="hover-collapsible">
+        <span class="collapsible-button">
+          <span class="collapsible-indicator"></span>Posts
+        </span>
+        <ul class="collapsible-section">
+          {{- range where .Site.RegularPages "Section" "posts" -}}
+            <li>
+              <a class="{{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">
+                {{ .Title }}
+              </a>
+            </li>
+          {{- end -}}
+        </ul>
+      </li>
+
+      <li class="hover-collapsible">
+        <span class="collapsible-button">
+          <span class="collapsible-indicator"></span>Misc pages
+        </span>
+        <ul class="collapsible-section">
+          {{- range .Site.Pages -}}
+            {{- if and .Title (ne .Kind "home") (ne .Kind "section") (ne .Kind "taxonomy") -}}
+            <li>
+              <a class="{{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+            </li>
+            {{- end -}}
+          {{- end -}}
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <p class="last-not-print">&copy; {{ now.Format "2006" }} {{ .Site.Author.name }}. See <a href="{{ "/LICENCE.html" | relURL }}">licence</a>. </p>
+
+  <a class="print-only" href="{{ .Permalink }}">{{ .Permalink }}</a>
+</div>

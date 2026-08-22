@@ -1,0 +1,55 @@
+baseURL = "https://f4inx.github.io/"
+languageCode = "en-us"
+title = "RF cat corner"
+tagline = "analog electronics, RF, EM simulations, ..."
+
+[author]
+  name = "Hadrien Theveneau"
+  url = "https://f4inx.github.io"
+
+[params]
+  description = "Blog edited by Hadrien F4INX on analog electronics, RF, EM simulations, ...."
+
+# Output formats
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+  section = ["HTML"]
+
+# Enable taxonomies
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# Markup configuration
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Allow HTML in markdown
+
+# Permalinks
+[permalinks]
+  posts = "/posts/:slug/"
+  pages = "/:slug/"
+
+# Menu configuration
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+# RSS configuration
+[outputFormats.RSS]
+  limit = 50
+
+# Enable sitemap
+[outputFormats]
+  [outputFormats.Sitemap]
+    name = "Sitemap"
+    mediaType = "application/xml"
+    baseName = "sitemap"
+    rel = "sitemap"
+
+# Copy static files as-is
+[build]
+  writeStats = true
