@@ -76,6 +76,10 @@ a {
   /* Prevent long urls to make horizontal scroll in small width displays. */
   overflow-wrap: anywhere;
 }
+a::after {
+  content: "🔗";
+  margin-left: 0.2em;
+}
 h1 a,
 h2 a,
 h3 a,
