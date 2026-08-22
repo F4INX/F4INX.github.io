@@ -69,10 +69,9 @@ html {
 /*********/
 
 a {
-  /* For accessibility reasons, colors of the links is */
-  /* kept, but underline is used in addition.          */
   --links-color: darkblue;
   color: var(--links-color);
+  text-decoration: none;
   /* Prevent long urls to make horizontal scroll in small width displays. */
   overflow-wrap: anywhere;
 }
