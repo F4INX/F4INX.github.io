@@ -4,7 +4,7 @@ date: 2022-03-22
 lastmod: 2022-03-22 19:42
 categories: [Amplifiers, Miller Effect]
 url: /posts/miller-effect-1.html
-excerpt: "This content was originally published on Microwaves 101 (https://www.microwaves101.com/encyclopedias/miller-effect). Many thanks to Steve for improvements on the original version. Have a look on his website for more interesting content."
+excerpt: "Originally published on Microwaves 101, a comprehensive explanation of the Miller effect in electronics..."
 ---
 
 
