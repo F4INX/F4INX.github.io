@@ -59,12 +59,6 @@ hugo_stats.json
 # Hugo cache
 .cache/
 
-# Ignore hugo stuff tested in other branches
-public/
-.hugo_build.lock
-hugo_stats.json
-static/
-
 # Ignore temp of diff-amp-equations (LTSpice, emf)
 static/posts/diff-amp-equations/diff-amp-SE-LTSpice.op.raw
 static/posts/diff-amp-equations/diff-amp-SE-LTSpice.raw
