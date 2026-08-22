@@ -3,7 +3,7 @@ title: "On group delay of antennas."
 date: 2022-07-10
 lastmod: 2022-07-10 16-54
 categories: [Antennas, Group Delay]
-slug: on-antennas-group-delay
+url: /posts/on-antennas-group-delay.html
 ---
 
 

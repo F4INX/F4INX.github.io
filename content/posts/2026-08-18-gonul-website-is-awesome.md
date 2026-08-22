@@ -3,7 +3,7 @@ title: "Gönül's website is awesome"
 date: 2026-08-18
 lastmod: 2026-08-18
 categories: [Site, Announcements]
-slug: gonul-website-is-awesome
+url: /posts/gonul-website-is-awesome.html
 ---
 
 

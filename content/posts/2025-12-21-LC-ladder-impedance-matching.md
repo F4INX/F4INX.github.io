@@ -3,7 +3,7 @@ title: "LC ladder impedance matching."
 date: 2025-12-21
 lastmod: 2025-12-21
 categories: [Impedance Matching, LC Networks]
-slug: LC-ladder-impedance-matching
+url: /posts/LC-ladder-impedance-matching.html
 ---
 
 

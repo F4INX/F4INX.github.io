@@ -3,7 +3,7 @@ title: "RFID coils should not be grounded."
 date: 2022-03-22
 lastmod: 2022-03-22 16:44
 categories: [RFID, NFC, Circuit Design]
-slug: nfc-coils-should-not-be-grounded
+url: /posts/nfc-coils-should-not-be-grounded.html
 ---
 
 

@@ -3,7 +3,7 @@ title: "Miller effect and solutions."
 date: 2022-03-22
 lastmod: 2022-03-22 19:42
 categories: [Amplifiers, Miller Effect]
-slug: miller-effect-1
+url: /posts/miller-effect-1.html
 ---
 
 

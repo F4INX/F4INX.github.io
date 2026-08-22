@@ -3,7 +3,7 @@ title: "Nonlinear impedance (draft)"
 date: 2026-05-14
 lastmod: 2026-05-14
 categories: [RF Design, Power Amplifiers]
-slug: nonlinear-impedance
+url: /posts/nonlinear-impedance.html
 ---
 
 

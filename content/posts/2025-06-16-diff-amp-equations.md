@@ -3,7 +3,7 @@ title: "Equations for terminating a differential amplifier in single-ended input
 date: 2025-06-16
 lastmod: 2025-06-16
 categories: [Operational Amplifiers, Differential Amplifiers]
-slug: diff-amp-equations
+url: /posts/diff-amp-equations.html
 ---
 
 

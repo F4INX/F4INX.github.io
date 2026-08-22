@@ -3,7 +3,7 @@ title: "The fine art of (not) doing oscillators"
 date: 2026-03-14
 lastmod: 2026-03-14
 categories: [Oscillators, Circuit Design]
-slug: how-not-to-do-oscillators
+url: /posts/how-not-to-do-oscillators.html
 ---
 
 

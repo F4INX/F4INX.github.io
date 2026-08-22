@@ -3,7 +3,7 @@ title: "IQ modulator and quadrature coupler sign issues."
 date: 2024-11-05
 lastmod: 2024-11-05
 categories: [Couplers, IQ Modulators, RF Design]
-slug: IQ-quadrature-sign
+url: /posts/IQ-quadrature-sign.html
 ---
 
 

@@ -3,7 +3,7 @@ title: "Hilbert transform demo."
 date: 2025-12-21
 lastmod: 2025-12-21
 categories: [DSP, Signal Processing]
-slug: hilbert-transform-demo
+url: /posts/hilbert-transform-demo.html
 ---
 
 

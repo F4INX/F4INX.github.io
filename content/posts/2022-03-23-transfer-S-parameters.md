@@ -3,7 +3,7 @@ title: "Transfer S parameters."
 date: 2022-03-23
 lastmod: 2022-03-23 13:30
 categories: [S-parameters, Network Analysis]
-slug: transfer-S-parameters
+url: /posts/transfer-S-parameters.html
 ---
 
 

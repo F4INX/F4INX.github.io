@@ -3,7 +3,7 @@ title: "On stability of capacitive loaded op-amps."
 date: 2025-05-29
 lastmod: 2025-10-10
 categories: [Operational Amplifiers, Stability]
-slug: op-amp-capacitor-stability
+url: /posts/op-amp-capacitor-stability.html
 ---
 
 

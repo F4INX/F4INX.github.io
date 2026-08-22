@@ -3,7 +3,7 @@ title: "Simple calculations for active bandpass filter with finite GBW operation
 date: 2025-12-31
 lastmod: 2025-12-31
 categories: [Operational Amplifiers, Filters, Analog Design]
-slug: vcvs-finite-gbw
+url: /posts/vcvs-finite-gbw.html
 ---
 
 

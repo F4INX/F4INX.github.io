@@ -3,7 +3,7 @@ title: "MLCC voltage dependence."
 date: 2024-04-24
 lastmod: 2025-05-14
 categories: [Components, Capacitors]
-slug: mlcc-voltage-dependence
+url: /posts/mlcc-voltage-dependence.html
 ---
 
 

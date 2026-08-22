@@ -3,7 +3,7 @@ title: "A (not so) gentle introduction to operational amplifiers."
 date: 2026-03-08
 lastmod: 2026-03-08
 categories: [Analog Design, Operational Amplifiers]
-slug: op-amp-introduction
+url: /posts/op-amp-introduction.html
 ---
 
 

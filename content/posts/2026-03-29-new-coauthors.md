@@ -3,7 +3,7 @@ title: "New co-authors"
 date: 2026-03-29
 lastmod: 2026-03-29
 categories: [Site, Announcements]
-slug: new-coauthors
+url: /posts/new-coauthors.html
 ---
 
 
