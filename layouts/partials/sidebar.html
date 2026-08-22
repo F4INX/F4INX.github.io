@@ -36,7 +36,7 @@
         </span>
         <ul class="collapsible-section">
           {{- range .Site.Pages -}}
-            {{- if and .Title (eq .Kind "page") (ne .Section "posts") -}}
+            {{- if and .Title (eq .Kind "page") (ne .Section "posts") (ne .Title "404: Page not found") -}}
             <li>
               <a class="{{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
             </li>
