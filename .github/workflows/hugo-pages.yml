@@ -3,8 +3,7 @@ name: Hugo Build and Deploy to Pages
 on:
   push:
     branches:
-      - main
-      - hugo
+      - master
   pull_request:
   workflow_dispatch:
 
@@ -36,7 +35,7 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/hugo'
+    if: github.ref == 'refs/heads/master'
 
     permissions:
       pages: write
