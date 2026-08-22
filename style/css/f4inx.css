@@ -686,6 +686,8 @@ figure figcaption {
   margin: 1rem 0;
 }
 
+/* Note that --bg-color and --fg-color */
+/* are swapped in dark mode.           */
 .card {
   background: var(--bg-color);
   border: 1px solid #333;
@@ -724,24 +726,15 @@ figure figcaption {
   color: var(--fg-color);
 }
 
+
 .card:hover {
-  background: #000000;
+  background: var(--fg-color);
 }
 .card:hover .card-title,
 .card:hover .card-excerpt,
 .card:hover .card-meta {
   text-decoration: none;
-  color: #ffffff;
-}
-@media (prefers-color-scheme: dark) {
-  .card:hover {
-    background: #ffffff;
-  }
-  .card:hover .card-title,
-  .card:hover .card-excerpt,
-  .card:hover .card-meta {
-    color: #000000;
-  }
+  color: var(--bg-color);
 }
 
 .card-excerpt {
@@ -753,8 +746,8 @@ figure figcaption {
 
 .card-category {
   display: inline-block;
-  background: #000;
-  color: white;
+  background: var(--fg-color);
+  color: var(--bg-color);
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.75rem;
@@ -762,18 +755,8 @@ figure figcaption {
   margin-bottom: 0.75rem;
 }
 .card:hover .card-category {
-  background: white;
-  color: #000;
-}
-@media (prefers-color-scheme: dark) {
-  .card-category {
-    background: white;
-    color: #000;
-  }
-  .card:hover .card-category {
-    background: #000;
-    color: white;
-  }
+  background: var(--bg-color);
+  color: var(--fg-color);
 }
 
 .card-meta {
