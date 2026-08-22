@@ -68,27 +68,27 @@ FIXME: Translate French titles, add alt text.
             /* Background */
             layout['paper_bgcolor'] = 'rgba(0,0,0,0)';
             layout['plot_bgcolor'] = 'rgba(0,0,0,0)';
-            if (!('xaxisin layout))
+            if (!('xaxis' in layout))
             {
                 layout['xaxis'] = {};
             }
             layout['xaxis']['color'] = 'white';
-            if (!('yaxisin layout))
+            if (!('yaxis' in layout))
             {
                 layout['yaxis'] = {};
             }
             layout['yaxis']['color'] = 'white';
             /* Foreground */
-            if (!('linein trace))
+            if (!('line' in trace))
             {
                 trace['line'] = {};
             }
             trace['line']['color'] = 'white';
             /* Marker if needed */
             /* Fill missing dict keys */
-            if (!('markerin trace)) {trace['marker'] = {};}
-            if (!('linein trace['marker'])) {trace['marker']['line'] = {};}
-            if (!('colorin trace['marker']['line'])) {
+            if (!('marker' in trace)) {trace['marker'] = {};}
+            if (!('line' in trace['marker'])) {trace['marker']['line'] = {};}
+            if (!('color' in trace['marker']['line'])) {
                 /* Case 1: missing color value */
                 trace['marker']['line']['color'] = 'white';
             }
@@ -303,8 +303,8 @@ FIXME: Translate French titles, add alt text.
         };
         
         const layout = {
-            xaxis: { title: 'Real part},
-            yaxis: { title: 'Imaginary part},
+            xaxis: { title: 'Real part' },
+            yaxis: { title: 'Imaginary part' },
             showlegend: false
         };
 
@@ -419,8 +419,8 @@ FIXME: Translate French titles, add alt text.
         };
 
         const layout = {
-            xaxis: { title: 'Real part},
-            yaxis: { title: 'Imaginary part},
+            xaxis: { title: 'Real part' },
+            yaxis: { title: 'Imaginary part' },
             showlegend: false
         };
 
