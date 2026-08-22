@@ -1,0 +1,27 @@
+{{- "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML -}}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Site.Title }}</title>
+    <description>{{ .Site.Params.description }}</description>
+    <link>{{ .Site.BaseURL | default "/" }}</link>
+    <atom:link href="{{ "/atom.xml" | absURL }}" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    {{- with .Site.Author.name -}}
+    <managingEditor>{{ . }}@f4inx.github.io</managingEditor>
+    {{- end -}}
+    <pubDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</lastBuildDate>
+    {{- range .Site.RegularPages -}}
+    <item>
+      <title>{{ .Title }}</title>
+      <description>{{ .Summary | html }}</description>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+      {{- with .Lastmod -}}
+      <lastmod>{{ .Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</lastmod>
+      {{- end -}}
+      <guid>{{ .Permalink }}</guid>
+    </item>
+    {{- end -}}
+  </channel>
+</rss>
