@@ -2,7 +2,7 @@
 # For production: HUGO_BASEURL=https://f4inx.github.io/ hugo
 # For development: hugo server uses / as baseURL for relative URLs
 baseURL = "/"
-languageCode = "en-us"
+locale = "en-US"
 title = "RF cat corner"
 tagline = "analog electronics, RF, EM simulations, ..."
 
