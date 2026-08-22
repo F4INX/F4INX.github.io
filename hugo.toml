@@ -6,12 +6,9 @@ languageCode = "en-us"
 title = "RF cat corner"
 tagline = "analog electronics, RF, EM simulations, ..."
 
-[author]
-  name = "Hadrien Theveneau"
-  url = "https://f4inx.github.io"
-
 [params]
   description = "Blog edited by Hadrien F4INX on analog electronics, RF, EM simulations, ...."
+  author = "Hadrien Theveneau"
 
 # Output formats
 [outputs]
