@@ -675,9 +675,9 @@ figure figcaption {
     display: block;
 }
 
-/*************/
-/* Card Layout */
-/*************/
+/****************/
+/* Cards layout */
+/****************/
 
 .content {
   padding: 1rem;
@@ -715,7 +715,11 @@ figure figcaption {
 
 /* With these color settings, underlining */
 /* is annoying.                           */
-.card-link:hover {
+/* Remove it in all states and not just   */
+/* in hover to fix strange bugs.          */
+.card-link,
+.card-link:hover,
+.card-link:focus {
   text-decoration: none;
 }
 
