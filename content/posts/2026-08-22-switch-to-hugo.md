@@ -1,7 +1,7 @@
 ---
 title: "Switch to Hugo"
 date: 2026-08-22
-lastmod: 2026-08-22
+lastmod: 2026-08-23
 categories: [Site, Meta]
 url: /posts/switch-to-hugo.html
 excerpt: "Following several annoying issues with Jekyll, I decided to switch to Hugo."
@@ -29,3 +29,5 @@ What I already have from this migration and what I want:
 * Easier installation on Windows. Not currently tested; I will see how well Mistral Vibe works outside of WSL.
 
 * Faster builds on GitHub. This seems to be already the case, but I have not performed formal benchmarks.
+
+**Edit 2026-08-23:** I reorganised my workflow. Instead of working from WSL on Windows files and folders, I moved the relevant files and folders in WSL and use Nextcloud to have backups. Jekyll would indeed have been much faster and with proper automatic rebuild with this setup, but Hugo is blazing fast and very convenient. I will use even more this workflow, particularly because Mistral Vibe is easier to use in WSL than in Windows.
