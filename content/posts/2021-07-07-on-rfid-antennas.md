@@ -12,7 +12,7 @@ related_posts:
 
 A friend of mine told me that he was looking for an "expert antenna engineer" to design RFID antennas, but he was not sure he searches well, because the last antenna expert he interview told him that he had designed hundreds of antennas, but never an rfid antenna. Never. Nada.
 
-He tried to search on antenna books some information on rfid antenna to orient his search. He was quickly disappointed. He opened the excellent "Electromagnetic Waves and Antennas" ([https://web.archive.org/web/20240528230718/www.ece.rutgers.edu/~orfanidi/ewa/)) from Orfanidis, and search for RFID and NFC. Nothing! Same thing with "Antenna Theory: Analysis and Design" from Balanis. This starts bad.
+He tried to search on antenna books some information on rfid antenna to orient his search. He was quickly disappointed. He opened the excellent "Electromagnetic Waves and Antennas" ([https://web.archive.org/web/20240528230718/www.ece.rutgers.edu/~orfanidi/ewa/](https://web.archive.org/web/20240528230718/www.ece.rutgers.edu/~orfanidi/ewa/)) from Orfanidis, and search for RFID and NFC. Nothing! Same thing with "Antenna Theory: Analysis and Design" from Balanis. This starts bad.
 
 The *coup de grâce* comes from Antenna Theory ([https://www.antenna-theory.com/definitions/nfc-antenna.php](https://www.antenna-theory.com/definitions/nfc-antenna.php)):
 
