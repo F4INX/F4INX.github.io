@@ -12,9 +12,7 @@ related_posts:
 
 <p class="begin-note">This content was originally published on Microwaves 101 (<a href="https://www.microwaves101.com/encyclopedias/transfer-s-parameters">https://www.microwaves101.com/encyclopedias/transfer-s-parameters</a>). Many thanks to Steve for hosting the original version. Have a look on his website for more interesting content.</p>
 
-{% comment %}
-Manually included to set size, class and alt. Zoomed for better rendering.
-{% endcomment %}
+<!-- Manually included to set size, class and alt. Zoomed for better rendering. -->
 <img class="dark-mode-invert" src="/posts/transfer-S-parameters/S-parameters.svg" alt="S-parameters matrix of generalized two-port network with characteristic impedance Z0" style="min-width:50%;">
 
 Transfer S parameters are a convenient way to express S parameters in a way that allows to easily cascade blocks. They have the same principle as ABCD parameters: they express all relevant input quantities in function of all relevant output quantities, contrary to normal S parameters which express all scattered waves in function of all incident waves, and are messy when cascading blocks. They are sometimes more convenient than ABCD parameters, because they work with wave quantities instead of voltages and current, which are very difficult to measure at high frequencies.

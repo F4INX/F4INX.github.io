@@ -23,9 +23,7 @@ The gate to source capacitance, Cgs, sees at its terminals only the gate voltage
 
 <cite>-- Miller's original article, [http://www.mit.edu/~klund/papers/jmiller.pdf](http://www.mit.edu/~klund/papers/jmiller.pdf), page 374</cite>
 
-{% comment %}
-Manually included to set class and alt.
-{% endcomment %}
+<!-- Manually included to set class and alt. -->
 <img class="dark-mode-invert" src="/posts/miller-effect/miller-effect-schematic-v2.1-cropped.svg" title="Miller effect in common source amplifier." alt="A voltage source of voltage 2vin is connected through a Rs impedance to the gate of a transistor used in common-source amplifier. Its gate has both a parasitic gate to ground capacitance Cgs and a parasitic gate to drain capacitance Cgd. The Miller effect multiplies the parasitic Cgd capacitance. The drain has a parasitic drain to ground capacitance Cgd and produces a voltage vl to a load impedance Rl.">
 
 This increase of the apparent capacitance is problematic in broad-band circuits because the bandwidth is reduced when the capacitance increases. In narrowband circuits, the Miller effect is less of a problem because capacitance can always be compensated for by the inductance of the bias circuits. However, keep in mind that the bandwidth of a circuit must be sufficient to keep a margin for process variations.
@@ -36,9 +34,7 @@ Some remedies to this problems are:
 
 * Use a balanced amplifier and compensate Cgd by another capacitor of the same value connected to the opposite voltage, like explained in following picture. We let the derivation to the reader. However, two problems limits that cool scheme. First, oscillation can occur. Second, the layout needs an [RF-RF cross-over](https://www.microwaves101.com/encyclopedias/rf-rf-crossovers), which is not practical.
 
-{% comment %}
-Manually included to set class and alt.
-{% endcomment %}
+<!-- Manually included to set class and alt. -->
 <img class="dark-mode-invert" src="/posts/miller-effect/miller-effect-balanced-v3-cropped.svg" alt="Two common-sources amplifiers are used in a balanced scheme where, to compensate the parasitic Cgd capacitance between gate and drain of a transistor, the gate of each transistor is connected to the drain of the other one through an additional capacitor of value Cgd. The physical connexion needs a crossover.">
 
 * Decrease the load impedance seen by the transistor, to reduce the voltage gain. Remember that Miller effect is an effect of the voltage gain. Two schemes for that are the cascode and the Cherry-Hooper amplifier.
@@ -47,9 +43,7 @@ Manually included to set class and alt.
 
 The image below illustrates a common way to alleviate the Miller effect: the cascode. The load impedance seen by the first transistor is dramatically reduced by the second transistor. In such a configuration, the voltage gain of the first transistor is approximately 1[^1]. Since the voltage gain is low, the Miller effect is drastically reduced.
 
-{% comment %}
-Manually included to set class.
-{% endcomment %}
+<!-- Manually included to set class. -->
 <img class="dark-mode-invert" src="/posts/miller-effect/miller-effect-cascode-v2.1-cropped.svg" alt="A voltage source of voltage 2vin is connected through a Rs impedance to the gate of a first transistor used in common-source amplifier. Its gate has both a gate to ground capacitance Cgs and a gate to drain capacitance Cgd. This Cgd capacitance is not multiplied in this configuration. The drain has a drain to source capacitance Cds and is connected to the source of a second transistor, used in common gate. This second transistor has a parasitic gate to source capacitor Cgs, a parasitic gate to source capacitor Cgs, a parasitic gate to drain capacitor, and a parasitic drain to source capacitor. The drain produces a voltage Vl to a load impedance Rl.">
 
 The second transistor has voltage gain but no current gain. And the Miller effect is eliminated because the gate is grounded for high frequencies. This scheme is usable only up to ft, not fmax. In general, ft is lower than fmax, at least for FET transistors. This should be kept in mind when designing really high frequency amplifiers, for example in the millimeter wave range.
