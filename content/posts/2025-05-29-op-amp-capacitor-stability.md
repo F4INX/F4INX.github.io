@@ -143,14 +143,14 @@ Since I had not yet the time to write on the topic, in waiting, please find a pi
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Blackcat-Lilith.jpg" alt="Lilith black cat."/>
 
-{% comment %}
+<!--
 https://www.ti.com/amplifier-circuit/op-amps/high-speed/products.html#89=Fixed%20Gain%2FBuffer&
 https://www.analog.com/en/parametricsearch/11086#/d=5057|s6|s7|s25|s3|s5|2687|5002|4502|300|4095|4108|2839|2840|s16&p5057=Buffer%20Amplifier|Line%20Drivers
 ttps://www.analog.com/en/parametricsearch/11087#/d=5057|s6|s7|s25|s3|s5|2687|4502|2606|300|4101|5055|4108|2839|2840|s16&p5057=Buffer Amplifier|Line Drivers
 Simple buffers:
   BUF634A
 The common LT1010 has xxx drawbacks.
-{% endcomment %}
+-->
 
 ## Case studies
 

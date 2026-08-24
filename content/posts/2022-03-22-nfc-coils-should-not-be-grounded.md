@@ -20,9 +20,7 @@ However, for the very same reasons, it's not a good idea to put a ground plane s
 
 The following pictures produced with OpenEMS shows clearly this effect:
 
-{% comment %}
-Manually included to set alt texts.
-{% endcomment %}
+<!-- Manually included to set alt texts. -->
 <table class="images-table">
 <tr>
 <td>

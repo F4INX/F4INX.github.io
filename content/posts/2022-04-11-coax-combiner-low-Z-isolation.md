@@ -281,11 +281,11 @@ The preadaptation section is the 2.5&#8239;Ω to 50&#8239;Ω part of a Klopfenst
 6) Profile transverse dimensions are calculated from <asciimath>Z_0(y)</asciimath> by numerical interpolation of the table calculated in step 6. Effective}dielectric constant <asciimath>K_{eff}</asciimath>, which depends on the profile dimensions, is calculated in the same step.
 
 7) Position z is calculated from <asciimath>K_{eff}(y)</asciimath> with:
-{% comment %}
+<!--
   <asciimath>
     z = int_{y=-1}^{1} (Theta_min c)/(4 pi f_min sqrt(K_eff(y)))
   </asciimath>
-{% endcomment %}
+-->
 <latexmath>
   z= \int\limits_{y=-1}^{1}{\frac{\Theta_\text{min} \cdot c}{4 \cdot \pi \cdot f_\text{min} \cdot \sqrt{K_\text{eff}(y)}} \cdot \mathrm{d}y} \label{eqn-z}
 </latexmath>
