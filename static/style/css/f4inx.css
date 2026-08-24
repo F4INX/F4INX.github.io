@@ -519,6 +519,10 @@ latexmath.framed mjx-math {
 .footnotes{
   border-top: var(--bar-2) solid var(--fg-color);
 }
+/* Hide the <hr> tag that Hugo adds before footnotes */
+.footnotes > hr {
+  display: none;
+}
 /* 80% size only in main page post footnotes */
 .posts > .post > .footnotes{
   border-top: none;
