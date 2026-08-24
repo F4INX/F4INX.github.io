@@ -83,6 +83,11 @@ a {
 .post a.collapsible-link::after {
   content: none;
 }
+/* Exclude link icon from footnotes links */
+a.footnote-ref::after,
+a.footnote-backref::after {
+  content: none;
+}
 h1 a,
 h2 a,
 h3 a,
