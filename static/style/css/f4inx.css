@@ -427,8 +427,6 @@ cite {
 /* Images */
 img {
   max-width: 100%;
-}
-p > img {
   display: block;
   margin-left: auto;
   margin-right: auto;

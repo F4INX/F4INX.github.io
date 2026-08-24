@@ -13,9 +13,9 @@ related_posts:
 
 ## Introduction
 
-A few years ago, I had to terminate a differential amplifier in single-ended input. Analog Devices AN-0990[^1] gives equations for that. Unfortunately, there are an inaccuracy in these equations. According to this page, the input impedance for balanced differential input signals is given by <asciimath>R_"IN, dm"=2\cdotR_G</asciimath> and for a single-ended input by <asciimath>R_"IN, cm"=R_G/(1-R_F/(2\cdot(R_G+R_F))).
+A few years ago, I had to terminate a differential amplifier in single-ended input. Analog Devices AN-0990[^1] gives equations for that. Unfortunately, there is an inaccuracy in these equations. According to this page, the input impedance for balanced differential input signals is given by <asciimath>R_{IN, dm}=2\cdotR_G</asciimath> and for a single-ended input by <asciimath>R_{IN, cm}=R_G/(1-R_F/(2\cdot(R_G+R_F))).
 
-However, in this use case, the last equation is **uncorrect**. It would have been correct if the -D<sub>IN</sub> input were connected directly to ground. However, this is not the case, and instead this input is connected to ground through a resistor of value <asciimath>R_S////R_T</asciimath> to ensure symmetry.
+However, in this use case, the last equation is **incorrect**. It would have been correct if the -D<sub>IN</sub> input were connected directly to ground. However, this is not the case, and instead this input is connected to ground through a resistor of value <asciimath>R_S////R_T</asciimath> to ensure symmetry.
 
 ## Schematic
 
@@ -220,7 +220,7 @@ leading to the final expression of &&R_T&&:
 
 ## LTSpice simulation
 
-LTSpice simulation filed are provided here: [diff-amp-SE-plot.asc](/posts/diff-amp-equations/diff-amp-SE-LTSpice.plt| absolute_url }}). Gain was set to 2 to allow easier check of proper operation by superimposing the curves.
+LTSpice simulation file is provided here: [diff-amp-SE-plot.asc](/posts/diff-amp-equations/diff-amp-SE-LTSpice.asc). Gain was set to 2 to allow easier check of proper operation by superimposing the curves.
 
 <img src="/posts/diff-amp-equations/diff-amp-SE-LTSpice.svg"/>
 
@@ -232,10 +232,10 @@ LTSpice simulation filed are provided here: [diff-amp-SE-plot.asc](/posts/diff-a
 
 [^3]: [https://en.wikipedia.org/wiki/Quadratic_equation](https://en.wikipedia.org/wiki/Quadratic_equation)
 
-[^4]: [/posts/miller-effect-1.html| absolute_url }}) [https://en.wikipedia.org/wiki/Miller_effect](https://en.wikipedia.org/wiki/Miller_effect)
+[^4]: [/posts/miller-effect-1.html](/posts/miller-effect-1.html) [https://en.wikipedia.org/wiki/Miller_effect](https://en.wikipedia.org/wiki/Miller_effect)
 
 [^5]: [https://en.wikipedia.org/wiki/Series_and_parallel_circuits#Resistance_units_2](https://en.wikipedia.org/wiki/Series_and_parallel_circuits#Resistance_units_2)
 
 ## Excel file
 
-The Excel calculation file, self explanatory, can be downloaded here: [diff-amp-SE-Excel.xlsx](/posts/diff-amp-equations/diff-amp-SE-Excel.xlsx| absolute_url }}).
+The Excel calculation file, self explanatory, can be downloaded here: [diff-amp-SE-Excel.xlsx](/posts/diff-amp-equations/diff-amp-SE-Excel.xlsx).
