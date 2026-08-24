@@ -1,0 +1,13 @@
+{{- define "footnote" -}}
+{{- with .Page.Footnotes -}}
+<div class="footnotes" role="doc-endnotes">
+<ol>
+{{- range . -}}
+<li id="fn:{{ .ID }}">
+{{- .Content | safeHTML -}}
+</li>
+{{- end -}}
+</ol>
+</div>
+{{- end -}}
+{{- end -}}
