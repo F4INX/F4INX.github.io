@@ -1,8 +1,9 @@
 ---
 layout: post
 title: On stability of capacitive loaded op-amps, detailed equations.
-permalink: /posts/op-amp-capacitor-stability-equations.html
-last_modified_at: 2025-12-19
+url: /posts/op-amp-capacitor-stability-equations.html
+date: 2025-12-19
+last_mod: 2025-12-19
 ---
 
 ## Isolation resistor + double feedback without RFx resistor
@@ -649,8 +650,8 @@ Since <latexmath>\left| L(\omega_0) \right| = 1</latexmath>:
 
 ### LTSpice simulation
 
-<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.png' | relative_url }}" >
+<img src="/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated.png" >
 
-<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-AC.png' | relative_url }}" >
+<img src="/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-AC.png" >
 
-<img src="{{ '/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-tran.png' | relative_url }}" >
+<img src="/posts/op-amp-capacitor-stability/op-amp-capacitor-compensated-tran.png" >
