@@ -323,7 +323,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^35]: N. Asuni, "PCB Impedance and Capacitance of Microstrip," 01 March 1998. \[Online\]. Available: <https://technick.net/tools/impedance-calculator/microstrip/>. \[Accessed 12 April 2020\].
 
-[^36]: A8 blog, "Online microstrip impedance calculator with multiple units," \[Online\]. Available: <https://www.a8blog.com/en_microstrip.htm>. \[Accessed 13 April 2020\].
+[^36]: A8 blog, "Online microstrip impedance calculator with multiple units," \[Online\]. Available: <http://www.a8blog.com/en_microstrip.htm>. \[Accessed 13 April 2020\].
 
 [^38]: R. Kapur, "Microstrip impedance calculator," everything RF, \[Online\]. Available: <https://www.everythingrf.com/rf-calculators/microstrip-impedance-calculator>. \[Accessed 06 April 2020\].
 
