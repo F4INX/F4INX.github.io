@@ -28,8 +28,10 @@ jobs:
         run: hugo --minify --baseURL "https://f4inx.github.io/"
 
       - name: Run lychee
-        uses: lycheeverse/lychee-action@v1
+        uses: lycheeverse/lychee-action@v2
         with:
-          args: --base https://f4inx.github.io/ --no-progress --verbose --exclude-file .lycheeignore ./public/**/*.html
+          # --base-url: replaces deprecated --base (since lychee v0.21+)
+          # .lycheeignore is picked up automatically, no need for --exclude-file
+          args: --base-url https://f4inx.github.io/ --no-progress --verbose ./public/**/*.html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -233,7 +233,7 @@ The following table sums up some microstrip calculators and the formulas which t
 | mcalc.sourceforge.net[^11]    | H&J             |           |                                                                               |
 | www.edn.com[^17]             | Wheeler 1977    |           |                                                                               |
 | cepd.com[^18]                 | Wheeler 1977    |           |                                                                               |
-| www.finetune.co.jp[^19]       | Wheeler 1977    |           |                                                                               |
+| [www.finetune.co.jp](https://web.archive.org/web/20260312171255/http://www.finetune.co.jp/~lyuka/technote/ustrip/)[^19] | Wheeler 1977    |           |                                                                               |
 | leleivre.com[^20]             | Wheeler 1977    |           |                                                                               |
 | chemandy.com[^21]             | Wheeler 1977    |           | _Confusion between ε<sub>r</sub> and ε<sub>r,eff</sub>._                      |
 | www.pasternack.com[^29]       | Hammerstad 1975 |           |                                                                               |

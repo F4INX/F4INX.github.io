@@ -15,7 +15,10 @@ https://www.linkedin.com/.*
 # Wikimedia rate-limits automated requests (429)
 https://upload.wikimedia.org/.*
 
-# Sites with HTTP/2 or SSL issues with lychee
+# Sites with HTTP/2 protocol issues with lychee
+# (links work in browsers, but lychee's HTTP/2 client fails)
 https://www.analog.com/.*
-https://www.finetune.co.jp/.*
 https://www.edn.com/.*
+
+# finetune.co.jp dead, replaced by archive version
+# Check later if temporarily or definitely
