@@ -317,7 +317,7 @@ This is one of the reason they are very popular, and also why this feedback resi
 
 The need of a rather low feedback resistance seems inconvenient, but current feedback amplifiers are almost always used for high-speed design where voltage feedback amplifiers would also need a low feedback resistances to avoid the effects of input capacitances. Indeed, in some circuits, both families are in practice almost interchangeable.
 
-For instance, the differential amplifier which gave me the opportunity to write this note ([{{"/posts/diff-amp-equations.html" ]({{"/posts/diff-amp-equations.html" )), used actually an ADA4927 which is a **current feedback** amplifier, but for some reason the demo circuit used in the webpage uses an ADA4937 which is a **voltage feedback** amplifier. But this works well because:
+For instance, the differential amplifier which gave me the opportunity to write this note ([diff-amp-equations](/posts/diff-amp-equations.html)), used actually an ADA4927 which is a **current feedback** amplifier, but for some reason the demo circuit used in the webpage uses an ADA4937 which is a **voltage feedback** amplifier. But this works well because:
 
 * both have the same footprints, even if not relevant for an LTSpice simulation,
 
@@ -371,7 +371,7 @@ Input range: slightly lower than ground to Vcc – headroom.
 
 <!-- TODO: Write stuff. -->
 
-[https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know](https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know)
+[https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know](https://web.archive.org/web/20240619192926/https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know)
 
 <figure>
   <img src="/posts/op-amp-introduction/n-p-input.png" />
@@ -380,7 +380,7 @@ Input range: slightly lower than ground to Vcc – headroom.
 
 ### Input supplied with charge pump
 
-[https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know](https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know)
+[https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know](https://web.archive.org/web/20240619192926/https://e2e.ti.com/blogs_/archives/b/thesignal/posts/rail-to-rail-inputs-what-you-should-know)
 
 <figure>
   <img src="/posts/op-amp-introduction/charge-pump-input.png" />
@@ -720,7 +720,7 @@ Multiple single-ended ampilfiers can be used in this case, but this solution is 
 
 For these cases, fully-differential output operational amplifiers can be used. They have directly a differential output, plus a Vocm input to set up the common-mode range.
 
-An example circuit using a fully differential amplifier is given in ([{{"/posts/diff-amp-equations.html" ]({{"/posts/diff-amp-equations.html" )).
+An example circuit using a fully differential amplifier is given in ([diff-amp-equations](/posts/diff-amp-equations.html)).
 
 #### Typical applications of single-ended output operational amplifiers
 

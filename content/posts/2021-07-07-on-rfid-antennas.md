@@ -72,7 +72,7 @@ Good question. For the terms, the usual terms are bad, but highly common, so sti
 
 Don't start searching an "antenna expert" and tell him later than it's antenna will be an RFID/NFC antenna. RFID/NFC should be among the first words. "Antenna" should be here just for Google: "coil" is the right term.
 
-An other answer is "don't search NFC coil designers". NFC coil design is easy, provided one has some minimum knowledge in electromagnetism. Application notes like [https://www.nxp.com/docs/en/application-note/AN11564.pdf](https://www.nxp.com/docs/en/application-note/AN11564.pdf) explains all what is needed to do this job. However, matching it, properly select the capacitors, designing the filter, the components, the rest of the system is not. Search RFID experts, who will know these not so easy topics. Search analog electronics designers who will know how to use the NFC coil. Both will learn quickly how to design an NFC coil.
+An other answer is "don't search NFC coil designers". NFC coil design is easy, provided one has some minimum knowledge in electromagnetism. Application notes like [https://www.nxp.com/docs/en/application-note/AN11564.pdf](https://web.archive.org/web/20241229183410/https://www.nxp.com/docs/en/application-note/AN11564.pdf) explains all what is needed to do this job. However, matching it, properly select the capacitors, designing the filter, the components, the rest of the system is not. Search RFID experts, who will know these not so easy topics. Search analog electronics designers who will know how to use the NFC coil. Both will learn quickly how to design an NFC coil.
 
 ## Sum up
 

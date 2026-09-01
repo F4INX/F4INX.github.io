@@ -490,7 +490,7 @@ The authors would like to thank Sylvie Lepilliet of the IEMN for her precious he
 
 [^kajfez1973correction]: <cite>D. Kajfez and J. Prewitt, <span class="article-title">"Correction to "a transmission line taper of improved design" (letters),"</span> <span class="article-journal">IEEE Transactions on Microwave Theory and Techniques</span>, vol. 21, no. 5, pp. 364–364, <time>May. 1973</time>. DOI: <a href="http://dx.doi.org/10.1109/TMTT.1973.1128003">10.1109/TMTT.1973.1128003</a>.</cite>
 
-[^microwaves101klopfenstein]: <cite>The Unknown Editor, <span class="article-title">"Klopfenstein’s taper"</span>, <time>Jun. 2013</time>, P-N Designs. Available: <a ref="http://www.microwaves101.com/encyclopedia/klopfenstein.cfm">http://www.microwaves101.com/encyclopedia/klopfenstein.cfm</a>.</cite>
+[^microwaves101klopfenstein]: <cite>The Unknown Editor, <span class="article-title">"Klopfenstein’s taper"</span>, <time>Jun. 2013</time>, P-N Designs. Available: <a ref="https://www.microwaves101.com/encyclopedias/klopfenstein-taper">https://www.microwaves101.com/encyclopedias/klopfenstein-taper</a>.</cite>
 
 [^ning2013spatial]: <cite>Y. Ning, W. Jiang, and W. Zhang, <span class="article-title">"The spatial power combining technique based on novel antipodal finline,"</span> in <span class="article-journal">IEEE International Wireless Symposium (IWS)</span>, 2013. <time>Apr. 2013</time>, pp. 1–4. DOI: <a href="http://dx.doi.org/10.1109/IEEE-IWS.2013.6616753">10.1109/IEEE-IWS.2013.6616753</a>.</cite>
 

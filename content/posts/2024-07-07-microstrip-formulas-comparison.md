@@ -231,7 +231,7 @@ The following table sums up some microstrip calculators and the formulas which t
 | ----------------------------- | --------------- | --------- | ----------------------------------------------------------------------------- |
 | www.microwaves101.com[^10]    | H&J             |           |                                                                               |
 | mcalc.sourceforge.net[^11]    | H&J             |           |                                                                               |
-| www.eeweb.com[^17]            | Wheeler 1977    |           |                                                                               |
+| www.edn.com[^17]             | Wheeler 1977    |           |                                                                               |
 | cepd.com[^18]                 | Wheeler 1977    |           |                                                                               |
 | www.finetune.co.jp[^19]       | Wheeler 1977    |           |                                                                               |
 | leleivre.com[^20]             | Wheeler 1977    |           |                                                                               |
@@ -285,9 +285,9 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^16]: Z. Peterson, "Clearing up trace impedance calculators and formulas," 19 May 2019. \[Online\]. Available: <https://resources.altium.com/p/clearing-up-trace-impedance-calculators-and-formulas>. \[Accessed 07 April 2020\].
 
-[^17]: EEWeb, "Microstrip," \[Online\]. Available: <https://www.eeweb.com/tools/microstrip-impedance>. \[Accessed 07 April 2020\].
+[^17]: EEWeb, "Microstrip," \[Online\]. Available: <https://www.edn.com/eeweb-content/tools/microstrip-impedance>. \[Accessed 07 April 2020\].
 
-[^18]: Colorado Electronic Product Design, "Microstrip impedance calculator," 2013. \[Online\]. Available: <http://cepd.com/calculators/microstrip.htm>. \[Accessed 07 April 2020\].     
+[^18]: Colorado Electronic Product Design, "Microstrip impedance calculator," 2013. \[Online\]. Available: <https://web.archive.org/web/20220529081541/https://cepd.com/calculators/microstrip.htm>. \[Accessed 07 April 2020\]. 
 
 [^19]: T. Hosoda, "Online calculator - Synthesize/Analyze microstrip transmission line," Finetune co., ltd., 25 December 2017. \[Online\]. Available: <http://www.finetune.co.jp/~lyuka/technote/ustrip/>. \[Accessed 07 April 2020\].   
 
@@ -299,7 +299,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^23]: P. T.-L. Wu, "Microwave Filter Design," 11 February 2011. \[Online\]. Available: <http://ntuemc.tw/upload/file/2011021716275842131.pdf>. \[Accessed 12 April 2020\].
 
-[^24]: P. G. Kumar, "Microwave theory and technology", lecture 9, 03 Septembre 2018. \[Online\]. Available: <https://archive.nptel.ac.in/courses/108/101/108101112/>. \[Accessed 14 May 2025\].
+[^24]: P. G. Kumar, "Microwave theory and technology", lecture 9, 03 Septembre 2018. \[Online\]. Available: <https://web.archive.org/web/20241014154436/https://archive.nptel.ac.in/courses/108/101/108101112/>. \[Accessed 14 May 2025\].
 
 [^25]: E. O. Hammerstad, "Equations for microstrip circuit design," in _Proc. European Microwave Conf._, 1975.
 
@@ -319,7 +319,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^33]: Electromagnetic compatibility laboratory, "Microstrip impedance calculator," \[Online\]. Available: <https://emclab.mst.edu/resources/tools/pcb-trace-impedance-calculator/microstrip/>. \[Accessed 12 April 2020\].
 
-[^34]: Reference Designer, "Microstrip Impedance Calculator," \[Online\]. Available: <http://referencedesigner.com/tutorials/si/si_06.php>. \[Accessed 12 April 2020\].
+[^34]: Reference Designer, "Microstrip Impedance Calculator," \[Online\]. Available: <https://web.archive.org/web/20250106210954/https://www.referencedesigner.com/tutorials/si/si_06.php>. \[Accessed 12 April 2020\].
 
 [^35]: N. Asuni, "PCB Impedance and Capacitance of Microstrip," 01 March 1998. \[Online\]. Available: <https://technick.net/tools/impedance-calculator/microstrip/>. \[Accessed 12 April 2020\].
 

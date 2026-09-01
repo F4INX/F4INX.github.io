@@ -30,6 +30,6 @@ jobs:
       - name: Run lychee
         uses: lycheeverse/lychee-action@v1
         with:
-          args: --base https://f4inx.github.io/ --no-progress --verbose ./public/**/*.html
+          args: --base https://f4inx.github.io/ --no-progress --verbose --exclude-file .lycheeignore ./public/**/*.html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
