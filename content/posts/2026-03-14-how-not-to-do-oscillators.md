@@ -6,7 +6,6 @@ categories: [Oscillators, Circuit Design]
 url: /posts/how-not-to-do-oscillators.html
 excerpt: "Practical insights and common pitfalls in oscillator circuit design, with real-world examples and solutions."
 related_posts:
-  - "IQ modulator and quadrature coupler sign issues."
 ---
 
 
