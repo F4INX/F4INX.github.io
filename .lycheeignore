@@ -1,0 +1,24 @@
+# Sites that block automated link checkers (403)
+https://www.researchgate.net/.*
+https://doi.org/.*
+https://www.hindawi.com/.*
+https://www.murata.com/.*
+https://fr.rs-online.com/.*
+https://product.tdk.com/.*
+https://www.everythingrf.com/.*
+https://toshiba.semicon-storage.com/.*
+https://electronics.stackexchange.com/.*
+
+# LinkedIn blocks bots
+https://www.linkedin.com/.*
+
+# Wikimedia rate-limits automated requests (429)
+https://upload.wikimedia.org/.*
+
+# Sites with HTTP/2 or SSL issues with lychee
+https://www.analog.com/.*
+https://www.finetune.co.jp/.*
+https://www.edn.com/.*
+
+# Sites that are down
+https://www.a8blog.com/.*

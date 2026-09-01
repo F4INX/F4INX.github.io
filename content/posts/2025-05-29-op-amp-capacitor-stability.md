@@ -125,7 +125,7 @@ This technique exists in two common variants shown in the 2 figures below from t
 
 The operating principle is the same in the two cases: provide an high frequency and a low frequency feedback paths. The high frequency path, right at the operational amplifier output, undelayed, provides stability, while the low frequency path, at the load, provided an exact low frequency response.
 
-With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. The detailed equations, rather long, are presented in this page: <a href="/posts/op-amp-capacitor-stability-equations.html</a>.
+With some mathematics, it is possible to determine the optimum values which ensure both stability and performance. The detailed equations, rather long, are presented in <a href="/posts/op-amp-capacitor-stability-equations.html">this page</a>.
 
 Simulation results with the values calculated using the equations are shown below:
 
@@ -308,7 +308,7 @@ From Wikipedia:
 
 [^7]: [https://www.analog.com/en/resources/analog-dialogue/articles/ask-the-applications-engineer-25.html](https://www.analog.com/en/resources/analog-dialogue/articles/ask-the-applications-engineer-25.html)
 
-[^8]: [https://e2e.ti.com/cfs-file/__key/.../Solving_5F00_Op_2D00_Amp_5F00_Stability_5F00_Wells_5F00_6_2D00_5_2D00_12-_2800_2_2900_.pdf](https://e2e.ti.com/cfs-file/__key/telligent-evolution-components-attachments/01-864-00-00-00-66-32-73/Solving_5F00_Op_2D00_Amp_5F00_Stability_5F00_Wells_5F00_6_2D00_5_2D00_12-_2800_2_2900_.pdf)
+[^8]: [https://e2e.ti.com/cfs-file/__key/.../Solving_5F00_Op_2D00_Amp_5F00_Stability_5F00_Wells_5F00_6_2D00_5_2D00_12-_2800_2_2900_.pdf](https://web.archive.org/web/20240624233914/https://e2e.ti.com/cfs-file/__key/telligent-evolution-components-attachments/01-864-00-00-00-66-32-73/Solving_5F00_Op_2D00_Amp_5F00_Stability_5F00_Wells_5F00_6_2D00_5_2D00_12-_2800_2_2900_.pdf)
 
 [^9]: [https://ww1.microchip.com/downloads/en/Appnotes/00884b.pdf](https://ww1.microchip.com/downloads/en/Appnotes/00884b.pdf)
 
