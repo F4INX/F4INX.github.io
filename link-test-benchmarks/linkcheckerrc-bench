@@ -1,0 +1,11 @@
+# Benchmark config for LinkChecker
+# No sites are ignored. HTTP/2 issue sites, 403 bot-detection sites,
+# LinkedIn, and Wikimedia are all included to test if LinkChecker can handle them.
+
+[checking]
+check-extern=1
+ssl-verify=1
+localwebroot=file:///home/hadrien/Nextcloud/WSL/Electronique/New%20site/f4inx.github.io/public/
+
+[requesting]
+user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36

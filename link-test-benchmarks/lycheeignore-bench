@@ -1,0 +1,3 @@
+# Benchmark config for lychee
+# No sites are ignored. HTTP/2 issue sites, 403 bot-detection sites,
+# LinkedIn, and Wikimedia are all included to test if lychee can handle them.
