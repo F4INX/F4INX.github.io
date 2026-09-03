@@ -17,6 +17,7 @@ ignore=
     https://www.hindawi.com/.*
     https://doi.org/.*
     https://electronics.stackexchange.com/.*
+    https://www.everythingrf.com/.*
 
 # LinkedIn blocks bots
     https://www.linkedin.com/.*
