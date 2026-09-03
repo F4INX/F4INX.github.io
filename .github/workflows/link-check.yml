@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  lychee:
-    name: Check links with lychee
+  linkchecker:
+    name: Check links with LinkChecker
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -27,11 +27,16 @@ jobs:
       - name: Build site
         run: hugo --minify --baseURL "https://f4inx.github.io/"
 
-      - name: Run lychee
-        uses: lycheeverse/lychee-action@v2
+      - name: Install LinkChecker
+        uses: awalsh128/cache-apt-pkgs-action@553a35bb8ebd9fcabcb1c9451aa4c98e1b4ca8a9
         with:
-          # --base-url: replaces deprecated --base (since lychee v0.21+)
-          # .lycheeignore is picked up automatically, no need for --exclude-file
-          args: --base-url https://f4inx.github.io/ --no-progress --verbose ./public/**/*.html
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          packages: linkchecker
+          version: default
+
+      - name: Run LinkChecker
+        run: |
+          # Replace PLACEHOLDER with the CI workspace path
+          sed -i "s|file:///PLACEHOLDER/|file://$GITHUB_WORKSPACE/public/|" .linkcheckerrc
+          linkchecker --config .linkcheckerrc \
+            --check-extern --no-warnings \
+            ./public/

@@ -1,0 +1,28 @@
+# LinkChecker configuration for f4inx.github.io
+# Used both locally and in CI. The localwebroot uses a PLACEHOLDER that is
+# replaced at runtime:
+# - Locally: linkchecker.sh replaces it with the script directory
+# - In CI: the GitHub Actions workflow replaces it with the workspace path
+
+[checking]
+check-extern=1
+ssl-verify=1
+localwebroot=file:///PLACEHOLDER/
+
+[filtering]
+# Sites behind Cloudflare bot protection (403 with JS challenge)
+# These cannot be checked by any HTTP-based link checker
+ignore=
+    https://www.researchgate.net/.*
+    https://www.hindawi.com/.*
+    https://doi.org/.*
+    https://electronics.stackexchange.com/.*
+
+# LinkedIn blocks bots
+    https://www.linkedin.com/.*
+
+# Wikimedia rate-limits automated requests (429)
+    https://upload.wikimedia.org/.*
+
+[requesting]
+user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
