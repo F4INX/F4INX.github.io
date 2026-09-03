@@ -210,10 +210,21 @@ The `content-length` differs slightly (because the challenge HTML includes the r
 
 The same behavior was observed on researchgate.net.
 
+### Can full browser headers bypass the 403?
+
+No. Testing with curl using a complete set of browser headers (User-Agent, Accept, Accept-Language, Accept-Encoding, Sec-CH-UA, Sec-CH-UA-Mobile, Sec-CH-UA-Platform, Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site, Sec-Fetch-User, Upgrade-Insecure-Requests, Connection) still returns 403. The response body is Cloudflare's "Just a moment..." JavaScript challenge page:
+
+```html
+<title>Just a moment...</title>
+<noscript>Enable JavaScript and cookies to continue</noscript>
+```
+
+Cloudflare serves a JS challenge that must be executed in a browser to compute a token, set a `cf_clearance` cookie, and redirect to the actual page. No combination of HTTP headers can bypass this — it requires a JavaScript engine.
+
 ### Conclusion on 403 handling
 
 - Custom User-Agent helps with some sites (rs-online.com, product.tdk.com) but not with Cloudflare-protected sites (stackexchange, researchgate, hindawi)
-- Cloudflare's `cf-mitigated: challenge` requires JavaScript execution to pass — no HTTP-based link checker can solve this
+- Cloudflare's `cf-mitigated: challenge` requires JavaScript execution to pass — no HTTP-based link checker can solve this, even with full browser headers
 - There is no way to distinguish existing vs non-existing pages behind Cloudflare bot protection
 - The only options are:
   1. Ignore these URLs in the config (accept that they cannot be checked automatically)
