@@ -258,7 +258,7 @@ h4, h5, h6 {
     margin-bottom: 0;
   }
   .sidebar img {
-    content: url("/style/img/f4inx-black.svg | absolute_url}}");
+    content: url("/style/img/f4inx-black.svg");
     width: 0.83em;
     vertical-align: baseline;
     display: unset;

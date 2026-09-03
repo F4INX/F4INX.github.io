@@ -24,5 +24,12 @@ ignore=
 # Wikimedia rate-limits automated requests (429)
     https://upload.wikimedia.org/.*
 
+# edn.com (formerly eeweb.com) has server/HTTP issues with link checkers
+    https://www.edn.com/.*
+
+# Hugo sitemap includes section URLs (/posts/, /details/, /misc/) that
+# don't have generated index pages. Skip the sitemap to avoid false 404s.
+    .*/sitemap.xml
+
 [requesting]
 user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
