@@ -66,6 +66,10 @@ grep "Result" /tmp/linkchecker-output.log | sort | uniq -c | sort -rn
 
 # View specific errors
 grep -B5 "404 Not Found" /tmp/linkchecker-output.log
+
+# Also produce a list of ignored URLs for manual checking
+./linkchecker.sh /tmp/linkchecker-output.log --ignored /tmp/ignored-urls.log
+cat /tmp/ignored-urls.log
 ```
 
 Or run directly (replace PLACEHOLDER first):
@@ -87,7 +91,11 @@ The workflow is defined in `.github/workflows/link-check.yml`. It:
 3. Builds the site with `hugo --minify`
 4. Installs LinkChecker via `apt-get`
 5. Replaces the `PLACEHOLDER` in `.linkcheckerrc` with the CI workspace path via `sed`,
-   then runs LinkChecker with that config.
+   then runs LinkChecker with verbose output.
+6. Writes a summary to the GitHub Actions step summary, including:
+   - Any link errors found
+   - A list of ignored links for manual checking
+   - Final statistics
 
 The workflow uses `continue-on-error: true` so it is non-blocking — broken links
 will be reported in the CI logs but will not prevent deployment.

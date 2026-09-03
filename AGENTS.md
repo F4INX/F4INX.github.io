@@ -13,6 +13,12 @@ the existing log file instead of re-running LinkChecker each time.
 grep "Result" /tmp/linkchecker-output.log | sort | uniq -c | sort -rn
 ```
 
+To also produce a list of ignored URLs for manual checking:
+```bash
+./linkchecker.sh /tmp/linkchecker-output.log --ignored /tmp/ignored-urls.log
+cat /tmp/ignored-urls.log
+```
+
 Or run directly:
 ```bash
 sed "s|file:///PLACEHOLDER/|file://$(pwd | sed 's/ /%20/g')/public/|" .linkcheckerrc > /tmp/lc.conf
