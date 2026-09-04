@@ -31,7 +31,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y linkchecker
 
       - name: Replace PLACEHOLDER with the CI workspace path
-        run: sed -i "s|file:///PLACEHOLDER/|file://$GITHUB_WORKSPACE/public/|" .linkcheckerrc
+        run: sed "s|file:///PLACEHOLDER/|file://$GITHUB_WORKSPACE/public/|" .linkcheckerrc > .linkcheckerrc.ci
 
       - name: Run LinkChecker
-        run: linkchecker --config .linkcheckerrc --check-extern --no-warnings ./public/
+        run: linkchecker --config .linkcheckerrc.ci --check-extern --no-warnings ./public/
