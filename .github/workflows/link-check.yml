@@ -28,10 +28,7 @@ jobs:
         run: hugo --minify --baseURL "https://f4inx.github.io/"
 
       - name: Install LinkChecker
-        uses: awalsh128/cache-apt-pkgs-action@553a35bb8ebd9fcabcb1c9451aa4c98e1b4ca8a9
-        with:
-          packages: linkchecker
-          version: default
+        run: sudo apt-get update && sudo apt-get install -y linkchecker
 
       - name: Run LinkChecker
         run: |
