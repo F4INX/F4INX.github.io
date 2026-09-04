@@ -34,4 +34,4 @@ jobs:
         run: sed "s|file:///PLACEHOLDER/|file://$GITHUB_WORKSPACE/public/|" .linkcheckerrc > .linkcheckerrc.ci
 
       - name: Run LinkChecker
-        run: linkchecker --config .linkcheckerrc.ci --check-extern --no-warnings ./public/
+        run: linkchecker --config .linkcheckerrc.ci --check-extern --no-warnings ./public/ 2>&1
