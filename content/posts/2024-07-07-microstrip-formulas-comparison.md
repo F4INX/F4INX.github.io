@@ -283,7 +283,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^15]: Wikipedia contributors, "Microstrip - Wikipedia, the free encyclopedia," \[Online\]. Available: <https://en.wikipedia.org/w/index.php?title=Microstrip&oldid=949478476>. \[Accessed 07 April 2020\].
 
-[^16]: Z. Peterson, "Clearing up trace impedance calculators and formulas," 19 May 2019. \[Online\]. Available: <https://resources.altium.com/p/clearing-up-trace-impedance-calculators-and-formulas>. \[Accessed 07 April 2020\].
+[^16]: Z. Peterson, "Clearing up trace impedance calculators and formulas," 19 May 2019. \[Online\]. Available: <https://resources.altium.com/p/clearing-trace-impedance-calculators-and-formulas>. \[Accessed 07 April 2020\].
 
 [^17]: EEWeb, "Microstrip," \[Online\]. Available: <https://www.edn.com/eeweb-content/tools/microstrip-impedance>. \[Accessed 07 April 2020\].
 
