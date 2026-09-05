@@ -19,6 +19,7 @@ https://upload.wikimedia.org/.*
 # (links work in browsers, but lychee's HTTP/2 client fails)
 https://www.analog.com/.*
 https://www.edn.com/.*
+https://ncalculators.com/.*
 
 # finetune.co.jp dead, replaced by archive version
 # Check later if temporarily or definitely
