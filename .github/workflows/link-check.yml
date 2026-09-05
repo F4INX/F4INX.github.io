@@ -9,7 +9,7 @@ on:
 
 jobs:
   lychee:
-    name: Check links with lychee
+    name: Check links with lychee ZZZ
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
