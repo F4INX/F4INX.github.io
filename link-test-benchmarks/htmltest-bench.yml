@@ -1,0 +1,14 @@
+# Benchmark config for htmltest
+# No sites are ignored. HTTP/2 issue sites, 403 bot-detection sites,
+# LinkedIn, and Wikimedia are all included to test if htmltest can handle them.
+
+DirectoryPath: ""
+CheckExternal: true
+CheckInternal: true
+CheckAnchors: true
+CheckFavicon: false
+CheckMetaReferrer: false
+HTMLExtensions: [".html"]
+
+HTTPHeaders:
+  User-Agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
