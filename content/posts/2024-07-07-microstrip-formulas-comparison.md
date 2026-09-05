@@ -273,7 +273,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 [^9]: Agilent Technologies, "Advanced Design System 2011.01 - Distributed components".                                                                                                                                                                        
 [^10]: D. Campbell and S. Huettner, "Microstrip calculator," Microwaves101, \[Online\]. Available: <https://www.microwaves101.com/calculators/1201-microstrip-calculator>. \[Accessed 13 April 2020\].
 
-[^11]: D. R. McMahill, "Microstrip analysis/synthesis calculator," 16 February 2020. \[Online\]. Available: <http://mcalc.sourceforge.net/>. \[Accessed 13 April 2020\].
+[^11]: D. R. McMahill, "Microstrip analysis/synthesis calculator," 16 February 2020. \[Online\]. Available: <https://mcalc.sourceforge.net/>. \[Accessed 13 April 2020\].
 
 [^12]: H. A. Wheeler, "Transmission-line properties of parallel strips separated by a dielectric sheet," _IEEE transactions on microwave theory and techniques,_ vol. 13, no. 2, pp. 172-185, 1965.
 
@@ -297,7 +297,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^22]: S. Huettner, "Microstrip," \[Online\]. Available: <https://www.microwaves101.com/encyclopedias/microstrip>. \[Accessed 02 April 2020\].
 
-[^23]: P. T.-L. Wu, "Microwave Filter Design," 11 February 2011. \[Online\]. Available: <http://ntuemc.tw/upload/file/2011021716275842131.pdf>. \[Accessed 12 April 2020\].
+[^23]: P. T.-L. Wu, "Microwave Filter Design," 11 February 2011. \[Online\]. Available: <https://ntuemc.tw/upload/file/2011021716275842131.pdf>. \[Accessed 12 April 2020\].
 
 [^24]: P. G. Kumar, "Microwave theory and technology", lecture 9, 03 Septembre 2018. \[Online\]. Available: <https://web.archive.org/web/20241014154436/https://archive.nptel.ac.in/courses/108/101/108101112/>. \[Accessed 14 May 2025\].
 
@@ -311,7 +311,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^29]: Pasternack, "Microstrip calculator," \[Online\]. Available: <https://www.pasternack.com/t-calculator-microstrip.aspx>. \[Accessed 12 April 2020\].
 
-[^30]: F. Xiao, "Microstrip trace impedance calculator," \[Online\]. Available: <http://www.emclab.cei.uec.ac.jp/xiao/MSline/index.html>. \[Accessed 12 April 2020\].
+[^30]: F. Xiao, "Microstrip trace impedance calculator," \[Online\]. Available: <https://www.emclab.cei.uec.ac.jp/xiao/MSline/index.html>. \[Accessed 12 April 2020\].
 
 [^31]: W. J. Highton, "Microstrip transmission line characteristic impedance calculator," Chemandy electronics, 2 January 2020. \[Online\]. Available: <https://chemandy.com/calculators/microstrip-transmission-line-calculator-hartley27.htm>. \[Accessed 13 April 2020\].
 
