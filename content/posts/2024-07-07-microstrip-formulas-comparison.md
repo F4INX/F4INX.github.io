@@ -297,7 +297,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^22]: S. Huettner, "Microstrip," \[Online\]. Available: <https://www.microwaves101.com/encyclopedias/microstrip>. \[Accessed 02 April 2020\].
 
-[^23]: P. T.-L. Wu, "Microwave Filter Design," 11 February 2011. \[Online\]. Available: <https://ntuemc.tw/upload/file/2011021716275842131.pdf>. \[Accessed 12 April 2020\].
+[^23]: P. T.-L. Wu, "Microwave Filter Design," 11 February 2011. \[Online\]. Available: <https://www.ntuemc.tw/upload/file/2011021716275842131.pdf>. \[Accessed 12 April 2020\].
 
 [^24]: P. G. Kumar, "Microwave theory and technology", lecture 9, 03 Septembre 2018. \[Online\]. Available: <https://web.archive.org/web/20241014154436/https://archive.nptel.ac.in/courses/108/101/108101112/>. \[Accessed 14 May 2025\].
 
