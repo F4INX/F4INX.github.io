@@ -99,3 +99,6 @@ static/posts/how-not-to-do-oscillators/*.op.raw
 static/posts/how-not-to-do-oscillators/*.raw
 static/posts/how-not-to-do-oscillators/*.net
 static/posts/how-not-to-do-oscillators/*.fft
+
+# Ignore temporarily installed link checker binaries
+link-test-benchmarks/bin/
