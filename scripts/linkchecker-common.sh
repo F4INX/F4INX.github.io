@@ -64,7 +64,7 @@ print_summary() {
     echo ""
 
     # Stats
-    grep "That's it" "$logfile" | strip_ansi
+    grep "That's it" "$logfile" | strip_ansi || true
 }
 
 # Internal: extract ignored/filtered URLs from log.

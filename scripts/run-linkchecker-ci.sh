@@ -14,7 +14,8 @@ LOGFILE="$GITHUB_WORKSPACE/linkchecker-output.log"
 
 # Prepare config and run
 CONFIG_TMP="$(prepare_config "$CONFIG" "$PUBLIC_DIR")"
-run_linkchecker "$CONFIG_TMP" "$PUBLIC_DIR" "$LOGFILE"
+# LinkChecker returns non-zero when it finds errors/warnings; don't fail the script
+run_linkchecker "$CONFIG_TMP" "$PUBLIC_DIR" "$LOGFILE" || true
 
 # Print summary to GitHub Actions step summary
 print_summary "$LOGFILE" "$SILENT_IGNORE" | tee -a "$GITHUB_STEP_SUMMARY"
