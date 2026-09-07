@@ -21,7 +21,7 @@ The gate to source capacitance, Cgs, sees at its terminals only the gate voltage
 
 > Thus the apparent input capacity can become a number of times greater than the actual capacitance between the tube electrodes...
 
-<cite>-- Miller's original article, [http://www.mit.edu/~klund/papers/jmiller.pdf](http://www.mit.edu/~klund/papers/jmiller.pdf), page 374</cite>
+<cite>-- Miller's original article, [https://www.mit.edu/~klund/papers/jmiller.pdf ](https://www.mit.edu/~klund/papers/jmiller.pdf ), page 374</cite>
 
 <!-- Manually included to set class and alt. -->
 <img class="dark-mode-invert" src="/posts/miller-effect/miller-effect-schematic-v2.1-cropped.svg" title="Miller effect in common source amplifier." alt="A voltage source of voltage 2vin is connected through a Rs impedance to the gate of a transistor used in common-source amplifier. Its gate has both a parasitic gate to ground capacitance Cgs and a parasitic gate to drain capacitance Cgd. The Miller effect multiplies the parasitic Cgd capacitance. The drain has a parasitic drain to ground capacitance Cgd and produces a voltage vl to a load impedance Rl.">
@@ -54,7 +54,7 @@ Finally, the DC power consumption of the whole amplifier is doubled. Each transi
 
 ## Cherry-Hooper amplifiers
 
-Professor Rodwell (UCSB) has some notes on this topic: [https://www.ece.ucsb.edu/Faculty/rodwell/Classes/mixed_signal/mixed_signal_notes_set_3.pdf](https://www.ece.ucsb.edu/Faculty/rodwell/Classes/mixed_signal/mixed_signal_notes_set_3.pdf).
+Professor Rodwell (UCSB) has some notes on this topic: [https://web.ece.ucsb.edu/Faculty/rodwell/Classes/mixed_signal/mixed_signal_notes_set_3.pdf](https://web.ece.ucsb.edu/Faculty/rodwell/Classes/mixed_signal/mixed_signal_notes_set_3.pdf).
 
 ## References
 
