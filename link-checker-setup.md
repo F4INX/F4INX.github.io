@@ -45,7 +45,6 @@ or rate limiting that no HTTP-based link checker can bypass:
 
 - `www.researchgate.net` — Cloudflare
 - `www.hindawi.com` — Cloudflare
-- `doi.org` — redirects to Cloudflare-protected sites
 - `electronics.stackexchange.com` — Cloudflare
 - `www.linkedin.com` — blocks bots
 - `upload.wikimedia.org` — rate limits (429)
