@@ -29,6 +29,7 @@ grep -B5 "Result.*ignored\|Result.*filtered" linkchecker-output.log \
   | grep "Real URL" \
   | sed 's/^Real URL   /- /' \
   | sort -u \
+  | grep -v -f linkchecker-silent-ignore \
   | tee -a $GITHUB_STEP_SUMMARY
 echo "" | tee -a $GITHUB_STEP_SUMMARY
 
