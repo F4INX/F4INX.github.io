@@ -2,11 +2,6 @@
 # Shared functions for running LinkChecker.
 # Sourced by linkchecker.sh (local) and scripts/run-linkchecker-ci.sh (CI).
 
-# Strip ANSI color codes from input.
-strip_ansi() {
-    sed 's/\x1b\[[0-9;]*m//g'
-}
-
 # Prepare LinkChecker config by replacing the PLACEHOLDER with the given public dir.
 # Usage: prepare_config <config_file> <public_dir>
 # Outputs the temp config path to stdout.
@@ -23,78 +18,74 @@ prepare_config() {
     echo "$config_tmp"
 }
 
-# Run LinkChecker and write output to a log file.
-# Usage: run_linkchecker <config> <public_dir> <logfile>
+# Run LinkChecker and write output to a log file (text) and CSV file.
+# Usage: run_linkchecker <config> <public_dir> <text_logfile> <csv_file>
 run_linkchecker() {
     local config="$1"
     local public_dir="$2"
-    local logfile="$3"
+    local text_logfile="$3"
+    local csv_file="$4"
 
     linkchecker --config "$config" \
         --check-extern --no-warnings -v --no-status \
-        "$public_dir/" > "$logfile" 2>&1
+        -F "csv/utf-8/$csv_file" \
+        "$public_dir/" > "$text_logfile" 2>&1
 }
 
 # Print formatted summary to stdout.
-# Usage: print_summary <logfile> [silent_ignore_file]
+# Usage: print_summary <text_logfile> <csv_file> [silent_ignore_file]
 print_summary() {
-    local logfile="$1"
-    local silent_ignore="${2:-}"
+    local text_logfile="$1"
+    local csv_file="$2"
+    local silent_ignore="${3:-}"
 
     echo "## Link Checker Results"
     echo ""
 
     # Status table
-    _print_status_table "$logfile"
+    _print_status_table "$text_logfile" "$csv_file"
     echo ""
 
     # Errors
     local has_errors
-    has_errors="$(grep -c "Result.*Error" "$logfile" || true)"
+    has_errors="$(grep -c "Result.*Error" "$text_logfile" || true)"
     if [ "$has_errors" -gt 0 ]; then
         echo "### Errors"
         echo ""
-        grep -B5 "Result.*Error" "$logfile" \
-            | strip_ansi \
+        grep -B5 "Result.*Error" "$text_logfile" \
+            | sed 's/\x1b\[[0-9;]*m//g' \
             | grep "Real URL\|Result" \
             | sed 's/^Real URL   /URL: /;s/^Result     /  /'
         echo ""
     fi
 
     # Redirects
-    local has_redirects
-    has_redirects="$(grep -c "http-redirected" "$logfile" || true)"
-    if [ "$has_redirects" -gt 0 ]; then
-        echo "### Redirects"
-        echo ""
-        _print_redirects "$logfile"
-        echo ""
-    fi
+    _print_redirects "$csv_file"
+    echo ""
 
     # Ignored links
     echo "### Ignored links (manual check recommended)"
     echo ""
-    _extract_ignored_urls "$logfile" "- " "$silent_ignore"
+    _extract_ignored_urls "$csv_file" "- " "$silent_ignore"
     echo ""
 
     # Stats
-    grep "That's it" "$logfile" | strip_ansi || true
+    grep "That's it" "$text_logfile" | sed 's/\x1b\[[0-9;]*m//g' || true
 }
 
-# Internal: print status table from log.
-# Usage: _print_status_table <logfile>
+# Internal: print status table from log and CSV.
+# Usage: _print_status_table <text_logfile> <csv_file>
 _print_status_table() {
-    local logfile="$1"
+    local text_logfile="$1"
+    local csv_file="$2"
 
-    local total errors redirects ignored filtered
-    total="$(grep "That's it" "$logfile" | sed 's/\x1b\[[0-9;]*m//g' | grep -oP '\d+ links' | grep -oP '^\d+')"
-    errors="$(grep -c "Result.*Error" "$logfile" || true)"
-    redirects="$(grep -c "http-redirected" "$logfile" || true)"
-    ignored="$(grep -c "Result.*ignored" "$logfile" || true)"
-    filtered="$(grep -c "Result.*filtered" "$logfile" || true)"
-
-    local warnings
-    warnings="$(grep "That's it" "$logfile" | sed 's/\x1b\[[0-9;]*m//g' | grep -oP '\d+ warnings' | grep -oP '^\d+')"
+    local total errors redirects ignored filtered warnings
+    total="$(grep "That's it" "$text_logfile" | sed 's/\x1b\[[0-9;]*m//g' | grep -oP '\d+ links' | grep -oP '^\d+')"
+    errors="$(grep -c "Result.*Error" "$text_logfile" || true)"
+    redirects="$(_count_csv "$csv_file" "warningstring" "Redirected")"
+    ignored="$(_count_csv "$csv_file" "warningstring" "ignored" "exact")"
+    filtered="$(_count_csv "$csv_file" "result" "filtered" "exact")"
+    warnings="$(grep "That's it" "$text_logfile" | sed 's/\x1b\[[0-9;]*m//g' | grep -oP '\d+ warnings' | grep -oP '^\d+')"
 
     local ok
     ok=$((total - errors - redirects - ignored - filtered))
@@ -110,47 +101,73 @@ _print_status_table() {
     echo "| Errors        | $errors |"
 }
 
-# Internal: print redirects from log.
-# Usage: _print_redirects <logfile>
-_print_redirects() {
-    local logfile="$1"
+# Internal: count rows in CSV matching a field value.
+# Usage: _count_csv <csv_file> <field> <pattern> [exact]
+_count_csv() {
+    local csv_file="$1"
+    local field="$2"
+    local pattern="$3"
+    local mode="${4:-}"
 
-    # LinkChecker logs redirects with [http-redirected] warnings.
-    # We extract the original URL and the final Real URL.
-    awk '
-    /^URL / {
-        if (url != "" && real != "" && redirected) {
-            print "- " url " --> " real
-        }
-        url=$0; sub(/^URL        `/, "", url); sub(/.$/, "", url);
-        real=""; redirected=0
-    }
-    /\[http-redirected\]/ { redirected=1 }
-    /^Real URL / {
-        real=$0; sub(/^Real URL   /, "", real)
-    }
-    /^Result/ {
-        if (url != "" && real != "" && redirected) {
-            print "- " url " --> " real
-        }
-        url=""; real=""; redirected=0
-    }
-    ' "$logfile"
+    python3 -c "
+import csv
+with open('$csv_file') as f:
+    lines = [l for l in f if not l.startswith('#')]
+    reader = csv.DictReader(lines, delimiter=';')
+    count = 0
+    for r in reader:
+        val = r.get('$field', '')
+        if '$mode' == 'exact':
+            if val == '$pattern':
+                count += 1
+        else:
+            if '$pattern' in val:
+                count += 1
+    print(count)
+" 2>/dev/null || echo 0
 }
 
-# Internal: extract ignored/filtered URLs from log.
-# Usage: _extract_ignored_urls <logfile> <prefix> [silent_ignore_file]
+# Internal: print redirects from CSV.
+# Usage: _print_redirects <csv_file>
+_print_redirects() {
+    local csv_file="$1"
+
+    python3 -c "
+import csv
+with open('$csv_file') as f:
+    lines = [l for l in f if not l.startswith('#')]
+    reader = csv.DictReader(lines, delimiter=';')
+    for r in reader:
+        ws = r.get('warningstring', '')
+        if 'Redirected' in ws:
+            url = r.get('urlname', '')
+            real = r.get('url', '')
+            if url and real and url != real:
+                print(f'- {url} --> {real}')
+" 2>/dev/null
+}
+
+# Internal: extract ignored/filtered URLs from CSV.
+# Usage: _extract_ignored_urls <csv_file> <prefix> [silent_ignore_file]
 _extract_ignored_urls() {
-    local logfile="$1"
+    local csv_file="$1"
     local prefix="$2"
     local silent_ignore="${3:-}"
 
     local result
-    result="$(grep -B5 "Result.*ignored\|Result.*filtered" "$logfile" \
-        | strip_ansi \
-        | grep "Real URL" \
-        | sed "s/^Real URL   /$prefix/" \
-        | sort -u)"
+    result="$(python3 -c "
+import csv
+with open('$csv_file') as f:
+    lines = [l for l in f if not l.startswith('#')]
+    reader = csv.DictReader(lines, delimiter=';')
+    for r in reader:
+        ws = r.get('warningstring', '')
+        res = r.get('result', '')
+        if ws == 'ignored' or res == 'filtered':
+            url = r.get('url', '')
+            if url:
+                print(f'$prefix{url}')
+" 2>/dev/null | sort -u)"
 
     if [ -n "$silent_ignore" ] && [ -f "$silent_ignore" ]; then
         local silent_tmp
@@ -164,11 +181,11 @@ _extract_ignored_urls() {
 }
 
 # Extract ignored URLs to a file.
-# Usage: extract_ignored <logfile> <output_file> [silent_ignore_file]
+# Usage: extract_ignored <csv_file> <output_file> [silent_ignore_file]
 extract_ignored() {
-    local logfile="$1"
+    local csv_file="$1"
     local output_file="$2"
     local silent_ignore="${3:-}"
 
-    _extract_ignored_urls "$logfile" "" "$silent_ignore" > "$output_file"
+    _extract_ignored_urls "$csv_file" "" "$silent_ignore" > "$output_file"
 }

@@ -9,13 +9,14 @@ CONFIG="$GITHUB_WORKSPACE/.linkcheckerrc"
 PUBLIC_DIR="$GITHUB_WORKSPACE/public"
 SILENT_IGNORE="$GITHUB_WORKSPACE/linkchecker-silent-ignore"
 LOGFILE="$GITHUB_WORKSPACE/linkchecker-output.log"
+CSV_FILE="$GITHUB_WORKSPACE/linkchecker-output.csv"
 
 # Prepare config and run
 CONFIG_TMP="$(prepare_config "$CONFIG" "$PUBLIC_DIR")"
-run_linkchecker "$CONFIG_TMP" "$PUBLIC_DIR" "$LOGFILE"
+run_linkchecker "$CONFIG_TMP" "$PUBLIC_DIR" "$LOGFILE" "$CSV_FILE"
 
 # Print summary to GitHub Actions step summary
-print_summary "$LOGFILE" "$SILENT_IGNORE" | tee -a "$GITHUB_STEP_SUMMARY"
+print_summary "$LOGFILE" "$CSV_FILE" "$SILENT_IGNORE" | tee -a "$GITHUB_STEP_SUMMARY"
 
 # Cleanup
 rm -f "$CONFIG_TMP"

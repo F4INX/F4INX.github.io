@@ -41,7 +41,8 @@ fi
 # Prepare config and run
 CONFIG_TMP="$(prepare_config "$CONFIG" "$PUBLIC_DIR")"
 LOGFILE="$(mktemp)"
-run_linkchecker "$CONFIG_TMP" "$PUBLIC_DIR" "$LOGFILE"
+CSV_FILE="$(mktemp)"
+run_linkchecker "$CONFIG_TMP" "$PUBLIC_DIR" "$LOGFILE" "$CSV_FILE"
 
 # Copy raw output if requested
 if [ -n "$OUTPUT_FILE" ]; then
@@ -50,14 +51,14 @@ if [ -n "$OUTPUT_FILE" ]; then
 fi
 
 # Print summary to stdout
-print_summary "$LOGFILE" "$SILENT_IGNORE"
+print_summary "$LOGFILE" "$CSV_FILE" "$SILENT_IGNORE"
 
 # Extract ignored URLs if requested
 if [ -n "$IGNORED_FILE" ]; then
-    extract_ignored "$LOGFILE" "$IGNORED_FILE" "$SILENT_IGNORE"
+    extract_ignored "$CSV_FILE" "$IGNORED_FILE" "$SILENT_IGNORE"
     echo "Ignored URLs written to $IGNORED_FILE"
     echo "Ignored: $(wc -l < "$IGNORED_FILE")"
 fi
 
 # Cleanup
-rm -f "$CONFIG_TMP" "$LOGFILE"
+rm -f "$CONFIG_TMP" "$LOGFILE" "$CSV_FILE"
