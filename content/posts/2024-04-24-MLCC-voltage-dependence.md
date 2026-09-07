@@ -25,7 +25,7 @@ Since this page was originally written for Microwaves101, the case study to illu
 
 To replace the 4.7 µF capacitor, a simple search gives this component:
 
-https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouche/8467296/ (4.7 µF)
+https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8467296 (4.7 µF)
 <img src="/posts/MLCC-voltage-dependence/radiospares-1.png">
 
 Seems rather nice, and smaller than the original. Wrong! Let’s check the detailed characteristics:
@@ -61,7 +61,7 @@ Seems rather nice, and smaller than the original. Wrong! Let’s check the detai
 Not good! If we need the 4.7 µF capacitance value, we’ll be soon in trouble.
 
 Let’s search a bigger capacitor. We search the biggest value among MLCC capacitors having 10 V rating.
-https://fr.rs-online.com/web/c/passifs/condensateurs/condensateurs-ceramique-multicouche/?applied-dimensions=4294244793,4291386526&pn=1
+https://fr.rs-online.com/web/c/passifs/condensateurs/condensateurs-ceramique-multicouches/
 We find some nice models:
 
 <img src="/posts/MLCC-voltage-dependence/radiospares-2.png">
@@ -117,9 +117,9 @@ An other interesting point is what happens when we combine both biasing and temp
 
 The temperature dependence is better when biased. This leads to the conclusion that temperature coefficient is most often less troublesome than voltage coefficient for MLCC capacitors.
 
-[^3]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8851960/](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8851960/)
+[^3]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8851960](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8851960)
 [^4]: [https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM32ER61A107ME20%23](https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM32ER61A107ME20%23)
 [^5]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/1084055](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/1084055)
 [^6]: [https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X5R1A107M160AC](https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X5R1A107M160AC)
-[^7]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8410809/](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8410809/)
-[^8]: [http://ksim.kemet.com/Plots/SpicePlots.aspx](http://ksim.kemet.com/Plots/SpicePlots.aspx)
+[^7]: [https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8410809](https://fr.rs-online.com/web/p/condensateurs-ceramique-multicouches/8410809)
+[^8]: [https://ksim3.kemet.com/Plots/SpicePlots.aspx](https://ksim3.kemet.com/Plots/SpicePlots.aspx)
