@@ -44,18 +44,32 @@ print_summary() {
     echo "## Link Checker Results"
     echo ""
 
+    # Status table
+    _print_status_table "$logfile"
+    echo ""
+
     # Errors
     local has_errors
     has_errors="$(grep -c "Result.*Error" "$logfile" || true)"
     if [ "$has_errors" -gt 0 ]; then
+        echo "### Errors"
+        echo ""
         grep -B5 "Result.*Error" "$logfile" \
             | strip_ansi \
             | grep "Real URL\|Result" \
             | sed 's/^Real URL   /URL: /;s/^Result     /  /'
-    else
-        echo "No errors found."
+        echo ""
     fi
-    echo ""
+
+    # Redirects
+    local has_redirects
+    has_redirects="$(grep -c "http-redirected" "$logfile" || true)"
+    if [ "$has_redirects" -gt 0 ]; then
+        echo "### Redirects"
+        echo ""
+        _print_redirects "$logfile"
+        echo ""
+    fi
 
     # Ignored links
     echo "### Ignored links (manual check recommended)"
@@ -65,6 +79,63 @@ print_summary() {
 
     # Stats
     grep "That's it" "$logfile" | strip_ansi || true
+}
+
+# Internal: print status table from log.
+# Usage: _print_status_table <logfile>
+_print_status_table() {
+    local logfile="$1"
+
+    local total errors redirects ignored filtered
+    total="$(grep "That's it" "$logfile" | sed 's/\x1b\[[0-9;]*m//g' | grep -oP '\d+ links' | grep -oP '^\d+')"
+    errors="$(grep -c "Result.*Error" "$logfile" || true)"
+    redirects="$(grep -c "http-redirected" "$logfile" || true)"
+    ignored="$(grep -c "Result.*ignored" "$logfile" || true)"
+    filtered="$(grep -c "Result.*filtered" "$logfile" || true)"
+
+    local warnings
+    warnings="$(grep "That's it" "$logfile" | sed 's/\x1b\[[0-9;]*m//g' | grep -oP '\d+ warnings' | grep -oP '^\d+')"
+
+    local ok
+    ok=$((total - errors - redirects - ignored - filtered))
+
+    echo "| Status        | Count |"
+    echo "|---------------|-------|"
+    echo "| Total         | $total |"
+    echo "| OK            | $ok |"
+    echo "| Redirects     | $redirects |"
+    echo "| Filtered      | $filtered |"
+    echo "| Ignored       | $ignored |"
+    echo "| Warnings      | $warnings |"
+    echo "| Errors        | $errors |"
+}
+
+# Internal: print redirects from log.
+# Usage: _print_redirects <logfile>
+_print_redirects() {
+    local logfile="$1"
+
+    # LinkChecker logs redirects with [http-redirected] warnings.
+    # We extract the original URL and the final Real URL.
+    awk '
+    /^URL / {
+        if (url != "" && real != "" && redirected) {
+            print "- " url " --> " real
+        }
+        url=$0; sub(/^URL        `/, "", url); sub(/.$/, "", url);
+        real=""; redirected=0
+    }
+    /\[http-redirected\]/ { redirected=1 }
+    /^Real URL / {
+        real=$0; sub(/^Real URL   /, "", real)
+    }
+    /^Result/ {
+        if (url != "" && real != "" && redirected) {
+            print "- " url " --> " real
+        }
+        url=""; real=""; redirected=0
+    }
+    ' "$logfile"
 }
 
 # Internal: extract ignored/filtered URLs from log.
