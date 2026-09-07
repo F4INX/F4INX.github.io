@@ -329,6 +329,6 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^39]: W. J. Highton, "Microstrip transmission line calculator using IPC-2141 equation," Chemandy electronics, 2 January 2020. \[Online\]. Available: <https://chemandy.com/calculators/microstrip-transmission-line-calculator-ipc2141.htm>. \[Accessed 13 April 2020\].
 
-[^40]: ncalculators.com, "Microstrip impedance calculator," \[Online\]. Available: <https://ncalculators.com/electronics/microstrip-impedance-calculator.htm>.
+[^40]: ncalculators.com, "Microstrip impedance calculator," \[Online\]. Available: <https://web.archive.org/web/20211018033617/https://ncalculators.com/electronics/microstrip-impedance-calculator.htm>.
 
 [^41]: I. Sukiswo, "Elektronika telekomunikasi, Microstrip," 08 December 2009. \[Online\]. Available: <http://www.elektro.undip.ac.id/sukiswo/?KULIAH:Elektronika_Telekomunikasi>. \[Accessed 16 April 2020\].
