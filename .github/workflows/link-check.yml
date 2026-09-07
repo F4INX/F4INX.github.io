@@ -34,4 +34,4 @@ jobs:
           version: default
 
       - name: Run LinkChecker
-        run: bash scripts/run-linkchecker-ci.sh
+        run: python3 linkchecker.py --ci | tee -a $GITHUB_STEP_SUMMARY

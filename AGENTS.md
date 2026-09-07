@@ -9,18 +9,12 @@ when you need to change the processing command — you can re-run the grep/sort 
 the existing log file instead of re-running LinkChecker each time.
 
 ```bash
-./linkchecker.sh /tmp/linkchecker-output.log
+./linkchecker.py /tmp/linkchecker-output.log
 grep "Result" /tmp/linkchecker-output.log | sort | uniq -c | sort -rn
 ```
 
 To also produce a list of ignored URLs for manual checking:
 ```bash
-./linkchecker.sh /tmp/linkchecker-output.log --ignored /tmp/ignored-urls.log
+./linkchecker.py /tmp/linkchecker-output.log --ignored /tmp/ignored-urls.log
 cat /tmp/ignored-urls.log
-```
-
-Or run directly:
-```bash
-sed "s|file:///PLACEHOLDER/|file://$(pwd | sed 's/ /%20/g')/public/|" .linkcheckerrc > /tmp/lc.conf
-linkchecker --config /tmp/lc.conf --check-extern --no-warnings ./public/ > /tmp/linkchecker-output.log 2>&1
 ```

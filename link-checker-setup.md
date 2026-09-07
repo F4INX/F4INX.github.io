@@ -27,9 +27,9 @@ linkchecker --version
 ## Configuration
 
 The config file is `.linkcheckerrc` at the repo root. It contains a `PLACEHOLDER`
-in the `localwebroot` setting that is replaced at runtime:
-- Locally: `linkchecker.sh` replaces it with the local `public/` path
-- In CI: the GitHub Actions workflow replaces it with the CI workspace path via `sed`
+in the `localwebroot` setting that is replaced at runtime by `linkchecker.py`:
+- Locally: the script replaces it with the local `public/` path
+- In CI: the script replaces it with the CI workspace path
 
 Settings:
 - `check-extern=1` — check external links
@@ -59,7 +59,7 @@ See `link-test-benchmarks/comparison.md` for the full investigation.
 hugo --minify --baseURL "https://f4inx.github.io/"
 
 # Run LinkChecker via the helper script (output to log file)
-./linkchecker.sh /tmp/linkchecker-output.log
+./linkchecker.py /tmp/linkchecker-output.log
 
 # View error summary
 grep "Result" /tmp/linkchecker-output.log | sort | uniq -c | sort -rn
@@ -68,14 +68,8 @@ grep "Result" /tmp/linkchecker-output.log | sort | uniq -c | sort -rn
 grep -B5 "404 Not Found" /tmp/linkchecker-output.log
 
 # Also produce a list of ignored URLs for manual checking
-./linkchecker.sh /tmp/linkchecker-output.log --ignored /tmp/ignored-urls.log
+./linkchecker.py /tmp/linkchecker-output.log --ignored /tmp/ignored-urls.log
 cat /tmp/ignored-urls.log
-```
-
-Or run directly (replace PLACEHOLDER first):
-```bash
-sed "s|file:///PLACEHOLDER/|file://$(pwd | sed 's/ /%20/g')/public/|" .linkcheckerrc > /tmp/lc.conf
-linkchecker --config /tmp/lc.conf --check-extern --no-warnings ./public/ > /tmp/linkchecker-output.log 2>&1
 ```
 
 Note: LinkChecker takes ~50s to run. Always write output to a log file first,
@@ -90,12 +84,15 @@ The workflow is defined in `.github/workflows/link-check.yml`. It:
 2. Installs Hugo
 3. Builds the site with `hugo --minify`
 4. Installs LinkChecker via `apt-get`
-5. Replaces the `PLACEHOLDER` in `.linkcheckerrc` with the CI workspace path via `sed`,
-   then runs LinkChecker with verbose output.
-6. Writes a summary to the GitHub Actions step summary, including:
-   - Any link errors found
-   - A list of ignored links for manual checking
-   - Final statistics
+5. Runs `python3 linkchecker.py --ci` which:
+   - Replaces the `PLACEHOLDER` in `.linkcheckerrc` with the CI workspace path
+   - Runs LinkChecker with CSV output
+   - Writes a summary to the GitHub Actions step summary, including:
+     - Status table (total, OK, redirects, filtered, ignored, errors)
+     - Any link errors found
+     - Redirects (original URL --> final URL)
+     - A list of ignored links for manual checking
+     - Final statistics
 
 The workflow uses `continue-on-error: true` so it is non-blocking — broken links
 will be reported in the CI logs but will not prevent deployment.
