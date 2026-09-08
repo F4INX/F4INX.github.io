@@ -124,7 +124,7 @@ def load_silent_ignore(path):
     return patterns
 
 
-def extract_ignored_urls(rows, silent_patterns, prefix=''):
+def extract_ignored_urls(rows, silent_patterns):
     """Return ignored/filtered URLs, filtered by silent-ignore patterns."""
     urls = set()
     for r in rows:
@@ -133,9 +133,8 @@ def extract_ignored_urls(rows, silent_patterns, prefix=''):
         if ws == 'ignored' or result == 'filtered':
             url = r.get('url', '')
             if url:
-                prefixed = f'{prefix}{url}'
-                if not any(p.search(prefixed) for p in silent_patterns):
-                    urls.add(prefixed)
+                if not any(p.search(url) for p in silent_patterns):
+                    urls.add(url)
     return sorted(urls)
 
 
@@ -178,8 +177,8 @@ def print_summary(text_log, csv_file, silent_ignore_path):
     print('### Filtered and ignored links (manual check recommended)')
     print()
     silent_patterns = load_silent_ignore(silent_ignore_path)
-    for url in extract_ignored_urls(rows, silent_patterns, '- '):
-        print(url)
+    for url in extract_ignored_urls(rows, silent_patterns):
+        print(f'- {url}')
     print()
 
     # Stats
