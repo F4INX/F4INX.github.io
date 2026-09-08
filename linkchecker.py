@@ -57,21 +57,23 @@ def parse_csv(csv_file):
     return list(reader)
 
 
+def _is_error(result):
+    """Check if a CSV result field indicates an error."""
+    return any(s in result for s in ['Error', 'Forbidden', 'Not Found', 'INTERNAL', 'ConnectionError'])
+
+
 def count_status(rows, text_log):
     """Count total, errors, redirects, filtered, ignored, warnings."""
     total = 0
-    warnings = 0
     for line in open(text_log, encoding='utf-8', errors='replace'):
         line = strip_ansi(line)
         m = re.search(r'(\d+) links', line)
         if m:
             total = int(m.group(1))
-        m = re.search(r'(\d+) warnings', line)
-        if m:
-            warnings = int(m.group(1))
 
-    errors = sum(1 for r in rows if 'Error' in r.get('result', ''))
+    errors = sum(1 for r in rows if _is_error(r.get('result', '')))
     redirects = sum(1 for r in rows if 'Redirected' in r.get('warningstring', ''))
+    warnings = sum(1 for r in rows if r.get('warningstring', '') and r.get('warningstring', '') != 'ignored' and 'Redirected' not in r.get('warningstring', ''))
     ignored = sum(1 for r in rows if r.get('warningstring', '') == 'ignored')
     filtered = sum(1 for r in rows if r.get('result', '') == 'filtered')
     ok = total - errors - redirects - ignored - filtered
@@ -83,20 +85,32 @@ def count_status(rows, text_log):
     }
 
 
-def extract_errors(text_log):
-    """Extract error lines from text log (for Real URL context)."""
-    lines = strip_ansi(open(text_log, encoding='utf-8', errors='replace').read()).splitlines()
+def extract_errors(rows):
+    """Extract error URLs from CSV rows."""
     errors = []
-    for i, line in enumerate(lines):
-        if 'Result     Error' in line:
-            # Look backwards for Real URL
-            for j in range(i, max(i - 10, -1), -1):
-                if lines[j].startswith('Real URL   '):
-                    url = lines[j].replace('Real URL   ', 'URL: ', 1)
-                    result = line.replace('Result     ', '  ', 1)
-                    errors.append(f'{url}\n{result}')
-                    break
+    for r in rows:
+        result = r.get('result', '')
+        if _is_error(result):
+            url = r.get('urlname', '')
+            real = r.get('url', '')
+            if url:
+                if real and real != url:
+                    errors.append(f'URL: {url}\n  Real URL: {real}\n  {result}')
+                else:
+                    errors.append(f'URL: {url}\n  {result}')
     return errors
+
+
+def extract_warnings(rows):
+    """Extract warning URLs from CSV rows (excluding redirects, which are shown separately)."""
+    warnings = []
+    for r in rows:
+        ws = r.get('warningstring', '')
+        if ws and ws != 'ignored' and 'Redirected' not in ws:
+            url = r.get('urlname', '')
+            if url:
+                warnings.append(f'URL: {url}\n  {ws}')
+    return warnings
 
 
 def extract_redirects(rows):
@@ -160,8 +174,16 @@ def print_summary(text_log, csv_file, silent_ignore_path):
     if stats['errors'] > 0:
         print('### Errors')
         print()
-        for err in extract_errors(text_log):
+        for err in extract_errors(rows):
             print(err)
+        print()
+
+    # Warnings
+    if stats['warnings'] > 0:
+        print('### Warnings')
+        print()
+        for warn in extract_warnings(rows):
+            print(warn)
         print()
 
     # Redirects
