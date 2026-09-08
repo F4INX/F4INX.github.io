@@ -146,10 +146,15 @@ def print_summary(text_log, csv_file, silent_ignore_path):
 
     print('## Link Checker Results')
     print()
-    print('| Status        | Count |')
-    print('|---------------|-------|')
-    for key in ['total', 'ok', 'redirects', 'filtered', 'ignored', 'warnings', 'errors']:
-        print(f'| {key.capitalize():<13} | {stats[key]} |')
+    print( '| Status                    | Count |')
+    print( '|---------------------------|-------|')
+    print(f'| Total                     | {stats['total']:>5} |')
+    print(f'| OK                        | {stats['ok']:>5} |')
+    print(f'| Redirects                 | {stats['redirects']:>5} |')
+    print(f'| Filtered (.linkcheckerrc) | {stats['filtered']:>5} |')
+    print(f'| Ignored (e.g. mailto: )   | {stats['ignored']:>5} |')
+    print(f'| Warnings                  | {stats['warnings']:>5} |')
+    print(f'| Errors                    | {stats['errors']:>5} |')
     print()
 
     # Errors
@@ -169,8 +174,8 @@ def print_summary(text_log, csv_file, silent_ignore_path):
             print(f'- {url} --> {real}')
         print()
 
-    # Ignored links
-    print('### Ignored links (manual check recommended)')
+    # Filtered and ignored links
+    print('### Filtered and ignored links (manual check recommended)')
     print()
     silent_patterns = load_silent_ignore(silent_ignore_path)
     for url in extract_ignored_urls(rows, silent_patterns, '- '):
