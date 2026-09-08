@@ -231,7 +231,7 @@ The following table sums up some microstrip calculators and the formulas which t
 | ----------------------------- | --------------- | --------- | ----------------------------------------------------------------------------- |
 | www.microwaves101.com[^10]    | H&J             |           |                                                                               |
 | mcalc.sourceforge.net[^11]    | H&J             |           |                                                                               |
-| www.edn.com[^17]             | Wheeler 1977    |           |                                                                               |
+| ~~www.edn.com[^17]~~          | Wheeler 1977    |           | _Now offline._                                                                              |
 | cepd.com[^18]                 | Wheeler 1977    |           |                                                                               |
 | [www.finetune.co.jp](https://web.archive.org/web/20260312171255/http://www.finetune.co.jp/~lyuka/technote/ustrip/)[^19] | Wheeler 1977    |           |                                                                               |
 | leleivre.com[^20]             | Wheeler 1977    |           |                                                                               |
@@ -285,7 +285,7 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 
 [^16]: Z. Peterson, "Clearing up trace impedance calculators and formulas," 19 May 2019. \[Online\]. Available: <https://resources.altium.com/p/clearing-trace-impedance-calculators-and-formulas>. \[Accessed 07 April 2020\].
 
-[^17]: EEWeb, "Microstrip," \[Online\]. Available: <https://www.edn.com/eeweb-content/tools/microstrip-impedance>. \[Accessed 07 April 2020\].
+[^17]: EEWeb, "Microstrip". ~~https://www.edn.com/eeweb-content/tools/microstrip-impedance~~. \[Accessed 07 April 2020, now offline\].
 
 [^18]: Colorado Electronic Product Design, "Microstrip impedance calculator," 2013. \[Online\]. Available: <https://web.archive.org/web/20220529081541/https://cepd.com/calculators/microstrip.htm>. \[Accessed 07 April 2020\]. 
 
