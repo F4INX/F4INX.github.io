@@ -316,7 +316,7 @@ From Wikipedia:
 
 [^11]: [https://www.analog.com/media/en/technical-documentation/data-sheets/ad8036_8037.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/ad8036_8037.pdf)
 
-[^12]: [https://www.analog.com/en/parametricsearch/11267#/sort=s3,asc](https://www.analog.com/en/parametricsearch/11267#/sort=s3,asc)
+[^12]: [https://www.analog.com/en/parametricsearch/2484#/](https://www.analog.com/en/parametricsearch/2484#/)
 
 [^13]: [https://www.analog.com/media/en/technical-documentation/data-sheets/ADV3219_3220.pdf](https://www.analog.com/media/en/technical-documentation/data-sheets/ADV3219_3220.pdf)
 

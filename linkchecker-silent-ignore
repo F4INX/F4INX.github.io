@@ -1,0 +1,10 @@
+# Patterns to silently ignore from the LinkChecker ignored links summary.
+# These are not actual links or are internal generated files that don't
+# need manual checking. One regex per line.
+
+# data:image/svg+xml; is used for the arrows left to collapsible sections.
+# All data links are ignored for future evolutions.
+^data:.*$
+
+# See comments in .linkcheckerrc
+^.*/sitemap\.xml$
