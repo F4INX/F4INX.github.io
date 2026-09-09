@@ -8,7 +8,6 @@
 check-extern=1
 ssl-verify=1
 localwebroot=file:///PLACEHOLDER/
-maxrequestspersecond=0.5
 
 [filtering]
 # Sites behind Cloudflare bot protection (403 with JS challenge)
@@ -24,6 +23,10 @@ ignore=
 
 # Wikimedia rate-limits automated requests (429)
     ^https://upload\.wikimedia\.org(/.*)?$
+
+# For whatever reason, web.archive.org check works
+# locally but had issues in the CI runner
+    ^https://web\.archive\.org(/.*)?$
 
 # Hugo sitemap includes section URLs (/posts/, /details/, /misc/) that
 # don't have generated index pages. Skip the sitemap to avoid false 404s.
