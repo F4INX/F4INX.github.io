@@ -153,7 +153,7 @@ def extract_ignored_urls(rows, silent_patterns):
 
 
 def print_summary(text_log, csv_file, silent_ignore_path):
-    """Print formatted summary to stdout."""
+    """Print formatted summary to stdout. Returns the stats dict."""
     rows = parse_csv(csv_file)
     stats = count_status(rows, text_log)
 
@@ -209,6 +209,8 @@ def print_summary(text_log, csv_file, silent_ignore_path):
             print(strip_ansi(line).strip())
             break
 
+    return stats
+
 
 def main():
     parser = argparse.ArgumentParser(description='Run LinkChecker and produce a summary.')
@@ -252,8 +254,20 @@ def main():
         shutil.copy(text_log, args.output)
         print(f'Output written to {args.output}')
 
-    # Print summary
-    print_summary(text_log, csv_file, silent_ignore)
+    # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
+    import io
+    from contextlib import redirect_stdout
+
+    buf = io.StringIO()
+    with redirect_stdout(buf):
+        stats = print_summary(text_log, csv_file, silent_ignore)
+    summary = buf.getvalue()
+    sys.stdout.write(summary)
+
+    step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
+    if args.ci and step_summary:
+        with open(step_summary, 'a', encoding='utf-8') as f:
+            f.write(summary)
 
     # Extract ignored URLs if requested
     if args.ignored:
@@ -270,6 +284,15 @@ def main():
     os.unlink(config_tmp)
     os.unlink(text_log)
     os.unlink(csv_file)
+
+    # Fail CI when errors or warnings were found
+    if stats['errors'] > 0 or stats['warnings'] > 0:
+        print(
+            f"\nLink check failed: {stats['errors']} error(s), "
+            f"{stats['warnings']} warning(s).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
 
 if __name__ == '__main__':
