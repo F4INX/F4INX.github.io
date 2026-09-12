@@ -20,33 +20,53 @@ ANSI_RE = re.compile(r'\x1b\[[0-9;]*m')
 
 
 def strip_ansi(text):
+    """Remove ANSI SGR escape codes from linkchecker's text output.
+
+    LinkChecker emits color codes (e.g. \\x1b[31m for red) even when
+    writing to a pipe rather than a TTY. This is only needed when parsing
+    the text output for the link count cross-check; CSV output contains
+    no ANSI codes.
+    """
     return ANSI_RE.sub('', text)
 
 
-def prepare_config(config_path, public_dir):
-    """Replace PLACEHOLDER in config, return temp config path."""
+def prepare_config(config_path, public_dir, output_path):
+    """Replace PLACEHOLDER in config and write the result to output_path."""
     webroot = 'file://' + public_dir.replace(' ', '%20') + '/'
     with open(config_path) as f:
         content = f.read()
     content = content.replace('file:///PLACEHOLDER/', webroot)
-    fd, tmp_path = tempfile.mkstemp(suffix='.conf')
-    with os.fdopen(fd, 'w') as f:
+    with open(output_path, 'w') as f:
         f.write(content)
-    return tmp_path
 
 
-def run_linkchecker(config, public_dir, text_log, csv_file):
-    """Run LinkChecker, write text log and CSV file."""
-    with open(text_log, 'w') as log:
-        subprocess.run(
-            [
-                'linkchecker', '--config', config,
-                '--check-extern', '--no-warnings', '-v', '--no-status',
-                '-F', f'csv/utf-8/{csv_file}',
-                public_dir + '/',
-            ],
-            stdout=log, stderr=subprocess.STDOUT,
+def run_linkchecker(config, public_dir, csv_file):
+    """Run LinkChecker, return captured stdout and write CSV file.
+
+    LinkChecker exits non-zero when:
+      - invalid links were found (expected, this is what we check for)
+      - warnings were found with warnings enabled (disabled via --no-warnings)
+      - a program error occurred (e.g. bad config, missing binary)
+
+    Since we cannot distinguish "found broken links" from "program error"
+    by exit code alone, we check whether the CSV file was actually written.
+    An empty or missing CSV means LinkChecker itself failed.
+    """
+    result = subprocess.run(
+        [
+            'linkchecker', '--config', config,
+            '--check-extern', '--no-warnings', '-v', '--no-status',
+            '-F', f'csv/utf-8/{csv_file}',
+            public_dir + '/',
+        ],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+    )
+    if not os.path.isfile(csv_file) or os.path.getsize(csv_file) == 0:
+        raise RuntimeError(
+            f'LinkChecker did not produce CSV output (exit code {result.returncode}).\n'
+            f'{result.stdout}'
         )
+    return result.stdout
 
 
 def parse_csv(csv_file):
@@ -57,23 +77,25 @@ def parse_csv(csv_file):
     return list(reader)
 
 
-def _is_error(result):
-    """Check if a CSV result field indicates an error."""
+def _is_error(row):
+    """Check if a CSV row indicates an error."""
+    result = row.get('result', '')
     return any(s in result for s in ['Error', 'Forbidden', 'Not Found', 'INTERNAL', 'ConnectionError'])
 
 
-def count_status(rows, text_log):
-    """Count total, errors, redirects, filtered, ignored, warnings."""
-    total = 0
-    for line in open(text_log, encoding='utf-8', errors='replace'):
-        line = strip_ansi(line)
-        m = re.search(r'(\d+) links', line)
-        if m:
-            total = int(m.group(1))
+def _is_warning(row):
+    """Check if a CSV row indicates a real warning (not ignored, not a redirect)."""
+    ws = row.get('warningstring', '')
+    return bool(ws) and ws != 'ignored' and 'Redirected' not in ws
 
-    errors = sum(1 for r in rows if _is_error(r.get('result', '')))
+
+def count_status(rows):
+    """Count total, errors, redirects, filtered, ignored, warnings."""
+    total = len(rows)
+
+    errors = sum(1 for r in rows if _is_error(r))
     redirects = sum(1 for r in rows if 'Redirected' in r.get('warningstring', ''))
-    warnings = sum(1 for r in rows if r.get('warningstring', '') and r.get('warningstring', '') != 'ignored' and 'Redirected' not in r.get('warningstring', ''))
+    warnings = sum(1 for r in rows if _is_warning(r))
     ignored = sum(1 for r in rows if r.get('warningstring', '') == 'ignored')
     filtered = sum(1 for r in rows if r.get('result', '') == 'filtered')
     ok = total - errors - redirects - ignored - filtered
@@ -89,10 +111,10 @@ def extract_errors(rows):
     """Extract error URLs from CSV rows."""
     errors = []
     for r in rows:
-        result = r.get('result', '')
-        if _is_error(result):
+        if _is_error(r):
             url = r.get('urlname', '')
             real = r.get('url', '')
+            result = r.get('result', '')
             if url:
                 if real and real != url:
                     errors.append(f'URL: {url}\n  Real URL: {real}\n  {result}')
@@ -105,9 +127,9 @@ def extract_warnings(rows):
     """Extract warning URLs from CSV rows (excluding redirects, which are shown separately)."""
     warnings = []
     for r in rows:
-        ws = r.get('warningstring', '')
-        if ws and ws != 'ignored' and 'Redirected' not in ws:
+        if _is_warning(r):
             url = r.get('urlname', '')
+            ws = r.get('warningstring', '')
             if url:
                 warnings.append(f'URL: {url}\n  {ws}')
     return warnings
@@ -130,11 +152,15 @@ def load_silent_ignore(path):
     if not path or not os.path.isfile(path):
         return []
     patterns = []
-    for line in open(path, encoding='utf-8'):
-        line = line.strip()
-        if not line or line.startswith('#'):
-            continue
-        patterns.append(re.compile(line))
+    with open(path, encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            try:
+                patterns.append(re.compile(line))
+            except re.error as e:
+                print(f'Warning: invalid regex in {path}: {line!r}: {e}', file=sys.stderr)
     return patterns
 
 
@@ -152,62 +178,82 @@ def extract_ignored_urls(rows, silent_patterns):
     return sorted(urls)
 
 
-def print_summary(text_log, csv_file, silent_ignore_path):
+def print_summary(text_output, csv_file, silent_ignore_path, out=print):
     """Print formatted summary to stdout. Returns the stats dict."""
     rows = parse_csv(csv_file)
-    stats = count_status(rows, text_log)
+    stats = count_status(rows)
 
-    print('## Link Checker Results')
-    print()
-    print( '| Status                       | Count |')
-    print( '|------------------------------|-------|')
-    print(f'| 🔍 Total                     | {stats['total']:>5} |')
-    print(f'| ✅ Successful                | {stats['ok']:>5} |')
-    print(f'| 🔀 Redirected                | {stats['redirects']:>5} |')
-    print(f'| 👻 Filtered (.linkcheckerrc) | {stats['filtered']:>5} |')
-    print(f'| 👻 Ignored (e.g. mailto: )    | {stats['ignored']:>5} |')
-    print(f'| ⚠️ Warnings                   | {stats['warnings']:>5} |')
-    print(f'| ❌ Errors                     | {stats['errors']:>5} |')
-    print()
+    out('## Link Checker Results')
+    out()
+    out( '| Status                       | Count |')
+    out( '|------------------------------|-------|')
+    out(f'| 🔍 Total                     | {stats['total']:>5} |')
+    out(f'| ✅ Successful                | {stats['ok']:>5} |')
+    out(f'| 🔀 Redirected                | {stats['redirects']:>5} |')
+    out(f'| 👻 Filtered (.linkcheckerrc) | {stats['filtered']:>5} |')
+    out(f'| 👻 Ignored (e.g. mailto: )    | {stats['ignored']:>5} |')
+    out(f'| ⚠️ Warnings                   | {stats['warnings']:>5} |')
+    out(f'| ❌ Errors                     | {stats['errors']:>5} |')
+    out()
 
     # Errors
     if stats['errors'] > 0:
-        print('### Errors')
-        print()
+        out('### Errors')
+        out()
         for err in extract_errors(rows):
-            print(err)
-        print()
+            out(err)
+        out()
 
     # Warnings
     if stats['warnings'] > 0:
-        print('### Warnings')
-        print()
+        out('### Warnings')
+        out()
         for warn in extract_warnings(rows):
-            print(warn)
-        print()
+            out(warn)
+        out()
 
     # Redirects
     redirects = extract_redirects(rows)
     if redirects:
-        print('### Redirects')
-        print()
+        out('### Redirects')
+        out()
         for url, real in redirects:
-            print(f'- {url} --> {real}')
-        print()
+            out(f'- {url} --> {real}')
+        out()
 
     # Filtered and ignored links
-    print('### Filtered and ignored links (manual check recommended)')
-    print()
+    out('### Filtered and ignored links (manual check recommended)')
+    out()
     silent_patterns = load_silent_ignore(silent_ignore_path)
     for url in extract_ignored_urls(rows, silent_patterns):
-        print(f'- {url}')
-    print()
+        out(f'- {url}')
+    out()
 
-    # Stats
-    for line in open(text_log, encoding='utf-8', errors='replace'):
+    # Stats: reconstruct summary from CSV, cross-check against text output
+    text_total = None
+    text_urls = None
+    for line in text_output.splitlines():
         if "That's it" in line:
-            print(strip_ansi(line).strip())
+            line = strip_ansi(line)
+            m = re.search(r'(\d+) links', line)
+            if m:
+                text_total = int(m.group(1))
+            m = re.search(r'(\d+) URLs', line)
+            if m:
+                text_urls = int(m.group(1))
             break
+
+    if text_total is None:
+        out('Warning: could not find summary line in text output.')
+        out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
+    else:
+        if text_total != stats['total']:
+            out(f'Warning: CSV has {stats["total"]} links, text output has {text_total}.')
+        if text_urls is None:
+            out('Warning: could not extract URLs checked count from text output.')
+            out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
+        else:
+            out(f"That's it. {stats['total']} links in {text_urls} URLs checked. {stats['warnings']} warnings, {stats['errors']} errors.")
 
     return stats
 
@@ -243,47 +289,43 @@ def main():
         )
 
     # Prepare config and run
-    config_tmp = prepare_config(config, public_dir)
-    text_log = tempfile.mktemp(suffix='.log')
-    csv_file = tempfile.mktemp(suffix='.csv')
-    run_linkchecker(config_tmp, public_dir, text_log, csv_file)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        config_tmp = os.path.join(tmpdir, 'linkchecker.conf')
+        csv_file = os.path.join(tmpdir, 'output.csv')
+        prepare_config(config, public_dir, config_tmp)
+        text_output = run_linkchecker(config_tmp, public_dir, csv_file)
 
-    # Copy raw output if requested
-    if args.output:
-        import shutil
-        shutil.copy(text_log, args.output)
-        print(f'Output written to {args.output}')
+        # Copy raw output if requested
+        if args.output:
+            with open(args.output, 'w', encoding='utf-8') as f:
+                f.write(text_output)
+            print(f'Output written to {args.output}')
 
-    # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
-    import io
-    from contextlib import redirect_stdout
+        # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
+        step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
+        if args.ci and step_summary:
+            with open(step_summary, 'a', encoding='utf-8') as f:
+                # Tees to stdout and the step summary file. Captures f from the
+                # enclosing with block, so out is only valid while it is open —
+                # print_summary must call it synchronously, not store it.
+                def out(s=''):
+                    print(s, file=sys.stdout)
+                    print(s, file=f)
+                stats = print_summary(text_output, csv_file, silent_ignore, out=out)
+        else:
+            # Summary with just stdout
+            stats = print_summary(text_output, csv_file, silent_ignore)
 
-    buf = io.StringIO()
-    with redirect_stdout(buf):
-        stats = print_summary(text_log, csv_file, silent_ignore)
-    summary = buf.getvalue()
-    sys.stdout.write(summary)
-
-    step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
-    if args.ci and step_summary:
-        with open(step_summary, 'a', encoding='utf-8') as f:
-            f.write(summary)
-
-    # Extract ignored URLs if requested
-    if args.ignored:
-        rows = parse_csv(csv_file)
-        silent_patterns = load_silent_ignore(silent_ignore)
-        urls = extract_ignored_urls(rows, silent_patterns)
-        with open(args.ignored, 'w') as f:
-            for url in urls:
-                f.write(url + '\n')
-        print(f'Ignored URLs written to {args.ignored}')
-        print(f'Ignored: {len(urls)}')
-
-    # Cleanup
-    os.unlink(config_tmp)
-    os.unlink(text_log)
-    os.unlink(csv_file)
+        # Extract ignored URLs if requested
+        if args.ignored:
+            rows = parse_csv(csv_file)
+            silent_patterns = load_silent_ignore(silent_ignore)
+            urls = extract_ignored_urls(rows, silent_patterns)
+            with open(args.ignored, 'w') as f:
+                for url in urls:
+                    f.write(url + '\n')
+            print(f'Ignored URLs written to {args.ignored}')
+            print(f'Ignored: {len(urls)}')
 
     # Fail CI when errors or warnings were found
     if stats['errors'] > 0 or stats['warnings'] > 0:
