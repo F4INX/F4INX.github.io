@@ -21,6 +21,13 @@ ANSI_RE = re.compile(r'\x1b\[[0-9;]*m')
 
 
 def strip_ansi(text):
+    """Remove ANSI SGR escape codes from linkchecker's text output.
+
+    LinkChecker emits color codes (e.g. \\x1b[31m for red) even when
+    writing to a pipe rather than a TTY. This is only needed when parsing
+    the text output for the link count cross-check; CSV output contains
+    no ANSI codes.
+    """
     return ANSI_RE.sub('', text)
 
 
@@ -83,14 +90,9 @@ def _is_error(result):
     return any(s in result for s in ['Error', 'Forbidden', 'Not Found', 'INTERNAL', 'ConnectionError'])
 
 
-def count_status(rows, text_output):
+def count_status(rows):
     """Count total, errors, redirects, filtered, ignored, warnings."""
-    total = 0
-    for line in text_output.splitlines():
-        line = strip_ansi(line)
-        m = re.search(r'(\d+) links', line)
-        if m:
-            total = int(m.group(1))
+    total = len(rows)
 
     errors = sum(1 for r in rows if _is_error(r.get('result', '')))
     redirects = sum(1 for r in rows if 'Redirected' in r.get('warningstring', ''))
@@ -177,7 +179,7 @@ def extract_ignored_urls(rows, silent_patterns):
 def print_summary(text_output, csv_file, silent_ignore_path, out=print):
     """Print formatted summary to stdout. Returns the stats dict."""
     rows = parse_csv(csv_file)
-    stats = count_status(rows, text_output)
+    stats = count_status(rows)
 
     out('## Link Checker Results')
     out()
@@ -225,11 +227,23 @@ def print_summary(text_output, csv_file, silent_ignore_path, out=print):
         out(f'- {url}')
     out()
 
-    # Stats
+    # Stats: reconstruct summary from CSV, cross-check against text output
+    text_total = None
+    text_urls = None
     for line in text_output.splitlines():
         if "That's it" in line:
-            out(strip_ansi(line).strip())
+            line = strip_ansi(line)
+            m = re.search(r'(\d+) links', line)
+            if m:
+                text_total = int(m.group(1))
+            m = re.search(r'(\d+) URLs', line)
+            if m:
+                text_urls = int(m.group(1))
             break
+
+    if text_total is not None and text_total != stats['total']:
+        out(f'Warning: CSV has {stats["total"]} links, text output has {text_total}.')
+    out(f"That's it. {stats['total']} links in {text_urls} URLs checked. {stats['warnings']} warnings, {stats['errors']} errors.")
 
     return stats
 
