@@ -28,7 +28,7 @@ magick /tmp/f4inx-16.png /tmp/f4inx-32.png /tmp/f4inx-48.png static/favicon.ico
 
 ## Verify
 
-Check the ICO contains all three sizes:
+Check the ICO contains all three sizes with transparency (RGBA mode):
 
 ```bash
 python3 -c "from PIL import Image; img = Image.open('static/favicon.ico'); print(img.info.get('sizes'))"
@@ -38,6 +38,30 @@ Expected output:
 
 ```
 {(16, 16), (32, 32), (48, 48)}
+```
+
+To confirm the alpha channel is preserved across all sizes:
+
+```bash
+python3 -c "
+from PIL import Image
+img = Image.open('static/favicon.ico')
+print(f'Mode: {img.mode}')
+for size in img.info.get('sizes', []):
+    img.size = size; img.load()
+    if img.mode == 'RGBA':
+        a = img.split()[3].getextrema()
+        print(f'  {size}: alpha {a} (transparent={\"yes\" if a[0] < 255 else \"no\"})')
+"
+```
+
+Expected output:
+
+```
+Mode: RGBA
+  (16, 16): alpha (0, 255) (transparent=yes)
+  (32, 32): alpha (0, 255) (transparent=yes)
+  (48, 48): alpha (0, 255) (transparent=yes)
 ```
 
 Verify Hugo copies it to the build output:
