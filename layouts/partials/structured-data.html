@@ -1,0 +1,42 @@
+{{- /* JSON-LD structured data for Google rich results. */ -}}
+{{- $description := or .Description .Site.Params.description -}}
+{{- $authorName := .Site.Params.author -}}
+{{- $siteURL := .Site.BaseURL -}}
+{{- $logoURL := printf "%sstyle/img/f4inx-black.svg" $siteURL -}}
+{{- if and .IsPage (eq .Section "posts") -}}
+{{- $data := dict
+  "@context" "https://schema.org"
+  "@type" "BlogPosting"
+  "headline" .Title
+  "description" $description
+  "url" .Permalink
+  "datePublished" (dateFormat "2006-01-02T15:04:05-07:00" .Date)
+  "dateModified" (dateFormat "2006-01-02T15:04:05-07:00" .Lastmod)
+  "author" (dict "@type" "Person" "name" $authorName)
+  "publisher" (dict "@type" "Organization" "name" .Site.Title "logo" (dict "@type" "ImageObject" "url" $logoURL))
+-}}
+{{- with .Params.categories -}}
+{{- $data = merge $data (dict "keywords" (delimit . ", ")) -}}
+{{- end -}}
+<script type="application/ld+json">{{ $data | jsonify | safeJS }}</script>
+{{- else if .IsHome -}}
+{{- $data := dict
+  "@context" "https://schema.org"
+  "@type" "WebSite"
+  "name" .Site.Title
+  "description" $description
+  "url" $siteURL
+  "author" (dict "@type" "Person" "name" $authorName)
+-}}
+<script type="application/ld+json">{{ $data | jsonify | safeJS }}</script>
+{{- else -}}
+{{- $data := dict
+  "@context" "https://schema.org"
+  "@type" "WebPage"
+  "name" .Title
+  "description" $description
+  "url" .Permalink
+  "isPartOf" (dict "@type" "WebSite" "name" .Site.Title "url" $siteURL)
+-}}
+<script type="application/ld+json">{{ $data | jsonify | safeJS }}</script>
+{{- end -}}

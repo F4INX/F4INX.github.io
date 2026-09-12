@@ -5,6 +5,3 @@
 # data:image/svg+xml; is used for the arrows left to collapsible sections.
 # All data links are ignored for future evolutions.
 ^data:.*$
-
-# See comments in .linkcheckerrc
-^.*/sitemap\.xml$

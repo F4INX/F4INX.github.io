@@ -4,6 +4,12 @@
 Usage:
     ./linkchecker.py [output.log] [--ignored ignored-urls.log]
     ./linkchecker.py --ci
+    ./linkchecker.py --local-server [--port PORT]
+
+By default the script auto-detects a running Hugo dev server on
+localhost:1313 and checks links against it. If no server is found, it
+falls back to checking files in public/. Use --local-server to require
+the dev server and exit with an error if it is not running.
 """
 
 import argparse
@@ -13,8 +19,11 @@ import re
 import subprocess
 import sys
 import tempfile
+import urllib.request
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+DEFAULT_SERVER_PORT = 1313
 
 ANSI_RE = re.compile(r'\x1b\[[0-9;]*m')
 
@@ -30,9 +39,31 @@ def strip_ansi(text):
     return ANSI_RE.sub('', text)
 
 
-def prepare_config(config_path, public_dir, output_path):
-    """Replace PLACEHOLDER in config and write the result to output_path."""
-    webroot = 'file://' + public_dir.replace(' ', '%20') + '/'
+def probe_server(port=DEFAULT_SERVER_PORT, timeout=2):
+    """Check whether a Hugo dev server is reachable on localhost.
+
+    Returns the server URL (e.g. 'http://localhost:1313/') if reachable,
+    None otherwise.
+    """
+    url = f'http://localhost:{port}/'
+    try:
+        req = urllib.request.Request(url, method='HEAD')
+        urllib.request.urlopen(req, timeout=timeout)
+        return url
+    except Exception:
+        return None
+
+
+def prepare_config(config_path, public_dir, output_path, base_url=None):
+    """Replace PLACEHOLDER in config and write the result to output_path.
+
+    When base_url is given (server mode), use it as the localwebroot instead
+    of a file:// path. This lets LinkChecker crawl a running dev server.
+    """
+    if base_url:
+        webroot = base_url
+    else:
+        webroot = 'file://' + public_dir.replace(' ', '%20') + '/'
     with open(config_path) as f:
         content = f.read()
     content = content.replace('file:///PLACEHOLDER/', webroot)
@@ -40,8 +71,11 @@ def prepare_config(config_path, public_dir, output_path):
         f.write(content)
 
 
-def run_linkchecker(config, public_dir, csv_file):
+def run_linkchecker(config, entry_url, csv_file):
     """Run LinkChecker, return captured stdout and write CSV file.
+
+    entry_url is the URL to start crawling from. In file mode this is a
+    file:// path; in server mode it is an http://localhost:PORT/ URL.
 
     LinkChecker exits non-zero when:
       - invalid links were found (expected, this is what we check for)
@@ -57,7 +91,7 @@ def run_linkchecker(config, public_dir, csv_file):
             'linkchecker', '--config', config,
             '--check-extern', '--no-warnings', '-v', '--no-status',
             '-F', f'csv/utf-8/{csv_file}',
-            public_dir + '/',
+            entry_url,
         ],
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
     )
@@ -263,6 +297,10 @@ def main():
     parser.add_argument('output', nargs='?', help='Write raw LinkChecker output to this file')
     parser.add_argument('--ignored', metavar='FILE', help='Write ignored URLs to this file')
     parser.add_argument('--ci', action='store_true', help='CI mode (use GITHUB_WORKSPACE)')
+    parser.add_argument('--local-server', action='store_true',
+                        help='Check the local dev server instead of files in public/')
+    parser.add_argument('--port', type=int, default=DEFAULT_SERVER_PORT,
+                        help=f'Port for the local dev server (default: {DEFAULT_SERVER_PORT})')
     args = parser.parse_args()
 
     # Determine paths
@@ -280,20 +318,47 @@ def main():
         print(f'Error: {config} not found.', file=sys.stderr)
         sys.exit(1)
 
-    # Build site if needed (local only)
-    if not args.ci and not os.path.isdir(public_dir):
-        print('Building site...')
-        subprocess.run(
-            ['hugo', '--minify', '--baseURL', 'https://f4inx.github.io/'],
-            cwd=SCRIPT_DIR, check=True,
-        )
+    # Determine whether to use server mode or file mode.
+    # Server mode is never used in CI.
+    server_url = None
+    if not args.ci:
+        if args.local_server:
+            server_url = probe_server(port=args.port)
+            if not server_url:
+                print(f'Error: no dev server found on localhost:{args.port}.',
+                      file=sys.stderr)
+                print('Start one with: hugo server', file=sys.stderr)
+                sys.exit(1)
+        else:
+            # Auto-detect: probe the dev server, fall back to file mode.
+            server_url = probe_server(port=args.port)
+            if server_url:
+                print(f'Dev server detected at {server_url}')
+            else:
+                print('No dev server detected, checking local files instead.')
+                print('Start one with: hugo server')
+
+    if server_url:
+        print(f'Checking links on {server_url}')
+    else:
+        # File mode: build site if needed (local only)
+        if not args.ci and not os.path.isdir(public_dir):
+            print('Building site...')
+            subprocess.run(
+                ['hugo', '--minify', '--baseURL', 'https://f4inx.github.io/'],
+                cwd=SCRIPT_DIR, check=True,
+            )
 
     # Prepare config and run
     with tempfile.TemporaryDirectory() as tmpdir:
         config_tmp = os.path.join(tmpdir, 'linkchecker.conf')
         csv_file = os.path.join(tmpdir, 'output.csv')
-        prepare_config(config, public_dir, config_tmp)
-        text_output = run_linkchecker(config_tmp, public_dir, csv_file)
+        prepare_config(config, public_dir, config_tmp, base_url=server_url)
+        if server_url:
+            entry_url = server_url
+        else:
+            entry_url = public_dir + '/'
+        text_output = run_linkchecker(config_tmp, entry_url, csv_file)
 
         # Copy raw output if requested
         if args.output:

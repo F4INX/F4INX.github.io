@@ -28,10 +28,6 @@ ignore=
 # locally but had issues in the CI runner
     ^https://web\.archive\.org(/.*)?$
 
-# Hugo sitemap includes section URLs (/posts/, /details/, /misc/) that
-# don't have generated index pages. Skip the sitemap to avoid false 404s.
-    ^.*/sitemap\.xml$
-
 # DOI redirections pointing towards Cloudflare protected websites
 # https://dx.doi.org/10.1155/2013/232317
 # -> https://www.hindawi.com/journals/ijap/2013/232317/
