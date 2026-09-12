@@ -7,7 +7,6 @@ Usage:
 """
 
 import argparse
-import contextlib
 import csv
 import os
 import re
@@ -31,36 +30,14 @@ def strip_ansi(text):
     return ANSI_RE.sub('', text)
 
 
-def prepare_config(config_path, public_dir):
-    """Replace PLACEHOLDER in config, return temp config path."""
+def prepare_config(config_path, public_dir, output_path):
+    """Replace PLACEHOLDER in config and write the result to output_path."""
     webroot = 'file://' + public_dir.replace(' ', '%20') + '/'
     with open(config_path) as f:
         content = f.read()
     content = content.replace('file:///PLACEHOLDER/', webroot)
-    fd, tmp_path = tempfile.mkstemp(suffix='.conf')
-    with os.fdopen(fd, 'w') as f:
+    with open(output_path, 'w') as f:
         f.write(content)
-    return tmp_path
-
-
-@contextlib.contextmanager
-def temp_config(config_path, public_dir):
-    """Create a temporary config file, cleaned up on exit."""
-    path = prepare_config(config_path, public_dir)
-    try:
-        yield path
-    finally:
-        os.unlink(path)
-
-
-@contextlib.contextmanager
-def temp_file(suffix):
-    """Create a temporary file path, cleaned up on exit."""
-    path = tempfile.mktemp(suffix=suffix)
-    try:
-        yield path
-    finally:
-        os.unlink(path)
 
 
 def run_linkchecker(config, public_dir, csv_file):
@@ -279,10 +256,10 @@ def main():
         )
 
     # Prepare config and run
-    with (
-        temp_config(config, public_dir) as config_tmp,
-        temp_file('.csv') as csv_file,
-    ):
+    with tempfile.TemporaryDirectory() as tmpdir:
+        config_tmp = os.path.join(tmpdir, 'linkchecker.conf')
+        csv_file = os.path.join(tmpdir, 'output.csv')
+        prepare_config(config, public_dir, config_tmp)
         text_output = run_linkchecker(config_tmp, public_dir, csv_file)
 
         # Copy raw output if requested
