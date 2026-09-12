@@ -301,8 +301,10 @@ def main():
         # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
         step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
         if args.ci and step_summary:
-            # Summary with tee: stdout and file
             with open(step_summary, 'a', encoding='utf-8') as f:
+                # Tees to stdout and the step summary file. Captures f from the
+                # enclosing with block, so out is only valid while it is open —
+                # print_summary must call it synchronously, not store it.
                 def out(s=''):
                     print(s, file=sys.stdout)
                     print(s, file=f)
