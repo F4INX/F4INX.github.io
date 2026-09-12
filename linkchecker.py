@@ -7,6 +7,7 @@ Usage:
 """
 
 import argparse
+import contextlib
 import csv
 import os
 import re
@@ -33,6 +34,26 @@ def prepare_config(config_path, public_dir):
     with os.fdopen(fd, 'w') as f:
         f.write(content)
     return tmp_path
+
+
+@contextlib.contextmanager
+def temp_config(config_path, public_dir):
+    """Create a temporary config file, cleaned up on exit."""
+    path = prepare_config(config_path, public_dir)
+    try:
+        yield path
+    finally:
+        os.unlink(path)
+
+
+@contextlib.contextmanager
+def temp_file(suffix):
+    """Create a temporary file path, cleaned up on exit."""
+    path = tempfile.mktemp(suffix=suffix)
+    try:
+        yield path
+    finally:
+        os.unlink(path)
 
 
 def run_linkchecker(config, public_dir, text_log, csv_file):
@@ -246,47 +267,44 @@ def main():
         )
 
     # Prepare config and run
-    config_tmp = prepare_config(config, public_dir)
-    text_log = tempfile.mktemp(suffix='.log')
-    csv_file = tempfile.mktemp(suffix='.csv')
-    run_linkchecker(config_tmp, public_dir, text_log, csv_file)
+    with (
+        temp_config(config, public_dir) as config_tmp,
+        temp_file('.log') as text_log,
+        temp_file('.csv') as csv_file,
+    ):
+        run_linkchecker(config_tmp, public_dir, text_log, csv_file)
 
-    # Copy raw output if requested
-    if args.output:
-        import shutil
-        shutil.copy(text_log, args.output)
-        print(f'Output written to {args.output}')
+        # Copy raw output if requested
+        if args.output:
+            import shutil
+            shutil.copy(text_log, args.output)
+            print(f'Output written to {args.output}')
 
-    # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
-    import io
-    from contextlib import redirect_stdout
+        # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
+        import io
+        from contextlib import redirect_stdout
 
-    buf = io.StringIO()
-    with redirect_stdout(buf):
-        stats = print_summary(text_log, csv_file, silent_ignore)
-    summary = buf.getvalue()
-    sys.stdout.write(summary)
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            stats = print_summary(text_log, csv_file, silent_ignore)
+        summary = buf.getvalue()
+        sys.stdout.write(summary)
 
-    step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
-    if args.ci and step_summary:
-        with open(step_summary, 'a', encoding='utf-8') as f:
-            f.write(summary)
+        step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
+        if args.ci and step_summary:
+            with open(step_summary, 'a', encoding='utf-8') as f:
+                f.write(summary)
 
-    # Extract ignored URLs if requested
-    if args.ignored:
-        rows = parse_csv(csv_file)
-        silent_patterns = load_silent_ignore(silent_ignore)
-        urls = extract_ignored_urls(rows, silent_patterns)
-        with open(args.ignored, 'w') as f:
-            for url in urls:
-                f.write(url + '\n')
-        print(f'Ignored URLs written to {args.ignored}')
-        print(f'Ignored: {len(urls)}')
-
-    # Cleanup
-    os.unlink(config_tmp)
-    os.unlink(text_log)
-    os.unlink(csv_file)
+        # Extract ignored URLs if requested
+        if args.ignored:
+            rows = parse_csv(csv_file)
+            silent_patterns = load_silent_ignore(silent_ignore)
+            urls = extract_ignored_urls(rows, silent_patterns)
+            with open(args.ignored, 'w') as f:
+                for url in urls:
+                    f.write(url + '\n')
+            print(f'Ignored URLs written to {args.ignored}')
+            print(f'Ignored: {len(urls)}')
 
     # Fail CI when errors or warnings were found
     if stats['errors'] > 0 or stats['warnings'] > 0:
