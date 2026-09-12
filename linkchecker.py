@@ -157,7 +157,10 @@ def load_silent_ignore(path):
             line = line.strip()
             if not line or line.startswith('#'):
                 continue
-            patterns.append(re.compile(line))
+            try:
+                patterns.append(re.compile(line))
+            except re.error as e:
+                print(f'Warning: invalid regex in {path}: {line!r}: {e}', file=sys.stderr)
     return patterns
 
 
