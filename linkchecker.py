@@ -56,18 +56,18 @@ def temp_file(suffix):
         os.unlink(path)
 
 
-def run_linkchecker(config, public_dir, text_log, csv_file):
-    """Run LinkChecker, write text log and CSV file."""
-    with open(text_log, 'w') as log:
-        subprocess.run(
-            [
-                'linkchecker', '--config', config,
-                '--check-extern', '--no-warnings', '-v', '--no-status',
-                '-F', f'csv/utf-8/{csv_file}',
-                public_dir + '/',
-            ],
-            stdout=log, stderr=subprocess.STDOUT,
-        )
+def run_linkchecker(config, public_dir, csv_file):
+    """Run LinkChecker, return captured stdout and write CSV file."""
+    result = subprocess.run(
+        [
+            'linkchecker', '--config', config,
+            '--check-extern', '--no-warnings', '-v', '--no-status',
+            '-F', f'csv/utf-8/{csv_file}',
+            public_dir + '/',
+        ],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+    )
+    return result.stdout
 
 
 def parse_csv(csv_file):
@@ -83,15 +83,14 @@ def _is_error(result):
     return any(s in result for s in ['Error', 'Forbidden', 'Not Found', 'INTERNAL', 'ConnectionError'])
 
 
-def count_status(rows, text_log):
+def count_status(rows, text_output):
     """Count total, errors, redirects, filtered, ignored, warnings."""
     total = 0
-    with open(text_log, encoding='utf-8', errors='replace') as f:
-        for line in f:
-            line = strip_ansi(line)
-            m = re.search(r'(\d+) links', line)
-            if m:
-                total = int(m.group(1))
+    for line in text_output.splitlines():
+        line = strip_ansi(line)
+        m = re.search(r'(\d+) links', line)
+        if m:
+            total = int(m.group(1))
 
     errors = sum(1 for r in rows if _is_error(r.get('result', '')))
     redirects = sum(1 for r in rows if 'Redirected' in r.get('warningstring', ''))
@@ -175,10 +174,10 @@ def extract_ignored_urls(rows, silent_patterns):
     return sorted(urls)
 
 
-def print_summary(text_log, csv_file, silent_ignore_path):
+def print_summary(text_output, csv_file, silent_ignore_path):
     """Print formatted summary to stdout. Returns the stats dict."""
     rows = parse_csv(csv_file)
-    stats = count_status(rows, text_log)
+    stats = count_status(rows, text_output)
 
     print('## Link Checker Results')
     print()
@@ -227,11 +226,10 @@ def print_summary(text_log, csv_file, silent_ignore_path):
     print()
 
     # Stats
-    with open(text_log, encoding='utf-8', errors='replace') as f:
-        for line in f:
-            if "That's it" in line:
-                print(strip_ansi(line).strip())
-                break
+    for line in text_output.splitlines():
+        if "That's it" in line:
+            print(strip_ansi(line).strip())
+            break
 
     return stats
 
@@ -269,15 +267,14 @@ def main():
     # Prepare config and run
     with (
         temp_config(config, public_dir) as config_tmp,
-        temp_file('.log') as text_log,
         temp_file('.csv') as csv_file,
     ):
-        run_linkchecker(config_tmp, public_dir, text_log, csv_file)
+        text_output = run_linkchecker(config_tmp, public_dir, csv_file)
 
         # Copy raw output if requested
         if args.output:
-            import shutil
-            shutil.copy(text_log, args.output)
+            with open(args.output, 'w', encoding='utf-8') as f:
+                f.write(text_output)
             print(f'Output written to {args.output}')
 
         # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
@@ -286,7 +283,7 @@ def main():
 
         buf = io.StringIO()
         with redirect_stdout(buf):
-            stats = print_summary(text_log, csv_file, silent_ignore)
+            stats = print_summary(text_output, csv_file, silent_ignore)
         summary = buf.getvalue()
         sys.stdout.write(summary)
 
