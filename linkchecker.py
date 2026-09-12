@@ -62,18 +62,25 @@ def parse_csv(csv_file):
     return list(reader)
 
 
-def _is_error(result):
-    """Check if a CSV result field indicates an error."""
+def _is_error(row):
+    """Check if a CSV row indicates an error."""
+    result = row.get('result', '')
     return any(s in result for s in ['Error', 'Forbidden', 'Not Found', 'INTERNAL', 'ConnectionError'])
+
+
+def _is_warning(row):
+    """Check if a CSV row indicates a real warning (not ignored, not a redirect)."""
+    ws = row.get('warningstring', '')
+    return bool(ws) and ws != 'ignored' and 'Redirected' not in ws
 
 
 def count_status(rows):
     """Count total, errors, redirects, filtered, ignored, warnings."""
     total = len(rows)
 
-    errors = sum(1 for r in rows if _is_error(r.get('result', '')))
+    errors = sum(1 for r in rows if _is_error(r))
     redirects = sum(1 for r in rows if 'Redirected' in r.get('warningstring', ''))
-    warnings = sum(1 for r in rows if r.get('warningstring', '') and r.get('warningstring', '') != 'ignored' and 'Redirected' not in r.get('warningstring', ''))
+    warnings = sum(1 for r in rows if _is_warning(r))
     ignored = sum(1 for r in rows if r.get('warningstring', '') == 'ignored')
     filtered = sum(1 for r in rows if r.get('result', '') == 'filtered')
     ok = total - errors - redirects - ignored - filtered
@@ -89,10 +96,10 @@ def extract_errors(rows):
     """Extract error URLs from CSV rows."""
     errors = []
     for r in rows:
-        result = r.get('result', '')
-        if _is_error(result):
+        if _is_error(r):
             url = r.get('urlname', '')
             real = r.get('url', '')
+            result = r.get('result', '')
             if url:
                 if real and real != url:
                     errors.append(f'URL: {url}\n  Real URL: {real}\n  {result}')
@@ -105,9 +112,9 @@ def extract_warnings(rows):
     """Extract warning URLs from CSV rows (excluding redirects, which are shown separately)."""
     warnings = []
     for r in rows:
-        ws = r.get('warningstring', '')
-        if ws and ws != 'ignored' and 'Redirected' not in ws:
+        if _is_warning(r):
             url = r.get('urlname', '')
+            ws = r.get('warningstring', '')
             if url:
                 warnings.append(f'URL: {url}\n  {ws}')
     return warnings
