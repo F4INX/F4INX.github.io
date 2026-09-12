@@ -41,7 +41,17 @@ def prepare_config(config_path, public_dir, output_path):
 
 
 def run_linkchecker(config, public_dir, csv_file):
-    """Run LinkChecker, return captured stdout and write CSV file."""
+    """Run LinkChecker, return captured stdout and write CSV file.
+
+    LinkChecker exits non-zero when:
+      - invalid links were found (expected, this is what we check for)
+      - warnings were found with warnings enabled (disabled via --no-warnings)
+      - a program error occurred (e.g. bad config, missing binary)
+
+    Since we cannot distinguish "found broken links" from "program error"
+    by exit code alone, we check whether the CSV file was actually written.
+    An empty or missing CSV means LinkChecker itself failed.
+    """
     result = subprocess.run(
         [
             'linkchecker', '--config', config,
@@ -51,6 +61,11 @@ def run_linkchecker(config, public_dir, csv_file):
         ],
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
     )
+    if not os.path.isfile(csv_file) or os.path.getsize(csv_file) == 0:
+        raise RuntimeError(
+            f'LinkChecker did not produce CSV output (exit code {result.returncode}).\n'
+            f'{result.stdout}'
+        )
     return result.stdout
 
 
