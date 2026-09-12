@@ -225,9 +225,17 @@ def print_summary(text_output, csv_file, silent_ignore_path, out=print):
                 text_urls = int(m.group(1))
             break
 
-    if text_total is not None and text_total != stats['total']:
-        out(f'Warning: CSV has {stats["total"]} links, text output has {text_total}.')
-    out(f"That's it. {stats['total']} links in {text_urls} URLs checked. {stats['warnings']} warnings, {stats['errors']} errors.")
+    if text_total is None:
+        out('Warning: could not find summary line in text output.')
+        out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
+    else:
+        if text_total != stats['total']:
+            out(f'Warning: CSV has {stats["total"]} links, text output has {text_total}.')
+        if text_urls is None:
+            out('Warning: could not extract URLs checked count from text output.')
+            out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
+        else:
+            out(f"That's it. {stats['total']} links in {text_urls} URLs checked. {stats['warnings']} warnings, {stats['errors']} errors.")
 
     return stats
 
