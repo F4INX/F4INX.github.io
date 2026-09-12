@@ -9,7 +9,6 @@ Usage:
 import argparse
 import contextlib
 import csv
-import io
 import os
 import re
 import subprocess
@@ -175,61 +174,61 @@ def extract_ignored_urls(rows, silent_patterns):
     return sorted(urls)
 
 
-def print_summary(text_output, csv_file, silent_ignore_path):
+def print_summary(text_output, csv_file, silent_ignore_path, out=print):
     """Print formatted summary to stdout. Returns the stats dict."""
     rows = parse_csv(csv_file)
     stats = count_status(rows, text_output)
 
-    print('## Link Checker Results')
-    print()
-    print( '| Status                       | Count |')
-    print( '|------------------------------|-------|')
-    print(f'| 🔍 Total                     | {stats['total']:>5} |')
-    print(f'| ✅ Successful                | {stats['ok']:>5} |')
-    print(f'| 🔀 Redirected                | {stats['redirects']:>5} |')
-    print(f'| 👻 Filtered (.linkcheckerrc) | {stats['filtered']:>5} |')
-    print(f'| 👻 Ignored (e.g. mailto: )    | {stats['ignored']:>5} |')
-    print(f'| ⚠️ Warnings                   | {stats['warnings']:>5} |')
-    print(f'| ❌ Errors                     | {stats['errors']:>5} |')
-    print()
+    out('## Link Checker Results')
+    out()
+    out( '| Status                       | Count |')
+    out( '|------------------------------|-------|')
+    out(f'| 🔍 Total                     | {stats['total']:>5} |')
+    out(f'| ✅ Successful                | {stats['ok']:>5} |')
+    out(f'| 🔀 Redirected                | {stats['redirects']:>5} |')
+    out(f'| 👻 Filtered (.linkcheckerrc) | {stats['filtered']:>5} |')
+    out(f'| 👻 Ignored (e.g. mailto: )    | {stats['ignored']:>5} |')
+    out(f'| ⚠️ Warnings                   | {stats['warnings']:>5} |')
+    out(f'| ❌ Errors                     | {stats['errors']:>5} |')
+    out()
 
     # Errors
     if stats['errors'] > 0:
-        print('### Errors')
-        print()
+        out('### Errors')
+        out()
         for err in extract_errors(rows):
-            print(err)
-        print()
+            out(err)
+        out()
 
     # Warnings
     if stats['warnings'] > 0:
-        print('### Warnings')
-        print()
+        out('### Warnings')
+        out()
         for warn in extract_warnings(rows):
-            print(warn)
-        print()
+            out(warn)
+        out()
 
     # Redirects
     redirects = extract_redirects(rows)
     if redirects:
-        print('### Redirects')
-        print()
+        out('### Redirects')
+        out()
         for url, real in redirects:
-            print(f'- {url} --> {real}')
-        print()
+            out(f'- {url} --> {real}')
+        out()
 
     # Filtered and ignored links
-    print('### Filtered and ignored links (manual check recommended)')
-    print()
+    out('### Filtered and ignored links (manual check recommended)')
+    out()
     silent_patterns = load_silent_ignore(silent_ignore_path)
     for url in extract_ignored_urls(rows, silent_patterns):
-        print(f'- {url}')
-    print()
+        out(f'- {url}')
+    out()
 
     # Stats
     for line in text_output.splitlines():
         if "That's it" in line:
-            print(strip_ansi(line).strip())
+            out(strip_ansi(line).strip())
             break
 
     return stats
@@ -279,16 +278,17 @@ def main():
             print(f'Output written to {args.output}')
 
         # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
-        buf = io.StringIO()
-        with contextlib.redirect_stdout(buf):
-            stats = print_summary(text_output, csv_file, silent_ignore)
-        summary = buf.getvalue()
-        sys.stdout.write(summary)
-
         step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
         if args.ci and step_summary:
+            # Summary with tee: stdout and file
             with open(step_summary, 'a', encoding='utf-8') as f:
-                f.write(summary)
+                def out(s=''):
+                    print(s, file=sys.stdout)
+                    print(s, file=f)
+                stats = print_summary(text_output, csv_file, silent_ignore, out=out)
+        else:
+            # Summary with just stdout
+            stats = print_summary(text_output, csv_file, silent_ignore)
 
         # Extract ignored URLs if requested
         if args.ignored:
