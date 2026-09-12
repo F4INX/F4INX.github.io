@@ -9,6 +9,7 @@ Usage:
 import argparse
 import contextlib
 import csv
+import io
 import os
 import re
 import subprocess
@@ -278,11 +279,8 @@ def main():
             print(f'Output written to {args.output}')
 
         # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
-        import io
-        from contextlib import redirect_stdout
-
         buf = io.StringIO()
-        with redirect_stdout(buf):
+        with contextlib.redirect_stdout(buf):
             stats = print_summary(text_output, csv_file, silent_ignore)
         summary = buf.getvalue()
         sys.stdout.write(summary)
