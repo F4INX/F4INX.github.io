@@ -65,11 +65,12 @@ def _is_error(result):
 def count_status(rows, text_log):
     """Count total, errors, redirects, filtered, ignored, warnings."""
     total = 0
-    for line in open(text_log, encoding='utf-8', errors='replace'):
-        line = strip_ansi(line)
-        m = re.search(r'(\d+) links', line)
-        if m:
-            total = int(m.group(1))
+    with open(text_log, encoding='utf-8', errors='replace') as f:
+        for line in f:
+            line = strip_ansi(line)
+            m = re.search(r'(\d+) links', line)
+            if m:
+                total = int(m.group(1))
 
     errors = sum(1 for r in rows if _is_error(r.get('result', '')))
     redirects = sum(1 for r in rows if 'Redirected' in r.get('warningstring', ''))
@@ -130,11 +131,12 @@ def load_silent_ignore(path):
     if not path or not os.path.isfile(path):
         return []
     patterns = []
-    for line in open(path, encoding='utf-8'):
-        line = line.strip()
-        if not line or line.startswith('#'):
-            continue
-        patterns.append(re.compile(line))
+    with open(path, encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            patterns.append(re.compile(line))
     return patterns
 
 
@@ -204,10 +206,11 @@ def print_summary(text_log, csv_file, silent_ignore_path):
     print()
 
     # Stats
-    for line in open(text_log, encoding='utf-8', errors='replace'):
-        if "That's it" in line:
-            print(strip_ansi(line).strip())
-            break
+    with open(text_log, encoding='utf-8', errors='replace') as f:
+        for line in f:
+            if "That's it" in line:
+                print(strip_ansi(line).strip())
+                break
 
     return stats
 
