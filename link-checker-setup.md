@@ -26,22 +26,22 @@ linkchecker --version
 
 ## Configuration
 
-The config file is `.linkcheckerrc` at the repo root. It contains a `PLACEHOLDER`
-in the `localwebroot` setting that is replaced at runtime by `linkchecker.py`:
-- Locally: the script replaces it with the local `public/` path
-- In CI: the script replaces it with the CI workspace path
+LinkChecker is configured programmatically in `linkchecker.py` via its Python
+API — no `.linkcheckerrc` file is needed. The settings that were previously in
+the config file are now set directly in code:
 
-Settings:
-- `check-extern=1` — check external links
-- `ssl-verify=1` — verify SSL certificates
-- `localwebroot` — resolve absolute URLs (e.g. `/posts/foo.html`) from the local filesystem
-- `ignore` — URLs to skip (Cloudflare-protected sites, LinkedIn, Wikimedia)
-- `user-agent` — browser-like User-Agent to avoid 403 bot detection
+- `checkextern = True` — check external links
+- `sslverify` — on by default (LinkChecker default)
+- `localwebroot` — set to the `public/` path in file mode, unused in server mode
+- `useragent` — browser-like User-Agent to avoid 403 bot detection
+- `externlinks` — ignore patterns loaded from `linkchecker-ignore`
 
 ### Ignored sites
 
-The following sites are ignored because they use Cloudflare bot protection (JS challenge)
-or rate limiting that no HTTP-based link checker can bypass:
+URLs to skip are listed in `linkchecker-ignore` (one regex per line, same
+format as `linkchecker-silent-ignore`). These sites use Cloudflare bot
+protection (JS challenge) or rate limiting that no HTTP-based link checker
+can bypass:
 
 - `www.researchgate.net` — Cloudflare
 - `www.hindawi.com` — Cloudflare
@@ -58,7 +58,7 @@ See `link-test-benchmarks/comparison.md` for the full investigation.
 hugo --minify --baseURL "https://f4inx.github.io/"
 
 # Run LinkChecker via the helper script (output to log file)
-./linkchecker.py /tmp/linkchecker-output.log
+./linkchecker.py > /tmp/linkchecker-output.log
 
 # View error summary
 grep "Result" /tmp/linkchecker-output.log | sort | uniq -c | sort -rn
@@ -67,7 +67,7 @@ grep "Result" /tmp/linkchecker-output.log | sort | uniq -c | sort -rn
 grep -B5 "404 Not Found" /tmp/linkchecker-output.log
 
 # Also produce a list of ignored URLs for manual checking
-./linkchecker.py /tmp/linkchecker-output.log --ignored /tmp/ignored-urls.log
+./linkchecker.py --ignored /tmp/ignored-urls.log > /tmp/linkchecker-output.log
 cat /tmp/ignored-urls.log
 ```
 
@@ -84,8 +84,8 @@ The workflow is defined in `.github/workflows/link-check.yml`. It:
 3. Builds the site with `hugo --minify`
 4. Installs LinkChecker via `apt-get`
 5. Runs `python3 linkchecker.py --ci` which:
-   - Replaces the `PLACEHOLDER` in `.linkcheckerrc` with the CI workspace path
-   - Runs LinkChecker with CSV output
+   - Configures LinkChecker via its Python API (no config file needed)
+   - Runs LinkChecker and collects results via a custom logger
    - Writes a summary to the GitHub Actions step summary, including:
      - Status table (total, OK, redirects, filtered, ignored, errors)
      - Any link errors found

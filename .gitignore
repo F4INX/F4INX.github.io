@@ -102,3 +102,9 @@ static/posts/how-not-to-do-oscillators/*.fft
 
 # Ignore temporarily installed link checker binaries
 link-test-benchmarks/bin/
+
+# Link checker external-link cache
+.linkchecker-cache.json
+
+ # Python stuff (LinkChecker)
+__pycache__/
