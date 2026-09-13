@@ -22,7 +22,7 @@
         <ul class="collapsible-section">
           {{- range where .Site.RegularPages "Section" "posts" -}}
             <li>
-              <a class="{{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">
+              <a class="{{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" href="{{ .RelPermalink }}">
                 {{ .Title }}
               </a>
             </li>
@@ -37,7 +37,7 @@
         <ul class="collapsible-section">
           {{- range where .Site.RegularPages "Section" "misc" -}}
             <li>
-              <a class="{{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+              <a class="{{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
             </li>
           {{- end -}}
         </ul>
@@ -47,5 +47,5 @@
 
   <p class="last-not-print">&copy; {{ now.Format "2006" }} {{ .Site.Params.author }}. See <a href="{{ "/misc/licence/" | relURL }}">licence</a>. </p>
 
-  <a class="print-only" href="{{ .Permalink }}">{{ .Permalink }}</a>
+  <a class="print-only" href="{{ .RelPermalink }}">{{ .Permalink }}</a>
 </div>
