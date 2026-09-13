@@ -62,4 +62,5 @@ jobs:
         with:
           name: linkchecker-cache
           path: .linkchecker-cache.json
+          include-hidden-files: true
           retention-days: 7
