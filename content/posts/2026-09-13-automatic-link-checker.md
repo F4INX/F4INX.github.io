@@ -54,7 +54,7 @@ According to the latest statistics, out of 655 links checked, 25 links are ignor
 
 ## Cache
 
-In development phases, it is not rare to run the test scripts a lot of times. Checking all the urls each time would not only be very unconvenient, but would also have the risk of triggering various anti-bot protections. So a cache mechanism is implemented to allow checking only when needed.
+During development, it is common to run the test script many times. Checking all URLs each time would be inconvenient and risk triggering various anti-bot protections. A cache mechanism is therefore implemented to check external links only when needed.
 
 ## Summary page
 
