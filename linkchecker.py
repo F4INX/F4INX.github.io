@@ -242,13 +242,18 @@ def load_silent_ignore(path):
     return patterns
 
 
-def extract_ignored_urls(rows, silent_patterns):
-    """Return ignored/filtered URLs, filtered by silent-ignore patterns."""
+def extract_ignored_urls(rows, silent_patterns, cached_urls=None):
+    """Return ignored/filtered URLs, filtered by silent-ignore patterns.
+
+    Cached URLs (skipped via the cache) are excluded — they are not
+    manually ignored and don't need checking.
+    """
+    cached_urls = cached_urls or set()
     urls = set()
     for r in rows:
         if _is_ignored(r) or r.result == 'filtered':
             url = r.url
-            if url:
+            if url and url not in cached_urls and r.base_url not in cached_urls:
                 if not any(p.search(url) for p in silent_patterns):
                     urls.add(url)
     return sorted(urls)
@@ -404,7 +409,8 @@ def print_summary(rows, silent_ignore_path, out=print, cached_urls=None):
     out('### Filtered and ignored links (manual check recommended)')
     out()
     silent_patterns = load_silent_ignore(silent_ignore_path)
-    for url in extract_ignored_urls(rows, silent_patterns):
+    for url in extract_ignored_urls(rows, silent_patterns,
+                                     cached_urls=cached_urls):
         out(f'- {url}')
     out()
 
@@ -522,7 +528,8 @@ def main():
     # Extract ignored URLs if requested
     if args.ignored:
         silent_patterns = load_silent_ignore(silent_ignore)
-        urls = extract_ignored_urls(rows, silent_patterns)
+        urls = extract_ignored_urls(rows, silent_patterns,
+                                    cached_urls=fresh_cached)
         with open(args.ignored, 'w') as f:
             for url in urls:
                 f.write(url + '\n')
