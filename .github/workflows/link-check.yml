@@ -35,5 +35,11 @@ jobs:
           packages: linkchecker
           version: default
 
+      - name: Restore link cache
+        uses: actions/cache@v4
+        with:
+          path: .linkchecker-cache.json
+          key: linkchecker-cache
+
       - name: Run LinkChecker
         run: python3 linkchecker.py --ci
