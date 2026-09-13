@@ -105,3 +105,6 @@ link-test-benchmarks/bin/
 
 # Link checker external-link cache
 .linkchecker-cache.json
+
+ # Python stuff (LinkChecker)
+__pycache__/
