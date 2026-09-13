@@ -11,8 +11,28 @@
 ^https://upload\.wikimedia\.org(/.*)?$
 ^https://web\.archive\.org(/.*)?$
 
-# DOI redirection pointing towards a Cloudflare protected website
+# DOI redirect to a Cloudflare-protected website
 # https://dx.doi.org/10.1155/2013/232317
 # -> https://www.hindawi.com/journals/ijap/2013/232317/
 # -> https://onlinelibrary.wiley.com/doi/10.1155/2013/232317
 ^https://dx.doi.org/10.1155/2013/232317$
+
+# Temporarily ignored due to 403 errors from GitHub CI IP blocking
+^https://fr\.rs-online\.com/web/p/condensateurs-ceramique-multicouches/8467296$
+^https://fr\.rs-online\.com/web/c/passifs/condensateurs/condensateurs-ceramique-multicouches/$
+^https://fr\.rs-online\.com/web/p/condensateurs-ceramique-multicouches/8851960$
+^https://fr\.rs-online\.com/web/p/condensateurs-ceramique-multicouches/1084055$
+^https://fr\.rs-online\.com/web/p/condensateurs-ceramique-multicouches/8410809$
+^https://product\.tdk\.com/en/search/capacitor/ceramic/mlcc/info\?part_no=C3216X5R1A107M160AC$
+^https://www\.analog\.com/en/resources/analog-dialogue/articles/ask-the-applications-engineer-25\.html$
+^https://www\.analog\.com/en/resources/analog-dialogue/articles/techniques-to-avoid-instability-capacitive-loading\.html$
+^https://www\.analog\.com/media/en/technical-documentation/data-sheets/ad8036_8037\.pdf$
+^https://www\.analog\.com/en/parametricsearch/2484#/$
+^https://www\.analog\.com/en/resources/analog-dialogue/articles/current-feedback-amplifiers-1\.html$
+^https://www\.analog\.com/media/en/training-seminars/tutorials/MT-037\.pdf$
+^https://www\.analog\.com/media/en/training-seminars/tutorials/MT-043\.pdf$
+^https://www\.analog\.com/media/en/technical-documentation/data-sheets/op1177_2177_4177\.pdf$
+^https://www\.analog\.com/en/resources/app-notes/an-581\.html$
+^https://www\.edn\.com$
+^https://mcalc\.sourceforge\.net/$
+^https://www\.analog\.com/en/resources/app-notes/an-0990\.html$
