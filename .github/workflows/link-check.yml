@@ -36,10 +36,13 @@ jobs:
           version: default
 
       - name: Restore link cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: .linkchecker-cache.json
-          key: linkchecker-cache-not-used
+          # key is intentionally unique to force a cache miss; we only want
+          # to restore via restore-keys prefix matching, so every run saves
+          # a fresh entry (save won't overwrite an existing key).
+          key: linkchecker-cache-restore-${{ github.run_id }}
           restore-keys: |
             linkchecker-cache
 
@@ -48,7 +51,7 @@ jobs:
 
       - name: Save link cache
         if: always()
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: .linkchecker-cache.json
           key: linkchecker-cache-${{ github.run_id }}
