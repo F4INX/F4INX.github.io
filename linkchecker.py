@@ -23,7 +23,6 @@ import os
 import re
 import subprocess
 import sys
-import tempfile
 import urllib.request
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
@@ -39,6 +38,9 @@ DEFAULT_SERVER_PORT = 1313
 CACHE_FILE = '.linkchecker-cache.json'
 DEFAULT_CACHE_TTL_HOURS = 24
 CACHE_MAX_AGE_DAYS = 30
+IGNORE_FILE = 'linkchecker-ignore'
+USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
+              '(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36')
 
 
 class CollectorLogger(_Logger):
@@ -76,50 +78,34 @@ def probe_server(port=DEFAULT_SERVER_PORT, timeout=2):
         return None
 
 
-def prepare_config(config_path, public_dir, output_path, base_url=None,
-                   extra_ignore_patterns=None):
-    """Replace PLACEHOLDER in config and write the result to output_path.
+def load_ignore_patterns(path):
+    """Load regex patterns from a file, return a list of externlinks entries.
 
-    When base_url is given (server mode), use it as the localwebroot instead
-    of a file:// path. This lets LinkChecker crawl a running dev server.
-
-    When extra_ignore_patterns is given, append them to the [filtering]
-    ignore list so LinkChecker skips those URLs (used for cached links).
+    Each line is a regex pattern. Blank lines and lines starting with # are
+    skipped. Each entry is a dict matching LinkChecker's externlinks format:
+    {'pattern': compiled_regex, 'negate': False, 'strict': 1}
     """
-    if base_url:
-        webroot = base_url
-    else:
-        webroot = 'file://' + public_dir.replace(' ', '%20') + '/'
-    with open(config_path) as f:
-        content = f.read()
-    content = content.replace('file:///PLACEHOLDER/', webroot)
-    if extra_ignore_patterns:
-        content = _inject_ignore_patterns(content, extra_ignore_patterns)
-    with open(output_path, 'w') as f:
-        f.write(content)
+    if not path or not os.path.isfile(path):
+        return []
+    entries = []
+    with open(path, encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            try:
+                entries.append({
+                    'pattern': re.compile(line),
+                    'negate': False,
+                    'strict': 1,
+                })
+            except re.error as e:
+                print(f'Warning: invalid regex in {path}: {line!r}: {e}',
+                      file=sys.stderr)
+    return entries
 
 
-def _inject_ignore_patterns(content, patterns):
-    """Insert regex patterns into the [filtering] section of the config.
-
-    Patterns are added to the existing ignore= list, before the next
-    section header. Each pattern is indented to match the continuation
-    format used by LinkChecker.
-    """
-    block = '\n'.join('    ' + p for p in patterns)
-    filtering_pos = content.find('[filtering]')
-    if filtering_pos == -1:
-        return content
-    after = content[filtering_pos + len('[filtering]'):]
-    m = re.search(r'\n\[', after)
-    if m:
-        insert_pos = filtering_pos + len('[filtering]') + m.start()
-        return content[:insert_pos] + block + '\n' + content[insert_pos:]
-    return content.rstrip() + '\n' + block + '\n'
-
-
-def run_linkchecker(config_path, public_dir, entry_url=None, base_url=None,
-                    extra_ignore_patterns=None):
+def run_linkchecker(public_dir, ignore_entries, entry_url=None, base_url=None):
     """Run LinkChecker via its Python API, return list of url_data objects.
 
     Uses a custom CollectorLogger that collects url_data objects directly,
@@ -128,27 +114,25 @@ def run_linkchecker(config_path, public_dir, entry_url=None, base_url=None,
     entry_url is the URL to start crawling from. In file mode this is a
     file:// path; in server mode it is an http://localhost:PORT/ URL.
     """
-    with tempfile.TemporaryDirectory() as tmpdir:
-        config_tmp = os.path.join(tmpdir, 'linkchecker.conf')
-        prepare_config(config_path, public_dir, config_tmp, base_url=base_url,
-                       extra_ignore_patterns=extra_ignore_patterns)
+    config = configuration.Configuration()
+    config.sanitize()
 
-        config = configuration.Configuration()
-        config.read(files=[config_tmp])
-        config.sanitize()
+    config.logger_add(CollectorLogger)
+    config['logger'] = config.logger_new('collector')
+    config['checkextern'] = True
+    config['verbose'] = True
+    config['warnings'] = False
+    config['status'] = False
+    config['useragent'] = USER_AGENT
+    config['externlinks'] = ignore_entries
+    if not base_url:
+        config['localwebroot'] = 'file://' + public_dir.replace(' ', '%20') + '/'
 
-        config.logger_add(CollectorLogger)
-        config['logger'] = config.logger_new('collector')
-        config['checkextern'] = True
-        config['verbose'] = True
-        config['warnings'] = False
-        config['status'] = False
+    aggregate = get_aggregate(config)
+    aggregate_url(aggregate, entry_url or (public_dir + '/'))
+    check_urls(aggregate)
 
-        aggregate = get_aggregate(config)
-        aggregate_url(aggregate, entry_url or (public_dir + '/'))
-        check_urls(aggregate)
-
-        return config['logger'].rows
+    return config['logger'].rows
 
 
 def _is_error(ud):
@@ -173,7 +157,7 @@ def count_status(rows, cached_urls=None):
 
     Cached URLs appear as 'filtered' in the results (they were added to the
     ignore list). The cached_urls set lets us separate them from links
-    filtered by .linkcheckerrc.
+    filtered by the ignore patterns file.
     """
     total = len(rows)
 
@@ -364,9 +348,12 @@ def prune_cache(cache, max_age_days=CACHE_MAX_AGE_DAYS):
     return pruned
 
 
-def build_ignore_patterns(urls):
-    """Build a list of escaped regex patterns matching exactly the given URLs."""
-    return [f'^{re.escape(url)}$' for url in sorted(urls)]
+def build_cache_entries(urls):
+    """Build externlinks entries for cached URLs (exact match)."""
+    return [
+        {'pattern': re.compile(f'^{re.escape(url)}$'), 'negate': False, 'strict': 1}
+        for url in sorted(urls)
+    ]
 
 
 def print_summary(rows, silent_ignore_path, out=print, cached_urls=None):
@@ -380,7 +367,7 @@ def print_summary(rows, silent_ignore_path, out=print, cached_urls=None):
     out(f'| 🔍 Total                     | {stats['total']:>5} |')
     out(f'| ✅ Successful                | {stats['ok']:>5} |')
     out(f'| 🔀 Redirected                | {stats['redirects']:>5} |')
-    out(f'| 👻 Filtered (.linkcheckerrc) | {stats['filtered']:>5} |')
+    out(f'| 👻 Filtered (ignore list)    | {stats['filtered']:>5} |')
     out(f'| 👻 Ignored (e.g. mailto: )    | {stats['ignored']:>5} |')
     if stats['cached'] > 0:
         out(f'| 💾 Cached (skipped)          | {stats['cached']:>5} |')
@@ -446,33 +433,33 @@ def main():
     if args.ci or os.environ.get('GITHUB_WORKSPACE'):
         base_dir = os.environ['GITHUB_WORKSPACE']
         public_dir = os.path.join(base_dir, 'public')
-        config = os.path.join(base_dir, '.linkcheckerrc')
+        ignore_file = os.path.join(base_dir, IGNORE_FILE)
         silent_ignore = os.path.join(base_dir, 'linkchecker-silent-ignore')
     else:
+        base_dir = SCRIPT_DIR
         public_dir = os.path.join(SCRIPT_DIR, 'public')
-        config = os.path.join(SCRIPT_DIR, '.linkcheckerrc')
+        ignore_file = os.path.join(SCRIPT_DIR, IGNORE_FILE)
         silent_ignore = os.path.join(SCRIPT_DIR, 'linkchecker-silent-ignore')
 
-    if not os.path.isfile(config):
-        print(f'Error: {config} not found.', file=sys.stderr)
+    if not os.path.isfile(ignore_file):
+        print(f'Error: {ignore_file} not found.', file=sys.stderr)
         sys.exit(1)
 
-    # Cache setup
+    # Load ignore patterns and combine with cached URL entries
+    ignore_entries = load_ignore_patterns(ignore_file)
     use_cache = not args.no_cache
     if use_cache:
-        cache_path = os.path.join(base_dir if args.ci or os.environ.get('GITHUB_WORKSPACE')
-                                   else SCRIPT_DIR, CACHE_FILE)
+        cache_path = os.path.join(base_dir, CACHE_FILE)
         cache = load_cache(cache_path)
         fresh_cached = get_fresh_cached_urls(cache, args.cache_ttl)
         if fresh_cached:
             print(f'Cache: {len(fresh_cached)} external links skipped '
                   f'(TTL {args.cache_ttl}h)')
-        ignore_patterns = build_ignore_patterns(fresh_cached)
+        ignore_entries += build_cache_entries(fresh_cached)
     else:
         cache_path = None
         cache = {}
         fresh_cached = set()
-        ignore_patterns = None
 
     # Determine whether to use server mode or file mode.
     # Server mode is never used in CI.
@@ -510,9 +497,8 @@ def main():
         entry_url = server_url
     else:
         entry_url = public_dir + '/'
-    rows = run_linkchecker(config, public_dir, entry_url=entry_url,
-                           base_url=server_url,
-                           extra_ignore_patterns=ignore_patterns)
+    rows = run_linkchecker(public_dir, ignore_entries,
+                           entry_url=entry_url, base_url=server_url)
 
     if not rows:
         print('Error: LinkChecker did not produce any results.', file=sys.stderr)

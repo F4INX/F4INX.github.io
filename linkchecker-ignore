@@ -1,0 +1,18 @@
+# URLs to ignore during link checking (one regex per line).
+# These sites use Cloudflare bot protection (JS challenge), block bots,
+# or rate-limit automated requests that no HTTP-based link checker can bypass.
+
+# Cloudflare bot protection (403 with JS challenge)
+^https://www\.researchgate\.net(/.*)?$
+^https://www\.hindawi\.com(/.*)?$
+^https://electronics\.stackexchange\.com(/.*)?$
+^https://www\.everythingrf\.com(/.*)?$
+^https://www\.linkedin\.com(/.*)?$
+^https://upload\.wikimedia\.org(/.*)?$
+^https://web\.archive\.org(/.*)?$
+
+# DOI redirection pointing towards a Cloudflare protected website
+# https://dx.doi.org/10.1155/2013/232317
+# -> https://www.hindawi.com/journals/ijap/2013/232317/
+# -> https://onlinelibrary.wiley.com/doi/10.1155/2013/232317
+^https://dx.doi.org/10.1155/2013/232317$
