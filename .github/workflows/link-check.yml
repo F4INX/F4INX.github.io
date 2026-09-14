@@ -6,8 +6,9 @@ on:
       - master
   pull_request:
   schedule:
-    # 06:00 UTC on the 1st of every month
-    - cron: "0 6 1 * *"
+    # 06:00 UTC every 6 days (keeps the GitHub Actions cache alive,
+    # which expires after 7 days of no access)
+    - cron: "0 6 */6 * *"
   workflow_dispatch:
 
 jobs:
