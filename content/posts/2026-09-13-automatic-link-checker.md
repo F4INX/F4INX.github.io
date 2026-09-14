@@ -56,6 +56,10 @@ According to the latest statistics, out of 655 links checked, 25 links are ignor
 
 During development, it is common to run the test script many times. Checking all URLs each time would be inconvenient and risk triggering various anti-bot protections. A cache mechanism is therefore implemented to check external links only when needed.
 
+## Post-checking
+
+LinkChecker triggers some anti-bot protections on certain sites. A post-checking phase is performed using [primp](https://github.com/deedy5/primp). A previous version used <a rel="nofollow" href="https://github.com/lexiforest/curl_cffi">curl_cffi</a>, but following <a rel="nofollow" href="https://www.reddit.com/r/webscraping/comments/1exbqyi/comment/lj5fo0d/">some doubts about curl_cffi</a>, I preferred to switch to primp.
+
 ## Summary page
 
 The script also produces a very convenient summary page for display on GitHub actions pages, like the one shown below (slightly older, with 26 ignored links instead of the current 25):
