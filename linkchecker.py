@@ -40,6 +40,7 @@ DEFAULT_SERVER_PORT = 1313
 CACHE_FILE = '.linkchecker-cache.json'
 DEFAULT_CACHE_TTL_HOURS = 24
 CACHE_MAX_AGE_DAYS = 30
+CLOUDFLARE_CACHE_TTL_HOURS = 30 * 24
 CONFIG_FILE = 'linkchecker-config.yaml'
 USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
               '(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36')
@@ -311,15 +312,19 @@ def get_fresh_cached_urls(cache, ttl_hours):
     """Return the set of URLs whose cache entry is still within the TTL.
 
     Only OK results are stored in the cache, so every fresh entry is a link
-    that was reachable last time and can be skipped.
+    that was reachable last time and can be skipped. Cloudflare-blocked
+    entries carry their own longer ttl_hours so they are skipped for a
+    month instead of the default TTL.
     """
-    cutoff = datetime.now() - timedelta(hours=ttl_hours)
+    now = datetime.now()
     fresh = set()
     for url, entry in cache.items():
         try:
             cached_at = datetime.fromisoformat(entry['cached_at'])
         except (KeyError, ValueError, TypeError):
             continue
+        entry_ttl = entry.get('ttl_hours', ttl_hours)
+        cutoff = now - timedelta(hours=entry_ttl)
         if cached_at > cutoff:
             fresh.add(url)
     return fresh
@@ -373,12 +378,27 @@ def build_cache_entries(urls):
     ]
 
 
+def _is_cloudflare_block(status, headers):
+    """Detect a Cloudflare bot-protection block from response headers.
+
+    Returns True when the response carries a cf-mitigated header, or when
+    the server is Cloudflare and the status is 403/503.
+    """
+    if 'cf-mitigated' in headers:
+        return True
+    server = headers.get('server', '').lower()
+    if server == 'cloudflare' and status in (403, 503):
+        return True
+    return False
+
+
 def recheck_urls(urls):
     """Recheck URLs using primp with browser impersonation.
 
     Returns (lines, results) where lines is a list of strings for the
-    summary, and results is a list of (url, status_code, ok) tuples.
-    ok is True for 2xx/3xx status codes.
+    summary, and results is a list of (url, status_code, ok, cloudflare)
+    tuples. ok is True for 2xx/3xx status codes. cloudflare is True when
+    the response was identified as a Cloudflare bot-protection block.
     """
     lines = []
 
@@ -394,6 +414,7 @@ def recheck_urls(urls):
     results = []
     ok_count = 0
     fail_count = 0
+    cloudflare_count = 0
 
     client = primp.Client(impersonate="chrome", follow_redirects=True)
 
@@ -401,14 +422,18 @@ def recheck_urls(urls):
         try:
             response = client.get(url, timeout=30)
             status = response.status_code
+            headers = dict(response.headers)
+            cloudflare = _is_cloudflare_block(status, headers)
             ok = 200 <= status < 400
-            results.append((url, status, ok))
-            if ok:
+            results.append((url, status, ok, cloudflare))
+            if cloudflare:
+                cloudflare_count += 1
+            elif ok:
                 ok_count += 1
             else:
                 fail_count += 1
         except Exception:
-            results.append((url, None, False))
+            results.append((url, None, False, False))
             fail_count += 1
 
     lines.append('### Rechecked links (primp, browser impersonation)')
@@ -417,10 +442,14 @@ def recheck_urls(urls):
     lines.append('|--------|-------|')
     lines.append(f'| ✅ OK   | {ok_count:>5} |')
     lines.append(f'| ❌ Fail | {fail_count:>5} |')
+    if cloudflare_count:
+        lines.append(f'| 🛡️ Cloudflare | {cloudflare_count:>5} |')
     lines.append('')
 
-    for url, status, ok in results:
-        if ok:
+    for url, status, ok, cloudflare in results:
+        if cloudflare:
+            lines.append(f'- 🛡️ {status} {url}')
+        elif ok:
             lines.append(f'- ✅ {status} {url}')
         elif status is not None:
             lines.append(f'- ❌ {status} {url}')
@@ -439,9 +468,12 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     # Compute recheck stats
     recheck_ok = 0
     recheck_fail = 0
+    recheck_cloudflare = 0
     if recheck_results:
-        for url, status, ok in recheck_results:
-            if ok:
+        for url, status, ok, cloudflare in recheck_results:
+            if cloudflare:
+                recheck_cloudflare += 1
+            elif ok:
                 recheck_ok += 1
             else:
                 recheck_fail += 1
@@ -449,7 +481,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     # Build set of rechecked URLs to exclude from filtered list
     recheck_urls_set = set()
     if recheck_results:
-        for url, status, ok in recheck_results:
+        for url, status, ok, cloudflare in recheck_results:
             recheck_urls_set.add(url)
 
     if public_ip:
@@ -472,6 +504,8 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     if recheck_results:
         out(f'| 🔄 Rechecked (primp)         | {recheck_ok:>5} |')
         out(f'| ❌ Recheck errors             | {recheck_fail:>5} |')
+        if recheck_cloudflare:
+            out(f'| 🛡️ Cloudflare blocked        | {recheck_cloudflare:>5} |')
     out()
 
     # Errors
@@ -510,16 +544,30 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
 
     # Rechecked links detail (primp)
     if recheck_results:
-        out('### Rechecked links (primp, browser impersonation)')
-        out()
-        for url, status, ok in recheck_results:
-            if ok:
-                out(f'- ✅ {status} {url}')
-            elif status is not None:
-                out(f'- ❌ {status} {url}')
-            else:
-                out(f'- ❌ (exception) {url}')
-        out()
+        # Non-Cloudflare results
+        non_cf = [(url, status, ok) for url, status, ok, cf in recheck_results
+                  if not cf]
+        if non_cf:
+            out('### Rechecked links (primp, browser impersonation)')
+            out()
+            for url, status, ok in non_cf:
+                if ok:
+                    out(f'- ✅ {status} {url}')
+                elif status is not None:
+                    out(f'- ❌ {status} {url}')
+                else:
+                    out(f'- ❌ (exception) {url}')
+            out()
+
+        # Cloudflare-blocked results
+        cf_results = [(url, status) for url, status, ok, cf in recheck_results
+                      if cf]
+        if cf_results:
+            out('### Cloudflare-blocked sites (cached for 1 month)')
+            out()
+            for url, status in cf_results:
+                out(f'- 🛡️ {status} {url}')
+            out()
 
     out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
 
@@ -665,11 +713,18 @@ def main():
         now = datetime.now()
         update_cache(cache, rows, now)
         # Add successfully rechecked URLs to the cache
-        for url, status, ok in recheck_results:
+        for url, status, ok, cloudflare in recheck_results:
             if ok:
                 cache[url] = {
                     'result': str(status),
                     'cached_at': now.isoformat(),
+                }
+            elif cloudflare:
+                cache[url] = {
+                    'result': str(status),
+                    'cached_at': now.isoformat(),
+                    'cloudflare': True,
+                    'ttl_hours': CLOUDFLARE_CACHE_TTL_HOURS,
                 }
         cache = prune_cache(cache)
         save_cache(cache_path, cache)
