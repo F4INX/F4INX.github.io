@@ -1,7 +1,7 @@
 ---
 title: "Automatic link checker"
 date: 2026-09-13
-lastmod: 2026-09-13
+lastmod: 2026-09-15
 categories: [Site, Meta]
 url: /posts/automatic-link-checker.html
 excerpt: "Broken links are a common problem. An automatic link checker was implemented for this website."
