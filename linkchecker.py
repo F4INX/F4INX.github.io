@@ -154,6 +154,7 @@ def run_linkchecker(public_dir, ignore_entries, entry_url=None, base_url=None):
     config['warnings'] = False
     config['status'] = False
     config['useragent'] = USER_AGENT
+    config['maxrequestspersecond'] = 5
     config['externlinks'] = ignore_entries
     if not base_url:
         config['localwebroot'] = 'file://' + public_dir.replace(' ', '%20') + '/'
