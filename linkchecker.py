@@ -183,12 +183,13 @@ def _is_ignored(ud):
     return any(w[0] == 'ignored' for w in ud.warnings) if ud.warnings else False
 
 
-def count_status(rows, cached_urls=None):
+def count_status(rows, cached_urls=None, cache=None):
     """Count total, errors, redirects, filtered, ignored, warnings, cached.
 
     Cached URLs appear as 'filtered' in the results (they were added to the
     ignore list). The cached_urls set lets us separate them from links
-    filtered by the ignore patterns file.
+    filtered by the ignore patterns file. Cached URLs that have a
+    final_url in the cache are counted separately as cached redirects.
     """
     total = len(rows)
 
@@ -200,11 +201,16 @@ def count_status(rows, cached_urls=None):
 
     cached_urls = cached_urls or set()
     cached = 0
+    cached_redirects = 0
     filtered = 0
     for r in rows:
         if r.result == 'filtered':
             if r.url in cached_urls or r.base_url in cached_urls:
                 cached += 1
+                if cache:
+                    key = r.base_url if r.base_url in cache else r.url
+                    if key in cache and 'final_url' in cache[key]:
+                        cached_redirects += 1
             else:
                 filtered += 1
 
@@ -214,6 +220,7 @@ def count_status(rows, cached_urls=None):
         'total': total, 'ok': ok, 'redirects': redirects,
         'filtered': filtered, 'ignored': ignored,
         'warnings': warnings, 'errors': errors, 'cached': cached,
+        'cached_redirects': cached_redirects,
     }
 
 
@@ -470,7 +477,7 @@ def recheck_urls(urls):
 def print_summary(rows, silent_patterns, out=print, cached_urls=None,
                   public_ip=None, recheck_results=None, cache=None):
     """Print formatted summary to stdout. Returns the stats dict."""
-    stats = count_status(rows, cached_urls=cached_urls)
+    stats = count_status(rows, cached_urls=cached_urls, cache=cache)
 
     # Compute recheck stats
     recheck_ok = 0
@@ -506,6 +513,8 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     out(f'| 👻 Ignored (e.g. mailto: )    | {stats['ignored']:>5} |')
     if stats['cached'] > 0:
         out(f'| 💾 Cached (skipped)          | {stats['cached']:>5} |')
+        if stats['cached_redirects'] > 0:
+            out(f'|   🔀 Cached redirects        | {stats['cached_redirects']:>5} |')
     out(f'| ⚠️ Warnings                   | {stats['warnings']:>5} |')
     out(f'| ❌ Errors                     | {stats['errors']:>5} |')
     if recheck_results:
