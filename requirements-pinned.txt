@@ -1,0 +1,14 @@
+# primp is pinned with a hash for supply-chain integrity.
+# When updating, fetch the new hashes from https://pypi.org/project/primp/#files
+#
+# This file is separate from requirements.txt because pip enters
+# --require-hashes mode whenever any --hash is present, which would
+# force every package (including transitive dependencies) to be hashed.
+# primp has no dependencies, so it can be pinned safely on its own.
+#
+# Hashes (in order):
+#   9a7be373...  manylinux x86_64 wheel (used by CI)
+#   82ba17b0...  sdist (source)
+primp==2.0.1 \
+    --hash=sha256:9a7be373adfded677a9092ae2743873d5c8a9573148d617a189d26715f7d8ea5 \
+    --hash=sha256:82ba17b077bef19a189d9ec8d77ca632496cb444e0f4fa37e27e90041cf0da8f

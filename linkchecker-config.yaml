@@ -1,0 +1,49 @@
+# Link checker configuration.
+#
+# ignore:   URLs matching these patterns are skipped by LinkChecker and
+#           never rechecked. Used for sites behind Cloudflare, bot
+#           protection, or rate limiting.
+#
+# recheck:  URLs matching these patterns are skipped by LinkChecker but
+#           rechecked afterwards with primp (browser impersonation).
+#           Used for sites that block LinkChecker but respond to a
+#           browser-like client. Sites that return a Cloudflare block
+#           during recheck are cached for 1 month to avoid repeated
+#           requests.
+#
+# silent:   URLs matching these patterns are hidden from the summary's
+#           "Filtered and ignored links" list. Used for non-link entries
+#           like data: URIs.
+#
+# One regex per line under each section.
+
+ignore:
+  # Cloudflare bot protection (403 with JS challenge)
+  - ^https://www\.linkedin\.com(/.*)?$
+
+  # RS has not only 403 errors due to Akamai bot protection,
+  # but also uses often silent redirections instead of 404 errors
+  # so links cannot be checked reliably.
+  - ^https://fr\.rs-online\.com(/.*)?$
+
+recheck:
+  - ^https://www\.analog\.com(/.*)?$
+  - ^https://www\.edn\.com$
+  - ^https://www\.everythingrf\.com(/.*)?$
+  - ^https://product\.tdk\.com(/.*)?$
+  - ^https://upload\.wikimedia\.org(/.*)?$
+  - ^https://web\.archive\.org(/.*)?$
+  - ^https://www\.researchgate\.net(/.*)?$
+  - ^https://www\.hindawi\.com(/.*)?$
+  - ^https://electronics\.stackexchange\.com(/.*)?$
+  - ^https://mcalc\.sourceforge\.net/$
+  # DOI redirect to a Cloudflare-protected website
+  # https://dx.doi.org/10.1155/2013/232317
+  # -> https://www.hindawi.com/journals/ijap/2013/232317/
+  # -> https://onlinelibrary.wiley.com/doi/10.1155/2013/232317
+  - ^https://dx.doi.org/10.1155/2013/232317$
+
+silent:
+  # data:image/svg+xml; is used for the arrows left to collapsible sections.
+  # All data links are ignored for future evolutions.
+  - ^data:.*$

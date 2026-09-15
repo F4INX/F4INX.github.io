@@ -1,7 +1,7 @@
 ---
 title: "Automatic link checker"
 date: 2026-09-13
-lastmod: 2026-09-13
+lastmod: 2026-09-15
 categories: [Site, Meta]
 url: /posts/automatic-link-checker.html
 excerpt: "Broken links are a common problem. An automatic link checker was implemented for this website."
@@ -55,6 +55,14 @@ According to the latest statistics, out of 655 links checked, 25 links are ignor
 ## Cache
 
 During development, it is common to run the test script many times. Checking all URLs each time would be inconvenient and risk triggering various anti-bot protections. A cache mechanism is therefore implemented to check external links only when needed.
+
+## Post-checking
+
+LinkChecker triggers some anti-bot protections on certain sites. A post-checking phase is performed using [primp](https://github.com/deedy5/primp). A previous version used <a rel="nofollow" href="https://github.com/lexiforest/curl_cffi">curl_cffi</a>, but following <a rel="nofollow" href="https://www.reddit.com/r/webscraping/comments/1exbqyi/comment/lj5fo0d/">some doubts about curl_cffi</a>, I preferred to switch to primp.
+
+## Cloudflare detection
+
+In previous versions, I had a manual list of Cloudflare URLs to ignore due to Cloudflare's bot block. Now, URLs blocked by Cloudflare are automatically flagged as such and cached so they are not checked again for 1 month, to avoid tickling the dragon too much.
 
 ## Summary page
 

@@ -25,7 +25,9 @@ import subprocess
 import sys
 import urllib.request
 from datetime import datetime, timedelta
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
+
+import yaml
 
 from linkcheck import configuration
 from linkcheck.cmdline import aggregate_url
@@ -38,7 +40,8 @@ DEFAULT_SERVER_PORT = 1313
 CACHE_FILE = '.linkchecker-cache.json'
 DEFAULT_CACHE_TTL_HOURS = 24
 CACHE_MAX_AGE_DAYS = 30
-IGNORE_FILE = 'linkchecker-ignore'
+CLOUDFLARE_CACHE_TTL_HOURS = 30 * 24
+CONFIG_FILE = 'linkchecker-config.yaml'
 USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
               '(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36')
 
@@ -78,31 +81,58 @@ def probe_server(port=DEFAULT_SERVER_PORT, timeout=2):
         return None
 
 
-def load_ignore_patterns(path):
-    """Load regex patterns from a file, return a list of externlinks entries.
+def fetch_public_ip(timeout=5):
+    """Fetch the runner's public IPv4 and IPv6 addresses.
 
-    Each line is a regex pattern. Blank lines and lines starting with # are
-    skipped. Each entry is a dict matching LinkChecker's externlinks format:
-    {'pattern': compiled_regex, 'negate': False, 'strict': 1}
+    Returns a string suitable for display in the summary, or None if
+    the lookups fail.
     """
+    ipv4 = None
+    ipv6 = None
+    try:
+        ipv4 = urllib.request.urlopen(
+            'https://api.ipify.org', timeout=timeout).read().decode().strip()
+    except Exception:
+        pass
+    try:
+        ipv6 = urllib.request.urlopen(
+            'https://api6.ipify.org', timeout=timeout).read().decode().strip()
+    except Exception:
+        pass
+    parts = []
+    parts.append(f'IPv4: {ipv4 or "none"}')
+    parts.append(f'IPv6: {ipv6 or "none"}')
+    return ' | '.join(parts)
+
+
+def load_config(path):
+    """Load link checker configuration from a YAML file.
+
+    Returns a dict with keys 'ignore', 'recheck', 'silent', each a list
+    of compiled regex patterns.
+    """
+    result = {'ignore': [], 'recheck': [], 'silent': []}
     if not path or not os.path.isfile(path):
-        return []
-    entries = []
+        return result
     with open(path, encoding='utf-8') as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith('#'):
-                continue
+        data = yaml.safe_load(f) or {}
+    for section in ('ignore', 'recheck', 'silent'):
+        patterns = data.get(section, []) or []
+        for line in patterns:
             try:
-                entries.append({
-                    'pattern': re.compile(line),
-                    'negate': False,
-                    'strict': 1,
-                })
+                result[section].append(re.compile(line))
             except re.error as e:
-                print(f'Warning: invalid regex in {path}: {line!r}: {e}',
-                      file=sys.stderr)
-    return entries
+                print(f'Warning: invalid regex in {path} [{section}]: '
+                      f'{line!r}: {e}', file=sys.stderr)
+    return result
+
+
+def _externlinks_from_patterns(patterns):
+    """Convert compiled regex patterns to LinkChecker externlinks entries."""
+    return [
+        {'pattern': p, 'negate': False, 'strict': 1}
+        for p in patterns
+    ]
 
 
 def run_linkchecker(public_dir, ignore_entries, entry_url=None, base_url=None):
@@ -124,6 +154,7 @@ def run_linkchecker(public_dir, ignore_entries, entry_url=None, base_url=None):
     config['warnings'] = False
     config['status'] = False
     config['useragent'] = USER_AGENT
+    config['maxrequestspersecond'] = 5
     config['externlinks'] = ignore_entries
     if not base_url:
         config['localwebroot'] = 'file://' + public_dir.replace(' ', '%20') + '/'
@@ -152,12 +183,13 @@ def _is_ignored(ud):
     return any(w[0] == 'ignored' for w in ud.warnings) if ud.warnings else False
 
 
-def count_status(rows, cached_urls=None):
+def count_status(rows, cached_urls=None, cache=None):
     """Count total, errors, redirects, filtered, ignored, warnings, cached.
 
     Cached URLs appear as 'filtered' in the results (they were added to the
     ignore list). The cached_urls set lets us separate them from links
-    filtered by the ignore patterns file.
+    filtered by the ignore patterns file. Cached URLs that have a
+    final_url in the cache are counted separately as cached redirects.
     """
     total = len(rows)
 
@@ -169,11 +201,16 @@ def count_status(rows, cached_urls=None):
 
     cached_urls = cached_urls or set()
     cached = 0
+    cached_redirects = 0
     filtered = 0
     for r in rows:
         if r.result == 'filtered':
             if r.url in cached_urls or r.base_url in cached_urls:
                 cached += 1
+                if cache:
+                    key = r.base_url if r.base_url in cache else r.url
+                    if key in cache and 'final_url' in cache[key]:
+                        cached_redirects += 1
             else:
                 filtered += 1
 
@@ -183,6 +220,7 @@ def count_status(rows, cached_urls=None):
         'total': total, 'ok': ok, 'redirects': redirects,
         'filtered': filtered, 'ignored': ignored,
         'warnings': warnings, 'errors': errors, 'cached': cached,
+        'cached_redirects': cached_redirects,
     }
 
 
@@ -213,33 +251,47 @@ def extract_warnings(rows):
     return warnings
 
 
+def normalize_url(url):
+    """Normalize a URL for comparison by percent-decoding it.
+
+    LinkChecker sometimes percent-encodes characters like ':' in paths,
+    causing false-positive redirects (e.g. File: vs File%3A). Decoding
+    both sides before comparing eliminates these.
+    """
+    return unquote(url)
+
+
+def renormalize_cache(cache):
+    """Fix existing cache entries affected by false-positive redirects.
+
+    Removes 'final_url' from entries where the normalized base URL and
+    final URL are identical (i.e., the only difference was percent-encoding).
+    This is a one-time migration step for caches written before the
+    normalization fix.
+    """
+    for url, entry in cache.items():
+        final = entry.get('final_url')
+        if final and normalize_url(url) == normalize_url(final):
+            del entry['final_url']
+    return cache
+
+
 def extract_redirects(rows):
-    """Return (original_url, final_url) pairs from url_data objects with redirects."""
+    """Return (original_url, final_url) pairs from url_data objects with redirects.
+
+    Redirects where the normalized URLs are identical (i.e., the only
+    difference is percent-encoding) are skipped as false positives.
+    """
     redirects = []
     for r in rows:
         if any('Redirected' in w[1] for w in r.warnings):
             url = r.base_url
             real = r.url
             if url and real and url != real:
+                if normalize_url(url) == normalize_url(real):
+                    continue
                 redirects.append((url, real))
     return redirects
-
-
-def load_silent_ignore(path):
-    """Load silent-ignore patterns, return list of compiled regexes."""
-    if not path or not os.path.isfile(path):
-        return []
-    patterns = []
-    with open(path, encoding='utf-8') as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith('#'):
-                continue
-            try:
-                patterns.append(re.compile(line))
-            except re.error as e:
-                print(f'Warning: invalid regex in {path}: {line!r}: {e}', file=sys.stderr)
-    return patterns
 
 
 def extract_ignored_urls(rows, silent_patterns, cached_urls=None):
@@ -299,15 +351,19 @@ def get_fresh_cached_urls(cache, ttl_hours):
     """Return the set of URLs whose cache entry is still within the TTL.
 
     Only OK results are stored in the cache, so every fresh entry is a link
-    that was reachable last time and can be skipped.
+    that was reachable last time and can be skipped. Cloudflare-blocked
+    entries carry their own longer ttl_hours so they are skipped for a
+    month instead of the default TTL.
     """
-    cutoff = datetime.now() - timedelta(hours=ttl_hours)
+    now = datetime.now()
     fresh = set()
     for url, entry in cache.items():
         try:
             cached_at = datetime.fromisoformat(entry['cached_at'])
         except (KeyError, ValueError, TypeError):
             continue
+        entry_ttl = entry.get('ttl_hours', ttl_hours)
+        cutoff = now - timedelta(hours=entry_ttl)
         if cached_at > cutoff:
             fresh.add(url)
     return fresh
@@ -321,7 +377,9 @@ def update_cache(cache, rows, now):
     LinkChecker will encounter on the next run.
 
     Only OK results are stored; error/warning entries are removed so they
-    will be rechecked on the next run.
+    will be rechecked on the next run. When a URL was redirected, the
+    final URL is stored as 'final_url' so the redirect can be displayed
+    even on cached runs.
     """
     for ud in rows:
         url = ud.base_url
@@ -332,10 +390,14 @@ def update_cache(cache, rows, now):
         if _is_error(ud) or _is_warning(ud):
             cache.pop(url, None)
         else:
-            cache[url] = {
+            entry = {
                 'result': ud.result,
                 'cached_at': now.isoformat(),
             }
+            real = ud.url
+            if real and real != url and normalize_url(url) != normalize_url(real):
+                entry['final_url'] = real
+            cache[url] = entry
     return cache
 
 
@@ -361,9 +423,124 @@ def build_cache_entries(urls):
     ]
 
 
-def print_summary(rows, silent_ignore_path, out=print, cached_urls=None):
+def _is_cloudflare_block(status, headers):
+    """Detect a Cloudflare bot-protection block from response headers.
+
+    Returns True when the response carries a cf-mitigated header, or when
+    the server is Cloudflare and the status is 403/503.
+    """
+    if 'cf-mitigated' in headers:
+        return True
+    server = headers.get('server', '').lower()
+    if server == 'cloudflare' and status in (403, 503):
+        return True
+    return False
+
+
+def recheck_urls(urls):
+    """Recheck URLs using primp with browser impersonation.
+
+    Returns (lines, results) where lines is a list of strings for the
+    summary, and results is a list of (url, status_code, ok, cloudflare)
+    tuples. ok is True for 2xx/3xx status codes. cloudflare is True when
+    the response was identified as a Cloudflare bot-protection block.
+    """
+    lines = []
+
+    try:
+        import primp
+    except ImportError:
+        lines.append('### Rechecked links (primp)')
+        lines.append('')
+        lines.append('primp not available — skipped.')
+        lines.append('')
+        return lines, []
+
+    results = []
+    ok_count = 0
+    fail_count = 0
+    cloudflare_count = 0
+
+    client = primp.Client(impersonate="chrome", follow_redirects=True)
+
+    for url in sorted(urls):
+        try:
+            response = client.get(url, timeout=30)
+            status = response.status_code
+            headers = dict(response.headers)
+            cloudflare = _is_cloudflare_block(status, headers)
+            ok = 200 <= status < 400
+            results.append((url, status, ok, cloudflare))
+            if cloudflare:
+                cloudflare_count += 1
+            elif ok:
+                ok_count += 1
+            else:
+                fail_count += 1
+        except Exception:
+            results.append((url, None, False, False))
+            fail_count += 1
+
+    lines.append('### Rechecked links (primp, browser impersonation)')
+    lines.append('')
+    lines.append('| Status | Count |')
+    lines.append('|--------|-------|')
+    lines.append(f'| ✅ OK   | {ok_count:>5} |')
+    lines.append(f'| ❌ Fail | {fail_count:>5} |')
+    if cloudflare_count:
+        lines.append(f'| 🛡️ Cloudflare | {cloudflare_count:>5} |')
+    lines.append('')
+
+    for url, status, ok, cloudflare in results:
+        if cloudflare:
+            lines.append(f'- 🛡️ {status} {url}')
+        elif ok:
+            lines.append(f'- ✅ {status} {url}')
+        elif status is not None:
+            lines.append(f'- ❌ {status} {url}')
+        else:
+            lines.append(f'- ❌ (exception) {url}')
+
+    lines.append('')
+    return lines, results
+
+
+def print_summary(rows, silent_patterns, out=print, cached_urls=None,
+                  public_ip=None, recheck_results=None, cache=None):
     """Print formatted summary to stdout. Returns the stats dict."""
-    stats = count_status(rows, cached_urls=cached_urls)
+    stats = count_status(rows, cached_urls=cached_urls, cache=cache)
+
+    # Compute recheck stats
+    recheck_ok = 0
+    recheck_fail = 0
+    recheck_cloudflare = 0
+    if recheck_results:
+        for url, status, ok, cloudflare in recheck_results:
+            if cloudflare:
+                recheck_cloudflare += 1
+            elif ok:
+                recheck_ok += 1
+            else:
+                recheck_fail += 1
+
+    # Cached Cloudflare-blocked URLs (from cache, not rechecked this run)
+    cached_cloudflare = []
+    if cache and cached_urls:
+        for url, entry in cache.items():
+            if url in cached_urls and entry.get('cloudflare'):
+                cached_cloudflare.append(
+                    (url, int(entry.get('result', 0))))
+    cached_cloudflare.sort()
+
+    # Build set of rechecked URLs to exclude from filtered list
+    recheck_urls_set = set()
+    if recheck_results:
+        for url, status, ok, cloudflare in recheck_results:
+            recheck_urls_set.add(url)
+
+    if public_ip:
+        out(f'**Runner IP:** {public_ip}')
+        out()
 
     out('## Link Checker Results')
     out()
@@ -376,8 +553,17 @@ def print_summary(rows, silent_ignore_path, out=print, cached_urls=None):
     out(f'| 👻 Ignored (e.g. mailto: )    | {stats['ignored']:>5} |')
     if stats['cached'] > 0:
         out(f'| 💾 Cached (skipped)          | {stats['cached']:>5} |')
+        if stats['cached_redirects'] > 0:
+            out(f'|  └─ 🔀 Cached redirects       | {stats['cached_redirects']:>5} |')
     out(f'| ⚠️ Warnings                   | {stats['warnings']:>5} |')
     out(f'| ❌ Errors                     | {stats['errors']:>5} |')
+    if recheck_results:
+        out(f'| 🔄 Rechecked (primp)         | {recheck_ok:>5} |')
+        out(f'| ❌ Recheck errors             | {recheck_fail:>5} |')
+        if recheck_cloudflare:
+            out(f'| 🛡️ Cloudflare blocked        | {recheck_cloudflare:>5} |')
+    if cached_cloudflare:
+        out(f'| 🛡️ Cloudflare (cached)       | {len(cached_cloudflare):>5} |')
     out()
 
     # Errors
@@ -405,14 +591,63 @@ def print_summary(rows, silent_ignore_path, out=print, cached_urls=None):
             out(f'- {url} --> {real}')
         out()
 
-    # Filtered and ignored links
+    # Cached redirects (from cache entries with a final_url)
+    cached_redirects = []
+    if cache and cached_urls:
+        for url, entry in cache.items():
+            if url in cached_urls and 'final_url' in entry:
+                cached_redirects.append((url, entry['final_url']))
+    if cached_redirects:
+        cached_redirects.sort()
+        out('### Cached redirects (from cache)')
+        out()
+        for url, real in cached_redirects:
+            out(f'- {url} --> {real}')
+        out()
+
+    # Filtered and ignored links (exclude rechecked URLs)
     out('### Filtered and ignored links (manual check recommended)')
     out()
-    silent_patterns = load_silent_ignore(silent_ignore_path)
     for url in extract_ignored_urls(rows, silent_patterns,
                                      cached_urls=cached_urls):
-        out(f'- {url}')
+        if url not in recheck_urls_set:
+            out(f'- {url}')
     out()
+
+    # Rechecked links detail (primp)
+    if recheck_results:
+        # Non-Cloudflare results
+        non_cf = [(url, status, ok) for url, status, ok, cf in recheck_results
+                  if not cf]
+        if non_cf:
+            out('### Rechecked links (primp, browser impersonation)')
+            out()
+            for url, status, ok in non_cf:
+                if ok:
+                    out(f'- ✅ {status} {url}')
+                elif status is not None:
+                    out(f'- ❌ {status} {url}')
+                else:
+                    out(f'- ❌ (exception) {url}')
+            out()
+
+        # Cloudflare-blocked results (fresh)
+        cf_results = [(url, status) for url, status, ok, cf in recheck_results
+                      if cf]
+        if cf_results:
+            out('### Cloudflare-blocked sites (cached for 1 month)')
+            out()
+            for url, status in cf_results:
+                out(f'- 🛡️ {status} {url}')
+            out()
+
+    # Cached Cloudflare-blocked sites (not rechecked this run)
+    if cached_cloudflare:
+        out('### Cloudflare-blocked sites (from cache, still within 1-month TTL)')
+        out()
+        for url, status in cached_cloudflare:
+            out(f'- 🛡️ {status} {url}')
+        out()
 
     out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
 
@@ -439,24 +674,28 @@ def main():
     if args.ci or os.environ.get('GITHUB_WORKSPACE'):
         base_dir = os.environ['GITHUB_WORKSPACE']
         public_dir = os.path.join(base_dir, 'public')
-        ignore_file = os.path.join(base_dir, IGNORE_FILE)
-        silent_ignore = os.path.join(base_dir, 'linkchecker-silent-ignore')
+        config_path = os.path.join(base_dir, CONFIG_FILE)
     else:
         base_dir = SCRIPT_DIR
         public_dir = os.path.join(SCRIPT_DIR, 'public')
-        ignore_file = os.path.join(SCRIPT_DIR, IGNORE_FILE)
-        silent_ignore = os.path.join(SCRIPT_DIR, 'linkchecker-silent-ignore')
+        config_path = os.path.join(SCRIPT_DIR, CONFIG_FILE)
 
-    if not os.path.isfile(ignore_file):
-        print(f'Error: {ignore_file} not found.', file=sys.stderr)
+    if not os.path.isfile(config_path):
+        print(f'Error: {config_path} not found.', file=sys.stderr)
         sys.exit(1)
 
-    # Load ignore patterns and combine with cached URL entries
-    ignore_entries = load_ignore_patterns(ignore_file)
+    config = load_config(config_path)
+
+    # Build ignore entries (ignore + recheck patterns) for LinkChecker
+    ignore_patterns = config['ignore'] + config['recheck']
+    ignore_entries = _externlinks_from_patterns(ignore_patterns)
+
+    # Load cache and add cached URLs to ignore list
     use_cache = not args.no_cache
     if use_cache:
         cache_path = os.path.join(base_dir, CACHE_FILE)
         cache = load_cache(cache_path)
+        renormalize_cache(cache)
         fresh_cached = get_fresh_cached_urls(cache, args.cache_ttl)
         if fresh_cached:
             print(f'Cache: {len(fresh_cached)} external links skipped '
@@ -510,8 +749,21 @@ def main():
         print('Error: LinkChecker did not produce any results.', file=sys.stderr)
         sys.exit(1)
 
+    # Recheck filtered URLs matching recheck patterns using primp
+    recheck_results = []
+    if config['recheck']:
+        filtered_urls = extract_ignored_urls(rows, config['silent'],
+                                             cached_urls=fresh_cached)
+        urls_to_recheck = [u for u in filtered_urls
+                           if any(p.search(u) for p in config['recheck'])]
+        if urls_to_recheck:
+            _, recheck_results = recheck_urls(urls_to_recheck)
+
     # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
     step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
+    public_ip = fetch_public_ip() if args.ci else None
+    if public_ip:
+        print(f'Runner IP: {public_ip}')
     if args.ci and step_summary:
         with open(step_summary, 'a', encoding='utf-8') as f:
             # Tees to stdout and the step summary file. Captures f from the
@@ -520,15 +772,17 @@ def main():
             def out(s=''):
                 print(s, file=sys.stdout)
                 print(s, file=f)
-            stats = print_summary(rows, silent_ignore, out=out,
-                                  cached_urls=fresh_cached)
+            stats = print_summary(rows, config['silent'], out=out,
+                                  cached_urls=fresh_cached, public_ip=public_ip,
+                                  recheck_results=recheck_results, cache=cache)
     else:
-        stats = print_summary(rows, silent_ignore, cached_urls=fresh_cached)
+        stats = print_summary(rows, config['silent'], cached_urls=fresh_cached,
+                              public_ip=public_ip, recheck_results=recheck_results,
+                              cache=cache)
 
     # Extract ignored URLs if requested
     if args.ignored:
-        silent_patterns = load_silent_ignore(silent_ignore)
-        urls = extract_ignored_urls(rows, silent_patterns,
+        urls = extract_ignored_urls(rows, config['silent'],
                                     cached_urls=fresh_cached)
         with open(args.ignored, 'w') as f:
             for url in urls:
@@ -540,6 +794,20 @@ def main():
     if use_cache:
         now = datetime.now()
         update_cache(cache, rows, now)
+        # Add successfully rechecked URLs to the cache
+        for url, status, ok, cloudflare in recheck_results:
+            if ok:
+                cache[url] = {
+                    'result': str(status),
+                    'cached_at': now.isoformat(),
+                }
+            elif cloudflare:
+                cache[url] = {
+                    'result': str(status),
+                    'cached_at': now.isoformat(),
+                    'cloudflare': True,
+                    'ttl_hours': CLOUDFLARE_CACHE_TTL_HOURS,
+                }
         cache = prune_cache(cache)
         save_cache(cache_path, cache)
         checked = len(rows) - stats['cached']

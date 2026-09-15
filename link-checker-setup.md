@@ -27,21 +27,24 @@ linkchecker --version
 ## Configuration
 
 LinkChecker is configured programmatically in `linkchecker.py` via its Python
-API — no `.linkcheckerrc` file is needed. The settings that were previously in
-the config file are now set directly in code:
+API. All URL patterns are configured in a single YAML file,
+`linkchecker-config.yaml`, with three sections:
+
+- `ignore` — URLs skipped by LinkChecker and never rechecked (Cloudflare,
+  bot protection, rate limiting)
+- `recheck` — URLs skipped by LinkChecker but rechecked afterwards with
+  `primp` (browser impersonation)
+- `silent` — URLs hidden from the summary's filtered/ignored list (e.g.
+  `data:` URIs)
+
+Other settings are set directly in code:
 
 - `checkextern = True` — check external links
 - `sslverify` — on by default (LinkChecker default)
 - `localwebroot` — set to the `public/` path in file mode, unused in server mode
 - `useragent` — browser-like User-Agent to avoid 403 bot detection
-- `externlinks` — ignore patterns loaded from `linkchecker-ignore`
 
 ### Ignored sites
-
-URLs to skip are listed in `linkchecker-ignore` (one regex per line, same
-format as `linkchecker-silent-ignore`). These sites use Cloudflare bot
-protection (JS challenge) or rate limiting that no HTTP-based link checker
-can bypass:
 
 - `www.researchgate.net` — Cloudflare
 - `www.hindawi.com` — Cloudflare

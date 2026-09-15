@@ -12,7 +12,7 @@ Comparison of three link checkers for the f4inx.github.io Hugo site.
 | Config file | `.lycheeignore` (auto-detected) | `htmltest.yml` | Python API (no config file) |
 | Custom User-Agent | No | Yes (`HTTPHeaders` in config) | Yes (`--user-agent` or config) |
 | HTTP/2 handling | Rust `reqwest` (strict) | Go `net/http` (robust) | Python `requests` (robust) |
-| Ignore URLs | Regex patterns in `.lycheeignore` | `IgnoreURLs` in config | `linkchecker-ignore` (regex, one per line) |
+| Ignore URLs | Regex patterns in `.lycheeignore` | `IgnoreURLs` in config | `linkchecker-config.yaml` (regex, YAML sections) |
 | Checks alt text | No | Yes | No |
 | Checks anchors | No | Yes | Yes |
 | Output formats | compact, detailed, json, junit, markdown | text | text, html, sql, xml, gml, dot, csv |
