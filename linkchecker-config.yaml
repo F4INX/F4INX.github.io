@@ -35,6 +35,10 @@ ignore:
   # so links cannot be checked reliably.
   - ^https://fr\.rs-online\.com(/.*)?$
 
+  # GitHub returned a rate-limit error on this URL, so it is ignored
+  # to have peace.
+  - ^https://github\.com/F4INX/F4INX.github.io/blob/master/\.github/workflows/link-check\.yml$
+
 recheck:
   - ^https://www\.analog\.com(/.*)?$
   - ^https://www\.edn\.com$
