@@ -338,7 +338,9 @@ def update_cache(cache, rows, now):
     LinkChecker will encounter on the next run.
 
     Only OK results are stored; error/warning entries are removed so they
-    will be rechecked on the next run.
+    will be rechecked on the next run. When a URL was redirected, the
+    final URL is stored as 'final_url' so the redirect can be displayed
+    even on cached runs.
     """
     for ud in rows:
         url = ud.base_url
@@ -349,10 +351,14 @@ def update_cache(cache, rows, now):
         if _is_error(ud) or _is_warning(ud):
             cache.pop(url, None)
         else:
-            cache[url] = {
+            entry = {
                 'result': ud.result,
                 'cached_at': now.isoformat(),
             }
+            real = ud.url
+            if real and real != url:
+                entry['final_url'] = real
+            cache[url] = entry
     return cache
 
 
@@ -461,7 +467,7 @@ def recheck_urls(urls):
 
 
 def print_summary(rows, silent_patterns, out=print, cached_urls=None,
-                  public_ip=None, recheck_results=None):
+                  public_ip=None, recheck_results=None, cache=None):
     """Print formatted summary to stdout. Returns the stats dict."""
     stats = count_status(rows, cached_urls=cached_urls)
 
@@ -530,6 +536,20 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
         out('### Redirects')
         out()
         for url, real in redirects:
+            out(f'- {url} --> {real}')
+        out()
+
+    # Cached redirects (from cache entries with a final_url)
+    cached_redirects = []
+    if cache and cached_urls:
+        for url, entry in cache.items():
+            if url in cached_urls and 'final_url' in entry:
+                cached_redirects.append((url, entry['final_url']))
+    if cached_redirects:
+        cached_redirects.sort()
+        out('### Cached redirects (from cache)')
+        out()
+        for url, real in cached_redirects:
             out(f'- {url} --> {real}')
         out()
 
@@ -693,10 +713,11 @@ def main():
                 print(s, file=f)
             stats = print_summary(rows, config['silent'], out=out,
                                   cached_urls=fresh_cached, public_ip=public_ip,
-                                  recheck_results=recheck_results)
+                                  recheck_results=recheck_results, cache=cache)
     else:
         stats = print_summary(rows, config['silent'], cached_urls=fresh_cached,
-                              public_ip=public_ip, recheck_results=recheck_results)
+                              public_ip=public_ip, recheck_results=recheck_results,
+                              cache=cache)
 
     # Extract ignored URLs if requested
     if args.ignored:
