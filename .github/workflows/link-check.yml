@@ -44,7 +44,7 @@ jobs:
             python3 -m venv ~/.venv
           fi
           ~/.venv/bin/pip install --upgrade pip
-          ~/.venv/bin/pip install linkchecker curl_cffi pyyaml
+          ~/.venv/bin/pip install linkchecker primp pyyaml
 
       - name: Save pip cache
         if: always()

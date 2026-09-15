@@ -33,7 +33,7 @@ API. All URL patterns are configured in a single YAML file,
 - `ignore` — URLs skipped by LinkChecker and never rechecked (Cloudflare,
   bot protection, rate limiting)
 - `recheck` — URLs skipped by LinkChecker but rechecked afterwards with
-  `curl_cffi` (browser impersonation, HTTP/3)
+  `primp` (browser impersonation)
 - `silent` — URLs hidden from the summary's filtered/ignored list (e.g.
   `data:` URIs)
 

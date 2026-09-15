@@ -374,7 +374,7 @@ def build_cache_entries(urls):
 
 
 def recheck_urls(urls):
-    """Recheck URLs using curl_cffi with browser impersonation.
+    """Recheck URLs using primp with browser impersonation.
 
     Returns (lines, results) where lines is a list of strings for the
     summary, and results is a list of (url, status_code, ok) tuples.
@@ -383,11 +383,11 @@ def recheck_urls(urls):
     lines = []
 
     try:
-        from curl_cffi import requests as cffi_requests
+        import primp
     except ImportError:
-        lines.append('### Rechecked links (curl_cffi)')
+        lines.append('### Rechecked links (primp)')
         lines.append('')
-        lines.append('curl_cffi not available — skipped.')
+        lines.append('primp not available — skipped.')
         lines.append('')
         return lines, []
 
@@ -395,15 +395,11 @@ def recheck_urls(urls):
     ok_count = 0
     fail_count = 0
 
+    client = primp.Client(impersonate="chrome", follow_redirects=True)
+
     for url in sorted(urls):
         try:
-            response = cffi_requests.get(
-                url,
-                impersonate="chrome",
-                http_version=3,
-                allow_redirects=True,
-                timeout=30,
-            )
+            response = client.get(url, timeout=30)
             status = response.status_code
             ok = 200 <= status < 400
             results.append((url, status, ok))
@@ -415,7 +411,7 @@ def recheck_urls(urls):
             results.append((url, None, False))
             fail_count += 1
 
-    lines.append('### Rechecked links (curl_cffi, browser impersonation)')
+    lines.append('### Rechecked links (primp, browser impersonation)')
     lines.append('')
     lines.append('| Status | Count |')
     lines.append('|--------|-------|')
@@ -474,7 +470,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     out(f'| ⚠️ Warnings                   | {stats['warnings']:>5} |')
     out(f'| ❌ Errors                     | {stats['errors']:>5} |')
     if recheck_results:
-        out(f'| 🔄 Rechecked (curl_cffi)      | {recheck_ok:>5} |')
+        out(f'| 🔄 Rechecked (primp)         | {recheck_ok:>5} |')
         out(f'| ❌ Recheck errors             | {recheck_fail:>5} |')
     out()
 
@@ -512,9 +508,9 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
             out(f'- {url}')
     out()
 
-    # Rechecked links detail (curl_cffi)
+    # Rechecked links detail (primp)
     if recheck_results:
-        out('### Rechecked links (curl_cffi, browser impersonation)')
+        out('### Rechecked links (primp, browser impersonation)')
         out()
         for url, status, ok in recheck_results:
             if ok:
@@ -624,7 +620,7 @@ def main():
         print('Error: LinkChecker did not produce any results.', file=sys.stderr)
         sys.exit(1)
 
-    # Recheck filtered URLs matching recheck patterns using curl_cffi
+    # Recheck filtered URLs matching recheck patterns using primp
     recheck_results = []
     if config['recheck']:
         filtered_urls = extract_ignored_urls(rows, config['silent'],

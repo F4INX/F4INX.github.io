@@ -5,9 +5,9 @@
 #           protection, or rate limiting.
 #
 # recheck:  URLs matching these patterns are skipped by LinkChecker but
-#           rechecked afterwards with curl_cffi (browser impersonation,
-#           HTTP/3). Used for sites that block LinkChecker but respond
-#           to a browser-like client.
+#           rechecked afterwards with primp (browser impersonation).
+#           Used for sites that block LinkChecker but respond to a
+#           browser-like client.
 #
 # silent:   URLs matching these patterns are hidden from the summary's
 #           "Filtered and ignored links" list. Used for non-link entries
