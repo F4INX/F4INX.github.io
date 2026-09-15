@@ -25,7 +25,7 @@ import subprocess
 import sys
 import urllib.request
 from datetime import datetime, timedelta
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 import yaml
 
@@ -251,14 +251,45 @@ def extract_warnings(rows):
     return warnings
 
 
+def normalize_url(url):
+    """Normalize a URL for comparison by percent-decoding it.
+
+    LinkChecker sometimes percent-encodes characters like ':' in paths,
+    causing false-positive redirects (e.g. File: vs File%3A). Decoding
+    both sides before comparing eliminates these.
+    """
+    return unquote(url)
+
+
+def renormalize_cache(cache):
+    """Fix existing cache entries affected by false-positive redirects.
+
+    Removes 'final_url' from entries where the normalized base URL and
+    final URL are identical (i.e., the only difference was percent-encoding).
+    This is a one-time migration step for caches written before the
+    normalization fix.
+    """
+    for url, entry in cache.items():
+        final = entry.get('final_url')
+        if final and normalize_url(url) == normalize_url(final):
+            del entry['final_url']
+    return cache
+
+
 def extract_redirects(rows):
-    """Return (original_url, final_url) pairs from url_data objects with redirects."""
+    """Return (original_url, final_url) pairs from url_data objects with redirects.
+
+    Redirects where the normalized URLs are identical (i.e., the only
+    difference is percent-encoding) are skipped as false positives.
+    """
     redirects = []
     for r in rows:
         if any('Redirected' in w[1] for w in r.warnings):
             url = r.base_url
             real = r.url
             if url and real and url != real:
+                if normalize_url(url) == normalize_url(real):
+                    continue
                 redirects.append((url, real))
     return redirects
 
@@ -364,7 +395,7 @@ def update_cache(cache, rows, now):
                 'cached_at': now.isoformat(),
             }
             real = ud.url
-            if real and real != url:
+            if real and real != url and normalize_url(url) != normalize_url(real):
                 entry['final_url'] = real
             cache[url] = entry
     return cache
@@ -664,6 +695,7 @@ def main():
     if use_cache:
         cache_path = os.path.join(base_dir, CACHE_FILE)
         cache = load_cache(cache_path)
+        renormalize_cache(cache)
         fresh_cached = get_fresh_cached_urls(cache, args.cache_ttl)
         if fresh_cached:
             print(f'Cache: {len(fresh_cached)} external links skipped '
