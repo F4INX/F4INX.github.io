@@ -492,6 +492,15 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
             else:
                 recheck_fail += 1
 
+    # Cached Cloudflare-blocked URLs (from cache, not rechecked this run)
+    cached_cloudflare = []
+    if cache and cached_urls:
+        for url, entry in cache.items():
+            if url in cached_urls and entry.get('cloudflare'):
+                cached_cloudflare.append(
+                    (url, int(entry.get('result', 0))))
+    cached_cloudflare.sort()
+
     # Build set of rechecked URLs to exclude from filtered list
     recheck_urls_set = set()
     if recheck_results:
@@ -522,6 +531,8 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
         out(f'| ❌ Recheck errors             | {recheck_fail:>5} |')
         if recheck_cloudflare:
             out(f'| 🛡️ Cloudflare blocked        | {recheck_cloudflare:>5} |')
+    if cached_cloudflare:
+        out(f'| 🛡️ Cloudflare (cached)       | {len(cached_cloudflare):>5} |')
     out()
 
     # Errors
@@ -589,7 +600,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
                     out(f'- ❌ (exception) {url}')
             out()
 
-        # Cloudflare-blocked results
+        # Cloudflare-blocked results (fresh)
         cf_results = [(url, status) for url, status, ok, cf in recheck_results
                       if cf]
         if cf_results:
@@ -598,6 +609,14 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
             for url, status in cf_results:
                 out(f'- 🛡️ {status} {url}')
             out()
+
+    # Cached Cloudflare-blocked sites (not rechecked this run)
+    if cached_cloudflare:
+        out('### Cloudflare-blocked sites (from cache, still within 1-month TTL)')
+        out()
+        for url, status in cached_cloudflare:
+            out(f'- 🛡️ {status} {url}')
+        out()
 
     out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
 
