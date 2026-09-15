@@ -514,7 +514,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     if stats['cached'] > 0:
         out(f'| 💾 Cached (skipped)          | {stats['cached']:>5} |')
         if stats['cached_redirects'] > 0:
-            out(f'|   🔀 Cached redirects        | {stats['cached_redirects']:>5} |')
+            out(f'|  └─ 🔀 Cached redirects       | {stats['cached_redirects']:>5} |')
     out(f'| ⚠️ Warnings                   | {stats['warnings']:>5} |')
     out(f'| ❌ Errors                     | {stats['errors']:>5} |')
     if recheck_results:
