@@ -189,14 +189,13 @@ Analysis of the transmission curves enables to deduce the connexions:
 
 This leads to the following schematic, compared to the datasheet information:
 
-<!-- FIXME: Add alt textes and titles. -->
 <table class="images-table">
 <tr>
 <td>
-<img src="/posts/IQ-quadrature-sign/mini-circuits-pins.svg" >
+<img src="/posts/IQ-quadrature-sign/mini-circuits-pins.svg" alt="Pin schematic of the Mini-Circuits QCH-451+ quadrature hybrid coupler, showing the four ports and their connections." title="Pin schematic of the Mini-Circuits QCH-451+">
 </td>
 <td>
-<img src="/posts/IQ-quadrature-sign/qch-451+-1.svg" >
+<img src="/posts/IQ-quadrature-sign/qch-451+-1.svg" alt="Internal schematic of the QCH-451+ derived from transmission curve analysis, showing two coupled lines with through and coupled ports." title="Internal schematic derived from measurements">
 </td>
 </tr>
 </table>
