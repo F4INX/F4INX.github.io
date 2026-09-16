@@ -360,60 +360,8 @@ Paths:
 
 Shortest unvisited path: (34) length 228.
 
-### Step 28
-
-Development of (34) length 228.
-
-Paths:
-
-* (73): (34) --42--> {DiW, Comp} length 270
-* (74): (34) --28--> {Oven, Comp} length 256
-* (75): (34) --56--> {Oven, DiW} length 284
-
-Shortest unvisited path: (71) length 236.
-
-### Step 29
-
-Development of (71) length 236.
-
-Paths:
-
-* (76): (71) --6--> {} length 242
-
-Shortest unvisited path: (45) length 241.
-
-### Step 30
-
-Development of (45) length 241.
-
-Paths:
-
-* (77): (45) --33--> {Comp} length 274
-* (78): (45) --44--> {Oven} length 285
-
-Shortest unvisited path: (73) length 270.
-
-### Step 31
-
-Development of (73) length 270.
-
-Paths:
-
-* (79): (73) --24--> {Comp} length 294
-* (80): (73) --48--> {DiW} length 318
-
-Shortest unvisited path: (77) length 274.
-
-### Step 32
-
-Development of (77) length 274.
-
-Paths:
-
-* (81): (77) --36--> {} length 310
-
 ## Conclusion
 
-The algorithm terminates after all paths have been developed. The optimal solution is path (70) with a total cost of 222, corresponding to the repair order: Comp, DiW, TV, WaM, Oven.
+Path (70) reaches the empty set with a total cost of 222, corresponding to the repair order: Comp, DiW, TV, WaM, Oven. Since all remaining unvisited paths have a higher length, this is the optimal solution.
 
 While a first approach to the analysis of a graph with constraints is to handle them with a *locations as nodes* approach and to use various techniques to process the constraints, handling them with a *states as nodes* approach can lead to simpler algorithms.
