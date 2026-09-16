@@ -19,8 +19,7 @@ However, it is also possible to see nodes as *states*, as outlined in the follow
 
 Imagine a travel problem where travellers should calculate their trip such that they either go through country A, or through country B, or through neither, but must not go through both countries.
 
-<!-- TODO: alt text. -->
-![alt text](/posts/graph-nodes-are-states/graph-01.svg)
+![Map with three countries A, B, and a neutral one, connected by roads between nodes 11, 21-23, 31-33, 41-43, and 51.](/posts/graph-nodes-are-states/graph-01.svg)
 
 A possible solution to this problem would be to tweak the algorithm used to solve this graph: either calculating shortest routes between sub-domains, or calculating the k shortest routes to be able to take alternative paths in the case the shortest path is forbidden, and so on.
 
@@ -45,7 +44,7 @@ I recently found this example in my drafts about a scheduling problem for the re
 Initial paths:
 * (1): {Ov, DiW, WaM, Comp, TV} length 0.
 
-![alt text](/posts/graph-nodes-are-states/djikstra-01.svg)
+![Initial node of the Dijkstra graph: the set of broken devices {Oven, Dishwasher, Washing machine, Computer, Television} with five outgoing edges to the subsets obtained by repairing one device, each labelled with the waiting cost for the repaired device and the remaining devices.](/posts/graph-nodes-are-states/djikstra-01.svg)
 
 ### Step 1
 
