@@ -42,13 +42,50 @@ I recently found this example in my drafts about a scheduling problem for the re
 | Computer        |   4  |     9     |
 | Television      |   6  |     5     |
 
-![alt text](/posts/graph-nodes-are-states/djikstra-02.png)
+Initial paths:
+* (1): {Ov, DiW, WaM, Comp, TV} length 0.
 
-![alt text](/posts/graph-nodes-are-states/djikstra-03.png)
+![alt text](/posts/graph-nodes-are-states/djikstra-02.svg)
 
-![alt text](/posts/graph-nodes-are-states/djikstra-04.png)
+### Step 1
 
-![alt text](/posts/graph-nodes-are-states/djikstra-05.png)
+Development of (1) of length 0.
+
+Paths:
+
+* (2): (1) -> {DiW, WaM, Comp, TV} length 69
+* (3): (1) -> {Oven, WaM, Comp, TV} length 46
+* (4): (1) -> {Oven, DiW, Comp, TV} length 115
+* (5): (1) -> {Oven, WaM, DiW, TV} length 92
+* (6): (1) -> {Oven, WaM, DiW, Comp} length 138
+
+Shortest unvisited path: (3) length 46.
+
+### Step 2
+
+Development of (3) length 46.
+
+Paths:
+
+* (7): (3) --57--> {WaM, Comp, TV} length 103
+* (8): (3) --95--> {Oven, Comp, TV} length 141
+* (9): (3) --76--> {Oven, WaM, TV} length 122
+* (10): (3) ------> {Oven, WaM, Comp} length 160
+
+Shortest unvisited path: (2) length 69.
+
+### Step 3
+
+Development of (2) length 69.
+
+Paths:
+
+* (11): (2) --42--> {WaM, Comp, TV} length 111
+* (12): (2) --105--> {DiW, Comp, TV} length 174
+* (13): (2) --84--> {DiW, WaM, TV} length 153
+* (14): (2) --126--> {DiW, WaM, Comp} length 195
+
+Shortest unvisited path: (5) length 92.
 
 ## Conclusion
 

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="136mm"
+   height="84mm"
+   viewBox="0 0 136 84"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="djikstra-02.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="2.9331864"
+     inkscape:cx="374.33693"
+     inkscape:cy="119.49462"
+     inkscape:window-width="1440"
+     inkscape:window-height="815"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       id="grid1"
+       units="mm"
+       originx="0"
+       originy="0"
+       spacingx="0.99999998"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="4"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <rect
+       x="211.65353"
+       y="136.06299"
+       width="5.0499557e-06"
+       height="15.118114"
+       id="rect4" />
+    <marker
+       style="overflow:visible"
+       id="DartArrow"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="DartArrow-7"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="DartArrow-7-7"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6-9-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="DartArrow-7-7-7"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6-9-3-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="DartArrow-7-7-7-8"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6-9-3-6-4" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.340787;stroke-dasharray:none;stroke-opacity:1"
+       id="path1"
+       cx="27.999992"
+       cy="41.999996"
+       rx="23.829607"
+       ry="5.8296056" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1"
+       x="27.495373"
+       y="43"
+       id="text1"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="27.495375"
+         y="43"
+         id="tspan2">Ov, DiW, WaM, Comp, TV</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#ffffff;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1"
+       x="76"
+       y="20"
+       id="text1-7"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="76"
+         y="20"
+         id="tspan3">Repair Ov,</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="76"
+         y="23.96875"
+         id="tspan7">69</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#ffffff;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1"
+       x="80"
+       y="32"
+       id="text1-7-2"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="80"
+         y="32"
+         id="tspan3-2">Repair DiW,</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="80"
+         y="35.96875"
+         id="tspan5">46</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#ffffff;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1"
+       x="78.199989"
+       y="41.98629"
+       id="text1-7-2-4"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="78.199989"
+         y="41.98629"
+         id="tspan3-2-7">Repair WaM,</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="78.199989"
+         y="45.95504"
+         id="tspan5-8">115</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#ffffff;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1"
+       x="80"
+       y="52"
+       id="text1-7-2-4-2"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="80"
+         y="52"
+         id="tspan3-2-7-5">Repair Comp,</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="80"
+         y="55.96875"
+         id="tspan5-8-4">92</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#ffffff;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1"
+       x="80"
+       y="72"
+       id="text1-7-2-4-2-8"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="80"
+         y="72"
+         id="tspan3-2-7-5-9">Repair TV,</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="80"
+         y="75.96875"
+         id="tspan5-8-4-2">138</tspan></text>
+    <ellipse
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.345732;stroke-dasharray:none;stroke-opacity:1"
+       id="path1-3"
+       cx="108"
+       cy="10"
+       rx="23.829607"
+       ry="6.0000005" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1"
+       x="107.49538"
+       y="10.829609"
+       id="text1-5"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265"
+         x="107.49538"
+         y="10.829609"
+         id="tspan2-6">DiW, WaM, Comp, TV</tspan></text>
+    <ellipse
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.341396;stroke-dasharray:none;stroke-opacity:1"
+       id="path1-3-6"
+       cx="107.9148"
+       cy="28"
+       rx="23.914803"
+       ry="5.8296056" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.18067px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:0.265472;stroke-dasharray:none;stroke-opacity:1"
+       x="107.21687"
+       y="29.051796"
+       id="text1-5-2"
+       transform="scale(1.001786,0.99821718)"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265473"
+         x="107.21687"
+         y="29.051796"
+         id="tspan2-6-6">Ov, WaM, Comp, TV</tspan></text>
+    <ellipse
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.346349;stroke-dasharray:none;stroke-opacity:1"
+       id="path1-3-6-6"
+       cx="108"
+       cy="42"
+       rx="23.914803"
+       ry="6.0000005" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.18067px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:0.265472;stroke-dasharray:none;stroke-opacity:1"
+       x="107.30193"
+       y="42.906101"
+       id="text1-5-2-1"
+       transform="scale(1.001786,0.99821718)"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265473"
+         x="107.30193"
+         y="42.906101"
+         id="tspan2-6-6-0">Ov, DiW, Comp, TV</tspan></text>
+    <ellipse
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.346349;stroke-dasharray:none;stroke-opacity:1"
+       id="path1-3-6-6-6"
+       cx="108"
+       cy="58"
+       rx="23.914803"
+       ry="6.0000005" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.18067px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:0.265472;stroke-dasharray:none;stroke-opacity:1"
+       x="107.30193"
+       y="58.934673"
+       id="text1-5-2-1-1"
+       transform="scale(1.001786,0.99821718)"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265473"
+         x="107.30193"
+         y="58.934673"
+         id="tspan2-6-6-0-5">Ov, DiW, WaM, TV</tspan></text>
+    <ellipse
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.343833;stroke-dasharray:none;stroke-opacity:1"
+       id="path1-3-6-6-6-0"
+       cx="108"
+       cy="73.91465"
+       rx="23.913584"
+       ry="5.9134331" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.18067px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:0.265472;stroke-dasharray:none;stroke-opacity:1"
+       x="107.30193"
+       y="74.963242"
+       id="text1-5-2-1-1-7"
+       transform="scale(1.001786,0.99821718)"><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.265473"
+         x="107.30193"
+         y="74.963242"
+         id="tspan2-6-6-0-5-8">Ov, DiW, WaM, Comp</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DartArrow)"
+       d="m 51.999995,35.999999 c 27.999999,-20 27.999999,-20 27.999999,-20"
+       id="path3" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DartArrow-7)"
+       d="M 55.999995,39.999998 79.999996,31.999999"
+       id="path3-2"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DartArrow-7-7)"
+       d="M 55.999995,41.999998 H 79.999996"
+       id="path3-2-2"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DartArrow-7-7-7)"
+       d="m 55.999995,43.999998 24.000001,8"
+       id="path3-2-2-9"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DartArrow-7-7-7-8)"
+       d="m 55.999995,47.999998 24.000001,24"
+       id="path3-2-2-9-4"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text4"
+       style="writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect4);display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>
