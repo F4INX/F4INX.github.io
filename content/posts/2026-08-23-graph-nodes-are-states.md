@@ -1,7 +1,7 @@
 ---
 title: "Graph nodes are states"
-date: 2026-08-23
-lastmod: 2026-08-23
+date: 2026-09-16
+lastmod: 2026-09-16
 categories: [Graph theory, Algorithms]
 url: /posts/graph-nodes-are-states.html
 excerpt: "Nodes of a graph are often seen as locations. However, seeing them as states can offer interesting solutions in cases where the paths are constrained."
