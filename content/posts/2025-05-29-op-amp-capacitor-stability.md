@@ -107,8 +107,8 @@ An isolation resistor ensures the opamp sees at the unity gain a convenient load
 
 This technique exists in two common variants shown in the 2 figures below from the excellent article[^6] from Texas Instruments. 
 
-<figure class="images-table">
-<table>
+<figure>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/op-amp-capacitor-stability/texas-article-fig-2.png" />
