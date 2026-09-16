@@ -33,6 +33,7 @@ While in the previous case the states can be seen as a convenient way to impleme
 
 I recently found this example in my drafts about a scheduling problem for the repair of various devices, the devices being able to be repaired only one at a time, and each device having a repair time and a cost per time unit. The example showed the application of Dijkstra's algorithm.
 
+{{% text-table %}}
 | Device                | Time | Unit Cost |
 |-----------------------|------|-----------|
 | Oven                  |   3  |     2     |
@@ -40,6 +41,7 @@ I recently found this example in my drafts about a scheduling problem for the re
 | Washing machine (WaM) |   5  |     4     |
 | Computer (Comp)       |   4  |     9     |
 | Television (TV)       |   6  |     5     |
+{{% /text-table %}}
 
 Initial paths:
 
