@@ -37,7 +37,7 @@ I recently found this example in my drafts about a scheduling problem for the re
 | Device          | Time | Unit Cost |
 |-----------------|------|-----------|
 | Oven            |   3  |     2     |
-| Dishwasher      |   3  |     3     |
+| Dishwasher      |   2  |     3     |
 | Washing machine |   5  |     4     |
 | Computer        |   4  |     9     |
 | Television      |   6  |     5     |
