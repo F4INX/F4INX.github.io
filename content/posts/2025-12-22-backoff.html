@@ -373,22 +373,6 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
 
 <p>The previous equations for the calculation need <latexinline>\text{LF} =\text{OIP3}_\text{dBm} - P_\text{sat,dBm}</latexinline>. To have estimates of its value, a review of several typical amplifiers was performed.</p>
 
-<!-- FIXME: replace by global setting -->
-<style>
-    table.article-backoff {
-        border-collapse: collapse;
-        /* Centering */
-        margin-left: auto;
-        margin-right: auto;
-    }
-    table.article-backoff th, table.article-backoff td {
-        border: 1px solid;
-    }
-    table.article-backoff th {
-        text-align: center;
-    }
-</style>
-
 <h3>TWTA</h3>
 
 <p>LF between 4 and 6.</p>
@@ -401,8 +385,8 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
     <!-- FIXME: better tuning than <p></p> -->
     <p></p>
 
-    <table class="article-backoff" :class="{ 'show': !hide }">
-    <tr><th>Mfg.</th><th>Name</th><th>Description</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
+    <table class="text-table" :class="{ 'show': !hide }">
+    <thead><th>Mfg.</th><th>Name</th><th>Description</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></thead>
     <tr><td>CPI</td><td>T04UO-A1</td><td>400 W CW TWTA</td><td>400</td><td>56,0</td><td>-24,0</td><td>49,0</td><td>61,0</td><td>5,00</td></tr> 
     <tr><td>CPI</td><td>TL07UO</td><td markdown="1">
     750 W SuperLinear® TWTA<sup id="fnref:5"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">5</a></sup>
@@ -441,8 +425,8 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
     <!-- FIXME: better tuning than <p></p> -->
     <p></p>
 
-    <table class="article-backoff">
-    <tr><th>Mfg.</th><th>Name</th><th>Description</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
+    <table class="text-table">
+    <thead><th>Mfg.</th><th>Name</th><th>Description</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></thead>
     <tr><td>CPI</td><td>T04UO-A1</td><td>400 W CW TWTA</td><td>400</td><td>56,0</td><td>-24,0</td><td>52,0</td><td>64,0</td><td>8,00</td></tr>
     <tr><td>CPI</td><td>TL07UO</td><td>750 W SuperLinear® TWTA</td><td>750</td><td>58,8</td><td>-25,0</td><td>55,2</td><td>67,7</td><td>8,95</td></tr>
     <tr><td>CPI</td><td>T07UO</td><td>750 W CW TWTA</td><td>750</td><td>58,8</td><td>-26,0</td><td>54,1</td><td>67,1</td><td>8,35</td></tr>
@@ -465,8 +449,8 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
     <!-- FIXME: better tuning than <p></p> -->
     <p></p>
 
-    <table class="article-backoff">
-    <tr><th>Mfg.</th><th>Name</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
+    <table class="text-table">
+    <thead><th>Mfg.</th><th>Name</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></thead>
     <tr><td>SpacePath</td><td markdown="1">
     STS16<sup id="fnref:8"><a href="#fn:8" class="footnote" rel="footnote" role="doc-noteref">8</a></sup>
     </td><td>20</td><td>43,0</td><td>-25,0</td><td>39,0</td><td>51,5</td><td>8,5</td></tr>
@@ -523,8 +507,8 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
     <!-- FIXME: better tuning than <p></p> -->
     <p></p>
 
-    <table class="article-backoff">
-    <tr><th>Mfg.</th><th>Name</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></tr>
+    <table class="text-table">
+    <thead><th>Mfg.</th><th>Name</th><th>Psat [W]</th><th>Psat [dBm]</th><th>IM [dBc]</th><th>IM value at [dBm]</th><th>OIP3 [dBm]</th><th>OIP3 - Psat [dB]</th></thead>
     <tr><td>Teledyne</td><td markdown="1">
     HPAK2600AHXXXXXG<sup id="fnref:16"><a href="#fn:16" class="footnote" rel="footnote" role="doc-noteref">16</a></sup>
     </td><td>600</td><td>57,8</td><td>-25</td><td>54,8</td><td>67,3</td><td>9,5</td></tr>
@@ -545,8 +529,8 @@ P_\text{out,dBm} = P_\text{sat,dBm} + \left(\text{OIP3}_\text{dBm} - P_\text{sat
 
 <p>The value of LF depends on the technology but is surprisingly constant inside a given technology. It is this possible to calculate recommended backoff values for each technology.</p>
 
-<table class="article-backoff">
-<tr><th>Technology</th><th>LF min</th><th>Back-off</th></tr>
+<table class="text-table">
+<thead><th>Technology</th><th>LF min</th><th>Back-off</th></thead>
 <tr><td>TWTA</td><td>4</td><td>9,9</td></tr>
 <tr><td>TWTA with linearizer</td><td>8</td><td>5,9</td></tr>
 <tr><td>SSPA</td><td>8</td><td>5,9</td></tr>
