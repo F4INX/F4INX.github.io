@@ -18,18 +18,9 @@ While Hammerstad and Jensen formulas[^1a] stay the gold standard, other formulas
 
 ## Geometry of the problem
 
-![](/posts/microstrip-formulas-comparison/microstrip.png)
-
-<!-- FIXME: Ugly tweak. -->
-<style>
-    .style-figcaption-after + p {
-      font-style: italic;
-      text-align: center;
-    }
-</style>
-<div class="style-figcaption-after"></div>
-
+{{% figure img="/posts/microstrip-formulas-comparison/microstrip.png" %}}
 Fig. 1 – Geometry of a microstrip line[^4].
+{{% /figure %}}
 
 The geometrical parameters of the microstrip line studied are defined in Fig. 1[^4]: w is the width of the microstrip line, h the height of the substrate, t the thickness of the strip. Non-geometrical parameters are the relative permittivity of the substrate. We’ll note for the characteristic impedance of free space.
 
@@ -167,17 +158,9 @@ Fig. 1 compares the asymptotic behavior of IPC-2141 formulas with the good formu
 
 Despite the problems of IPC-2141 formulas, they are used in several online calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35]<sup>,</sup>[^36]<sup>,</sup>[^37]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40]. Some calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35] give warnings when using IPC-2141 formulas outside of their validity range like shown in Fig. 3. On the contrary, some other calculators[^36]<sup>,</sup>[^37]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] give neither a warning nor a validity range, including a calculator on a renowned website[^38]. Worse, some calculators[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] even give nonsense negative impedance when fed with proper values without any warning.
 
-![](/posts/microstrip-formulas-comparison/ipc-warning.png)
-
-<!-- FIXME: Ugly tweak. -->
-<style>
-    .style-figcaption-after + p {
-      font-style: italic;
-      text-align: center;
-    }
-</style>
-<div class="style-figcaption-after"></div>
+{{% figure img="/posts/microstrip-formulas-comparison/ipc-warning.png" %}}
 Fig. 4 – Screenshot of a microstrip line impedance calculator[^33] raising a warning when trying to calculate impedances outside IPC-2141 validity range.
+{{% /figure %}}
 
 It should be mentioned that a calculator[^33] not only gives the validity range of the IPC-2141 formula and warns when trying to enter parameters outside of this range, but it also gives accuracy data.
 
