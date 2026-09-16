@@ -11,7 +11,7 @@ excerpt: "Nodes of a graph are often seen as locations. However, seeing them as 
 
 When studying graph theory, the first examples proposed to students most often involve maps where nodes are geographical locations, edges physical roads with their distances, and path distances actual travel distances.
 
-However, it is also possible to see nodes are *states*, as outlined in the following examples.
+However, it is also possible to see nodes as *states*, as outlined in the following examples.
 
 ## Example 1: routing problems with constraints
 
@@ -30,9 +30,9 @@ The total number of nodes in this approach is multiplied by the number of the st
 
 ## Example 2: true states
 
-While in the previous case the states can be seen as a convenient way to implement a constraint, in lots of cases the nodes are true states. A typical example is the study of a control flow instead a program. But there are more mundane cases.
+While in the previous case the states can be seen as a convenient way to implement a constraint, in lots of cases the nodes are true states. A typical example is the study of a control flow inside a program. But there are more mundane cases.
 
-I recently found this example in my drafts about a scheduling problem for the repair of various devices, the devices being able to be repaired only one at a time, and each device having a repair time and a cost per time unit. The example showed the first steps of the application of Dijkstra algorithm.
+I recently found this example in my drafts about a scheduling problem for the repair of various devices, the devices being able to be repaired only one at a time, and each device having a repair time and a cost per time unit. The example showed the first steps of the application of Dijkstra's algorithm.
 
 | Device          | Time | Unit Cost |
 |-----------------|------|-----------|
@@ -89,4 +89,4 @@ Shortest unvisited path: (5) length 92.
 
 ## Conclusion
 
-While a first approach to the analysis of graph with constraints is to handle them with a *locations as nodes* approach and to use various techniques to process the constraints, handling them with a *states as nodes* approaches can lead to simpler algorithms.
+While a first approach to the analysis of graph with constraints is to handle them with a *locations as nodes* approach and to use various techniques to process the constraints, handling them with a *states as nodes* approach can lead to simpler algorithms.
