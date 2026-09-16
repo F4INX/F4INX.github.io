@@ -45,7 +45,7 @@ I recently found this example in my drafts about a scheduling problem for the re
 Initial paths:
 * (1): {Ov, DiW, WaM, Comp, TV} length 0.
 
-![alt text](/posts/graph-nodes-are-states/djikstra-02.svg)
+![alt text](/posts/graph-nodes-are-states/djikstra-01.svg)
 
 ### Step 1
 
