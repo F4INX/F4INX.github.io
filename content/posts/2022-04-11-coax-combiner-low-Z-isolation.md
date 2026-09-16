@@ -342,43 +342,39 @@ Measurement results after desembedding and impedance renormalization are shown i
 The worst case isolation between inputs is at least 10&#8239;dB for inputs close to each other (45° pair) and at least 15&#8239;dB for other pairs. This isolation enables instability problems to be avoided, and enables the propagation of a failure from a device to another one to be avoided. If a power amplifier module fails, the system can be operated at a reduced power with the other power modules, compared to TWTA-based solutions.
 
 <figure>
-  <!-- TODO: Alignment bug in table version, fallback to compound version. -->
-  <!--
-    <table>
-      <tbody>
-        <tr>
-          <td rowspan="2">
-            <span style="writing-mode: vertical-lr;transform: rotate(180deg);">
-              Transmission between inputs and output (dB)
-            </span>
-          </td>
-          <td>
-            <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-1.svg">
-          </td>
-          <td>
-            <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-2.svg">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-3.svg">
-          </td>
-          <td>
-            <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-4.svg">
-          </td>
-        </tr>
-        <tr>
-          <td>
-          </td>
-          <td colspan="2" style="text-align:center;">
-            Frequency (GHz)
-          </td>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  -->
-  <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot.svg" title="Details of inputs transmissions." alt="Details of inputs transmissions.">
+  <table class="images-table">
+    <tbody>
+      <tr>
+        <td rowspan="2">
+          <span style="writing-mode: vertical-lr;transform: rotate(180deg); font-size: 0.5em; margin-right: 1.0em">
+            Transmission between inputs and output (dB)
+          </span>
+        </td>
+        <td>
+          <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-1.svg">
+        </td>
+        <td>
+          <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-2.svg">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-3.svg">
+        </td>
+        <td>
+          <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-4.svg">
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td colspan="2" style="text-align:center;">
+          Frequency (GHz)
+        </td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <figcaption>Fig.&#8239;12. Details of inputs transmissions.</figcaption>
 </figure>
 <!-- \label{fig-transmission-detail} -->
