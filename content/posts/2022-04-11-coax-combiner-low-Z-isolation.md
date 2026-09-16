@@ -371,7 +371,6 @@ The worst case isolation between inputs is at least 10&#8239;dB for inputs close
         <td colspan="2" style="text-align:center;">
           Frequency (GHz)
         </td>
-        </td>
       </tr>
     </tbody>
   </table>
