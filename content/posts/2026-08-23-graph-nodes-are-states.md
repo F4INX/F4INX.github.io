@@ -17,13 +17,13 @@ However, it is also possible to see nodes as *states*, as outlined in the follow
 
 *Inspired by a true problem.*
 
-Imagine a travel problem where travellers should calculate their trip such that they either go through country A, or through country B, or through neither, but must not go through both countries.
+Imagine a travel problem where travellers should calculate their trip so that they either go through country A, or through country B, or through neither, but must not go through both countries.
 
 ![Map with three countries A, B, and a neutral one, connected by roads between nodes 11, 21-23, 31-33, 41-43, and 51.](/posts/graph-nodes-are-states/graph-01.svg)
 
 A possible solution to this problem would be to tweak the algorithm used to solve this graph: either calculating shortest routes between sub-domains, or calculating the k shortest routes to be able to take alternative paths in the case the shortest path is forbidden, and so on.
 
-A more straightforward way is to consider **states as nodes** and to apply the usual algorithms directly. Here, the states would be like ```(11,none)``` for the starting node, ```(31,A)``` after ```(11,none)->(21,A)```, or ```(31,B)``` after ```(11,none)->(31,B)```, and so on. Note that this graph would be directional, which could surprise people used to the *locations as nodes* approach but is barely noticed for people used to *states as nodes* approach.
+A more straightforward way is to consider **states as nodes** and to apply the usual algorithms directly. Here, the states would be like ```(11,none)``` for the starting node, ```(31,A)``` after ```(11,none)->(21,A)```, or ```(31,B)``` after ```(11,none)->(31,B)```, and so on. Note that this graph would be directional, which could surprise people used to the *locations as nodes* approach but is barely noticed for people used to the *states as nodes* approach.
 
 The total number of nodes in this approach is multiplied by the number of the states. On the one hand, it can be troublesome for algorithms relying on various arrays to do their job, but this drawback may be overcome by the simplification of the algorithm. On the other hand, this is not at all a problem in cases the graph is stored in a sparse way or lazily evaluated.
 
@@ -88,4 +88,4 @@ Shortest unvisited path: (5) length 92.
 
 ## Conclusion
 
-While a first approach to the analysis of graph with constraints is to handle them with a *locations as nodes* approach and to use various techniques to process the constraints, handling them with a *states as nodes* approach can lead to simpler algorithms.
+While a first approach to the analysis of a graph with constraints is to handle them with a *locations as nodes* approach and to use various techniques to process the constraints, handling them with a *states as nodes* approach can lead to simpler algorithms.
