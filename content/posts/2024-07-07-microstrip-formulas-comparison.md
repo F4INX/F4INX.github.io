@@ -216,36 +216,27 @@ The real strange point is the accuracy of the IPC-2141 formulas. Their relative 
 
 The following table sums up some microstrip calculators and the formulas which they use. Only microstrip calculators for which the formula was told or could be inferred from JavaScript source code were included.
 
-<!-- FIXME: Ugly tweak. -->
-<style>
-    .style-table-after + table,
-    .style-table-after + table th,
-    .style-table-after + table td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-</style>
-<div class="style-table-after"></div>
-
-| Website                       | Formula         | Val. warn | Comments                                                                      |
-| ----------------------------- | --------------- | --------- | ----------------------------------------------------------------------------- |
-| www.microwaves101.com[^10]    | H&J             |           |                                                                               |
-| mcalc.sourceforge.net[^11]    | H&J             |           |                                                                               |
-| ~~www.edn.com[^17]~~          | Wheeler 1977    |           | _Now offline._                                                                              |
-| cepd.com[^18]                 | Wheeler 1977    |           |                                                                               |
+{{% text-table %}}
+| Website                       | Formula         | IPC-2141 limit warning | Comments                                                                      |
+| ----------------------------- | --------------- | ---------------------- | ----------------------------------------------------------------------------- |
+| www.microwaves101.com[^10]    | H&J             |                        |                                                                               |
+| mcalc.sourceforge.net[^11]    | H&J             |                        |                                                                               |
+| ~~www.edn.com[^17]~~          | Wheeler 1977    |                        | _Now offline._                                                                              |
+| cepd.com[^18]                 | Wheeler 1977    |                        |                                                                               |
 | [www.finetune.co.jp](https://web.archive.org/web/20260312171255/http://www.finetune.co.jp/~lyuka/technote/ustrip/)[^19] | Wheeler 1977    |           |                                                                               |
-| leleivre.com[^20]             | Wheeler 1977    |           |                                                                               |
-| chemandy.com[^21]             | Wheeler 1977    |           | _Confusion between ε<sub>r</sub> and ε<sub>r,eff</sub>._                      |
-| www.pasternack.com[^29]       | Hammerstad 1975 |           |                                                                               |
-| www.emclab.cei.uec.ac.jp[^30] | Hammerstad 1975 |           |                                                                               |
-| chemandy.com[^31]             | Hammerstad 1975 |           |                                                                               |
-| emclab.mst.edu[^33]           | IPC-2141        | Yes       |                                                                               |
-| referencedesigner.com[^34]    | IPC-2121        | Yes       | _Formulas not told in document, but seen in JavaScript source code._          |
-| technick.net[^35]             | IPC-2141        | Yes       |                                                                               |
-| a8blog.com[^36]               | IPC-2141        | No        | _No warnings, but at least does not print the calculated negative impedance._ |
-| www.everythingrf.com[^38]     | IPC-2141        | No        |                                                                               |
-| chemandy.com[^39]             | IPC-2141        | No        |                                                                               |
-| ncalculators.com[^40]         | IPC-2121        | No        |                                                                               |
+| leleivre.com[^20]             | Wheeler 1977    |                        |                                                                               |
+| chemandy.com[^21]             | Wheeler 1977    |                        | _Confusion between ε<sub>r</sub> and ε<sub>r,eff</sub>._                      |
+| www.pasternack.com[^29]       | Hammerstad 1975 |                        |                                                                               |
+| www.emclab.cei.uec.ac.jp[^30] | Hammerstad 1975 |                        |                                                                               |
+| chemandy.com[^31]             | Hammerstad 1975 |                        |                                                                               |
+| emclab.mst.edu[^33]           | IPC-2141        | Yes                    |                                                                               |
+| referencedesigner.com[^34]    | IPC-2121        | Yes                    | _Formulas not told in document, but seen in JavaScript source code._          |
+| technick.net[^35]             | IPC-2141        | Yes                    |                                                                               |
+| a8blog.com[^36]               | IPC-2141        | No                     | _No warnings, but at least does not print the calculated negative impedance._ |
+| www.everythingrf.com[^38]     | IPC-2141        | No                     |                                                                               |
+| chemandy.com[^39]             | IPC-2141        | No                     |                                                                               |
+| ncalculators.com[^40]         | IPC-2121        | No                     |                                                                               |
+{{% /text-table %}}
 
 ## Conclusion
 

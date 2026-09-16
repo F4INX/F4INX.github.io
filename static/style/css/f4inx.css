@@ -443,11 +443,20 @@ table.images-table td {
 }
 
 /* Text only tables and figures */
+/* Center table on page */
 figure.text-table {
   margin-left: auto;
   margin-right: auto;
   display: table;  /* For caption. */
 }
+/* Center title elements */
+/* td used for some tables there the "title" is on two lines */
+figure.text-table table thead th,
+figure.text-table table thead td {
+  text-align: center;
+  font-weight: bold;
+}
+/* Borders and lines */
 figure.text-table table,
 table.text-table {
   border-collapse: collapse;
@@ -474,6 +483,7 @@ table.text-table tbody tr,
 table.text-table tbody td {
   border-bottom: var(--bar-3) solid var(--fg-color);
 }
+/* Caption */
 figure.text-table figcaption {
   display: table-caption;
   caption-side: top;
