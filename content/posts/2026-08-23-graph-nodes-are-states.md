@@ -67,10 +67,10 @@ Development of (3) length 46.
 
 Paths:
 
-* (7): (3) --57--> {WaM, Comp, TV} length 103
-* (8): (3) --95--> {Oven, Comp, TV} length 141
-* (9): (3) --76--> {Oven, WaM, TV} length 122
-* (10): (3) ------> {Oven, WaM, Comp} length 160
+* (7): (3) --60--> {WaM, Comp, TV} length 106
+* (8): (3) --100--> {Oven, Comp, TV} length 146
+* (9): (3) --80--> {Oven, WaM, TV} length 126
+* (10): (3) --120--> {Oven, WaM, Comp} length 166
 
 Shortest unvisited path: (2) length 69.
 
