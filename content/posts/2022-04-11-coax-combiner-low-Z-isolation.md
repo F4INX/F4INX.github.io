@@ -183,7 +183,7 @@ The prematching section behaves in exactly the same way in the even and the odd 
 -->
 
 <figure>
-  <table>
+  <table class="images-table">
     <tbody>
       <tr>
         <td>

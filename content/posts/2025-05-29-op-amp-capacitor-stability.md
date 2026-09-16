@@ -30,7 +30,7 @@ And once the isolation resistor is added, it lacks only two components to make s
 
 In the discussion, the OPA994[^4] was suggested. Indeed, it is advertised as having an "unlimited capacitive load drive capability" with a "phase margin of 50° when driving a load of 10&nbsp;μF and 1&nbsp;MΩ". It is indeed the case. However, on some part of the phase margin plots, the phase margin is as low as 20°, and, again, is works much better with an isolation resistor. It should be noted, however, that the OP994 with a 50&nbsp;Ω isolation resistor has a 45&nbsp;% worst case overshoot while the OPA192 has only a 20&nbsp;% overshoot.
 
-<table>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/op-amp-capacitor-stability/opa994-ds-fig-5-39.png"/>
@@ -243,7 +243,7 @@ The AD8180 is an open loop buffer and can drive capacitive loads without isolati
 The ADV3219 is a feedback amplifier with an internal feedback. Performance curves are given for low capacitive loads without isolation resistor. For higher capacitive loads, the datasheets recommands an isolation resistor of "a few tens of ohms", but does not give more performance details. Nevertheless it can be assumes that it will be dominated by the RC constant of the output.
 
 <figure>
-<table>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/op-amp-capacitor-stability/ad8180-ds-fig-22.png" />
