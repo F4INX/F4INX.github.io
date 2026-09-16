@@ -31,7 +31,7 @@ The total number of nodes in this approach is multiplied by the number of the st
 
 While in the previous case the states can be seen as a convenient way to implement a constraint, in lots of cases the nodes are true states. A typical example is the study of a control flow inside a program. But there are more mundane cases.
 
-I recently found this example in my drafts about a scheduling problem for the repair of various devices, the devices being able to be repaired only one at a time, and each device having a repair time and a cost per time unit. The example showed the first steps of the application of Dijkstra's algorithm.
+I recently found this example in my drafts about a scheduling problem for the repair of various devices, the devices being able to be repaired only one at a time, and each device having a repair time and a cost per time unit. The example showed the application of Dijkstra's algorithm.
 
 | Device                | Time | Unit Cost |
 |-----------------------|------|-----------|
@@ -87,6 +87,35 @@ Paths:
 
 Shortest unvisited path: (5) length 92.
 
+### Steps 4 to 24
+
+Removed for brevity, follow the same pattern.
+
+### Step 25
+
+Development of (56) length 216.
+
+Paths:
+
+* (70): (56) --6--> {} length 222
+
+Shortest unvisited path: (54) length 221.
+
+### Step 26
+
+Development of (54) length 221.
+
+Paths:
+
+* (71): (54) --15--> {DiW} length 236
+* (72): (54) --10--> {Oven} length 231
+
+Shortest unvisited path: (70) length 222.
+
+This path reaches the empty set (all devices repaired), ending the algorithm.
+
 ## Conclusion
+
+Path (70) reaches the empty set with a total cost of 222, corresponding to the repair order: Comp, DiW, TV, WaM, Oven. Since all remaining unvisited paths have a higher length, this is the optimal solution.
 
 While a first approach to the analysis of a graph with constraints is to handle them with a *locations as nodes* approach and to use various techniques to process the constraints, handling them with a *states as nodes* approach can lead to simpler algorithms.
