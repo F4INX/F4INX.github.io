@@ -190,7 +190,7 @@ Analysis of the transmission curves enables to deduce the connexions:
 This leads to the following schematic, compared to the datasheet information:
 
 <!-- FIXME: Add alt textes and titles. -->
-<table>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/IQ-quadrature-sign/mini-circuits-pins.svg" >

@@ -438,6 +438,10 @@ img {
 }
 
 /* Tables for images formatting */
+table.images-table {
+  margin-left: auto;
+  margin-right: auto;
+}
 table.images-table td {
   line-height: 0;
 }
