@@ -445,6 +445,10 @@ table.images-table {
 table.images-table td {
   line-height: 0;
 }
+/* For tables mixing images and labels, restore line height for text. */
+table.images-table td p {
+  line-height: normal;
+}
 
 /* Text only tables and figures */
 /* Center table on page */

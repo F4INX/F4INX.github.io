@@ -256,7 +256,7 @@ The ADV3219 is a feedback amplifier with an internal feedback. Performance curve
 </figure>
 
 <figure>
-<table>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/op-amp-capacitor-stability/ad8170-ds-fig-19.png" />
