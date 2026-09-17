@@ -215,26 +215,26 @@ The \[ADV3129[^13]\] multiplexer is organized as two input transconductance stag
 
 The following chips are interesting, with only single channel devices mentionned:
 
-<figure>
-<img src="/posts/op-amp-capacitor-stability/ad8170-ds-block-diagram.png" width="50%" />
-<figcaption markdown="1">
+{{% figurecap
+  img="/posts/op-amp-capacitor-stability/ad8170-ds-block-diagram.png"
+  width="50%"
+%}}
 AD8170[^14]
-</figcaption>
-</figure>
+{{% /figurecap %}}
 
-<figure>
-<img src="/posts/op-amp-capacitor-stability/ad8180-ds-block-diagram.png" width="50%" />
-<figcaption markdown="1">
+{{% figurecap
+  img="/posts/op-amp-capacitor-stability/ad8180-ds-block-diagram.png"
+  width="50%"
+%}}
 AD8180[^15]
-</figcaption>
-</figure>
+{{% /figurecap %}}
 
-<figure>
-<img src="/posts/op-amp-capacitor-stability/adv3219-ds-block-diagram.png" width="50%" />
-<figcaption markdown="1">
+{{% figurecap
+  img="/posts/op-amp-capacitor-stability/adv3219-ds-block-diagram.png"
+  width="50%"
+%}}
 ADV3219[^16]
-</figcaption>
-</figure>
+{{% /figurecap %}}
 
 The AD8170 is a **current feedback** amplifier with a switchable input. These category of operational amplifiers are sensitive to the impedance seen at the feedback pin, to DFB schemes cannot be used directly with them. The datasheet recommands isolation resistor values and feedback resistance. Simple RC calculations shows that the performance is mainly determined by the RC constant of the isolation resistor and the capacitive load.
 
