@@ -209,9 +209,9 @@ A problem with the AD8036[^11] is that it is an input clamping amplifier, with c
 
 Switching between two voltages levels would be conveniently done by a switch integrated circuit. Most common switches are slow, either because they are plain slow or because they include some "break before make" circuitry which take some transition times. The switches in the "buffered analog multiplexers" section of Analog Devices[^12] provide faster time, probably because the techniques to deal with switching transitions are easier to implement in unidirectional multiplexed buffer than in unidirectional buffer, like current steering:
 
-<blockquote>
-<p markdown="1">The &#91;ADV3129[^13]&#93; multiplexer is organized as two input transconductance stages tied in parallel with a single output transimpedance stage followed by a unity-gain buffer. Internal voltage feedback sets the gain.</p>
-</blockquote>
+{{% blockquote %}}
+The \[ADV3129[^13]\] multiplexer is organized as two input transconductance stages tied in parallel with a single output transimpedance stage followed by a unity-gain buffer. Internal voltage feedback sets the gain.
+{{% /blockquote %}}
 
 The following chips are interesting, with only single channel devices mentionned:
 
