@@ -13,7 +13,9 @@ related_posts:
 
 Hadrien Theveneau, Christophe Gaquière, Romain Lenglet, Matthieu Werquin, Jean-Christophe Joly, and Stéphane Tortel
 
-<p class="begin-note" markdown="1">This post is a mix between an unpublished long article, an article published in IEEE MWCL[^theveneau2017spatial], and further additions. Original articles by the authors in front of this post, revisions by the first author.</p>
+{{% begin-note %}}
+This post is a mix between an unpublished long article, an article published in IEEE MWCL[^theveneau2017spatial], and further additions. Original articles by the authors in front of this post, revisions by the first author.
+{{% /begin-note %}}
 
 <summary>
 This article describes the design, fabrication and measurement of a 2.5&#8239;Ω, 8-way, 1&#8239;&ndash;&#8239;6&#8239;GHz spatial power combiner using an absorbing material to increase the isolation. Insertion losses are lower than 1.8&#8239;dB in the 1&#8239;&ndash;&#8239;6&#8239;GHz band, except for a few peaks. Isolation is at least 10&#8239;dB for 45° input pairs and better than -15&#8239;dB for other pairs. This is the first power combiner to provide wide bandwidth, high isolation, and low input impedances at the same time.

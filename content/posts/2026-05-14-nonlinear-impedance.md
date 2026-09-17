@@ -11,7 +11,9 @@ related_posts:
 ---
 
 
-<p class="begin-note">Although it is still in draft stage, this document is released before finishing due to its interest. This page is a quick and dirty translation of a previous French document. Various editing issues are susceptible to be present.</p>
+{{% begin-note %}}
+Although it is still in draft stage, this document is released before finishing due to its interest. This page is a quick and dirty translation of a previous French document. Various editing issues are susceptible to be present.
+{{% /begin-note %}}
 
 ### A few words on the notion of transistor output impedance
 

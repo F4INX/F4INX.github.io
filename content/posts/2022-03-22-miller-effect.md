@@ -11,7 +11,9 @@ related_posts:
 ---
 
 
-<p class="begin-note">This content was originally published on Microwaves 101 (<a href="https://www.microwaves101.com/encyclopedias/miller-effect">https://www.microwaves101.com/encyclopedias/miller-effect</a>). Many thanks to Steve for improvements on the original version. Have a look on his website for more interesting content.</p>
+{{% begin-note %}}
+This content was originally published on Microwaves 101 (<a href="https://www.microwaves101.com/encyclopedias/miller-effect">https://www.microwaves101.com/encyclopedias/miller-effect</a>). Many thanks to Steve for improvements on the original version. Have a look on his website for more interesting content.
+{{% /begin-note %}}
 
 In Scientific Papers of the Bureau of Standards, Volume 15, 1919-1920, John M. Miller published a paper in titled "Dependence of the Input Impedance of a Three-Electrode Vacuum Tube Upon the Load in the Plate Circuit." For this work, Mr. Miller is forever associated with the "Miller effect" which is still relevant a century later.
 
