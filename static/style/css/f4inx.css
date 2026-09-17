@@ -558,7 +558,10 @@ latexmath.framed mjx-math {
   margin-right: auto;
 }
 
-a.reversefootnote {
+/* Keep both Jekyll (reversefootnote) and Hugo (footnote-backref)
+   just in case. */
+a.reversefootnote,
+a.footnote-backref  {
   color: inherit;  /* People don't need color to guess they are clickable */
 }
 

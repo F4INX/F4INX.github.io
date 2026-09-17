@@ -18,18 +18,9 @@ While Hammerstad and Jensen formulas[^1a] stay the gold standard, other formulas
 
 ## Geometry of the problem
 
-![](/posts/microstrip-formulas-comparison/microstrip.png)
-
-<!-- FIXME: Ugly tweak. -->
-<style>
-    .style-figcaption-after + p {
-      font-style: italic;
-      text-align: center;
-    }
-</style>
-<div class="style-figcaption-after"></div>
-
+{{% figurecap img="/posts/microstrip-formulas-comparison/microstrip.png" %}}
 Fig. 1 – Geometry of a microstrip line[^4].
+{{% /figurecap %}}
 
 The geometrical parameters of the microstrip line studied are defined in Fig. 1[^4]: w is the width of the microstrip line, h the height of the substrate, t the thickness of the strip. Non-geometrical parameters are the relative permittivity of the substrate. We’ll note for the characteristic impedance of free space.
 
@@ -165,19 +156,11 @@ Fig. 1 compares the asymptotic behavior of IPC-2141 formulas with the good formu
   <figcaption>Fig. 3 – Asymptotic behavior of formulas.</figcaption>
 </figure>
 
-Despite the problems of IPC-2141 formulas, they are used in several online calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35]<sup>,</sup>[^36]<sup>,</sup>[^37]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40]. Some calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35] give warnings when using IPC-2141 formulas outside of their validity range like shown in Fig. 3. On the contrary, some other calculators[^36]<sup>,</sup>[^37]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] give neither a warning nor a validity range, including a calculator on a renowned website[^38]. Worse, some calculators[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] even give nonsense negative impedance when fed with proper values without any warning.
+Despite the problems of IPC-2141 formulas, they are used in several online calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35]<sup>,</sup>[^36]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40]. Some calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35] give warnings when using IPC-2141 formulas outside of their validity range like shown in Fig. 3. On the contrary, some other calculators[^36]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] give neither a warning nor a validity range, including a calculator on a renowned website[^38]. Worse, some calculators[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] even give nonsense negative impedance when fed with proper values without any warning.
 
-![](/posts/microstrip-formulas-comparison/ipc-warning.png)
-
-<!-- FIXME: Ugly tweak. -->
-<style>
-    .style-figcaption-after + p {
-      font-style: italic;
-      text-align: center;
-    }
-</style>
-<div class="style-figcaption-after"></div>
+{{% figurecap img="/posts/microstrip-formulas-comparison/ipc-warning.png" %}}
 Fig. 4 – Screenshot of a microstrip line impedance calculator[^33] raising a warning when trying to calculate impedances outside IPC-2141 validity range.
+{{% /figurecap %}}
 
 It should be mentioned that a calculator[^33] not only gives the validity range of the IPC-2141 formula and warns when trying to enter parameters outside of this range, but it also gives accuracy data.
 
@@ -321,5 +304,3 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 [^39]: W. J. Highton, "Microstrip transmission line calculator using IPC-2141 equation," Chemandy electronics, 2 January 2020. \[Online\]. Available: <https://chemandy.com/calculators/microstrip-transmission-line-calculator-ipc2141.htm>. \[Accessed 13 April 2020\].
 
 [^40]: ncalculators.com, "Microstrip impedance calculator," \[Online\]. Available: <https://web.archive.org/web/20211018033617/https://ncalculators.com/electronics/microstrip-impedance-calculator.htm>.
-
-[^41]: I. Sukiswo, "Elektronika telekomunikasi, Microstrip," 08 December 2009. \[Online\]. Available: <http://www.elektro.undip.ac.id/sukiswo/?KULIAH:Elektronika_Telekomunikasi>. \[Accessed 16 April 2020\].
