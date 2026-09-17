@@ -182,7 +182,7 @@ The prematching section behaves in exactly the same way in the even and the odd 
 \end{figure}
 -->
 
-<figure>
+{{% figbegin %}}
   <table class="images-table">
     <tbody>
       <tr>
@@ -203,8 +203,10 @@ The prematching section behaves in exactly the same way in the even and the odd 
       </tr>
     </tbody>
   </table>
-  <figcaption>Fig.&#8239;5. Electric field of propagation modes in point A of the combiner: even mode (a) and two odd modes (b) and (c). The inner core is removed to simplify the calculation, see <span markdown="1">\[[^theveneau2017amplificateurs]\]</span> for more details.</figcaption>
-</figure>
+  {{% figcaption %}}
+  Fig.&#8239;5. Electric field of propagation modes in point A of the combiner: even mode (a) and two odd modes (b) and (c). The inner core is removed to simplify the calculation, see [^theveneau2017amplificateurs] for more details.
+  {{% /figcaption %}}
+{{% figend %}}
 
 In the even mode, as shown in Fig.&#8239;5a<!--~\ref{fig-plt-even-mode}-->, the strips have the same potential and almost no field goes into the absorber. The lines have low losses and the even mode is transmitted from point A to point B. The rest of the combiner, made with a full metal core, completes the impedance transformation, which was started in the prematch section. The heat spreader behaves approximately like a shunt inductor. This mode is the normal combing mode.
 
