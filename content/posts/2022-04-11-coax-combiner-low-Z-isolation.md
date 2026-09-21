@@ -355,18 +355,18 @@ The worst case isolation between inputs is at least 10&#8239;dB for inputs close
           </span>
         </td>
         <td>
-          <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-1.svg">
+          <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-1.svg">
         </td>
         <td>
-          <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-2.svg">
+          <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-2.svg">
         </td>
       </tr>
       <tr>
         <td>
-          <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-3.svg">
+          <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-3.svg">
         </td>
         <td>
-          <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-4.svg">
+          <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-4.svg">
         </td>
       </tr>
       <tr>
