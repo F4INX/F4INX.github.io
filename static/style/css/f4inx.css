@@ -442,12 +442,11 @@ table.images-table {
   margin-left: auto;
   margin-right: auto;
 }
-table.images-table td {
-  line-height: 0;
-}
-/* For tables mixing images and labels, restore line height for text. */
-table.images-table td p {
-  line-height: normal;
+/* Block images to remove the inline baseline gap. */
+table.images-table img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Text only tables and figures */
