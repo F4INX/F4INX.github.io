@@ -442,8 +442,11 @@ table.images-table {
   margin-left: auto;
   margin-right: auto;
 }
-table.images-table td {
-  line-height: 0;
+/* Block images to remove the inline baseline gap. */
+table.images-table img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Text only tables and figures */
