@@ -709,9 +709,10 @@ figure figcaption {
 /* Cards layout */
 /****************/
 
-.content {
-  padding: 1rem;
-  max-width: 1200px;
+/* Overrides the narrow column setting for the home page */
+/* with cards.                                           */
+.content-cards {
+  max-width: 1200px;  
   margin: 0 auto;
   width: 100%;
 }
@@ -720,7 +721,7 @@ figure figcaption {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
-  margin: 1rem 0;
+  margin: 1rem;
 }
 
 /* Note that --bg-color and --fg-color */
