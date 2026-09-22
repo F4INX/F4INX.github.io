@@ -66,6 +66,9 @@ jobs:
             linkchecker-cache
 
       - name: Run LinkChecker
+        # The primp recheck is rate-limited to 2 req/s by default
+        # (--recheck-rate in linkchecker.py) to avoid 403s from bot
+        # protection.
         run: ~/.venv/bin/python3 linkchecker.py --ci
 
       - name: Save link cache
