@@ -709,9 +709,11 @@ figure figcaption {
 /* Cards layout */
 /****************/
 
-.content {
+/* Overrides the narrow column setting for the home page */
+/* with cards.                                           */
+.content-cards {
   padding: 1rem;
-  max-width: 1200px;
+  max-width: 1200px;  
   margin: 0 auto;
   width: 100%;
 }
