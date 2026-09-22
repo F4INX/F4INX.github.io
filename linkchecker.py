@@ -23,6 +23,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.request
 from datetime import datetime, timedelta
 from urllib.parse import unquote, urlparse
@@ -41,6 +42,7 @@ CACHE_FILE = '.linkchecker-cache.json'
 DEFAULT_CACHE_TTL_HOURS = 24
 CACHE_MAX_AGE_DAYS = 30
 CLOUDFLARE_CACHE_TTL_HOURS = 30 * 24
+DEFAULT_RECHECK_RATE = 2.0
 CONFIG_FILE = 'linkchecker-config.yaml'
 USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
               '(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36')
@@ -437,13 +439,15 @@ def _is_cloudflare_block(status, headers):
     return False
 
 
-def recheck_urls(urls):
+def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
     """Recheck URLs using primp with browser impersonation.
 
-    Returns (lines, results) where lines is a list of strings for the
-    summary, and results is a list of (url, status_code, ok, cloudflare)
-    tuples. ok is True for 2xx/3xx status codes. cloudflare is True when
-    the response was identified as a Cloudflare bot-protection block.
+    Requests are paced at `rate` per second to avoid tripping bot
+    protection. Returns (lines, results) where lines is a list of strings
+    for the summary, and results is a list of (url, status_code, ok,
+    cloudflare) tuples. ok is True for 2xx/3xx status codes. cloudflare is
+    True when the response was identified as a Cloudflare bot-protection
+    block.
     """
     lines = []
 
@@ -462,8 +466,11 @@ def recheck_urls(urls):
     cloudflare_count = 0
 
     client = primp.Client(impersonate="chrome", follow_redirects=True)
+    delay = 1.0 / rate if rate > 0 else 0.0
 
-    for url in sorted(urls):
+    for i, url in enumerate(sorted(urls)):
+        if i and delay:
+            time.sleep(delay)
         try:
             response = client.get(url, timeout=30)
             status = response.status_code
@@ -668,6 +675,10 @@ def main():
                              f'(default: {DEFAULT_CACHE_TTL_HOURS})')
     parser.add_argument('--no-cache', action='store_true',
                         help='Disable external link cache (always check all links)')
+    parser.add_argument('--recheck-rate', type=float, default=DEFAULT_RECHECK_RATE,
+                        metavar='RPS',
+                        help=f'Requests per second for the primp recheck '
+                             f'(default: {DEFAULT_RECHECK_RATE}, 0 for no limit)')
     args = parser.parse_args()
 
     # Determine paths
@@ -757,7 +768,8 @@ def main():
         urls_to_recheck = [u for u in filtered_urls
                            if any(p.search(u) for p in config['recheck'])]
         if urls_to_recheck:
-            _, recheck_results = recheck_urls(urls_to_recheck)
+            _, recheck_results = recheck_urls(urls_to_recheck,
+                                              rate=args.recheck_rate)
 
     # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
     step_summary = os.environ.get('GITHUB_STEP_SUMMARY')

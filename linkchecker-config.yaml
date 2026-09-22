@@ -9,7 +9,9 @@
 #           Used for sites that block LinkChecker but respond to a
 #           browser-like client. Sites that return a Cloudflare block
 #           during recheck are cached for 1 month to avoid repeated
-#           requests.
+#           requests. Recheck requests are rate-limited to avoid
+#           tripping bot protection; see --recheck-rate in linkchecker.py
+#           (default 2 requests/second, 0 for no limit).
 #
 # silent:   URLs matching these patterns are hidden from the summary's
 #           "Filtered and ignored links" list. Used for non-link entries
