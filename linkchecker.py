@@ -185,17 +185,21 @@ def _is_ignored(ud):
     return any(w[0] == 'ignored' for w in ud.warnings) if ud.warnings else False
 
 
-def count_status(rows, cached_urls=None, cache=None):
+def count_status(rows, cached_urls=None, cache=None, recovered=None):
     """Count total, errors, redirects, filtered, ignored, warnings, cached.
 
     Cached URLs appear as 'filtered' in the results (they were added to the
     ignore list). The cached_urls set lets us separate them from links
     filtered by the ignore patterns file. Cached URLs that have a
     final_url in the cache are counted separately as cached redirects.
+    URLs in the `recovered` set (error URLs cleared by the primp
+    recheck) are not counted as errors.
     """
+    recovered = recovered or set()
     total = len(rows)
 
-    errors = sum(1 for r in rows if _is_error(r))
+    errors = sum(1 for r in rows
+                 if _is_error(r) and r.base_url not in recovered)
     redirects = sum(1 for r in rows
                     if any('Redirected' in w[1] for w in r.warnings))
     warnings = sum(1 for r in rows if _is_warning(r))
@@ -226,11 +230,16 @@ def count_status(rows, cached_urls=None, cache=None):
     }
 
 
-def extract_errors(rows):
-    """Extract error URLs from url_data objects."""
+def extract_errors(rows, recovered=None):
+    """Extract error URLs from url_data objects.
+
+    URLs in the `recovered` set (error URLs cleared by the primp
+    recheck, see print_summary) are excluded.
+    """
+    recovered = recovered or set()
     errors = []
     for r in rows:
-        if _is_error(r):
+        if _is_error(r) and r.base_url not in recovered:
             url = r.base_url
             real = r.url
             result = r.result
@@ -515,7 +524,16 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
 def print_summary(rows, silent_patterns, out=print, cached_urls=None,
                   public_ip=None, recheck_results=None, cache=None):
     """Print formatted summary to stdout. Returns the stats dict."""
-    stats = count_status(rows, cached_urls=cached_urls, cache=cache)
+    # Error URLs cleared by the primp recheck: either the target
+    # responds to a browser-like client (link works, not an error), or
+    # it is a Cloudflare block, which is cached and reported separately.
+    recovered = set()
+    if recheck_results:
+        for url, status, ok, cloudflare in recheck_results:
+            if ok or cloudflare:
+                recovered.add(url)
+    stats = count_status(rows, cached_urls=cached_urls, cache=cache,
+                         recovered=recovered)
 
     # Compute recheck stats
     recheck_ok = 0
@@ -577,7 +595,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     if stats['errors'] > 0:
         out('### Errors')
         out()
-        for err in extract_errors(rows):
+        for err in extract_errors(rows, recovered):
             out(err)
         out()
 
@@ -760,15 +778,21 @@ def main():
         print('Error: LinkChecker did not produce any results.', file=sys.stderr)
         sys.exit(1)
 
-    # Recheck filtered URLs matching recheck patterns using primp
+    # Recheck filtered URLs matching recheck patterns, plus URLs that
+    # errored in the main run, using primp (browser impersonation).
+    # Error URLs are rechecked regardless of patterns so that
+    # Cloudflare-protected targets are detected and cached instead of
+    # failing CI until a pattern is added by hand.
     recheck_results = []
     if config['recheck']:
         filtered_urls = extract_ignored_urls(rows, config['silent'],
                                              cached_urls=fresh_cached)
-        urls_to_recheck = [u for u in filtered_urls
-                           if any(p.search(u) for p in config['recheck'])]
+        urls_to_recheck = {u for u in filtered_urls
+                           if any(p.search(u) for p in config['recheck'])}
+        urls_to_recheck |= {r.base_url for r in rows
+                            if _is_error(r) and r.base_url}
         if urls_to_recheck:
-            _, recheck_results = recheck_urls(urls_to_recheck,
+            _, recheck_results = recheck_urls(sorted(urls_to_recheck),
                                               rate=args.recheck_rate)
 
     # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
