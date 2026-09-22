@@ -438,16 +438,35 @@ img {
 }
 
 /* Tables for images formatting */
-table.images-table td {
-  line-height: 0;
+table.images-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Block images to remove the inline baseline gap. */
+table.images-table img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Text only tables and figures */
-figure.text-table {
+/* Center table on page */
+figure.text-table,
+table.text-table {
   margin-left: auto;
   margin-right: auto;
   display: table;  /* For caption. */
 }
+/* Center title elements */
+/* td used for some tables there the "title" is on two lines */
+figure.text-table table thead th,
+table.text-table thead th,
+figure.text-table table thead td,
+table.text-table thead td {
+  text-align: center;
+  font-weight: bold;
+}
+/* Borders and lines */
 figure.text-table table,
 table.text-table {
   border-collapse: collapse;
@@ -474,6 +493,7 @@ table.text-table tbody tr,
 table.text-table tbody td {
   border-bottom: var(--bar-3) solid var(--fg-color);
 }
+/* Caption */
 figure.text-table figcaption {
   display: table-caption;
   caption-side: top;
@@ -541,7 +561,10 @@ latexmath.framed mjx-math {
   margin-right: auto;
 }
 
-a.reversefootnote {
+/* Keep both Jekyll (reversefootnote) and Hugo (footnote-backref)
+   just in case. */
+a.reversefootnote,
+a.footnote-backref  {
   color: inherit;  /* People don't need color to guess they are clickable */
 }
 
@@ -686,9 +709,10 @@ figure figcaption {
 /* Cards layout */
 /****************/
 
-.content {
-  padding: 1rem;
-  max-width: 1200px;
+/* Overrides the narrow column setting for the home page */
+/* with cards.                                           */
+.content-cards {
+  max-width: 1200px;  
   margin: 0 auto;
   width: 100%;
 }
@@ -697,7 +721,7 @@ figure figcaption {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
-  margin: 1rem 0;
+  margin: 1rem;
 }
 
 /* Note that --bg-color and --fg-color */

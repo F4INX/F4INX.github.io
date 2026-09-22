@@ -13,7 +13,9 @@ related_posts:
 
 Hadrien Theveneau, Christophe Gaquière, Romain Lenglet, Matthieu Werquin, Jean-Christophe Joly, and Stéphane Tortel
 
-<p class="begin-note" markdown="1">This post is a mix between an unpublished long article, an article published in IEEE MWCL[^theveneau2017spatial], and further additions. Original articles by the authors in front of this post, revisions by the first author.</p>
+{{% begin-note %}}
+This post is a mix between an unpublished long article, an article published in IEEE MWCL[^theveneau2017spatial], and further additions. Original articles by the authors in front of this post, revisions by the first author.
+{{% /begin-note %}}
 
 <summary>
 This article describes the design, fabrication and measurement of a 2.5&#8239;Ω, 8-way, 1&#8239;&ndash;&#8239;6&#8239;GHz spatial power combiner using an absorbing material to increase the isolation. Insertion losses are lower than 1.8&#8239;dB in the 1&#8239;&ndash;&#8239;6&#8239;GHz band, except for a few peaks. Isolation is at least 10&#8239;dB for 45° input pairs and better than -15&#8239;dB for other pairs. This is the first power combiner to provide wide bandwidth, high isolation, and low input impedances at the same time.
@@ -182,8 +184,8 @@ The prematching section behaves in exactly the same way in the even and the odd 
 \end{figure}
 -->
 
-<figure>
-  <table>
+{{% figbegin %}}
+  <table class="images-table">
     <tbody>
       <tr>
         <td>
@@ -203,8 +205,10 @@ The prematching section behaves in exactly the same way in the even and the odd 
       </tr>
     </tbody>
   </table>
-  <figcaption>Fig.&#8239;5. Electric field of propagation modes in point A of the combiner: even mode (a) and two odd modes (b) and (c). The inner core is removed to simplify the calculation, see <span markdown="1">\[[^theveneau2017amplificateurs]\]</span> for more details.</figcaption>
-</figure>
+  {{% figcaption %}}
+  Fig.&#8239;5. Electric field of propagation modes in point A of the combiner: even mode (a) and two odd modes (b) and (c). The inner core is removed to simplify the calculation, see [^theveneau2017amplificateurs] for more details.
+  {{% /figcaption %}}
+{{% figend %}}
 
 In the even mode, as shown in Fig.&#8239;5a<!--~\ref{fig-plt-even-mode}-->, the strips have the same potential and almost no field goes into the absorber. The lines have low losses and the even mode is transmitted from point A to point B. The rest of the combiner, made with a full metal core, completes the impedance transformation, which was started in the prematch section. The heat spreader behaves approximately like a shunt inductor. This mode is the normal combing mode.
 
@@ -342,43 +346,38 @@ Measurement results after desembedding and impedance renormalization are shown i
 The worst case isolation between inputs is at least 10&#8239;dB for inputs close to each other (45° pair) and at least 15&#8239;dB for other pairs. This isolation enables instability problems to be avoided, and enables the propagation of a failure from a device to another one to be avoided. If a power amplifier module fails, the system can be operated at a reduced power with the other power modules, compared to TWTA-based solutions.
 
 <figure>
-  <!-- TODO: Alignment bug in table version, fallback to compound version. -->
-  <!--
-    <table>
-      <tbody>
-        <tr>
-          <td rowspan="2">
-            <span style="writing-mode: vertical-lr;transform: rotate(180deg);">
-              Transmission between inputs and output (dB)
-            </span>
-          </td>
-          <td>
-            <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-1.svg">
-          </td>
-          <td>
-            <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-2.svg">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-3.svg">
-          </td>
-          <td>
-            <img src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-4.svg">
-          </td>
-        </tr>
-        <tr>
-          <td>
-          </td>
-          <td colspan="2" style="text-align:center;">
-            Frequency (GHz)
-          </td>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  -->
-  <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot.svg" title="Details of inputs transmissions." alt="Details of inputs transmissions.">
+  <table class="images-table">
+    <tbody>
+      <tr>
+        <td rowspan="2">
+          <span style="writing-mode: vertical-lr;transform: rotate(180deg); font-size: 0.5em; margin-right: 1.0em">
+            Transmission between inputs and output (dB)
+          </span>
+        </td>
+        <td>
+          <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-1.svg">
+        </td>
+        <td>
+          <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-2.svg">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-3.svg">
+        </td>
+        <td>
+          <img class="dark-mode-invert" src="/posts/coax-combiner-low-Z-isolation/transmission-detail-plot-4.svg">
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td colspan="2" style="text-align:center;">
+          Frequency (GHz)
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <figcaption>Fig.&#8239;12. Details of inputs transmissions.</figcaption>
 </figure>
 <!-- \label{fig-transmission-detail} -->
@@ -407,29 +406,23 @@ Fig.&#8239;15b. <!--\ref{fig-thermal}b--> shows the temperature of the device wh
 
 Table&#8239;1.<!--\ref{tab-state-art-1}--> shows comparison with related power combiners. It is the only one which has low impedance inputs. Insertion losses are high, but such high losses are due to the combination of the high impedance transformation ratio and the low lower frequency.
 
-<figure class="text-table">
-  <table>
-    <thead>
-      <tr><td>    BW                </td><td>     N     </td><td>Z<sub>in</sub></td><td>    IL        </td><td>   Isolations                   </td><td>                   Refs                                                              </td></tr>
-      <tr><td>    [GHz]             </td><td>           </td><td>              </td><td>    [dB]      </td><td>   [dB]                         </td><td>                                                                                     </td></tr>
-    </thead>
-    <tbody>
-      <tr><td><em> 1    -  6   </em></td><td><em> 8</em></td><td><em>  2.5</em></td><td><em>1.7 </em></td><td><em>11.5 20.1 18.9 17.2     </em></td><td>               <em>This work                                                  </em>  </td></tr>
-      <tr><td>     2    -  8        </td><td>     8     </td><td>     50       </td><td>    0.4      </td><td>     9.5 17.0 16.3 12.7          </td><td><span markdown="1">[^ghanadi2012radial]                                       </span></td></tr>
-      <tr><td>     2    - 17        </td><td>     8     </td><td>     50       </td><td>    1        </td><td>     9.5 17.0 16.3 12.7          </td><td><span markdown="1">[^ghanadi2012radial]                                       </span></td></tr>
-      <tr><td>     7.6  - 10.4      </td><td>    12     </td><td>     50       </td><td>    1        </td><td>             -                   </td><td><span markdown="1">[^cohn1979broadband]<sup>,</sup>[^schellenberg1978combiner]</span></td></tr>
-      <tr><td>     5    - 20        </td><td>    64     </td><td>     50       </td><td>    1.5      </td><td>             -                   </td><td><span markdown="1">[^alexianan1997broadband]                                  </span></td></tr>
-      <tr><td>     6    - 18        </td><td>    20     </td><td>     50       </td><td>    0.97     </td><td>             -                   </td><td><span markdown="1">[^ning2013spatial]                                         </span></td></tr>
-      <tr><td>     2    - 16        </td><td>    32     </td><td>     50       </td><td>    1.2      </td><td>             -                   </td><td><span markdown="1">[^jia2002multioctave]                                      </span></td></tr>
-      <tr><td>     0.52 -  1.86     </td><td>     8     </td><td>     50       </td><td>    0.2      </td><td>             -                   </td><td><span markdown="1">[^amjadi2012design]                                        </span></td></tr>
-      <tr><td>    12.1  - 15.7      </td><td>     8     </td><td>     50       </td><td>    0.17     </td><td>     7.0 12.0 11.0  7.0          </td><td><span markdown="1">[^shan2011suspended]                                       </span></td></tr>
-      <tr><td>     8    - 18        </td><td>     8     </td><td>     50       </td><td>    0.5      </td><td>     9.0  7.2 10.2 11.0          </td><td><span markdown="1">[^song2007broadband]<sup>,</sup>[^song2008broadband]       </span></td></tr>
-      <tr><td>    28    - 36        </td><td>    20     </td><td>    377       </td><td>    1.0      </td><td>    12.0 15.0 17.0 18.0          </td><td><span markdown="1">[^chu2015isolated]                                         </span></td></tr>
-      <tr><td>    11.5  - 16        </td><td>     8     </td><td>     50       </td><td>    0.5      </td><td>     9.0 14.6 22.6 16.3 14.6     </td><td><span markdown="1">[^chu2015isolated]                                         </span></td></tr>
-    </tbody>
-  </table>
-  <figcaption>Table 1. Comparison with related combiners.</figcaption>
-</figure>
+{{% text-table %}}
+| BW<br>[GHz] | N | Z<sub>in</sub> | IL<br>[dB] | Isolations<br>[dB] | Refs |
+|------------|---|---------------|------------|--------------------|------|
+| *1 - 6* | *8* | *2.5* | *1.7* | *11.5 20.1 18.9 17.2* | *This work* |
+| 2 - 8 | 8 | 50 | 0.4 | 9.5 17.0 16.3 12.7 | [^ghanadi2012radial] |
+| 2 - 17 | 8 | 50 | 1 | 9.5 17.0 16.3 12.7 | [^ghanadi2012radial] |
+| 7.6 - 10.4 | 12 | 50 | 1 | - | [^cohn1979broadband]<sup>,</sup>[^schellenberg1978combiner] |
+| 5 - 20 | 64 | 50 | 1.5 | - | [^alexianan1997broadband] |
+| 6 - 18 | 20 | 50 | 0.97 | - | [^ning2013spatial] |
+| 2 - 16 | 32 | 50 | 1.2 | - | [^jia2002multioctave] |
+| 0.52 - 1.86 | 8 | 50 | 0.2 | - | [^amjadi2012design] |
+| 12.1 - 15.7 | 8 | 50 | 0.17 | 7.0 12.0 11.0 7.0 | [^shan2011suspended] |
+| 8 - 18 | 8 | 50 | 0.5 | 9.0 7.2 10.2 11.0 | [^song2007broadband]<sup>,</sup>[^song2008broadband] |
+| 28 - 36 | 20 | 377 | 1.0 | 12.0 15.0 17.0 18.0 | [^chu2015isolated] |
+| 11.5 - 16 | 8 | 50 | 0.5 | 9.0 14.6 22.6 16.3 14.6 | [^chu2015isolated] |
+{{% figcaption %}}Table 1. Comparison with related combiners.{{% /figcaption %}}
+{{% /text-table %}}
 
 ## Conclusion
 

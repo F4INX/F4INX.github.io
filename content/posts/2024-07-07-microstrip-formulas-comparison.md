@@ -18,18 +18,9 @@ While Hammerstad and Jensen formulas[^1a] stay the gold standard, other formulas
 
 ## Geometry of the problem
 
-![](/posts/microstrip-formulas-comparison/microstrip.png)
-
-<!-- FIXME: Ugly tweak. -->
-<style>
-    .style-figcaption-after + p {
-      font-style: italic;
-      text-align: center;
-    }
-</style>
-<div class="style-figcaption-after"></div>
-
+{{% figurecap img="/posts/microstrip-formulas-comparison/microstrip.png" %}}
 Fig. 1 – Geometry of a microstrip line[^4].
+{{% /figurecap %}}
 
 The geometrical parameters of the microstrip line studied are defined in Fig. 1[^4]: w is the width of the microstrip line, h the height of the substrate, t the thickness of the strip. Non-geometrical parameters are the relative permittivity of the substrate. We’ll note for the characteristic impedance of free space.
 
@@ -165,19 +156,11 @@ Fig. 1 compares the asymptotic behavior of IPC-2141 formulas with the good formu
   <figcaption>Fig. 3 – Asymptotic behavior of formulas.</figcaption>
 </figure>
 
-Despite the problems of IPC-2141 formulas, they are used in several online calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35]<sup>,</sup>[^36]<sup>,</sup>[^37]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40]. Some calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35] give warnings when using IPC-2141 formulas outside of their validity range like shown in Fig. 3. On the contrary, some other calculators[^36]<sup>,</sup>[^37]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] give neither a warning nor a validity range, including a calculator on a renowned website[^38]. Worse, some calculators[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] even give nonsense negative impedance when fed with proper values without any warning.
+Despite the problems of IPC-2141 formulas, they are used in several online calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35]<sup>,</sup>[^36]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40]. Some calculators[^33]<sup>,</sup>[^34]<sup>,</sup>[^35] give warnings when using IPC-2141 formulas outside of their validity range like shown in Fig. 3. On the contrary, some other calculators[^36]<sup>,</sup>[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] give neither a warning nor a validity range, including a calculator on a renowned website[^38]. Worse, some calculators[^38]<sup>,</sup>[^39]<sup>,</sup>[^40] even give nonsense negative impedance when fed with proper values without any warning.
 
-![](/posts/microstrip-formulas-comparison/ipc-warning.png)
-
-<!-- FIXME: Ugly tweak. -->
-<style>
-    .style-figcaption-after + p {
-      font-style: italic;
-      text-align: center;
-    }
-</style>
-<div class="style-figcaption-after"></div>
+{{% figurecap img="/posts/microstrip-formulas-comparison/ipc-warning.png" %}}
 Fig. 4 – Screenshot of a microstrip line impedance calculator[^33] raising a warning when trying to calculate impedances outside IPC-2141 validity range.
+{{% /figurecap %}}
 
 It should be mentioned that a calculator[^33] not only gives the validity range of the IPC-2141 formula and warns when trying to enter parameters outside of this range, but it also gives accuracy data.
 
@@ -216,36 +199,27 @@ The real strange point is the accuracy of the IPC-2141 formulas. Their relative 
 
 The following table sums up some microstrip calculators and the formulas which they use. Only microstrip calculators for which the formula was told or could be inferred from JavaScript source code were included.
 
-<!-- FIXME: Ugly tweak. -->
-<style>
-    .style-table-after + table,
-    .style-table-after + table th,
-    .style-table-after + table td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-</style>
-<div class="style-table-after"></div>
-
-| Website                       | Formula         | Val. warn | Comments                                                                      |
-| ----------------------------- | --------------- | --------- | ----------------------------------------------------------------------------- |
-| www.microwaves101.com[^10]    | H&J             |           |                                                                               |
-| mcalc.sourceforge.net[^11]    | H&J             |           |                                                                               |
-| ~~www.edn.com[^17]~~          | Wheeler 1977    |           | _Now offline._                                                                              |
-| cepd.com[^18]                 | Wheeler 1977    |           |                                                                               |
+{{% text-table %}}
+| Website                       | Formula         | IPC-2141 limit warning | Comments                                                                      |
+| ----------------------------- | --------------- | ---------------------- | ----------------------------------------------------------------------------- |
+| www.microwaves101.com[^10]    | H&J             |                        |                                                                               |
+| mcalc.sourceforge.net[^11]    | H&J             |                        |                                                                               |
+| ~~www.edn.com[^17]~~          | Wheeler 1977    |                        | _Now offline._                                                                              |
+| cepd.com[^18]                 | Wheeler 1977    |                        |                                                                               |
 | [www.finetune.co.jp](https://web.archive.org/web/20260312171255/http://www.finetune.co.jp/~lyuka/technote/ustrip/)[^19] | Wheeler 1977    |           |                                                                               |
-| leleivre.com[^20]             | Wheeler 1977    |           |                                                                               |
-| chemandy.com[^21]             | Wheeler 1977    |           | _Confusion between ε<sub>r</sub> and ε<sub>r,eff</sub>._                      |
-| www.pasternack.com[^29]       | Hammerstad 1975 |           |                                                                               |
-| www.emclab.cei.uec.ac.jp[^30] | Hammerstad 1975 |           |                                                                               |
-| chemandy.com[^31]             | Hammerstad 1975 |           |                                                                               |
-| emclab.mst.edu[^33]           | IPC-2141        | Yes       |                                                                               |
-| referencedesigner.com[^34]    | IPC-2121        | Yes       | _Formulas not told in document, but seen in JavaScript source code._          |
-| technick.net[^35]             | IPC-2141        | Yes       |                                                                               |
-| a8blog.com[^36]               | IPC-2141        | No        | _No warnings, but at least does not print the calculated negative impedance._ |
-| www.everythingrf.com[^38]     | IPC-2141        | No        |                                                                               |
-| chemandy.com[^39]             | IPC-2141        | No        |                                                                               |
-| ncalculators.com[^40]         | IPC-2121        | No        |                                                                               |
+| leleivre.com[^20]             | Wheeler 1977    |                        |                                                                               |
+| chemandy.com[^21]             | Wheeler 1977    |                        | _Confusion between ε<sub>r</sub> and ε<sub>r,eff</sub>._                      |
+| www.pasternack.com[^29]       | Hammerstad 1975 |                        |                                                                               |
+| www.emclab.cei.uec.ac.jp[^30] | Hammerstad 1975 |                        |                                                                               |
+| chemandy.com[^31]             | Hammerstad 1975 |                        |                                                                               |
+| emclab.mst.edu[^33]           | IPC-2141        | Yes                    |                                                                               |
+| referencedesigner.com[^34]    | IPC-2121        | Yes                    | _Formulas not told in document, but seen in JavaScript source code._          |
+| technick.net[^35]             | IPC-2141        | Yes                    |                                                                               |
+| a8blog.com[^36]               | IPC-2141        | No                     | _No warnings, but at least does not print the calculated negative impedance._ |
+| www.everythingrf.com[^38]     | IPC-2141        | No                     |                                                                               |
+| chemandy.com[^39]             | IPC-2141        | No                     |                                                                               |
+| ncalculators.com[^40]         | IPC-2121        | No                     |                                                                               |
+{{% /text-table %}}
 
 ## Conclusion
 
@@ -330,5 +304,3 @@ IPC-2141 formulas have severe issues and must be used with extreme caution.
 [^39]: W. J. Highton, "Microstrip transmission line calculator using IPC-2141 equation," Chemandy electronics, 2 January 2020. \[Online\]. Available: <https://chemandy.com/calculators/microstrip-transmission-line-calculator-ipc2141.htm>. \[Accessed 13 April 2020\].
 
 [^40]: ncalculators.com, "Microstrip impedance calculator," \[Online\]. Available: <https://web.archive.org/web/20211018033617/https://ncalculators.com/electronics/microstrip-impedance-calculator.htm>.
-
-[^41]: I. Sukiswo, "Elektronika telekomunikasi, Microstrip," 08 December 2009. \[Online\]. Available: <http://www.elektro.undip.ac.id/sukiswo/?KULIAH:Elektronika_Telekomunikasi>. \[Accessed 16 April 2020\].

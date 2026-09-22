@@ -30,7 +30,7 @@ And once the isolation resistor is added, it lacks only two components to make s
 
 In the discussion, the OPA994[^4] was suggested. Indeed, it is advertised as having an "unlimited capacitive load drive capability" with a "phase margin of 50° when driving a load of 10&nbsp;μF and 1&nbsp;MΩ". It is indeed the case. However, on some part of the phase margin plots, the phase margin is as low as 20°, and, again, is works much better with an isolation resistor. It should be noted, however, that the OP994 with a 50&nbsp;Ω isolation resistor has a 45&nbsp;% worst case overshoot while the OPA192 has only a 20&nbsp;% overshoot.
 
-<table>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/op-amp-capacitor-stability/opa994-ds-fig-5-39.png"/>
@@ -107,8 +107,8 @@ An isolation resistor ensures the opamp sees at the unity gain a convenient load
 
 This technique exists in two common variants shown in the 2 figures below from the excellent article[^6] from Texas Instruments. 
 
-<figure class="images-table">
-<table>
+<figure>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/op-amp-capacitor-stability/texas-article-fig-2.png" />
@@ -209,32 +209,32 @@ A problem with the AD8036[^11] is that it is an input clamping amplifier, with c
 
 Switching between two voltages levels would be conveniently done by a switch integrated circuit. Most common switches are slow, either because they are plain slow or because they include some "break before make" circuitry which take some transition times. The switches in the "buffered analog multiplexers" section of Analog Devices[^12] provide faster time, probably because the techniques to deal with switching transitions are easier to implement in unidirectional multiplexed buffer than in unidirectional buffer, like current steering:
 
-<blockquote>
-<p markdown="1">The &#91;ADV3129[^13]&#93; multiplexer is organized as two input transconductance stages tied in parallel with a single output transimpedance stage followed by a unity-gain buffer. Internal voltage feedback sets the gain.</p>
-</blockquote>
+{{% blockquote %}}
+The \[ADV3129[^13]\] multiplexer is organized as two input transconductance stages tied in parallel with a single output transimpedance stage followed by a unity-gain buffer. Internal voltage feedback sets the gain.
+{{% /blockquote %}}
 
 The following chips are interesting, with only single channel devices mentionned:
 
-<figure>
-<img src="/posts/op-amp-capacitor-stability/ad8170-ds-block-diagram.png" width="50%" />
-<figcaption markdown="1">
+{{% figurecap
+  img="/posts/op-amp-capacitor-stability/ad8170-ds-block-diagram.png"
+  width="50%"
+%}}
 AD8170[^14]
-</figcaption>
-</figure>
+{{% /figurecap %}}
 
-<figure>
-<img src="/posts/op-amp-capacitor-stability/ad8180-ds-block-diagram.png" width="50%" />
-<figcaption markdown="1">
+{{% figurecap
+  img="/posts/op-amp-capacitor-stability/ad8180-ds-block-diagram.png"
+  width="50%"
+%}}
 AD8180[^15]
-</figcaption>
-</figure>
+{{% /figurecap %}}
 
-<figure>
-<img src="/posts/op-amp-capacitor-stability/adv3219-ds-block-diagram.png" width="50%" />
-<figcaption markdown="1">
+{{% figurecap
+  img="/posts/op-amp-capacitor-stability/adv3219-ds-block-diagram.png"
+  width="50%"
+%}}
 ADV3219[^16]
-</figcaption>
-</figure>
+{{% /figurecap %}}
 
 The AD8170 is a **current feedback** amplifier with a switchable input. These category of operational amplifiers are sensitive to the impedance seen at the feedback pin, to DFB schemes cannot be used directly with them. The datasheet recommands isolation resistor values and feedback resistance. Simple RC calculations shows that the performance is mainly determined by the RC constant of the isolation resistor and the capacitive load.
 
@@ -243,7 +243,7 @@ The AD8180 is an open loop buffer and can drive capacitive loads without isolati
 The ADV3219 is a feedback amplifier with an internal feedback. Performance curves are given for low capacitive loads without isolation resistor. For higher capacitive loads, the datasheets recommands an isolation resistor of "a few tens of ohms", but does not give more performance details. Nevertheless it can be assumes that it will be dominated by the RC constant of the output.
 
 <figure>
-<table>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/op-amp-capacitor-stability/ad8180-ds-fig-22.png" />
@@ -256,7 +256,7 @@ The ADV3219 is a feedback amplifier with an internal feedback. Performance curve
 </figure>
 
 <figure>
-<table>
+<table class="images-table">
 <tr>
 <td>
 <img src="/posts/op-amp-capacitor-stability/ad8170-ds-fig-19.png" />

@@ -11,7 +11,9 @@ related_posts:
 ---
 
 
-<p class="begin-note">This content was originally published on Microwaves 101 (<a href="https://www.microwaves101.com/encyclopedias/capacitor-voltage-effects">https://www.microwaves101.com/encyclopedias/capacitor-voltage-effects</a>). Many thanks to Steve for improvements on the original version. Have a look on his website for more interesting content.</p>
+{{% begin-note %}}
+This content was originally published on Microwaves 101 (<a href="https://www.microwaves101.com/encyclopedias/capacitor-voltage-effects">https://www.microwaves101.com/encyclopedias/capacitor-voltage-effects</a>). Many thanks to Steve for improvements on the original version. Have a look on his website for more interesting content.
+{{% /begin-note %}}
 
 > This page was suggested by Hadrien, who has had recent experience in MLC capacitor variations with voltage.  Did you know your capacitor nominal value can drop 80% when you apply a DC voltage to it?  Worse, there does not seem to be any standards for voltage variations like there are for temperature variations.
 
