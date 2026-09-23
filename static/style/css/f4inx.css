@@ -88,6 +88,10 @@ a.footnote-ref::after,
 a.footnote-backref::after {
   content: none;
 }
+/* Class to manually exclude link icon */
+a.noicon::after {
+  content: none;
+}
 h1 a,
 h2 a,
 h3 a,
