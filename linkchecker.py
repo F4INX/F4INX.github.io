@@ -42,7 +42,7 @@ CACHE_FILE = '.linkchecker-cache.json'
 DEFAULT_CACHE_TTL_HOURS = 24
 CACHE_MAX_AGE_DAYS = 30
 CLOUDFLARE_CACHE_TTL_HOURS = 30 * 24
-DEFAULT_RECHECK_RATE = 2.0
+DEFAULT_RECHECK_RATE = 0.5
 CONFIG_FILE = 'linkchecker-config.yaml'
 USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
               '(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36')
@@ -111,13 +111,22 @@ def load_config(path):
     """Load link checker configuration from a YAML file.
 
     Returns a dict with keys 'ignore', 'recheck', 'silent', each a list
-    of compiled regex patterns.
+    of compiled regex patterns, and 'recheck_rate', the primp recheck
+    rate in requests per second.
     """
-    result = {'ignore': [], 'recheck': [], 'silent': []}
+    result = {'ignore': [], 'recheck': [], 'silent': [],
+              'recheck_rate': DEFAULT_RECHECK_RATE}
     if not path or not os.path.isfile(path):
         return result
     with open(path, encoding='utf-8') as f:
         data = yaml.safe_load(f) or {}
+    try:
+        result['recheck_rate'] = float(
+            data.get('recheck_rate', DEFAULT_RECHECK_RATE))
+    except (TypeError, ValueError):
+        print(f'Warning: invalid recheck_rate in {path}: '
+              f'{data.get("recheck_rate")!r}, using {DEFAULT_RECHECK_RATE}',
+              file=sys.stderr)
     for section in ('ignore', 'recheck', 'silent'):
         patterns = data.get(section, []) or []
         for line in patterns:
@@ -693,10 +702,11 @@ def main():
                              f'(default: {DEFAULT_CACHE_TTL_HOURS})')
     parser.add_argument('--no-cache', action='store_true',
                         help='Disable external link cache (always check all links)')
-    parser.add_argument('--recheck-rate', type=float, default=DEFAULT_RECHECK_RATE,
+    parser.add_argument('--recheck-rate', type=float, default=None,
                         metavar='RPS',
-                        help=f'Requests per second for the primp recheck '
-                             f'(default: {DEFAULT_RECHECK_RATE}, 0 for no limit)')
+                        help='Requests per second for the primp recheck '
+                             f'(overrides recheck_rate in {CONFIG_FILE}, '
+                             '0 for no limit)')
     args = parser.parse_args()
 
     # Determine paths
@@ -714,6 +724,12 @@ def main():
         sys.exit(1)
 
     config = load_config(config_path)
+
+    # The recheck rate comes from the config file unless overridden
+    # on the command line.
+    recheck_rate = args.recheck_rate
+    if recheck_rate is None:
+        recheck_rate = config['recheck_rate']
 
     # Build ignore entries (ignore + recheck patterns) for LinkChecker
     ignore_patterns = config['ignore'] + config['recheck']
@@ -793,7 +809,7 @@ def main():
                             if _is_error(r) and r.base_url}
         if urls_to_recheck:
             _, recheck_results = recheck_urls(sorted(urls_to_recheck),
-                                              rate=args.recheck_rate)
+                                              rate=recheck_rate)
 
     # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
     step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
