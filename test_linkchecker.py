@@ -415,6 +415,13 @@ ttls = [e['ttl_hours'] for e in cache5.values()]
 check('success ttls within [7,14] days', all(7 * 24 <= t <= 14 * 24 for t in ttls))
 check('bot_cache_ttl_range from config', cfg['bot_cache_ttl_range'] == (30 * 24, 45 * 24))
 
+# --- config: the edn.com link stays checked (recheck, not ignore) ---
+ignore_patterns = [p.pattern for p in cfg['ignore']]
+recheck_patterns = [p.pattern for p in cfg['recheck']]
+check('edn.com stays checked (recheck, not ignore)',
+      r'^https://www\.edn\.com$' in recheck_patterns
+      and r'^https://www\.edn\.com$' not in ignore_patterns)
+
 print()
 print('FAILURES:', fails if fails else 'none')
 sys.exit(1 if fails else 0)
