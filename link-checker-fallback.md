@@ -81,6 +81,21 @@ Status: implemented in `linkchecker.py` (`verify_blocked_with_sitemaps`).
 - Caveat: a sitemap reflects the site's last publish, not literally the
   current second; a link that died yesterday can still be listed.
 
+## Update: connection-level failures (2026-10-25)
+
+The edn.com case turned out to be different from a bot-protection
+block: the site is alive (Wayback has 200 snapshots of the root page on
+2026-10-19 and 2026-10-21, and Safari/Firefox fingerprints get 200)
+but resets connections for the Chrome TLS fingerprint, so the recheck
+threw an exception instead of getting an HTTP response. The recheck
+now retries failed requests once with a Safari fingerprint, which
+edn.com answers with 200 — the checked link (the site root) is
+verified live and cached on the success cadence. The strikethrough in
+the content is correct and stays: it marks the dead article link cited
+in the footnote (the EEWeb microstrip tool), not the valid root URL
+that the checker verifies.
+
+
 ## urlscan.io API notes (tested 2026-10-25)
 
 - The `api-key` header is required on both the submit

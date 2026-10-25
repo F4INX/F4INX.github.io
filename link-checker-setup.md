@@ -115,9 +115,11 @@ pushes to `master`, on pull requests, on demand, and on a daily schedule
    - Configures LinkChecker via its Python API and `linkchecker-config.yaml`
    - Runs LinkChecker and collects results via a custom logger
    - Rechecks filtered and failed links with `primp` (browser
-     impersonation, paced by `recheck_rate`), and verifies bot-blocked
-     links against their host's current sitemap (see
-     `link-checker-fallback.md`)
+     impersonation, paced by `recheck_rate`), retrying requests that
+     fail with the Chrome fingerprint once with a Safari fingerprint
+     (some sites, e.g. edn.com, reset Chrome connections), and
+     verifies bot-blocked links against their host's current sitemap
+     (see `link-checker-fallback.md`)
    - Writes a summary to the GitHub Actions step summary, including:
      - Status table (total, OK, redirects, filtered, ignored, warnings,
        errors, rechecked, Cloudflare-blocked, Akamai-blocked,
