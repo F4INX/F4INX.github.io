@@ -20,7 +20,7 @@ All options were probed live against the blocked analog.com URLs
 | Headless real browser (Playwright) retry for blocked links | First-party, direct fetch | Current | Not tested; expected high (Akamai Bot Manager is built to pass real browsers; primp lacks only the JS sensor) |
 | Residential egress (self-hosted runner on a home connection) | First-party, direct fetch | Current | Not tested; expected high (the block is IP-reputation-based). Security: never expose a home runner to `pull_request` |
 | Proxy-as-a-service (ScraperAPI, Bright Data, own VPS egress) | Third-party, direct fetch | Current | Not tested for Akamai; residential pools likely pass |
-| urlscan.io fresh scan | Third-party, live browser fetch | Current | Endpoint works; requires a free API key (401 without one) |
+| urlscan.io fresh scan | Third-party, live browser fetch | Current | Key tested 2026-10-25: API works, but the scanner is Akamai-blocked for analog.com (403 "Access Denied") while it passes Cloudflare (researchgate -> 200, real title). Viable for the Cloudflare kind only |
 | VirusTotal URL rescan | Third-party, live fetch | Current | Not tested; datacenter fetcher may be blocked |
 | W3C checklink | Third-party, live fetch | Current | Inconclusive (returned its form page; likely UA-gated or blocked) |
 | Reader proxy (r.jina.ai) | Third-party, live fetch | Current | Eliminated: Akamai blocks it too (403) |
@@ -34,12 +34,16 @@ All options were probed live against the blocked analog.com URLs
 
 1. **Primary fallback: the site's own sitemap.** It is the only option that
    is simultaneously first-party, current, validated against the actual
-   blocked URLs, and free.
+   blocked URLs, and free. This is also the only validated option that works
+   for the Akamai-blocked analog.com links: urlscan.io and r.jina.ai are
+   Akamai-blocked too.
 2. **Upgrade path: headless real browser (Playwright).** If direct page
    verification is preferred over sitemap membership. Heavier CI (Chromium
    install, ~1-2 min and ~300 MB), no third party.
-3. **Third-party annotation: urlscan.io** (free API key) when the sitemap
-   misses.
+3. **Third-party annotation: urlscan.io** (free API key) for Cloudflare-kind
+   blocks (tested: passes Cloudflare, e.g. researchgate returns 200 with the
+   real page title). Not usable for Akamai blocks: the scanner gets the same
+   403 as we do.
 4. **Safety net: the 30-45 day re-probe stays** regardless of the fallback
    chosen.
 5. **Wayback / Common Crawl** remain available as an optional secondary past
@@ -61,3 +65,22 @@ All options were probed live against the blocked analog.com URLs
 - Opportunistic per host: only helps hosts whose sitemaps are reachable.
 - Caveat: a sitemap reflects the site's last publish, not literally the
   current second; a link that died yesterday can still be listed.
+
+## urlscan.io API notes (tested 2026-10-25)
+
+- The `api-key` header is required on both the submit
+  (`POST /api/v1/scan/`) and the result (`GET /api/v1/result/{uuid}/`)
+  requests; without it the result endpoint answers
+  `{"warning": "You're not logged in!"}`.
+- Submit with `{"url": ..., "visibility": "unlisted"}` so scans are not
+  publicly searchable.
+- The result JSON has no `task.status`; poll until `page.status` is present
+  (scans complete in ~20-30 s).
+- Relevant fields: `page.status` (live HTTP status), `page.title`,
+  `page.url` (final URL after redirects), `page.server`, `page.ip`.
+- Probe results: an-581 (Akamai) -> 403 "Access Denied" (`AkamaiGHost`,
+  scanner IP 23.212.201.43, DE); researchgate figure (Cloudflare) -> 200
+  with the real page title.
+- Keep the key in GitHub Actions secrets (e.g. `URLSCAN_API_KEY`); never
+  commit it. `urlscan_probe.py` reads it from the environment.
+
