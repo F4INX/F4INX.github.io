@@ -61,15 +61,20 @@ All options were probed live against the blocked analog.com URLs
 
 ## Implementation notes for the sitemap fallback
 
+Status: implemented in `linkchecker.py` (`verify_blocked_with_sitemaps`).
+
 - On a bot-block of URL `U` on host `H`: resolve `H`'s sitemap set via
   `robots.txt` -> sitemap index -> child sitemaps, and check whether `U` is
   listed.
-- Cache the sitemap set per host with the success TTL (7-14 days); sitemaps
-  change slowly, so one fetch per host per run is enough.
+- Cache the sitemap set per host (the child sitemap list, under a reserved
+  `__sitemaps__<host>` cache key) with the success TTL (7-14 days), so the
+  robots.txt and index fetches are not repeated on every cycle. Child
+  sitemaps are fetched once per host per run, within the size budget.
 - Apply a size budget per host per run (analog.com's largest child sitemap is
   ~1.7 MB; name-matching child sitemaps reduces this).
-- Sitemap hit: cache the link as verified with the success TTL band
-  (7-14 days), re-verified through the cached sitemap on each cycle.
+- Sitemap hit: cache the link as verified (marked `sitemap_verified`,
+  reported under "Sitemap-verified" in the summary) with the success TTL
+  band (7-14 days), re-verified through the cached sitemap on each cycle.
 - Sitemap miss: the link stays bot-blocked (30-45 days). Absence is ambiguous
   (delisted vs. dead), so a miss never fails CI.
 - Opportunistic per host: only helps hosts whose sitemaps are reachable.

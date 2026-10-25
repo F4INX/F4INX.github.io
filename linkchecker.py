@@ -19,9 +19,17 @@ rechecks are spread over time instead of happening in a burst on every
 run. Bot-blocked links get a random TTL from bot_cache_ttl_range
 (30-45 days). --cache-ttl only applies to legacy entries that have no
 per-entry TTL. Use --no-cache to bypass the cache and check all links.
+
+Bot-blocked links are additionally verified against their host's current
+sitemap (robots.txt -> sitemap index -> child sitemaps, fetched with
+primp within a size budget). A link listed in its host's sitemap is
+verified alive and cached on the success TTL (7-14 days); a link that is
+not listed stays bot-blocked (30-45 days) — absence from a sitemap is
+ambiguous, so it never fails the check.
 """
 
 import argparse
+import gzip
 import json
 import os
 import random
@@ -31,6 +39,7 @@ import sys
 import time
 import urllib.request
 from datetime import datetime, timedelta
+from html import unescape
 from urllib.parse import unquote, urlparse
 
 import yaml
@@ -52,6 +61,14 @@ CACHE_MAX_AGE_DAYS = 60
 # Cache TTL ranges in hours, drawn randomly per link at cache time.
 DEFAULT_CACHE_TTL_RANGE = (7 * 24, 14 * 24)
 DEFAULT_BOT_CACHE_TTL_RANGE = (30 * 24, 45 * 24)
+# Sitemap fallback for bot-blocked links: fetch timeout in seconds, and
+# size budgets per child sitemap and per host per run (child sitemaps can
+# be several MB on large sites).
+SITEMAP_FETCH_TIMEOUT = 30
+SITEMAP_MAX_BYTES_PER_SITEMAP = 5 * 1024 * 1024
+SITEMAP_MAX_BYTES_PER_HOST = 10 * 1024 * 1024
+# Reserved cache key prefix for per-host sitemap sets (never a real URL).
+SITEMAP_CACHE_PREFIX = '__sitemaps__'
 DEFAULT_RECHECK_RATE = 0.5
 CONFIG_FILE = 'linkchecker-config.yaml'
 USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
@@ -529,8 +546,10 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
     Requests are paced at `rate` per second to avoid tripping bot
     protection. Returns (lines, results) where lines is a list of strings
     for the summary, and results is a list of (url, status_code, ok,
-    block) tuples. ok is True for 2xx/3xx status codes. block is the kind
-    of bot-protection block detected ('cloudflare' or 'akamai'), or None.
+    block, sitemap) tuples. ok is True for 2xx/3xx status codes. block is
+    the kind of bot-protection block detected ('cloudflare' or 'akamai'),
+    or None. sitemap is None here; it is filled in by
+    verify_blocked_with_sitemaps for blocked links.
     """
     lines = []
 
@@ -561,7 +580,7 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
             headers = dict(response.headers)
             block = _is_bot_block(status, headers, response.text)
             ok = 200 <= status < 400
-            results.append((url, status, ok, block))
+            results.append((url, status, ok, block, None))
             if block == 'cloudflare':
                 cloudflare_count += 1
             elif block == 'akamai':
@@ -571,7 +590,7 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
             else:
                 fail_count += 1
         except Exception:
-            results.append((url, None, False, None))
+            results.append((url, None, False, None, None))
             fail_count += 1
 
     lines.append('### Rechecked links (primp, browser impersonation)')
@@ -586,7 +605,7 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
         lines.append(f'| 🛡️ Akamai | {akamai_count:>5} |')
     lines.append('')
 
-    for url, status, ok, block in results:
+    for url, status, ok, block, _ in results:
         if block:
             lines.append(f'- 🛡️ {status} {url}')
         elif ok:
@@ -600,6 +619,186 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
     return lines, results
 
 
+class _SitemapFetcher:
+    """Fetch sitemap documents via primp, paced like the recheck."""
+
+    def __init__(self, rate):
+        import primp
+        self.client = primp.Client(impersonate="chrome",
+                                   follow_redirects=True)
+        self.delay = 1.0 / rate if rate > 0 else 0.0
+        self.count = 0
+        self.memo = {}
+
+    def get(self, url):
+        """Paced GET with in-run memoization.
+
+        Returns the decoded text (gunzipped when needed), or None on any
+        failure.
+        """
+        if url in self.memo:
+            return self.memo[url]
+        if self.count and self.delay:
+            time.sleep(self.delay)
+        self.count += 1
+        text = None
+        try:
+            response = self.client.get(url, timeout=SITEMAP_FETCH_TIMEOUT)
+            body = response.content
+            if body[:2] == b'\x1f\x8b':
+                body = gzip.decompress(body)
+            text = body.decode('utf-8', 'replace')
+        except Exception:
+            text = None
+        self.memo[url] = text
+        return text
+
+
+def _sitemap_cache_key(host):
+    """Reserved cache key for a host's sitemap set (never a real URL)."""
+    return f'{SITEMAP_CACHE_PREFIX}{host}'
+
+
+def _normalize_sitemap_url(url):
+    """Normalize a URL for sitemap membership comparison: XML entities
+    unescaped, percent-decoded, no trailing slash."""
+    return normalize_url(unescape(url)).strip().rstrip('/')
+
+
+def _parse_sitemap_locs(xml_text):
+    """Parse a sitemap XML document. Returns (loc values, is_index)."""
+    is_index = '<sitemapindex' in xml_text
+    locs = re.findall(r'<loc>([^<]+)</loc>', xml_text)
+    return locs, is_index
+
+
+def _resolve_sitemap_set(fetcher, host):
+    """Resolve a host's sitemap set: robots.txt -> declared sitemaps ->
+    child sitemaps (when the declared sitemap is an index).
+
+    Returns the list of sitemap URLs to fetch, or None when the host
+    declares no reachable sitemap.
+    """
+    robots = fetcher.get(f'https://{host}/robots.txt')
+    if robots is None:
+        return None
+    declared = []
+    for line in robots.splitlines():
+        if line.lower().startswith('sitemap:'):
+            value = line.split(':', 1)[1].strip()
+            if value:
+                declared.append(value)
+    if not declared:
+        return None
+    sitemaps = []
+    for url in declared:
+        text = fetcher.get(url)
+        if text is None:
+            continue
+        locs, is_index = _parse_sitemap_locs(text)
+        if is_index:
+            sitemaps.extend(locs)
+        else:
+            sitemaps.append(url)
+    return sitemaps or None
+
+
+def _collect_listed_urls(fetcher, sitemap_urls, wanted):
+    """Fetch sitemaps until all wanted URLs are found or the size budget
+    runs out. Returns the set of listed URLs (normalized)."""
+    listed = set()
+    remaining = {_normalize_sitemap_url(u) for u in wanted}
+    queue = list(sitemap_urls)
+    budget = SITEMAP_MAX_BYTES_PER_HOST
+    while queue and remaining and budget > 0:
+        url = queue.pop(0)
+        text = fetcher.get(url)
+        if text is None:
+            continue
+        budget -= len(text)
+        locs, is_index = _parse_sitemap_locs(text)
+        if is_index:
+            queue.extend(locs)
+            continue
+        if len(text) > SITEMAP_MAX_BYTES_PER_SITEMAP:
+            continue
+        listed.update(_normalize_sitemap_url(loc) for loc in locs)
+        remaining = {u for u in remaining if u not in listed}
+    return listed
+
+
+def verify_blocked_with_sitemaps(recheck_results, cache, config,
+                                 rate=DEFAULT_RECHECK_RATE):
+    """Verify bot-blocked links against their host's current sitemap.
+
+    For each host with bot-blocked URLs, the sitemap set is resolved
+    (robots.txt -> sitemap index -> child sitemaps) and cached per host
+    under a reserved key with the success TTL, so the robots.txt and
+    index fetches are not repeated on every cycle. Child sitemaps are
+    fetched within a size budget and each blocked URL is checked for
+    membership: a hit means the site itself lists the link right now.
+
+    Takes recheck results as (url, status, ok, block, sitemap) tuples
+    and returns new tuples where sitemap is True (listed in the host's
+    current sitemap), False (checked, not listed), or None (no sitemap
+    check) for blocked links.
+    """
+    blocked_by_host = {}
+    for url, status, ok, block, _ in recheck_results:
+        if block:
+            host = urlparse(url).hostname
+            if host:
+                blocked_by_host.setdefault(host, []).append(url)
+    if not blocked_by_host:
+        return list(recheck_results)
+    try:
+        fetcher = _SitemapFetcher(rate)
+    except ImportError:
+        return list(recheck_results)
+
+    now = datetime.now()
+    verified = set()
+    checked = set()
+
+    for host, urls in sorted(blocked_by_host.items()):
+        sitemaps = None
+        entry = cache.get(_sitemap_cache_key(host))
+        if entry:
+            try:
+                cached_at = datetime.fromisoformat(entry['cached_at'])
+                ttl = entry.get('ttl_hours', config['cache_ttl_range'][0])
+                if cached_at > now - timedelta(hours=ttl):
+                    sitemaps = entry.get('children')
+            except (KeyError, ValueError, TypeError):
+                sitemaps = None
+        if sitemaps is None:
+            sitemaps = _resolve_sitemap_set(fetcher, host)
+            if sitemaps:
+                cache[_sitemap_cache_key(host)] = {
+                    'children': sitemaps,
+                    'cached_at': now.isoformat(),
+                    'ttl_hours': random.uniform(*config['cache_ttl_range']),
+                }
+        if not sitemaps:
+            continue
+        listed = _collect_listed_urls(fetcher, sitemaps, urls)
+        for u in urls:
+            checked.add(u)
+            if _normalize_sitemap_url(u) in listed:
+                verified.add(u)
+
+    results = []
+    for url, status, ok, block, _ in recheck_results:
+        if block and url in verified:
+            sitemap = True
+        elif block and url in checked:
+            sitemap = False
+        else:
+            sitemap = None
+        results.append((url, status, ok, block, sitemap))
+    return results
+
+
 def print_summary(rows, silent_patterns, out=print, cached_urls=None,
                   public_ip=None, recheck_results=None, cache=None):
     """Print formatted summary to stdout. Returns the stats dict."""
@@ -609,7 +808,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     # separately.
     recovered = set()
     if recheck_results:
-        for url, status, ok, block in recheck_results:
+        for url, status, ok, block, _ in recheck_results:
             if ok or block:
                 recovered.add(url)
     stats = count_status(rows, cached_urls=cached_urls, cache=cache,
@@ -620,12 +819,16 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     recheck_fail = 0
     recheck_cloudflare = 0
     recheck_akamai = 0
+    recheck_sitemap = 0
     if recheck_results:
-        for url, status, ok, block in recheck_results:
-            if block == 'cloudflare':
-                recheck_cloudflare += 1
-            elif block == 'akamai':
-                recheck_akamai += 1
+        for url, status, ok, block, sitemap in recheck_results:
+            if block:
+                if sitemap:
+                    recheck_sitemap += 1
+                elif block == 'cloudflare':
+                    recheck_cloudflare += 1
+                else:
+                    recheck_akamai += 1
             elif ok:
                 recheck_ok += 1
             else:
@@ -634,11 +837,15 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     # Cached bot-blocked URLs (from cache, not rechecked this run)
     cached_cloudflare = []
     cached_akamai = []
+    cached_sitemap = []
     if cache and cached_urls:
         for url, entry in cache.items():
             if url not in cached_urls:
                 continue
-            if entry.get('cloudflare'):
+            if entry.get('sitemap_verified'):
+                cached_sitemap.append(
+                    (url, int(entry.get('result', 0))))
+            elif entry.get('cloudflare'):
                 cached_cloudflare.append(
                     (url, int(entry.get('result', 0))))
             elif entry.get('akamai'):
@@ -646,11 +853,12 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
                     (url, int(entry.get('result', 0))))
     cached_cloudflare.sort()
     cached_akamai.sort()
+    cached_sitemap.sort()
 
     # Build set of rechecked URLs to exclude from filtered list
     recheck_urls_set = set()
     if recheck_results:
-        for url, status, ok, block in recheck_results:
+        for url, status, ok, block, _ in recheck_results:
             recheck_urls_set.add(url)
 
     if public_ip:
@@ -679,10 +887,14 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
             out(f'| 🛡️ Cloudflare blocked        | {recheck_cloudflare:>5} |')
         if recheck_akamai:
             out(f'| 🛡️ Akamai blocked             | {recheck_akamai:>5} |')
+        if recheck_sitemap:
+            out(f'| 📄 Sitemap-verified           | {recheck_sitemap:>5} |')
     if cached_cloudflare:
         out(f'| 🛡️ Cloudflare (cached)       | {len(cached_cloudflare):>5} |')
     if cached_akamai:
         out(f'| 🛡️ Akamai (cached)           | {len(cached_akamai):>5} |')
+    if cached_sitemap:
+        out(f'| 📄 Sitemap-verified (cached)  | {len(cached_sitemap):>5} |')
     out()
 
     # Errors
@@ -737,7 +949,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     if recheck_results:
         # Results that are not bot-protection blocks
         non_blocked = [(url, status, ok)
-                       for url, status, ok, block in recheck_results
+                       for url, status, ok, block, _ in recheck_results
                        if not block]
         if non_blocked:
             out('### Rechecked links (primp, browser impersonation)')
@@ -753,8 +965,8 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
 
         # Cloudflare-blocked results (fresh)
         cf_results = [(url, status)
-                      for url, status, ok, block in recheck_results
-                      if block == 'cloudflare']
+                      for url, status, ok, block, sitemap in recheck_results
+                      if block == 'cloudflare' and not sitemap]
         if cf_results:
             out('### Cloudflare-blocked sites (cached 30-45 days)')
             out()
@@ -764,13 +976,24 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
 
         # Akamai-blocked results (fresh)
         akamai_results = [(url, status)
-                          for url, status, ok, block in recheck_results
-                          if block == 'akamai']
+                          for url, status, ok, block, sitemap in recheck_results
+                          if block == 'akamai' and not sitemap]
         if akamai_results:
             out('### Akamai-blocked sites (cached 30-45 days)')
             out()
             for url, status in akamai_results:
                 out(f'- 🛡️ {status} {url}')
+            out()
+
+        # Sitemap-verified bot-blocked results (fresh)
+        sitemap_results = [(url, status, block)
+                           for url, status, ok, block, sitemap in recheck_results
+                           if sitemap]
+        if sitemap_results:
+            out('### Sitemap-verified bot-blocked links (cached 7-14 days)')
+            out()
+            for url, status, block in sitemap_results:
+                out(f'- 📄 {status} {url} ({block})')
             out()
 
     # Cached bot-blocked sites (not rechecked this run)
@@ -785,6 +1008,13 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
         out()
         for url, status in cached_akamai:
             out(f'- 🛡️ {status} {url}')
+        out()
+    if cached_sitemap:
+        out('### Sitemap-verified bot-blocked links '
+            '(from cache, still within TTL)')
+        out()
+        for url, status in cached_sitemap:
+            out(f'- 📄 {status} {url}')
         out()
 
     out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
@@ -915,6 +1145,10 @@ def main():
         if urls_to_recheck:
             _, recheck_results = recheck_urls(sorted(urls_to_recheck),
                                               rate=recheck_rate)
+            # Verify bot-blocked links against their host's current
+            # sitemap (see link-checker-fallback.md).
+            recheck_results = verify_blocked_with_sitemaps(
+                recheck_results, cache, config, rate=recheck_rate)
 
     # Print summary to stdout and, in CI, to GITHUB_STEP_SUMMARY
     step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
@@ -952,7 +1186,7 @@ def main():
         now = datetime.now()
         update_cache(cache, rows, now, ttl_range=config['cache_ttl_range'])
         # Add successfully rechecked URLs to the cache
-        for url, status, ok, block in recheck_results:
+        for url, status, ok, block, sitemap in recheck_results:
             if ok:
                 cache[url] = {
                     'result': str(status),
@@ -960,12 +1194,19 @@ def main():
                     'ttl_hours': random.uniform(*config['cache_ttl_range']),
                 }
             elif block:
-                cache[url] = {
+                entry = {
                     'result': str(status),
                     'cached_at': now.isoformat(),
                     block: True,
                     'ttl_hours': random.uniform(*config['bot_cache_ttl_range']),
                 }
+                if sitemap:
+                    # Listed in the host's current sitemap: the link is
+                    # verified alive, so re-verify on the success cadence.
+                    entry['sitemap_verified'] = True
+                    entry['ttl_hours'] = random.uniform(
+                        *config['cache_ttl_range'])
+                cache[url] = entry
         cache = prune_cache(cache)
         save_cache(cache_path, cache)
         checked = len(rows) - stats['cached']
