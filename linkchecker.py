@@ -544,7 +544,10 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
     """Recheck URLs using primp with browser impersonation.
 
     Requests are paced at `rate` per second to avoid tripping bot
-    protection. Returns (lines, results) where lines is a list of strings
+    protection. Requests that fail with the Chrome fingerprint are
+    retried once with a Safari fingerprint (some sites, e.g. edn.com,
+    reset connections for Chrome but answer Safari). Returns (lines,
+    results) where lines is a list of strings
     for the summary, and results is a list of (url, status_code, ok,
     block, sitemap) tuples. ok is True for 2xx/3xx status codes. block is
     the kind of bot-protection block detected ('cloudflare' or 'akamai'),
@@ -569,13 +572,23 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
     akamai_count = 0
 
     client = primp.Client(impersonate="chrome", follow_redirects=True)
+    # Some sites reset connections for the Chrome fingerprint (e.g.
+    # edn.com); requests that fail are retried once with a Safari
+    # fingerprint before giving up.
+    retry_client = None
     delay = 1.0 / rate if rate > 0 else 0.0
 
     for i, url in enumerate(sorted(urls)):
         if i and delay:
             time.sleep(delay)
         try:
-            response = client.get(url, timeout=30)
+            try:
+                response = client.get(url, timeout=30)
+            except Exception:
+                if retry_client is None:
+                    retry_client = primp.Client(impersonate="safari",
+                                                follow_redirects=True)
+                response = retry_client.get(url, timeout=30)
             status = response.status_code
             headers = dict(response.headers)
             block = _is_bot_block(status, headers, response.text)

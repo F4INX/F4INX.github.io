@@ -85,10 +85,18 @@ class FakeResponse:
 
 
 class FakeClient:
+    instances = 0
+
     def __init__(self, *args, **kwargs):
-        pass
+        FakeClient.instances += 1
+        self.instance_no = FakeClient.instances
 
     def get(self, url, timeout=30):
+        # The first client (Chrome fingerprint) fails on flaky.example,
+        # simulating a site that resets Chrome connections; the retry
+        # client (Safari fingerprint) answers it.
+        if 'flaky.example' in url and self.instance_no == 1:
+            raise RuntimeError('stream error')
         if 'cf.example' in url:
             return FakeResponse(403, {'server': 'cloudflare'})
         if 'akamai.example' in url:
@@ -120,6 +128,26 @@ check('recheck exception tuple',
 joined = '\n'.join(lines)
 check('recheck lines split cloudflare/akamai',
       '🛡️ Cloudflare |     1' in joined and '🛡️ Akamai |     1' in joined)
+
+# --- recheck_urls retries failed requests with a second fingerprint ---
+FakeClient.instances = 0
+primp.Client = FakeClient
+try:
+    _, retry_results = lc.recheck_urls(['https://flaky.example/'], rate=0)
+finally:
+    primp.Client = real_client
+check('chrome-failing url succeeds on safari retry',
+      retry_results == [('https://flaky.example/', 200, True, None, None)])
+check('retry client was created', FakeClient.instances == 2)
+FakeClient.instances = 0
+primp.Client = FakeClient
+try:
+    _, boom_results = lc.recheck_urls(['https://boom.example/'], rate=0)
+finally:
+    primp.Client = real_client
+check('url failing on both fingerprints is an exception',
+      boom_results == [('https://boom.example/', None, False, None, None)])
+check('retry client reused for second failure', FakeClient.instances == 2)
 
 # --- print_summary: separate Cloudflare/Akamai counts ---
 out_lines = []
