@@ -47,8 +47,8 @@ Scalar settings:
   (7-14), so rechecks spread evenly over time instead of happening in a
   burst on every run
 - `bot_cache_ttl_range` — cache TTL range in days for bot-blocked links
-  (Cloudflare); blocked links are re-probed after a random TTL drawn from
-  this range (30-45)
+  (Cloudflare, Akamai); blocked links are re-probed after a random TTL
+  drawn from this range (30-45)
 
 Other settings are set directly in code:
 
@@ -118,17 +118,18 @@ pushes to `master`, on pull requests, on demand, and on a daily schedule
      impersonation, paced by `recheck_rate`)
    - Writes a summary to the GitHub Actions step summary, including:
      - Status table (total, OK, redirects, filtered, ignored, warnings,
-       errors, rechecked, Cloudflare-blocked)
+       errors, rechecked, Cloudflare-blocked, Akamai-blocked)
      - Any link errors and warnings found
      - Redirects (original URL --> final URL)
-     - Rechecked links and Cloudflare-blocked sites
+     - Rechecked links and bot-blocked sites (Cloudflare, Akamai)
      - A list of ignored links for manual checking
      - Final statistics
 
 External-link results are cached in `.linkchecker-cache.json`, persisted
 between runs via the GitHub Actions cache and a 7-day artifact:
-successful links are skipped for a random 7-14 days, Cloudflare-blocked
-links for a random 30-45 days, and entries older than 60 days are pruned.
+successful links are skipped for a random 7-14 days, bot-blocked links
+(Cloudflare, Akamai) for a random 30-45 days, and entries older than
+60 days are pruned.
 
 The check is blocking: the job fails when errors or warnings are found.
 Recheck errors and bot-blocked sites are reported but do not fail the job.

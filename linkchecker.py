@@ -494,15 +494,43 @@ def _is_cloudflare_block(status, headers):
     return False
 
 
+def _is_akamai_block(status, headers, body=''):
+    """Detect an Akamai Bot Manager denial from a response.
+
+    Returns True when the server is AkamaiGHost and the status is 403/503
+    (e.g. analog.com article pages), or when the body is the classic
+    errors.edgesuite.net "Access Denied" page. The server is matched
+    exactly so that genuine 403s from AkamaiNetStorage (stored files) are
+    not misclassified as bot blocks.
+    """
+    if status not in (403, 503):
+        return False
+    if headers.get('server', '').lower() == 'akamaighost':
+        return True
+    return 'errors.edgesuite.net' in body
+
+
+def _is_bot_block(status, headers, body=''):
+    """Detect a bot-protection block from a response.
+
+    Calls both sub-detectors and returns which one matched: 'cloudflare',
+    'akamai', or None when the response is not a bot-protection block.
+    """
+    if _is_cloudflare_block(status, headers):
+        return 'cloudflare'
+    if _is_akamai_block(status, headers, body):
+        return 'akamai'
+    return None
+
+
 def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
     """Recheck URLs using primp with browser impersonation.
 
     Requests are paced at `rate` per second to avoid tripping bot
     protection. Returns (lines, results) where lines is a list of strings
     for the summary, and results is a list of (url, status_code, ok,
-    cloudflare) tuples. ok is True for 2xx/3xx status codes. cloudflare is
-    True when the response was identified as a Cloudflare bot-protection
-    block.
+    block) tuples. ok is True for 2xx/3xx status codes. block is the kind
+    of bot-protection block detected ('cloudflare' or 'akamai'), or None.
     """
     lines = []
 
@@ -519,6 +547,7 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
     ok_count = 0
     fail_count = 0
     cloudflare_count = 0
+    akamai_count = 0
 
     client = primp.Client(impersonate="chrome", follow_redirects=True)
     delay = 1.0 / rate if rate > 0 else 0.0
@@ -530,17 +559,19 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
             response = client.get(url, timeout=30)
             status = response.status_code
             headers = dict(response.headers)
-            cloudflare = _is_cloudflare_block(status, headers)
+            block = _is_bot_block(status, headers, response.text)
             ok = 200 <= status < 400
-            results.append((url, status, ok, cloudflare))
-            if cloudflare:
+            results.append((url, status, ok, block))
+            if block == 'cloudflare':
                 cloudflare_count += 1
+            elif block == 'akamai':
+                akamai_count += 1
             elif ok:
                 ok_count += 1
             else:
                 fail_count += 1
         except Exception:
-            results.append((url, None, False, False))
+            results.append((url, None, False, None))
             fail_count += 1
 
     lines.append('### Rechecked links (primp, browser impersonation)')
@@ -551,10 +582,12 @@ def recheck_urls(urls, rate=DEFAULT_RECHECK_RATE):
     lines.append(f'| ❌ Fail | {fail_count:>5} |')
     if cloudflare_count:
         lines.append(f'| 🛡️ Cloudflare | {cloudflare_count:>5} |')
+    if akamai_count:
+        lines.append(f'| 🛡️ Akamai | {akamai_count:>5} |')
     lines.append('')
 
-    for url, status, ok, cloudflare in results:
-        if cloudflare:
+    for url, status, ok, block in results:
+        if block:
             lines.append(f'- 🛡️ {status} {url}')
         elif ok:
             lines.append(f'- ✅ {status} {url}')
@@ -572,11 +605,12 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     """Print formatted summary to stdout. Returns the stats dict."""
     # Error URLs cleared by the primp recheck: either the target
     # responds to a browser-like client (link works, not an error), or
-    # it is a Cloudflare block, which is cached and reported separately.
+    # it is a bot-protection block, which is cached and reported
+    # separately.
     recovered = set()
     if recheck_results:
-        for url, status, ok, cloudflare in recheck_results:
-            if ok or cloudflare:
+        for url, status, ok, block in recheck_results:
+            if ok or block:
                 recovered.add(url)
     stats = count_status(rows, cached_urls=cached_urls, cache=cache,
                          recovered=recovered)
@@ -585,28 +619,38 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     recheck_ok = 0
     recheck_fail = 0
     recheck_cloudflare = 0
+    recheck_akamai = 0
     if recheck_results:
-        for url, status, ok, cloudflare in recheck_results:
-            if cloudflare:
+        for url, status, ok, block in recheck_results:
+            if block == 'cloudflare':
                 recheck_cloudflare += 1
+            elif block == 'akamai':
+                recheck_akamai += 1
             elif ok:
                 recheck_ok += 1
             else:
                 recheck_fail += 1
 
-    # Cached Cloudflare-blocked URLs (from cache, not rechecked this run)
+    # Cached bot-blocked URLs (from cache, not rechecked this run)
     cached_cloudflare = []
+    cached_akamai = []
     if cache and cached_urls:
         for url, entry in cache.items():
-            if url in cached_urls and entry.get('cloudflare'):
+            if url not in cached_urls:
+                continue
+            if entry.get('cloudflare'):
                 cached_cloudflare.append(
                     (url, int(entry.get('result', 0))))
+            elif entry.get('akamai'):
+                cached_akamai.append(
+                    (url, int(entry.get('result', 0))))
     cached_cloudflare.sort()
+    cached_akamai.sort()
 
     # Build set of rechecked URLs to exclude from filtered list
     recheck_urls_set = set()
     if recheck_results:
-        for url, status, ok, cloudflare in recheck_results:
+        for url, status, ok, block in recheck_results:
             recheck_urls_set.add(url)
 
     if public_ip:
@@ -633,8 +677,12 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
         out(f'| ❌ Recheck errors             | {recheck_fail:>5} |')
         if recheck_cloudflare:
             out(f'| 🛡️ Cloudflare blocked        | {recheck_cloudflare:>5} |')
+        if recheck_akamai:
+            out(f'| 🛡️ Akamai blocked             | {recheck_akamai:>5} |')
     if cached_cloudflare:
         out(f'| 🛡️ Cloudflare (cached)       | {len(cached_cloudflare):>5} |')
+    if cached_akamai:
+        out(f'| 🛡️ Akamai (cached)           | {len(cached_akamai):>5} |')
     out()
 
     # Errors
@@ -687,13 +735,14 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
 
     # Rechecked links detail (primp)
     if recheck_results:
-        # Non-Cloudflare results
-        non_cf = [(url, status, ok) for url, status, ok, cf in recheck_results
-                  if not cf]
-        if non_cf:
+        # Results that are not bot-protection blocks
+        non_blocked = [(url, status, ok)
+                       for url, status, ok, block in recheck_results
+                       if not block]
+        if non_blocked:
             out('### Rechecked links (primp, browser impersonation)')
             out()
-            for url, status, ok in non_cf:
+            for url, status, ok in non_blocked:
                 if ok:
                     out(f'- ✅ {status} {url}')
                 elif status is not None:
@@ -703,8 +752,9 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
             out()
 
         # Cloudflare-blocked results (fresh)
-        cf_results = [(url, status) for url, status, ok, cf in recheck_results
-                      if cf]
+        cf_results = [(url, status)
+                      for url, status, ok, block in recheck_results
+                      if block == 'cloudflare']
         if cf_results:
             out('### Cloudflare-blocked sites (cached 30-45 days)')
             out()
@@ -712,11 +762,28 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
                 out(f'- 🛡️ {status} {url}')
             out()
 
-    # Cached Cloudflare-blocked sites (not rechecked this run)
+        # Akamai-blocked results (fresh)
+        akamai_results = [(url, status)
+                          for url, status, ok, block in recheck_results
+                          if block == 'akamai']
+        if akamai_results:
+            out('### Akamai-blocked sites (cached 30-45 days)')
+            out()
+            for url, status in akamai_results:
+                out(f'- 🛡️ {status} {url}')
+            out()
+
+    # Cached bot-blocked sites (not rechecked this run)
     if cached_cloudflare:
         out('### Cloudflare-blocked sites (from cache, still within TTL)')
         out()
         for url, status in cached_cloudflare:
+            out(f'- 🛡️ {status} {url}')
+        out()
+    if cached_akamai:
+        out('### Akamai-blocked sites (from cache, still within TTL)')
+        out()
+        for url, status in cached_akamai:
             out(f'- 🛡️ {status} {url}')
         out()
 
@@ -885,18 +952,18 @@ def main():
         now = datetime.now()
         update_cache(cache, rows, now, ttl_range=config['cache_ttl_range'])
         # Add successfully rechecked URLs to the cache
-        for url, status, ok, cloudflare in recheck_results:
+        for url, status, ok, block in recheck_results:
             if ok:
                 cache[url] = {
                     'result': str(status),
                     'cached_at': now.isoformat(),
                     'ttl_hours': random.uniform(*config['cache_ttl_range']),
                 }
-            elif cloudflare:
+            elif block:
                 cache[url] = {
                     'result': str(status),
                     'cached_at': now.isoformat(),
-                    'cloudflare': True,
+                    block: True,
                     'ttl_hours': random.uniform(*config['bot_cache_ttl_range']),
                 }
         cache = prune_cache(cache)

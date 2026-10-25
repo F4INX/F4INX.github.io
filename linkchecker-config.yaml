@@ -12,10 +12,10 @@
 #           Cloudflare-protected at the target (e.g. DOI redirects to
 #           publisher sites) are detected and cached instead of failing
 #           CI until a pattern is added by hand. Sites that return a
-#           Cloudflare block during recheck are cached for a random
-#           30-45 days (bot_cache_ttl_range below) to avoid repeated
-#           requests. Recheck requests are rate-limited by recheck_rate
-#           below to avoid tripping bot protection.
+#           bot-protection block (Cloudflare, Akamai) during recheck are
+#           cached for a random 30-45 days (bot_cache_ttl_range below)
+#           to avoid repeated requests. Recheck requests are rate-limited
+#           by recheck_rate below to avoid tripping bot protection.
 #
 # silent:   URLs matching these patterns are hidden from the summary's
 #           "Filtered and ignored links" list. Used for non-link entries
@@ -33,7 +33,7 @@ recheck_rate: 0.5
 # burst on every run.
 cache_ttl_range: [7, 14]
 
-# Cache TTL range in days for bot-blocked links (Cloudflare).
+# Cache TTL range in days for bot-blocked links (Cloudflare, Akamai).
 # Blocked links are re-probed after a random TTL drawn from this range.
 bot_cache_ttl_range: [30, 45]
 
