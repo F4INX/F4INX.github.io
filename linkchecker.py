@@ -13,13 +13,18 @@ falls back to checking files in public/. Use --local-server to require
 the dev server and exit with an error if it is not running.
 
 External links that were successfully checked are cached in
-.linkchecker-cache.json (TTL 24h by default, configurable with
---cache-ttl). Use --no-cache to bypass the cache and check all links.
+.linkchecker-cache.json, each with a random TTL drawn from
+cache_ttl_range in the config file (7-14 days by default), so that
+rechecks are spread over time instead of happening in a burst on every
+run. Bot-blocked links get a random TTL from bot_cache_ttl_range
+(30-45 days). --cache-ttl only applies to legacy entries that have no
+per-entry TTL. Use --no-cache to bypass the cache and check all links.
 """
 
 import argparse
 import json
 import os
+import random
 import re
 import subprocess
 import sys
@@ -40,8 +45,13 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_SERVER_PORT = 1313
 CACHE_FILE = '.linkchecker-cache.json'
 DEFAULT_CACHE_TTL_HOURS = 24
-CACHE_MAX_AGE_DAYS = 30
-CLOUDFLARE_CACHE_TTL_HOURS = 30 * 24
+# Prune horizon for the cache. Must exceed the bot-blocked TTL range
+# plus the run cadence, so that entries are always refreshed by a
+# recheck before they can be pruned.
+CACHE_MAX_AGE_DAYS = 60
+# Cache TTL ranges in hours, drawn randomly per link at cache time.
+DEFAULT_CACHE_TTL_RANGE = (7 * 24, 14 * 24)
+DEFAULT_BOT_CACHE_TTL_RANGE = (30 * 24, 45 * 24)
 DEFAULT_RECHECK_RATE = 0.5
 CONFIG_FILE = 'linkchecker-config.yaml'
 USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
@@ -107,15 +117,37 @@ def fetch_public_ip(timeout=5):
     return ' | '.join(parts)
 
 
+def _parse_ttl_range(value, key, default):
+    """Parse a [min, max] TTL range in days from the config file.
+
+    Returns the range in hours, or the default (also in hours) when the
+    value is missing or invalid.
+    """
+    if value is None:
+        return default
+    try:
+        lo, hi = (float(v) for v in value)
+        if lo <= 0 or hi < lo:
+            raise ValueError
+    except (TypeError, ValueError):
+        print(f'Warning: invalid {key} in config: {value!r}, '
+              f'using {[d / 24 for d in default]} days', file=sys.stderr)
+        return default
+    return (lo * 24, hi * 24)
+
+
 def load_config(path):
     """Load link checker configuration from a YAML file.
 
     Returns a dict with keys 'ignore', 'recheck', 'silent', each a list
-    of compiled regex patterns, and 'recheck_rate', the primp recheck
-    rate in requests per second.
+    of compiled regex patterns, 'recheck_rate', the primp recheck rate
+    in requests per second, and 'cache_ttl_range' / 'bot_cache_ttl_range',
+    the cache TTL ranges in hours for successful and bot-blocked links.
     """
     result = {'ignore': [], 'recheck': [], 'silent': [],
-              'recheck_rate': DEFAULT_RECHECK_RATE}
+              'recheck_rate': DEFAULT_RECHECK_RATE,
+              'cache_ttl_range': DEFAULT_CACHE_TTL_RANGE,
+              'bot_cache_ttl_range': DEFAULT_BOT_CACHE_TTL_RANGE}
     if not path or not os.path.isfile(path):
         return result
     with open(path, encoding='utf-8') as f:
@@ -127,6 +159,9 @@ def load_config(path):
         print(f'Warning: invalid recheck_rate in {path}: '
               f'{data.get("recheck_rate")!r}, using {DEFAULT_RECHECK_RATE}',
               file=sys.stderr)
+    for key, default in (('cache_ttl_range', DEFAULT_CACHE_TTL_RANGE),
+                         ('bot_cache_ttl_range', DEFAULT_BOT_CACHE_TTL_RANGE)):
+        result[key] = _parse_ttl_range(data.get(key), key, default)
     for section in ('ignore', 'recheck', 'silent'):
         patterns = data.get(section, []) or []
         for line in patterns:
@@ -389,17 +424,18 @@ def get_fresh_cached_urls(cache, ttl_hours):
     return fresh
 
 
-def update_cache(cache, rows, now):
+def update_cache(cache, rows, now, ttl_range=DEFAULT_CACHE_TTL_RANGE):
     """Update cache with results for external URLs that were actually checked.
 
     Uses base_url (the URL as it appears in the HTML) as the cache key,
     so that redirecting links are cached by their original URL — the one
     LinkChecker will encounter on the next run.
 
-    Only OK results are stored; error/warning entries are removed so they
-    will be rechecked on the next run. When a URL was redirected, the
-    final URL is stored as 'final_url' so the redirect can be displayed
-    even on cached runs.
+    OK results are stored with a random TTL drawn from ttl_range (in
+    hours), so that rechecks are spread over time. Error/warning entries
+    are removed so they will be rechecked on the next run. When a URL
+    was redirected, the final URL is stored as 'final_url' so the
+    redirect can be displayed even on cached runs.
     """
     for ud in rows:
         url = ud.base_url
@@ -413,6 +449,7 @@ def update_cache(cache, rows, now):
             entry = {
                 'result': ud.result,
                 'cached_at': now.isoformat(),
+                'ttl_hours': random.uniform(*ttl_range),
             }
             real = ud.url
             if real and real != url and normalize_url(url) != normalize_url(real):
@@ -669,7 +706,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
         cf_results = [(url, status) for url, status, ok, cf in recheck_results
                       if cf]
         if cf_results:
-            out('### Cloudflare-blocked sites (cached for 1 month)')
+            out('### Cloudflare-blocked sites (cached 30-45 days)')
             out()
             for url, status in cf_results:
                 out(f'- 🛡️ {status} {url}')
@@ -677,7 +714,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
 
     # Cached Cloudflare-blocked sites (not rechecked this run)
     if cached_cloudflare:
-        out('### Cloudflare-blocked sites (from cache, still within 1-month TTL)')
+        out('### Cloudflare-blocked sites (from cache, still within TTL)')
         out()
         for url, status in cached_cloudflare:
             out(f'- 🛡️ {status} {url}')
@@ -698,7 +735,8 @@ def main():
                         help=f'Port for the local dev server (default: {DEFAULT_SERVER_PORT})')
     parser.add_argument('--cache-ttl', type=float, default=DEFAULT_CACHE_TTL_HOURS,
                         metavar='HOURS',
-                        help=f'TTL for cached external links in hours '
+                        help='Fallback TTL in hours for legacy cache '
+                             'entries without a per-entry TTL '
                              f'(default: {DEFAULT_CACHE_TTL_HOURS})')
     parser.add_argument('--no-cache', action='store_true',
                         help='Disable external link cache (always check all links)')
@@ -845,20 +883,21 @@ def main():
     # Update and save the cache with freshly checked external links
     if use_cache:
         now = datetime.now()
-        update_cache(cache, rows, now)
+        update_cache(cache, rows, now, ttl_range=config['cache_ttl_range'])
         # Add successfully rechecked URLs to the cache
         for url, status, ok, cloudflare in recheck_results:
             if ok:
                 cache[url] = {
                     'result': str(status),
                     'cached_at': now.isoformat(),
+                    'ttl_hours': random.uniform(*config['cache_ttl_range']),
                 }
             elif cloudflare:
                 cache[url] = {
                     'result': str(status),
                     'cached_at': now.isoformat(),
                     'cloudflare': True,
-                    'ttl_hours': CLOUDFLARE_CACHE_TTL_HOURS,
+                    'ttl_hours': random.uniform(*config['bot_cache_ttl_range']),
                 }
         cache = prune_cache(cache)
         save_cache(cache_path, cache)

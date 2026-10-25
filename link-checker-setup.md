@@ -27,8 +27,10 @@ linkchecker --version
 ## Configuration
 
 LinkChecker is configured programmatically in `linkchecker.py` via its Python
-API. All URL patterns are configured in a single YAML file,
-`linkchecker-config.yaml`, with three sections:
+API. All URL patterns and tunables are configured in a single YAML file,
+`linkchecker-config.yaml`.
+
+Pattern sections (one regex per line):
 
 - `ignore` — URLs skipped by LinkChecker and never rechecked (Cloudflare,
   bot protection, rate limiting)
@@ -37,6 +39,17 @@ API. All URL patterns are configured in a single YAML file,
 - `silent` — URLs hidden from the summary's filtered/ignored list (e.g.
   `data:` URIs)
 
+Scalar settings:
+
+- `recheck_rate` — requests per second for the primp recheck (0.5)
+- `cache_ttl_range` — cache TTL range in days for successfully checked
+  external links; a random TTL is drawn from this range for each link
+  (7-14), so rechecks spread evenly over time instead of happening in a
+  burst on every run
+- `bot_cache_ttl_range` — cache TTL range in days for bot-blocked links
+  (Cloudflare); blocked links are re-probed after a random TTL drawn from
+  this range (30-45)
+
 Other settings are set directly in code:
 
 - `checkextern = True` — check external links
@@ -44,13 +57,22 @@ Other settings are set directly in code:
 - `localwebroot` — set to the `public/` path in file mode, unused in server mode
 - `useragent` — browser-like User-Agent to avoid 403 bot detection
 
-### Ignored sites
+### Filtered sites
 
-- `www.researchgate.net` — Cloudflare
-- `www.hindawi.com` — Cloudflare
-- `electronics.stackexchange.com` — Cloudflare
-- `www.linkedin.com` — blocks bots
-- `upload.wikimedia.org` — rate limits (429)
+Sites in the `ignore` list are skipped and never rechecked; sites in the
+`recheck` list are skipped by LinkChecker but rechecked afterwards with
+primp (browser impersonation). Notable entries:
+
+- `ignore`: `www.linkedin.com` (Cloudflare challenge), `fr.rs-online.com`
+  (Akamai bot protection, silent redirects)
+- `recheck`: `www.analog.com` (Akamai blocks article pages for datacenter
+  IPs), `www.edn.com`, `www.everythingrf.com` (Cloudflare),
+  `product.tdk.com`, `upload.wikimedia.org` (rate limits),
+  `web.archive.org`, `www.researchgate.net` (Cloudflare),
+  `www.hindawi.com` (Cloudflare), `electronics.stackexchange.com`
+  (Cloudflare), `mcalc.sourceforge.net` (Cloudflare),
+  `dx.doi.org/10.1155/2013/232317` (DOI redirect to a Cloudflare-protected
+  site)
 
 See `link-test-benchmarks/comparison.md` for the full investigation.
 
@@ -80,21 +102,33 @@ on the same output without re-running LinkChecker.
 
 ## CI usage (GitHub Actions)
 
-The workflow is defined in `.github/workflows/link-check.yml`. It:
+The workflow is defined in `.github/workflows/link-check.yml`. It runs on
+pushes to `master`, on pull requests, on demand, and on a daily schedule
+(06:00 UTC). Each run:
 
 1. Checks out the repo
 2. Installs Hugo
 3. Builds the site with `hugo --minify`
-4. Installs LinkChecker via `apt-get`
+4. Installs the Python dependencies in a venv (`requirements.txt`,
+   `requirements-pinned.txt`)
 5. Runs `python3 linkchecker.py --ci` which:
-   - Configures LinkChecker via its Python API (no config file needed)
+   - Configures LinkChecker via its Python API and `linkchecker-config.yaml`
    - Runs LinkChecker and collects results via a custom logger
+   - Rechecks filtered and failed links with `primp` (browser
+     impersonation, paced by `recheck_rate`)
    - Writes a summary to the GitHub Actions step summary, including:
-     - Status table (total, OK, redirects, filtered, ignored, errors)
-     - Any link errors found
+     - Status table (total, OK, redirects, filtered, ignored, warnings,
+       errors, rechecked, Cloudflare-blocked)
+     - Any link errors and warnings found
      - Redirects (original URL --> final URL)
+     - Rechecked links and Cloudflare-blocked sites
      - A list of ignored links for manual checking
      - Final statistics
 
-The workflow uses `continue-on-error: true` so it is non-blocking — broken links
-will be reported in the CI logs but will not prevent deployment.
+External-link results are cached in `.linkchecker-cache.json`, persisted
+between runs via the GitHub Actions cache and a 7-day artifact:
+successful links are skipped for a random 7-14 days, Cloudflare-blocked
+links for a random 30-45 days, and entries older than 60 days are pruned.
+
+The check is blocking: the job fails when errors or warnings are found.
+Recheck errors and bot-blocked sites are reported but do not fail the job.
