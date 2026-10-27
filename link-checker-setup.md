@@ -49,6 +49,15 @@ Scalar settings:
 - `bot_cache_ttl_range` — cache TTL range in days for bot-blocked links
   (Cloudflare, Akamai); blocked links are re-probed after a random TTL
   drawn from this range (30-45)
+- `rate_limit_cache_ttl_hours` — fixed cache TTL in hours for
+  rate-limited links (HTTP 429, tagged `http-rate-limited` by
+  LinkChecker); a 429 usually means the shared CI runner IP is
+  throttled, not that the link is dead, so the result is cached (168,
+  i.e. 7 days) instead of failing CI on every daily run. Cached
+  rate-limited links are listed under "Rate-limited (cached)" in the
+  summary so they stay visible. Scope note: only the main LinkChecker
+  run caches 429s this way — a 429 returned during the primp recheck
+  is not cached and simply counts as a recheck failure
 
 Other settings are set directly in code:
 

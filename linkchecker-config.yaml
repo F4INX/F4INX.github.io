@@ -27,6 +27,13 @@
 # Overridden by --recheck-rate in linkchecker.py.
 recheck_rate: 0.5
 
+# Fixed cache TTL in hours for rate-limited links (HTTP 429). A 429
+# usually means the shared CI runner IP is throttled, not that the link
+# is dead, so the result is cached instead of failing CI daily. Only the
+# main LinkChecker run caches 429s; the primp recheck path does not
+# (out of scope for now). See link-checker-setup.md.
+rate_limit_cache_ttl_hours: 168
+
 # Cache TTL range in days for successfully checked external links. A
 # random TTL is drawn from this range for each link when it is cached,
 # so rechecks are spread evenly over time instead of happening in a

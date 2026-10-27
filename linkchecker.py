@@ -61,6 +61,13 @@ CACHE_MAX_AGE_DAYS = 60
 # Cache TTL ranges in hours, drawn randomly per link at cache time.
 DEFAULT_CACHE_TTL_RANGE = (7 * 24, 14 * 24)
 DEFAULT_BOT_CACHE_TTL_RANGE = (30 * 24, 45 * 24)
+# TTL for rate-limited links (HTTP 429): cached for a fixed period so a
+# throttled shared-runner IP does not fail CI on every run. Only the
+# main LinkChecker run caches 429s; the primp recheck path does not.
+DEFAULT_RATE_LIMIT_CACHE_TTL_HOURS = 7 * 24
+# Warning tag the linkchecker package attaches to HTTP 429 responses
+# (linkcheck.checker.const.WARN_HTTP_RATE_LIMITED).
+RATE_LIMITED_TAG = 'http-rate-limited'
 # Sitemap fallback for bot-blocked links: fetch timeout in seconds, and
 # size budgets per child sitemap and per host per run (child sitemaps can
 # be several MB on large sites).
@@ -158,13 +165,17 @@ def load_config(path):
 
     Returns a dict with keys 'ignore', 'recheck', 'silent', each a list
     of compiled regex patterns, 'recheck_rate', the primp recheck rate
-    in requests per second, and 'cache_ttl_range' / 'bot_cache_ttl_range',
-    the cache TTL ranges in hours for successful and bot-blocked links.
+    in requests per second, 'cache_ttl_range' / 'bot_cache_ttl_range',
+    the cache TTL ranges in hours for successful and bot-blocked links,
+    and 'rate_limit_cache_ttl_hours', the fixed cache TTL in hours for
+    rate-limited links.
     """
     result = {'ignore': [], 'recheck': [], 'silent': [],
               'recheck_rate': DEFAULT_RECHECK_RATE,
               'cache_ttl_range': DEFAULT_CACHE_TTL_RANGE,
-              'bot_cache_ttl_range': DEFAULT_BOT_CACHE_TTL_RANGE}
+              'bot_cache_ttl_range': DEFAULT_BOT_CACHE_TTL_RANGE,
+              'rate_limit_cache_ttl_hours':
+                  DEFAULT_RATE_LIMIT_CACHE_TTL_HOURS}
     if not path or not os.path.isfile(path):
         return result
     with open(path, encoding='utf-8') as f:
@@ -175,6 +186,15 @@ def load_config(path):
     except (TypeError, ValueError):
         print(f'Warning: invalid recheck_rate in {path}: '
               f'{data.get("recheck_rate")!r}, using {DEFAULT_RECHECK_RATE}',
+              file=sys.stderr)
+    try:
+        result['rate_limit_cache_ttl_hours'] = float(
+            data.get('rate_limit_cache_ttl_hours',
+                     DEFAULT_RATE_LIMIT_CACHE_TTL_HOURS))
+    except (TypeError, ValueError):
+        print(f'Warning: invalid rate_limit_cache_ttl_hours in {path}: '
+              f'{data.get("rate_limit_cache_ttl_hours")!r}, '
+              f'using {DEFAULT_RATE_LIMIT_CACHE_TTL_HOURS}',
               file=sys.stderr)
     for key, default in (('cache_ttl_range', DEFAULT_CACHE_TTL_RANGE),
                          ('bot_cache_ttl_range', DEFAULT_BOT_CACHE_TTL_RANGE)):
@@ -239,6 +259,11 @@ def _is_warning(ud):
     return bool(ud.warnings) and all(
         'Redirected' not in w[1] for w in ud.warnings
     )
+
+
+def _is_rate_limited(ud):
+    """Check if a url_data object was rate limited (HTTP 429)."""
+    return any(w[0] == RATE_LIMITED_TAG for w in ud.warnings or [])
 
 
 def _is_ignored(ud):
@@ -422,10 +447,11 @@ def save_cache(path, cache):
 def get_fresh_cached_urls(cache, ttl_hours):
     """Return the set of URLs whose cache entry is still within the TTL.
 
-    Only OK results are stored in the cache, so every fresh entry is a link
-    that was reachable last time and can be skipped. Cloudflare-blocked
-    entries carry their own longer ttl_hours so they are skipped for a
-    month instead of the default TTL.
+    Only OK results and rate-limited results are stored in the cache, so
+    every fresh entry is a link that was reachable (or merely throttled)
+    last time and can be skipped. Cloudflare-blocked entries carry their
+    own longer ttl_hours so they are skipped for a month instead of the
+    default TTL.
     """
     now = datetime.now()
     fresh = set()
@@ -441,7 +467,8 @@ def get_fresh_cached_urls(cache, ttl_hours):
     return fresh
 
 
-def update_cache(cache, rows, now, ttl_range=DEFAULT_CACHE_TTL_RANGE):
+def update_cache(cache, rows, now, ttl_range=DEFAULT_CACHE_TTL_RANGE,
+                 rate_limit_ttl_hours=DEFAULT_RATE_LIMIT_CACHE_TTL_HOURS):
     """Update cache with results for external URLs that were actually checked.
 
     Uses base_url (the URL as it appears in the HTML) as the cache key,
@@ -449,9 +476,11 @@ def update_cache(cache, rows, now, ttl_range=DEFAULT_CACHE_TTL_RANGE):
     LinkChecker will encounter on the next run.
 
     OK results are stored with a random TTL drawn from ttl_range (in
-    hours), so that rechecks are spread over time. Error/warning entries
-    are removed so they will be rechecked on the next run. When a URL
-    was redirected, the final URL is stored as 'final_url' so the
+    hours), so that rechecks are spread over time. Rate-limited results
+    (HTTP 429) are stored with the fixed rate_limit_ttl_hours, so a
+    throttled host does not fail CI on every run. Other error/warning
+    entries are removed so they will be rechecked on the next run. When
+    a URL was redirected, the final URL is stored as 'final_url' so the
     redirect can be displayed even on cached runs.
     """
     for ud in rows:
@@ -460,7 +489,14 @@ def update_cache(cache, rows, now, ttl_range=DEFAULT_CACHE_TTL_RANGE):
             continue
         if ud.result in ('filtered', 'ignored'):
             continue
-        if _is_error(ud) or _is_warning(ud):
+        if _is_rate_limited(ud):
+            cache[url] = {
+                'result': ud.result,
+                'cached_at': now.isoformat(),
+                'rate_limited': True,
+                'ttl_hours': rate_limit_ttl_hours,
+            }
+        elif _is_error(ud) or _is_warning(ud):
             cache.pop(url, None)
         else:
             entry = {
@@ -851,6 +887,7 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
     cached_cloudflare = []
     cached_akamai = []
     cached_sitemap = []
+    cached_rate_limited = []
     if cache and cached_urls:
         for url, entry in cache.items():
             if url not in cached_urls:
@@ -864,9 +901,12 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
             elif entry.get('akamai'):
                 cached_akamai.append(
                     (url, int(entry.get('result', 0))))
+            elif entry.get('rate_limited'):
+                cached_rate_limited.append(url)
     cached_cloudflare.sort()
     cached_akamai.sort()
     cached_sitemap.sort()
+    cached_rate_limited.sort()
 
     # Build set of rechecked URLs to exclude from filtered list
     recheck_urls_set = set()
@@ -908,6 +948,8 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
         out(f'| 🛡️ Akamai (cached)           | {len(cached_akamai):>5} |')
     if cached_sitemap:
         out(f'| 📄 Sitemap-verified (cached)  | {len(cached_sitemap):>5} |')
+    if cached_rate_limited:
+        out(f'| ⏳ Rate-limited (cached)      | {len(cached_rate_limited):>5} |')
     out()
 
     # Errors
@@ -1028,6 +1070,14 @@ def print_summary(rows, silent_patterns, out=print, cached_urls=None,
         out()
         for url, status in cached_sitemap:
             out(f'- 📄 {status} {url}')
+        out()
+
+    # Rate-limited sites (not requested this run, cached within TTL)
+    if cached_rate_limited:
+        out('### Rate-limited links (from cache, still within TTL)')
+        out()
+        for url in cached_rate_limited:
+            out(f'- ⏳ 429 {url}')
         out()
 
     out(f"That's it. {stats['total']} links checked. {stats['warnings']} warnings, {stats['errors']} errors.")
@@ -1197,7 +1247,8 @@ def main():
     # Update and save the cache with freshly checked external links
     if use_cache:
         now = datetime.now()
-        update_cache(cache, rows, now, ttl_range=config['cache_ttl_range'])
+        update_cache(cache, rows, now, ttl_range=config['cache_ttl_range'],
+                     rate_limit_ttl_hours=config['rate_limit_cache_ttl_hours'])
         # Add successfully rechecked URLs to the cache
         for url, status, ok, block, sitemap in recheck_results:
             if ok:

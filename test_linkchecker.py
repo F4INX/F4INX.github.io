@@ -422,6 +422,87 @@ check('edn.com stays checked (recheck, not ignore)',
       r'^https://www\.edn\.com$' in recheck_patterns
       and r'^https://www\.edn\.com$' not in ignore_patterns)
 
+# --- rate-limited links (HTTP 429) are cached for 7 days ---
+rate_limited_ud = ud(
+    'https://github.com/F4INX/F4INX.github.io/blob/master/.github/workflows/link-check.yml',
+    result='429 Too Many Requests',
+    warnings=[('http-rate-limited', 'Rate limited (Retry-After: None)')])
+cache6 = {}
+lc.update_cache(cache6, [rate_limited_ud], now)
+entry = cache6.get(rate_limited_ud.base_url)
+check('rate-limited url is cached', entry is not None)
+check('rate-limited entry flagged', bool(entry and entry.get('rate_limited')))
+check('rate-limited ttl is 7 days',
+      bool(entry) and entry['ttl_hours'] == 7 * 24)
+check('rate-limited result stored',
+      bool(entry) and entry['result'] == '429 Too Many Requests')
+
+# fresh within the TTL, expired after it
+fresh = lc.get_fresh_cached_urls(cache6, ttl_hours=24)
+check('rate-limited entry fresh after 1 day',
+      rate_limited_ud.base_url in fresh)
+cache6[rate_limited_ud.base_url]['cached_at'] = (
+    now - timedelta(hours=7 * 24 + 1)).isoformat()
+fresh = lc.get_fresh_cached_urls(cache6, ttl_hours=24)
+check('rate-limited entry expired after 7 days',
+      rate_limited_ud.base_url not in fresh)
+
+# other warnings and errors are still removed from the cache
+other_cache = {}
+lc.update_cache(other_cache, [
+    ud('https://warn.example/', valid=True,
+       warnings=[('http-empty-content', 'empty')]),
+    ud('https://error.example/', valid=False, result='404 Not Found'),
+    rate_limited_ud,
+], now)
+check('non-rate-limited warning still popped', 'https://warn.example/' not in other_cache)
+check('error still popped', 'https://error.example/' not in other_cache)
+check('rate-limited kept alongside pops',
+      rate_limited_ud.base_url in other_cache)
+
+# config: rate_limit_cache_ttl_hours parsed, overridable, validated
+check('rate_limit_cache_ttl_hours from config',
+      cfg['rate_limit_cache_ttl_hours'] == 168)
+import tempfile
+with tempfile.NamedTemporaryFile('w', suffix='.yaml', delete=False) as f:
+    f.write('rate_limit_cache_ttl_hours: 336\n')
+    bad_cfg_path = f.name
+try:
+    check('rate_limit_cache_ttl_hours override',
+          lc.load_config(bad_cfg_path)['rate_limit_cache_ttl_hours'] == 336)
+    with open(bad_cfg_path, 'w') as f:
+        f.write('rate_limit_cache_ttl_hours: oops\n')
+    check('invalid rate_limit_cache_ttl_hours falls back to default',
+          lc.load_config(bad_cfg_path)['rate_limit_cache_ttl_hours'] == 168)
+finally:
+    os.unlink(bad_cfg_path)
+
+# summary: cached rate-limited links get their own row and section
+out_lines4 = []
+
+
+def collect4(s=''):
+    out_lines4.append(s)
+
+
+rl_cache = {
+    rate_limited_ud.base_url: {
+        'result': '429 Too Many Requests',
+        'rate_limited': True,
+        'cached_at': datetime.now().isoformat(),
+        'ttl_hours': 168,
+    },
+}
+lc.print_summary([], [], out=collect4, cache=rl_cache,
+                 cached_urls=set(rl_cache))
+summary4 = '\n'.join(out_lines4)
+check('summary has rate-limited row with count 1',
+      '⏳ Rate-limited (cached)      |     1' in summary4)
+check('summary has rate-limited section',
+      '### Rate-limited links (from cache, still within TTL)' in summary4)
+check('summary lists rate-limited url',
+      f'- ⏳ 429 {rate_limited_ud.base_url}' in summary4)
+
 print()
 print('FAILURES:', fails if fails else 'none')
 sys.exit(1 if fails else 0)
