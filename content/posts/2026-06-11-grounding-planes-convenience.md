@@ -80,3 +80,7 @@ A second example are hybrid modules. Here, inputs and outputs have coaxial shape
 
 ![image](grounding-planes-convenience/semigen-hybrid-module.png)
 *Copyright SemiGen, https://www.semigen.net/about/*
+
+## Conclusion
+
+While planes are very convenient, they are only a convenience. The key point is to have for each signal line a return conductor tightly coupled to it.
