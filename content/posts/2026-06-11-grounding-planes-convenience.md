@@ -58,4 +58,25 @@ On PCBs, the typical dimensions lead to a microstrip dominant operation, and the
 
 ## 5. Weirder shapes
 
-...
+In more complex case, the ground can have a non regular shape, either to achieve a particular effect, or just a convenience.
+
+A first example is this schme I used a few years before to achieve the impedances I wanted while keeping the trace widths I wanted. The ground plane with the ground and the metalic part on which it is attached behave as a single ground conductor.
+
+<figure>
+  <picture>
+    <source
+      srcset="/posts/coax-combiner-low-Z-isolation/preadaptation-2D-3D-v3-web-dark.svg"
+      media="(prefers-color-scheme: dark)">
+    <img
+      class="dark-mode-no-bg"
+      src="/posts/coax-combiner-low-Z-isolation/preadaptation-2D-3D-v3-web.svg" style="width:100%;"
+      title="Section of the impedance prematch structure (not to scale) and 3D view."
+      alt="Section of the impedance prematch structure (not to scale) and 3D view.">
+  </picture>
+  <figcaption>Fig.&#8239;7. Section of the impedance prematch structure (not to scale) and 3D view.</figcaption>
+</figure>
+
+A second example are hybrid modules. Here, inputs and outputs have coaxial shapes, ground is all around all sections of the circuits, and a ground plane is provided everywhere.
+
+![image](grounding-planes-convenience/semigen-hybrid-module.png)
+*Copyright SemiGen, https://www.semigen.net/about/*
