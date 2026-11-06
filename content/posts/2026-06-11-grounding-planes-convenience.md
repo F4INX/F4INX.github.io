@@ -26,7 +26,19 @@ Oh the other hand of the robustness, when connecting various boxes but without s
 
 This configuration can be seen as a *very crude* approximation of coaxial lines, however improved when several ground wires are used and tightly coupled to their corresponding signal wires, ideally in a one to one fashion.
 
-## 2. Grids
+## 2. Differential lines
+
+In the *bunch of ground wires* approach, I deliberately did not mention the various differential pairs approach, who are probably the *very most* common approach in consumer electronics: DDR signals, PCIe, Ethernet, USB, and so on.
+
+Roughly speaking, in single-ended lines, you have a big connector, whose potential won't change a lot precisely because it is big, and a small connector using the big conductor as a potential reference. Let put aside for now questions like the meaning of the potential, how to deal with the multiple definitions of the potential, and to what this potential should be refered to. Just say for now they are important questions for later.
+
+On the contrary, in differential lines, you have a + connector and a - conductor, typically connected to two signal sources with symmetric impedances. Here the question of where is the ground becomes really interesting.
+
+Imagine for whatever reason that instead of a differential line *two* single-ended lines are used, in a +, GND, GND, - fashion. Since the 2 GND conductors are at the same potential (there are more complicated was to tell this), connecting them don't change the picture (let aside a few details). Eventually they can be merged into a single unique conductor. But since in this conductor, not current flows (let aside a few details), it can even be removed.
+
+This illustrates that between the conductors of each differential pair there is a surface, behaving like a ground. When the conductors are straight, this surface is a plane, called a symmetry plane, and often modelled in EM simulators as a perfect conducting plane. When the conductors are not straight, for instance in twisted pairs, the shape of this surface is much more convoluted, but you still have a virtual grounding effect.
+
+## 3. Grids
 
 More often than not, grids are useful for grounding, even if their limitations must be taken into account: they stop working well when the frequency is too high compared to the size of the holes, and it is difficult to have a controlled impedance line with such a ground.
 
@@ -36,7 +48,7 @@ Some decades ago, in 2 layers TTL or CMOS digital boards, a strategy was to rout
 
 Finally, grids are also convenient for the grounding of a whole room containing shelves of devices.
 
-## 3. Coplanar
+## 4. Coplanar
 
 Ground does not need to be below the line. A perfectly working configuration is to have the ground on both sides of the lines. However, is is very important to ensure both grounds are connected together.
 
