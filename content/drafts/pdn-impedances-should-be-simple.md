@@ -87,4 +87,4 @@ The calculation is best done from the total consumption, which is easier to meas
 
 In lots of cases, tr is missing, like for instance in the MSP430 datasheet.
 
-In this case, stay consistent with the geometry: one capacitor per Vcc pin, size consistent with the sizes of the pins. Components are designed to work, and their internal rise and fall times will be consistent with the pins inductances and so on. Sure this is not perfect, but this is the best you can do in this case.
+In this case, stay consistent with the geometry: one capacitor per Vcc pin, size consistent with the sizes of the pins. Components are designed to work, and their internal rise and fall times will be consistent with the inductance of the pins and so on. Sure this is not perfect, but this is the best you can do in this case.
