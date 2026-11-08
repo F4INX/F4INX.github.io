@@ -25,7 +25,7 @@ From Ott, p. 428.
 I_n = \frac{2 \cdot I \cdot t_r}{T} \cdot \left[ \frac{\sin(\frac{n \cdot \pi \cdot t_r}{T})}{\frac{n \cdot \pi \cdot t_r}{T}} \right]^2
 </latexmath>
 
-Use the following enveloppe as a simpler upper bound (Ott, p. 430):
+Use the following envelope as a simpler upper bound (Ott, p. 430):
 
 ![](pdn-impedances-should-be-simple/edges-fourier.png)
 
@@ -45,7 +45,7 @@ where <asciimath>\Delta V</asciimath> "is the allowable power supply transient v
 L_\text{max} = \frac{Z_t \cdot t_r}{2}
 </latexmath>
 
-Oh. God. Why cannot we make things simple ?
+Oh. God. Why cannot we make things simple?
 
 ### Alternative time-domain approach
 
@@ -53,7 +53,7 @@ We propose here an alternative approach:
 
 1/ As usual.
 
-2/ From the curves, allocates a maximum R and L such that <asciimath>R \cdot I_(pk) + L \cdot I_(pk)/t_r <= Delta V_text(max)</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
+2/ From the curves, allocate a maximum R and L such that <asciimath>R \cdot I_(pk) + L \cdot I_(pk)/t_r <= Delta V_text(max)</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
 
 3/ (Optional) from R and L, calculate a maximum allowed impedance vs. frequency.
 
@@ -75,12 +75,12 @@ Peak current can be calculated from charge conservation from the curve: <asciima
 
 ## Current drawn by chip consumption (cross-conduction of the gates)
 
-This one is more tricky. Most circuits are synchronous nowadays so mainly this case will be studied. Circuits having multiple clock domains can also be studied with this method. It will also be asumed that the current spikes will be dominant on rising edges rather than on falling edges, which is a reasonable worst case.
+This one is trickier. Most circuits are synchronous nowadays so mainly this case will be studied. Circuits having multiple clock domains can also be studied with this method. It will also be assumed that the current spikes will be dominant on rising edges rather than on falling edges, which is a reasonable worst case.
 
-The calculation is better made from the total consumption, easier to measure and to define, than from other parameters like Cpd. From similar charge conservation considerations than previously, calculation lead to <asciimath>I_text(TOTAL) = I_text(pk) \cdot t_r \cdot f_text(CLK)</asciimath>, and thus <asciimath>I_text(pk) = I_text(TOTAL) / (f_text(CLK) \cdot t_r)</asciimath>.
+The calculation is better made from the total consumption, easier to measure and to define, than from other parameters like Cpd. From similar charge conservation considerations than previously, calculations lead to <asciimath>I_text(TOTAL) = I_text(pk) \cdot t_r \cdot f_text(CLK)</asciimath>, and thus <asciimath>I_text(pk) = I_text(TOTAL) / (f_text(CLK) \cdot t_r)</asciimath>.
 
 ## What to do if tr is missing ?
 
 In lots of cases, tr is missing, like for instance in the MSP430 datasheet.
 
-In this case, stay concistent with the geometry: one capacitor per Vcc pin, size consistent with the sizes of the pins. Components are designed to work, and their internal rise and fall times will be consistent with the pins inductances and so on. Sure this is not perfect, but this is the best you can do in this case.
+In this case, stay consistent with the geometry: one capacitor per Vcc pin, size consistent with the sizes of the pins. Components are designed to work, and their internal rise and fall times will be consistent with the pins inductances and so on. Sure this is not perfect, but this is the best you can do in this case.
