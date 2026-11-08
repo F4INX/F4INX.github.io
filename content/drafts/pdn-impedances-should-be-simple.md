@@ -79,7 +79,7 @@ Worst case peak current can be calculated from charge conservation from the curv
 
 This one is trickier. Most circuits are synchronous nowadays so mainly this case will be studied. Circuits having multiple clock domains can also be studied with this method. It will also be assumed that the current spikes will be dominant on rising edges rather than on falling edges, which is a reasonable worst case.
 
-The calculation is better made from the total consumption, easier to measure and to define, than from other parameters like Cpd. From similar charge conservation considerations than previously, calculations lead to <asciimath>I_text(TOTAL) = I_text(pk) \cdot t_r \cdot f_text(CLK)</asciimath>, and thus <asciimath>I_text(pk) = I_text(TOTAL) / (f_text(CLK) \cdot t_r)</asciimath>.
+The calculation is best done from the total consumption, which is easier to measure and define, rather than from other parameters like Cpd. From similar charge conservation considerations than previously, calculations lead to <asciimath>I_text(TOTAL) = I_text(pk) \cdot t_r \cdot f_text(CLK)</asciimath>, and thus <asciimath>I_text(pk) = I_text(TOTAL) / (f_text(CLK) \cdot t_r)</asciimath>.
 
 ## What to do if tr is missing ?
 
