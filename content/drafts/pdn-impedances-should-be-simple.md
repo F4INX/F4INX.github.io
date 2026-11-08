@@ -1,8 +1,8 @@
 ---
-layout: post
-title: PDN impedances should be simple
-permalink: /drafts/pdn-impedances-should-be-simple.html
-last_modified_at: 2026-05-14
+title: "PDN impedances should be simple"
+date: 2026-05-14
+lastmod: 2026-05-14
+url: /drafts/pdn-impedances-should-be-simple.html
 ---
 
 Calculation of the maximum impedance a PDN should provide is often a complex task, partly because frequency domain representations are used instead of time domain representations which here make calculations much easier.
