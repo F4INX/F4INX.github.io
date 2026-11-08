@@ -19,6 +19,8 @@ The typical approach, well explained by Ott, is as follows:
 
 From Ott, p. 428.
 
+With I, the *peak* current, the charge in a triangular pulse can be calculated by integration as <asciimath>Q=I \cdot t_r</asciimath>, the average current as <asciimath>I_(avg)=I \cdot t_r / T</asciimath>, which can be reversed as <asciimath>I = (I_(avg) \cdot T) / t_r</asciimath>.
+
 2/ Express the Fourier transform of this current as such (Ott, p. 429):
 
 <latexmath>
