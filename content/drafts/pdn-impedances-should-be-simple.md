@@ -41,10 +41,16 @@ where <asciimath>\Delta V</asciimath> "is the allowable power supply transient v
 
 ![](pdn-impedances-should-be-simple/zt-curve.png)
 
-3/ Calculate the maximum allowed impedance from this curve as (Ott, eqn. 11-7 rearranged, p. 445):
+3/ Calculate the maximum allowed impedance from this curve as (Ott, eqn. 11-7, p. 445).
+
+The second part of this curve, corresponding to the inductive part, starts from <asciimath>Z_t</asciimath> at <asciimath>1/(π \\cdot t_r)</asciimath>, which is equivalent to:
 
 <latexmath>
+\begin{gathered}
+2 \cdot \pi \cdot f \cdot L = Z_t \quad \text{for} \quad f = \frac{1}{\pi \cdot t_r}  \\
+\frac{2 \cdot \pi \cdot L}{\pi \cdot t_r} = Z_t  \\
 L_\text{max} = \frac{Z_t \cdot t_r}{2}
+\end{gathered}
 </latexmath>
 
 Oh. God. Why cannot we make things simple?
