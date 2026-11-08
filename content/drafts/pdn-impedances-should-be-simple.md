@@ -39,7 +39,7 @@ where <asciimath>\Delta V</asciimath> "is the allowable power supply transient v
 
 ![](pdn-impedances-should-be-simple/zt-curve.png)
 
-3/ From this curve, calculate the maximum allowed impedance as (Ott, eqn. 11-7 rearranged, p. 445):
+3/ Calculate the maximum allowed impedance from this curve as (Ott, eqn. 11-7 rearranged, p. 445):
 
 <latexmath>
 L_\text{max} = \frac{Z_t \cdot t_r}{2}
@@ -51,11 +51,11 @@ Oh. God. Why cannot we make things simple?
 
 We propose here an alternative approach:
 
-1/ As usual.
+1/ Use the same trapezoidal current approximation as above.
 
-2/ From the curves, allocate a maximum R and L such that <asciimath>R \cdot I_(pk) + L \cdot I_(pk)/t_r <= Delta V_text(max)</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
+2/ Allocate a maximum R and L from the curves such that <asciimath>R \cdot I_(pk) + L \cdot I_(pk)/t_r <= Delta V_text(max)</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
 
-3/ (Optional) from R and L, calculate a maximum allowed impedance vs. frequency.
+3/ (Optional) Calculate a maximum allowed impedance vs. frequency from R and L.
 
 Note that, here, R and L can be seen not only as physical elements, but also as convenient calculation tools, for example when modelling something whose behavior is more complex than a pure R and L.
 
