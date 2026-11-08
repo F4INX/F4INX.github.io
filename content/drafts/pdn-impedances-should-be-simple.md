@@ -61,7 +61,9 @@ Note that, here, R and L can be seen not only as physical elements, but also as 
 
 ## Current drawn by capacitive loading
 
-The repetition rate of the charge of the capacitive loads might seem an important point. However, the R+L model shows that the repetition rate has almost no importance and that the dominant parameters are the rise and fall times. Anyway, a reasonable model for synchronous circuits is that this current is drawn at fCLK/4, following this typical scenario:
+The repetition rate of the charge of the capacitive loads might seem an important point. However, the R+L model shows that the repetition rate has almost no importance and that the dominant parameters are the rise and fall times.
+
+Anyway, while the current needed to charge the *internal* capacitors of a typical chip is drawn at fCLK, the current for the output capacitors *together* drawn at fCLK/2 since on average half of these charge at each time, and the current for a *single* output capacitor drawn af fCLK/4, following this typical scenario:
 
 * CLK ↑, output ↑, capacitor charges from Vcc
 
@@ -71,7 +73,7 @@ The repetition rate of the charge of the capacitive loads might seem an importan
 
 * CLK ↓, output =
 
-Peak current can be calculated from charge conservation from the curve: <asciimath>I_text(pk) = C_l \cdot V_text(cc) / t_r</asciimath>.
+Worst case peak current can be calculated from charge conservation from the curve: <asciimath>I_text(pk) = C_l \cdot V_text(cc) / t_r</asciimath>. This being said, decoupling of simple chips is straightforward, and complex chips are likely to draw more current from their internals than from their outputs.
 
 ## Current drawn by chip consumption (cross-conduction of the gates)
 
