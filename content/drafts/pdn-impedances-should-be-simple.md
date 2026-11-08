@@ -35,7 +35,7 @@ Calculate the low frequency part as such:
 Z_t = \frac{k \cdot \Delta V}{\Delta I}
 </latexmath>
 
-where <asciimath>\Delta V</asciimath> "is the allowable power supply transient voltage variation", <asciimath>\Delta I</asciimath> "is the amplitude of the transient power supply current drawn by the IC", and k a correction factor taking into account the part of the current "contained in the frequencies below the 1/π t<sub>r</sub> frequency" (Ott, pp. 446-447).
+where <asciimath>\Delta V</asciimath> "is the allowable power supply transient voltage variation", <asciimath>\Delta I</asciimath> "is the amplitude of the transient power supply current drawn by the IC", and k a correction factor taking into account the part of the current "contained in the frequencies below the <asciimath>1/(π \\cdot t_r)</asciimath> frequency" (Ott, pp. 446-447).
 
 ![](pdn-impedances-should-be-simple/zt-curve.png)
 
