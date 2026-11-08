@@ -53,7 +53,7 @@ L_\text{max} = \frac{Z_t \cdot t_r}{2}
 \end{gathered}
 </latexmath>
 
-Oh. God. Why cannot we make things simple?
+Rather complex.
 
 ### Alternative time-domain approach
 
