@@ -9,6 +9,8 @@ excerpt: "Planes are often used for the grounding of PCBs. However, the importan
 
 Grounding is a very important point in modern electronics. The often recommended way to do this is to use a ground plane just below the lines referenced to it. However, the important point is for the ground to follow the signals, and the plane geometry is just a convenience for this. Here is a review of interesting variants.
 
+## A review of interesting geometries
+
 ## 1. The bunch of coaxial shields
 
 The typical lab bench comprises several metallic boxes connected by coaxial cables. Coaxial cables are used a minima for RF and signals. Serious setups use them also for supplies. In such a setup, the grounding between the boxes is made by the boxes themselves and by the coaxial cables.
@@ -81,6 +83,32 @@ A second example are hybrid modules. Here, inputs and outputs have coaxial shape
 ![image](grounding-planes-convenience/semigen-hybrid-module.png)
 *Copyright SemiGen, https://www.semigen.net/about/*
 
+## A derivation of rules
+
+### Horizontal PCB connections
+
+It can be safely assumed that the optimal grounding scheme for systems where frequency high enough dominate (> 1 MHz), that ies most of the systems, would be to have coaxial cables between each functional block. Even if this scheme is totally unpacticable at the board level, it can be approximated by following a few rules.
+
+It can be shown mathematically that a coxial line is equivalent to a microstrip line with an infinite ground plane and all other signal being on the other side of the ground plane. This might seem inconvenient at a first glance, but note that it is a common practice to put on different sides of ground planes signals which would be very likely to perturbate each other.
+
+A good approximation is to have microstrip lines with ground plane extending at least 5 times the substrate thicknes (or 3 times if relaxed) around the line, and to have nearby line no closer than the same amount. Once again, common PCB design rules.
+
+## Vertical PCB connections
+
+The careful reader would have noticed that the previous rules solved the case of horizontal propagation in the PCB, but not the case of layer to layer propagation. Hence the base "coax rules" provides again answers: the ideal coxial line between the layers turns to be simple stitching vias, for simple case, or a full coaxial circle of vias for very high (> 10 GHz) frequencies.
+
+## PCB to outside connections
+
+### Coaxial connectors
+
+A straightforward application of the coaxial ideal is the use of RF coaxial connectors or BNC connectors typically used for the low frequency signals (also by tradition, BNC connectors works work without any problem beyond 1 GHz), either directly screw-mounted to the chassis or connected through an intermediate coaxial cable to it.
+
+### Low frequency signals (e.g. banana plugs)
+
+Lower frequency wires, not always using coaxial connectors, when then are referrenced to a ground, should always be accompagnied by a ground wire connected on both sides. Not doing this creates typically large loops, either large current loops producing radiation, or large loops receiving radiation.
+
+The case of isolated wires, typically the red and black connector of an isolated power supply, won't be covered here, but a viable strategy could be to treat them as two coupled signals with a common ground conductor grounded on both sides.
+
 ## Conclusion
 
-While planes are very convenient, they are only a convenience. The key point is to have for each signal line a return conductor tightly coupled to it.
+Most good practices of grounding and shielding signals can be derived from approximations of the coaxial cables everywhere scheme.
