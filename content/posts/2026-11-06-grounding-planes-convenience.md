@@ -85,7 +85,9 @@ A second example are hybrid modules. Here, inputs and outputs have coaxial shape
 
 ## A derivation of rules
 
-### Horizontal PCB connections
+### Connections inside PCB
+
+#### Horizontal PCB connections
 
 It can be safely assumed that the optimal grounding scheme for systems where frequency high enough dominate (> 1 MHz), that ies most of the systems, would be to have coaxial cables between each functional block. Even if this scheme is totally unpacticable at the board level, it can be approximated by following a few rules.
 
@@ -93,17 +95,17 @@ It can be shown mathematically that a coxial line is equivalent to a microstrip 
 
 A good approximation is to have microstrip lines with ground plane extending at least 5 times the substrate thicknes (or 3 times if relaxed) around the line, and to have nearby line no closer than the same amount. Once again, common PCB design rules.
 
-## Vertical PCB connections
+#### Vertical PCB connections
 
 The careful reader would have noticed that the previous rules solved the case of horizontal propagation in the PCB, but not the case of layer to layer propagation. Hence the base "coax rules" provides again answers: the ideal coxial line between the layers turns to be simple stitching vias, for simple case, or a full coaxial circle of vias for very high (> 10 GHz) frequencies.
 
-## PCB to outside connections
+### PCB to outside connections
 
-### Coaxial connectors
+#### Coaxial connectors
 
 A straightforward application of the coaxial ideal is the use of RF coaxial connectors or BNC connectors typically used for the low frequency signals (also by tradition, BNC connectors works work without any problem beyond 1 GHz), either directly screw-mounted to the chassis or connected through an intermediate coaxial cable to it.
 
-### Low frequency signals (e.g. banana plugs)
+#### Low frequency signals (e.g. banana plugs)
 
 Lower frequency wires, not always using coaxial connectors, when then are referrenced to a ground, should always be accompagnied by a ground wire connected on both sides. Not doing this creates typically large loops, either large current loops producing radiation, or large loops receiving radiation.
 
