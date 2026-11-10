@@ -21,7 +21,7 @@ The typical approach, well explained by Ott, is as follows:
 
 From Ott, p. 428.
 
-With I the *peak* current, the charge contained in one triangular pulse is <asciimath>Q = I \cdot t_r</asciimath>, hence the average current over a period T is <asciimath>I_(avg) = I \cdot t_r / T</asciimath>. Reversing this relation, <asciimath>I = I_(avg) \cdot T / t_r</asciimath>, gives the peak current from the average consumption — a relation reused below when estimating the current drawn by the chip from its total consumption.
+With I the *peak* current, the charge contained in one triangular pulse is <asciimath>Q = I \cdot t_r</asciimath>, hence the average current over a period T is <asciimath>I_text(avg) = I \cdot t_r / T</asciimath>. Reversing this relation, <asciimath>I = I_text(avg) \cdot T / t_r</asciimath>, gives the peak current from the average consumption — a relation reused below when estimating the current drawn by the chip from its total consumption.
 
 2/ Express the Fourier transform of this current as such (Ott, p. 429):
 
@@ -63,7 +63,7 @@ We propose here an alternative approach:
 
 1/ Use the same trapezoidal current approximation as above.
 
-2/ Allocate a maximum R and L from the curves such that <asciimath>R \cdot I_(pk) + L \cdot I_(pk)/t_r <= Delta V_text(max)</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
+2/ Allocate a maximum R and L from the curves such that <asciimath>R \cdot I_text(pk) + L \cdot I_text(pk)/t_r \leq \Delta V_text(max)</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
 
 3/ (Optional) Calculate a maximum allowed impedance vs. frequency from R and L.
 
