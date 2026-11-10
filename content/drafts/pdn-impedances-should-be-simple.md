@@ -91,6 +91,4 @@ The calculation is best done from the total consumption, which is easier to meas
 
 ## What to do if tr is missing?
 
-In lots of cases, tr is missing, like for instance in the MSP430 datasheet.
-
-In this case, stay consistent with the geometry: one capacitor per Vcc pin, size consistent with the sizes of the pins. Components are designed to work, and their internal rise and fall times will be consistent with the inductance of the pins and so on. Sure this is not perfect, but this is the best you can do in this case.
+When the datasheet gives no rise/fall time — as for instance in the MSP430 datasheet — the current-based budget above cannot be computed; the best available fallback is then a geometry-consistent decoupling rule: one capacitor per Vcc pin, size consistent with the sizes of the pins. Components are designed to work, and their internal rise and fall times will be consistent with the inductance of the pins and so on. Sure this is not perfect, but this is the best you can do in this case.
