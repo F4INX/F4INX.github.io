@@ -7,28 +7,52 @@ url: /posts/grounding-return-currents.html
 # excerpt: ""
 ---
 
-Grounding is a very important point in modern electronics. The often recommended way to do this is to use a ground plane just below the lines referenced to it. However, the important point is for the ground to follow the signals, and the plane geometry is just a convenience for this. Here is a review of interesting variants.
+<!-- Part I of this series ~~has shown~~ *which should show* that ground is not a matter of a potential --> Most misconceptions about grounding occur due to the lack of a clear idea of what a ground *is* and what it should *do*.
 
-## A review of interesting geometries
+The goal of a ground is to provide to each signal conductor a reference conductor, allowing to contain the electromagnetic wave, to provide a shielding effect, even if sometimes very cruse, and to ensure proper flow of the return currents. These three functions are not independent.
 
-### 1. The bunch of coaxial shields
+Most EMC design rules are a consequence of this, as can be shown by a review of various ways to provide a ground, followed by an analysis of the ensued design rules.
 
-The typical lab bench comprises several metallic boxes connected by coaxial cables. Coaxial cables are used a minima for RF and signals. Serious setups use them also for supplies. In such a setup, the grounding between the boxes is made by the boxes themselves and by the coaxial cables.
+## The ideal: coaxial cables everywhere
 
-#### 1.1 Nuvotronics coax
+### Lab benches
 
-In the wide scale of the labs, coaxial cables are often used. On the contrary, using modern 3D manufacturing techniques, this techique is also possible on a micro scale. Sure it is very expensive, but definitely working well.
+The ideal would be to use coaxial cables for each signal. While it seems to be very cumbersome, this situation is actually very common in lab benches, comprising several metallic boxes connected by coaxial cables. A minima they are used for RF. Serious setups also use them for lower frequency signals. Very serious setups also use them for supplies, typically by using banana to coax adapter straight at the supplies output. High end setups use source measurement units (SMUs) directly fitted with coaxial cables.
+
+In such a setup, the grounding is made by the boxes themselved and by the shields of the coaxial cables.
+
+### Nuvotronics coax
+
+In addition to the wide scale of the labs, there are also very expensive ways, using modern 3D techniques, to manufacture coaxial cables on a micro scale. In applications where the costs can be afforded, this works definitely very well.
 
 ![](grounding-planes-convenience/nuvotronics-coax.png)
 *Copyright Cubic Nuvotronics, https://www.cubic.com/sites/default/files/2024-05/2023%20Nuvo%20Product%20brochure_R32_PRINT.pdf*
 
-#### 1.2 The bunch of cables with their ground wire
+## Various real-world approximations of coaxial cables
 
-Oh the other hand of the robustness, when connecting various boxes but without shielded cables, accompanying each bunch of connectors by one or several ground wires connected to the grounds on each side is almost always better than the reverse.
+### The microstrip line
+
+While microstrip lines never achieve the excellent shielding effect of coaxial cables, they are often *good enough*. While in coaxial lines, the signal line is tightly coupled to a fully surrounding shield, in microstrip line, this tight coupling is ensured by a close ground plane, which provides something like a proximity shielding effect.
+
+This configuration is commonly used in PCBs, for instance in a 4 layers board with at least one full ground plane.
+
+### Coplanar
+
+The tightly coupled ground does not need to be *below* the signal line. A perfectly working configuration is to have the ground on both sides of the lines. However, is is very important to ensure both grounds are connected together.
+
+A typical very high frequency PCB configuration is to have a mixture between coplan and microstrip called grounded coplanar microstrip where grounds are both on the sides and below, regularly connected through vias.
+
+On PCBs, the typical dimensions lead to a microstrip dominant operation, and the side grounds mainly improve shielding. However, on some MMICs, the dimensions lead to a coplanar dominant operation.
+
+<!-- TODO: fine rework from here. -->
+
+### The bunch of cables with their ground wire
+
+On the other hand of the robustness, when connecting various boxes but without shielded cables, accompanying each bunch of connectors by one or several ground wires connected to the grounds on each side is almost always better than the reverse.
 
 This configuration can be seen as a *very crude* approximation of coaxial lines, however improved when several ground wires are used and tightly coupled to their corresponding signal wires, ideally in a one to one fashion.
 
-### 2. Differential lines
+### Differential lines
 
 In the *bunch of ground wires* approach, I deliberately did not mention the various differential pairs approach, who are probably the *very most* common approach in consumer electronics: DDR signals, PCIe, Ethernet, USB, and so on.
 
@@ -40,7 +64,7 @@ Imagine for whatever reason that instead of a differential line *two* single-end
 
 This illustrates that between the conductors of each differential pair there is a surface, behaving like a ground. When the conductors are straight, this surface is a plane, called a symmetry plane, and often modelled in EM simulators as a perfect conducting plane. When the conductors are not straight, for instance in twisted pairs, the shape of this surface is much more convoluted, but you still have a virtual grounding effect.
 
-### 3. Grids
+### Grids
 
 More often than not, grids are useful for grounding, even if their limitations must be taken into account: they stop working well when the frequency is too high compared to the size of the holes, and it is difficult to have a controlled impedance line with such a ground.
 
@@ -50,15 +74,7 @@ Some decades ago, in 2 layers TTL or CMOS digital boards, a strategy was to rout
 
 Finally, grids are also convenient for the grounding of a whole room containing shelves of devices.
 
-### 4. Coplanar
-
-Ground does not need to be below the line. A perfectly working configuration is to have the ground on both sides of the lines. However, is is very important to ensure both grounds are connected together.
-
-A typical very high frequency PCB configuration is to have a mixture between coplan and microstrip called grounded coplanar microstrip where grounds are both on the sides and below, regularly connected through vias.
-
-On PCBs, the typical dimensions lead to a microstrip dominant operation, and the side grounds mainly improve shielding. However, on some MMICs, the dimensions lead to a coplanar dominant operation.
-
-### 5. Weirder shapes
+### Weirder shapes
 
 In more complex case, the ground can have a non regular shape, either to achieve a particular effect, or just a convenience.
 
