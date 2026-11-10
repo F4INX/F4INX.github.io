@@ -111,6 +111,20 @@ Lower frequency wires, not always using coaxial connectors, when then are referr
 
 The case of isolated wires, typically the red and black connector of an isolated power supply, won't be covered here, but a viable strategy could be to treat them as two coupled signals with a common ground conductor grounded on both sides.
 
+#### Ground connections between PCB and case
+
+While some particular configurations might benefit from a single point grounding, more often this configuration is unpracticable. According to the "everything should be coax" rule if ground is connected in a single point, every signal should also follow this connection, like in the following picture from [Ott](https://hott.shielddigitaldesign.com/techtips/split-gnd-plane.html):
+
+![](grounding-planes-convenience/ott-correct-ground-split.png)
+
+Let aside the *inside* of PCBs where this could be convenient, for the *PCB to outside* case, the signals have more often than not connectors big enough so that the bunch of connectors cannot be considered as a single point, at least at higher frequencies, like in the following picture from [Spectran](https://aaronia.com/de/produkte/spektrumanalysatoren/spectran-v6-odb).
+
+![](grounding-planes-convenience/spectran-analyzer-connectors.png)
+
+Also, for convenience or due to external constraints, the various connectors can even be on different sides.
+
+Each signal connection should have its ground, so multiple point grounding occur naturally.
+
 ## Conclusion
 
 Most good practices of grounding and shielding signals can be derived from approximations of the coaxial cables everywhere scheme.
