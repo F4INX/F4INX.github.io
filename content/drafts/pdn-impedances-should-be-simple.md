@@ -7,6 +7,8 @@ url: /drafts/pdn-impedances-should-be-simple.html
 
 Calculation of the maximum impedance a PDN should provide is often a complex task, partly because frequency domain representations are used instead of time domain representations which here make calculations much easier.
 
+In the time domain, the constraint reduces to a simple budget: the resistive drop plus the inductive drop of the transient current must stay below the allowable voltage variation, <asciimath>R \cdot I_text(pk) + L \cdot I_text(pk)/t_r \leq \Delta V_text(max)</asciimath>, from which maximum R and L follow directly.
+
 ## Comments on PDN maximum impedance calculation method
 
 ### Typical approach
@@ -19,7 +21,7 @@ The typical approach, well explained by Ott, is as follows:
 
 From Ott, p. 428.
 
-With I, the *peak* current, the charge in a triangular pulse can be calculated by integration as <asciimath>Q=I \cdot t_r</asciimath>, the average current as <asciimath>I_(avg)=I \cdot t_r / T</asciimath>, which can be reversed as <asciimath>I = (I_(avg) \cdot T) / t_r</asciimath>.
+With I the *peak* current, the charge contained in one triangular pulse is <asciimath>Q = I \cdot t_r</asciimath>, hence the average current over a period T is <asciimath>I_text(avg) = I \cdot t_r / T</asciimath>. Reversing this relation, <asciimath>I = I_text(avg) \cdot T / t_r</asciimath>, gives the peak current from the average consumption — a relation reused below when estimating the current drawn by the chip from its total consumption.
 
 2/ Express the Fourier transform of this current as such (Ott, p. 429):
 
@@ -61,7 +63,7 @@ We propose here an alternative approach:
 
 1/ Use the same trapezoidal current approximation as above.
 
-2/ Allocate a maximum R and L from the curves such that <asciimath>R \cdot I_(pk) + L \cdot I_(pk)/t_r <= Delta V_text(max)</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
+2/ Allocate a maximum R and L from the curves such that <asciimath>R \cdot I_text(pk) + L \cdot I_text(pk)/t_r \leq \Delta V_text(max)</asciimath>. Note the solution is not necessarily unique. A starting point could be to allocate the same delta to both terms.
 
 3/ (Optional) Calculate a maximum allowed impedance vs. frequency from R and L.
 
@@ -71,7 +73,7 @@ Note that, here, R and L can be seen not only as physical elements, but also as 
 
 The repetition rate of the charge of the capacitive loads might seem an important point. However, the R+L model shows that the repetition rate has almost no importance and that the dominant parameters are the rise and fall times.
 
-Anyway, while the current needed to charge the *internal* capacitors of a typical chip is drawn at fCLK, the current for the output capacitors *together* is drawn at fCLK/2 since on average half of these charge at each time, and that for a *single* output capacitor at fCLK/4, following this typical scenario:
+Even if it does not matter for decoupling, in case it is needed otherwise: the current needed to charge the *internal* capacitors of a typical chip is drawn at fCLK, the current for the output capacitors *together* is drawn at fCLK/2 since on average half of these charge at each time, and that for a *single* output capacitor at fCLK/4, following this typical scenario:
 
 * CLK ↑, output ↑, capacitor charges from Vcc
 
@@ -87,10 +89,8 @@ Worst case peak current can be calculated from charge conservation from the curv
 
 This one is trickier. Most circuits are synchronous nowadays so mainly this case will be studied. Circuits having multiple clock domains can also be studied with this method. It will also be assumed that the current spikes will be dominant on rising edges rather than on falling edges, which is a reasonable worst case.
 
-The calculation is best done from the total consumption, which is easier to measure and define, rather than from other parameters like Cpd. From the same charge conservation considerations as above, calculations lead to <asciimath>I_text(TOTAL) = I_text(pk) \cdot t_r \cdot f_text(CLK)</asciimath>, and thus <asciimath>I_text(pk) = I_text(TOTAL) / (f_text(CLK) \cdot t_r)</asciimath>.
+The calculation is best done from the total consumption, which is easier to measure and define, rather than from other parameters like Cpd. From the same charge conservation considerations as above, calculations lead to <asciimath>I_text(total) = I_text(pk) \cdot t_r \cdot f_text(CLK)</asciimath>, and thus <asciimath>I_text(pk) = I_text(total) / (f_text(CLK) \cdot t_r)</asciimath>.
 
 ## What to do if tr is missing?
 
-In lots of cases, tr is missing, like for instance in the MSP430 datasheet.
-
-In this case, stay consistent with the geometry: one capacitor per Vcc pin, size consistent with the sizes of the pins. Components are designed to work, and their internal rise and fall times will be consistent with the inductance of the pins and so on. Sure this is not perfect, but this is the best you can do in this case.
+When the datasheet gives no rise/fall time — as for instance in the MSP430 datasheet — the current-based budget above cannot be computed; the best available fallback is then a geometry-consistent decoupling rule: one capacitor per Vcc pin, size consistent with the sizes of the pins. Components are designed to work, and their internal rise and fall times will be consistent with the inductance of the pins and so on. Sure this is not perfect, but this is the best you can do in this case.
