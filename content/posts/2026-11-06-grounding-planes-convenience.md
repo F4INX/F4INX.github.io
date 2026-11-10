@@ -10,4 +10,4 @@ build:
 # excerpt: ""
 ---
 
-*This article has been reworked, new version here [Grounding II - a matter of return currents](/posts/grounding-return-currents.html).*
+*This article has been reworked, new version here [Grounding II - a matter of return currents](/posts/grounding-return-conductors.html).*
