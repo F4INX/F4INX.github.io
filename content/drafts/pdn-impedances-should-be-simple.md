@@ -7,6 +7,8 @@ url: /drafts/pdn-impedances-should-be-simple.html
 
 Calculation of the maximum impedance a PDN should provide is often a complex task, partly because frequency domain representations are used instead of time domain representations which here make calculations much easier.
 
+In the time domain, the constraint reduces to a simple budget: the resistive drop plus the inductive drop of the transient current must stay below the allowable voltage variation, <asciimath>R \cdot I_text(pk) + L \cdot I_text(pk)/t_r \leq \Delta V_text(max)</asciimath>, from which maximum R and L follow directly.
+
 ## Comments on PDN maximum impedance calculation method
 
 ### Typical approach
