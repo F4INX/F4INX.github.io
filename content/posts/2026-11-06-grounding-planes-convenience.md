@@ -1,7 +1,7 @@
 ---
 title: "Grounding - planes are a convenience"
 date: 2026-11-06
-lastmod: 2026-11-06
+lastmod: 2026-11-10
 categories: [EMC, Grounds]
 url: /posts/ground-planes-convenience.html
 excerpt: "Planes are often used for the grounding of PCBs. However, the important point is for the ground to follow the signals, and the plane geometry is just a convenience for this."
