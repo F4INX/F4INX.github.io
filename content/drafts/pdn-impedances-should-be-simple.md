@@ -73,7 +73,7 @@ Note that, here, R and L can be seen not only as physical elements, but also as 
 
 The repetition rate of the charge of the capacitive loads might seem an important point. However, the R+L model shows that the repetition rate has almost no importance and that the dominant parameters are the rise and fall times.
 
-Anyway, while the current needed to charge the *internal* capacitors of a typical chip is drawn at fCLK, the current for the output capacitors *together* is drawn at fCLK/2 since on average half of these charge at each time, and that for a *single* output capacitor at fCLK/4, following this typical scenario:
+Even if it does not matter for decoupling, in case it is needed otherwise: the current needed to charge the *internal* capacitors of a typical chip is drawn at fCLK, the current for the output capacitors *together* is drawn at fCLK/2 since on average half of these charge at each time, and that for a *single* output capacitor at fCLK/4, following this typical scenario:
 
 * CLK ↑, output ↑, capacitor charges from Vcc
 
