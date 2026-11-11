@@ -56,6 +56,9 @@ This configuration can be tailored according to the criticity of the signals. Fo
 
 An albeit old but very interesting example is the PATA (aka EIDE) interfaced used in hard disk drives in old computers. On the one side, the *16* data lines share just two ground lines. The crosstalk between these lines should be rather heavy, but these effects are only during the *changes*: once the signals are ready to be clocked, this works fine. On the other hand, from pin 19 to 30, the signals who are edge sensitive, similar to a *clocking*, are highly interleaved with grounds, almost in a coplanar fashion: ground, nothing, signal, ground, signal, ground, signal, ground, signal, almost a ground, signal, ground. Note that the cable select is grounded at one side, which is not perfect, but still better than another signal.
 
+![](grounding-planes-convenience/pata-ribbon.png)
+*From https://www.itmegabyte.com/shop/power-adapters-and-cables/ide-cables/ide-cable-18-inch-dual-drive-ultra-ata-ide-hard-drive-cable-ide66/*
+
 ![](grounding-planes-convenience/pata.png)
 
 {{% text-table %}}
