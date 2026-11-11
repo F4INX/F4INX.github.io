@@ -46,13 +46,64 @@ A typical very high frequency PCB configuration is to have a mixture between cop
 
 On PCBs, the typical dimensions lead to a microstrip dominant operation, and the side grounds mainly improve shielding. However, on some MMICs, the dimensions lead to a coplanar dominant operation.
 
+### The bunch of cables with their ground wires
+
+On the other hand of the robustsness, sometimes cables are not shielded, and are accompagned by several ground wires connected to the ground on each side.
+
+While this is a *very crude* approximation of the ideal of using a coaxial line for each signal, on the other hand this is *still* acceptable. What is strongly advised against, except possibly in very rare cases, is to route the signals away from the ground, for instance in an unwisely attempt to remove ground loops.
+
+This configuration can be tailored according to the criticity of the signals. Fow now, it is sufficient to note that *clocked* signals are less sensitive than *clocking* signals, since perturbations on *clocked* signals is seen only at the clocking time, while perturbations on *clocking* signals can trigger an undesirable clocking.
+
+An albeit old but very interesting example is the PATA (aka EIDE) interfaced used in hard disk drives in old computers. On the one side, the *16* data lines share just two ground lines. The crosstalk between these lines should be rather heavy, but these effects are only during the *changes*: once the signals are ready to be clocked, this works fine. On the other hand, from pin 19 to 30, the signals who are edge sensitive, similar to a *clocking*, are highly interleaved with grounds, almost in a coplanar fashion: ground, nothing, signal, ground, signal, ground, signal, ground, signal, almost a ground, signal, ground. Note that the cable select is grounded at one side, which is not perfect, but still better than another signal.
+
+![](grounding-planes-convenience/pata.png)
+
+{{% text-table %}}
+| Pin | Signal |
+| --- | --- |
+| 1 | Reset |
+| **2** | **Ground** |
+| 3 | Data 7 |
+| 4 | Data 8 |
+| 5 | Data 6 |
+| 6 | Data 9 |
+| 7 | Data 5 |
+| 8 | Data 10 |
+| 9 | Data 4 |
+| 10 | Data 11 |
+| 11 | Data 3 |
+| 12 | Data 12 |
+| 13 | Data 2 |
+| 14 | Data 13 |
+| 15 | Data 1 |
+| 16 | Data 14 |
+| 17 | Data 0 |
+| 18 | Data 15 |
+| **19** | **Ground** |
+| 20 | *Unconnected* |
+| 21 | DDRQ |
+| **22** | **Ground** |
+| 23 | I/O write |
+| **24** | **Ground** |
+| 25 | I/O read |
+| **26** | **Ground** |
+| 27 | IOCHRDY |
+| **28** | **Cable select (grounded)** |
+| 29 | DDACK |
+| **30** | **Ground** |
+| 31 | IRQ |
+| 32 | *Unconnected* |
+| 33 | Addr 1 |
+| 34 | GPIO_DMA66_Detect |
+| 35 | Addr 0 |
+| 36 | Addr 2 |
+| 37 | Chip select 1P |
+| 38 | Chip select 3P |
+| 39 | Activity |
+| **40** | **Ground** |
+{{% /text-table %}}
+
 <!-- TODO: fine rework from here. -->
-
-### The bunch of cables with their ground wire
-
-On the other hand of the robustness, when connecting various boxes but without shielded cables, accompanying each bunch of connectors by one or several ground wires connected to the grounds on each side is almost always better than the reverse.
-
-This configuration can be seen as a *very crude* approximation of coaxial lines, however improved when several ground wires are used and tightly coupled to their corresponding signal wires, ideally in a one to one fashion.
 
 ### Differential lines
 
