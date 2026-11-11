@@ -106,32 +106,6 @@ An albeit old but very interesting example is the PATA (aka EIDE) interfaced use
 | **40** | **Ground** |
 {{% /text-table %}}
 
-### Differential lines
-
-An additional ground goes often with differential lines for various reasons. As a good practice, to improve shielding or to handle common-mode issues. Or because a ground is already present, typically in PCBs with existing ground planes. Or to reduce the physical dimensions while keeping the requested impedance, typically to match the pin size of the components, or to pack lots of differential lines in a tight space.
-
-Still, differential lines can work without an additional ground, and routinely do. Old telephone lines worked routinely without additional grounding. Ethernet works also with U/UTP cables without ground, even if additional shielding is recommended to be sure, and network cards use transformers for this. HDMI cables are shielded, but an HDMI cable with its shield stripped works surprisingly well, even if this is NOT recommended due to the risk of electromagnetic interferences:
-
-*Click to enlarge.*
-<table class="images-table">
-<tr>
-<td>
-<a href="grounding-planes-convenience/hdmi-cable-stripped-cat-wide.jpg" class="noicon">
-<img src="grounding-planes-convenience/hdmi-cable-stripped-cat.jpg"/>
-</a>
-</td>
-<td>
-<a href="grounding-planes-convenience/hdmi-cable-stripped-screen-wide.jpg" class="noicon">
-<img src="grounding-planes-convenience/hdmi-cable-stripped-screen.jpg"/>
-</a>
-</td>
-</tr>
-</table>
-
-For symmetric straight differential lines, the symmetry planes behaves like a ground plane for differential signals. *For such signals*, putting an actual ground plane on this place would not change the behavior, and while there would be currents facing each line, the net current would be null.
-
-The same effect exists for twisted differential lines, just the shape of the *virtual ground surface* would be more convoluted.
-
 ### Grids
 
 More often than not, grids are useful for grounding, even if their limitations must be taken into account: they stop working well when the frequency is too high compared to the size of the holes, and it is difficult to have a controlled impedance line with such a ground.
