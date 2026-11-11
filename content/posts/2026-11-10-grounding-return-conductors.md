@@ -114,6 +114,8 @@ One typical use is shielded boxes with holes for air cooling.
 
 Some decades ago, in 2 layers TTL or CMOS digital boards, a strategy was to route ground and power in grid fashion, and the spacing between the ground lines was used to route signal traces. Note that in this particular case, both ground and supply behave as ground, due to the decoupling capacitors connecting them. Also such circuits did not need controlled impedance lines.
 
+![](grounding-planes-convenience/ttl-grid-routing.png)
+
 Finally, grids are also convenient for the grounding of a whole room containing shelves of devices.
 
 ### Weirder shapes
