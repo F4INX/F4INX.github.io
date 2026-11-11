@@ -106,19 +106,31 @@ An albeit old but very interesting example is the PATA (aka EIDE) interfaced use
 | **40** | **Ground** |
 {{% /text-table %}}
 
-<!-- TODO: fine rework from here. -->
-
 ### Differential lines
 
-In the *bunch of ground wires* approach, I deliberately did not mention the various differential pairs approach, who are probably the *very most* common approach in consumer electronics: DDR signals, PCIe, Ethernet, USB, and so on.
+An additional ground goes often with differential lines for various reasons. As a good practice, to improve shielding or to handle common-mode issues. Or because a ground is already present, typically in PCBs with existing ground planes. Or to reduce the physical dimensions while keeping the requested impedance, typically to match the pin size of the components, or to pack lots of differential lines in a tight space.
 
-Roughly speaking, in single-ended lines, you have a big connector, whose potential won't change a lot precisely because it is big, and a small connector using the big conductor as a potential reference. Let put aside for now questions like the meaning of the potential, how to deal with the multiple definitions of the potential, and to what this potential should be refered to. Just say for now they are important questions for later.
+Still, differential lines can work without an additional ground, and routinely do. Old telephone lines worked routinely without additional grounding. Ethernet works also with U/UTP cables without ground, even if additional shielding is recommended to be sure, and network cards use transformers for this. HDMI cables are shielded, but an HDMI cable with its shield stripped works surprisingly well, even if this is NOT recommended due to the risk of electromagnetic interferences:
 
-On the contrary, in differential lines, you have a + connector and a - conductor, typically connected to two signal sources with symmetric impedances. Here the question of where is the ground becomes really interesting.
+*Click to enlarge.*
+<table class="images-table">
+<tr>
+<td>
+<a href="grounding-planes-convenience/hdmi-cable-stripped-cat-wide.jpg" class="noicon">
+<img src="grounding-planes-convenience/hdmi-cable-stripped-cat.jpg"/>
+</a>
+</td>
+<td>
+<a href="grounding-planes-convenience/hdmi-cable-stripped-screen-wide.jpg" class="noicon">
+<img src="grounding-planes-convenience/hdmi-cable-stripped-screen.jpg"/>
+</a>
+</td>
+</tr>
+</table>
 
-Imagine for whatever reason that instead of a differential line *two* single-ended lines are used, in a +, GND, GND, - fashion. Since the 2 GND conductors are at the same potential (there are more complicated was to tell this), connecting them don't change the picture (let aside a few details). Eventually they can be merged into a single unique conductor. But since in this conductor, not current flows (let aside a few details), it can even be removed.
+For symmetric straight differential lines, the symmetry planes behaves like a ground plane for differential signals. *For such signals*, putting an actual ground plane on this place would not change the behavior, and while there would be currents facing each line, the net current would be null.
 
-This illustrates that between the conductors of each differential pair there is a surface, behaving like a ground. When the conductors are straight, this surface is a plane, called a symmetry plane, and often modelled in EM simulators as a perfect conducting plane. When the conductors are not straight, for instance in twisted pairs, the shape of this surface is much more convoluted, but you still have a virtual grounding effect.
+The same effect exists for twisted differential lines, just the shape of the *virtual ground surface* would be more convoluted.
 
 ### Grids
 
