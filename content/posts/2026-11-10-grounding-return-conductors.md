@@ -7,7 +7,9 @@ url: /posts/grounding-return-conductors.html
 # excerpt: ""
 ---
 
-<!-- Part I of this series ~~has shown~~ *which should show* that ground is not a matter of a potential --> Most misconceptions about grounding occur due to the lack of a clear idea of what a ground *is* and what it should *do*.
+<!-- Part I of this series ~~has shown~~ *which should show* that ground is not a matter of a potential -->
+
+Most misconceptions about grounding occur due to the lack of a clear idea of what a ground *is* and what it should *do*.
 
 The goal of a ground is to provide to each signal conductor a reference conductor, allowing to contain the electromagnetic wave, to provide a shielding effect, even if sometimes very cruse, and to ensure proper flow of the return currents. These three functions are not independent.
 
