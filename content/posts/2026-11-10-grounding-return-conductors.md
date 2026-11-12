@@ -137,7 +137,7 @@ A second example are hybrid modules. Here, inputs and outputs have coaxial shape
 
 #### Horizontal PCB connections
 
-It can be safely assumed that the optimal grounding scheme for systems where frequency high enough dominate (> 1 MHz), that ies most of the systems, would be to have coaxial cables between each functional block. Even if this scheme is totally unpacticable at the board level, it can be approximated by following a few rules.
+It can be safely assumed that the optimal grounding scheme for systems where frequency high enough dominate (> 1 MHz), that is most of the systems, would be to have coaxial cables between each functional block. Even if this scheme is totally unpacticable at the board level, it can be approximated by following a few rules.
 
 It can be shown mathematically that a coxial line is equivalent to a microstrip line with an infinite ground plane and all other signal being on the other side of the ground plane. This might seem inconvenient at a first glance, but note that it is a common practice to put on different sides of ground planes signals which would be very likely to perturbate each other.
 
