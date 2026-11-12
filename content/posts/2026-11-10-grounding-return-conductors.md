@@ -175,4 +175,4 @@ Each signal connection should have its ground, so multiple point grounding occur
 
 ## Conclusion
 
-Most good practices of grounding and shielding signals can be derived from approximations of the coaxial cables everywhere scheme.
+Most good practices of grounding and shielding signals can be derived starting from an approximation of using coaxial cables for each signal. Each signal must have a ground. Ground planes are the go-to way to provide this on PCBs. But variants exists and are sometimes very convenient. Mesh grounding occurs naturally. 
