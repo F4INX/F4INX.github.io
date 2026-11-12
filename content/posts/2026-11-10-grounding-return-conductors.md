@@ -106,18 +106,6 @@ An albeit old but very interesting example is the PATA (aka EIDE) interfaced use
 | **40** | **Ground** |
 {{% /text-table %}}
 
-### Grids
-
-More often than not, grids are useful for grounding, even if their limitations must be taken into account: they stop working well when the frequency is too high compared to the size of the holes, and it is difficult to have a controlled impedance line with such a ground.
-
-One typical use is shielded boxes with holes for air cooling.
-
-Some decades ago, in 2 layers TTL or CMOS digital boards, a strategy was to route ground and power in grid fashion, and the spacing between the ground lines was used to route signal traces. Note that in this particular case, both ground and supply behave as ground, due to the decoupling capacitors connecting them. Also such circuits did not need controlled impedance lines.
-
-![](grounding-planes-convenience/ttl-grid-routing.png)
-
-Finally, grids are also convenient for the grounding of a whole room containing shelves of devices.
-
 ### Weirder shapes
 
 In more complex case, the ground can have a non regular shape, either to achieve a particular effect, or just a convenience.
