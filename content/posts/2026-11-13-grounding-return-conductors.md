@@ -1,7 +1,7 @@
 ---
 title: "Grounding II – a matter of return conductors."
-date: 2026-11-10
-lastmod: 2026-11-10
+date: 2026-11-13
+lastmod: 2026-11-13
 categories: [EMC, Grounds]
 url: /posts/grounding-return-conductors.html
 # excerpt: ""
