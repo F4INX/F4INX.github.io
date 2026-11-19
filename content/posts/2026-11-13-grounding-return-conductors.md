@@ -27,7 +27,8 @@ In such a setup, the grounding is made by the boxes themselved and by the shield
 
 In addition to the wide scale of the labs, there are also very expensive ways, using modern 3D techniques, to manufacture coaxial cables on a micro scale. In applications where the costs can be afforded, this works definitely very well.
 
-![](grounding-planes-convenience/nuvotronics-coax.png)
+<img class="dark-mode-no-bg" src="grounding-planes-convenience/nuvotronics-coax.png"/>
+
 *Copyright Cubic Nuvotronics, https://www.cubic.com/sites/default/files/2024-05/2023%20Nuvo%20Product%20brochure_R32_PRINT.pdf*
 
 ## Various real-world approximations of coaxial cables
