@@ -5,7 +5,7 @@ weight: 2
 date: 2026-11-23
 ---
 
-When a post needs a break from the technical content, I use cat pictures as placeholders. Here are the ones currently in use.
+When a post needs a break from the technical content, or when I lack time to write some details, I use cat pictures as placeholders. Here are the ones currently in use.
 
 ## Bombay black cats of Blue Sinfonie
 
