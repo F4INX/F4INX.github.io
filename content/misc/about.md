@@ -1,6 +1,6 @@
 ---
 title: About
-order: 2
+weight: 3
 draft: false
 ---
 
