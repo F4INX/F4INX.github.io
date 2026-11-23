@@ -1,5 +1,12 @@
 # AGENTS.md
 
+## Placeholder cats
+
+When adding a cat picture used as a placeholder in a post, update the
+`content/misc/placeholder-cats.md` page accordingly. Note that not all cat
+pictures are placeholders (e.g. `hadrien-with-cat.png` is a real photo), so
+only list the ones actually used as placeholders.
+
 ## Link checking
 
 LinkChecker takes ~50s to run. Do not pipe its output directly to `grep` or other

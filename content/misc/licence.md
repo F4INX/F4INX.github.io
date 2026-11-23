@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Licence
-order: 3
+weight: 4
 ---
 
 ## Contents licences
